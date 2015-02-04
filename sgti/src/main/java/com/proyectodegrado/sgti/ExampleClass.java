@@ -1,4 +1,4 @@
-package java.com.proyectodegrado.sgti;
+package com.proyectodegrado.sgti;
 
 public class ExampleClass {
 
