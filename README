@@ -1,6 +1,7 @@
-# sgti
+Sistema de Gestión de Técnicos e Incidentes (SGTI)
+======================================================
 
-* 1. Clonar el proyecto en el repositorio local:
+* 1. Clonar el proyecto en el repositorio local
 git clone --recursive git@github.com:gavegno/sgti.git
 
 
