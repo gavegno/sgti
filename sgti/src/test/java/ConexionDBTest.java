@@ -21,7 +21,7 @@ public class ConexionDBTest {
 		BeanFactory factory = context;
 		Conexion conexion = (Conexion) factory.getBean("conexionBD");
 		Connection con = conexion.conectar();
-		assertTrue(con != null);
+		assertTrue(con != null && !con.isClosed());
 		conexion.cerrar(con);
 		assertTrue(con.isClosed());
 		
