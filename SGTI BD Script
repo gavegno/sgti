@@ -17,13 +17,15 @@ CREATE DATABASE sgti
 CREATE TABLE tipohora
 (
   id serial NOT NULL,
-  tipo character varying NOT NULL
+  tipo character varying NOT NULL,
+  CONSTRAINT "id_primaryKey" PRIMARY KEY (id )
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE tipohora
   OWNER TO root;
+
 
 
 
