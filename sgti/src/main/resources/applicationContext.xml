@@ -7,4 +7,16 @@
 		
 		<bean id="conexionBD" class="com.proyectodegrado.sgti.conexionbd.Conexion"/>
 		
+		<bean id="consultasTipoHora" class="com.proyectodegrado.sgti.consultas.ConsultasTipoHora">
+			<property name="conexionBD" ref="conexionBD"/>
+		</bean>
+		
+		<bean id="tipoHoraDao" class="com.proyectodegrado.sgti.daos.TipoHoraDAO">
+			<property name="consultasTipoHora" ref="consultasTipoHora"/>
+		</bean>
+		
+		<bean id="servicioTipoHora" class="com.proyectodegrado.sgti.servicios.impl.ServicioTipoHoraImpl">
+			<property name="tipoHoraDao" ref="tipoHoraDao"/>
+		</bean>
+		
 </beans>
