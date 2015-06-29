@@ -7,39 +7,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.proyectodegrado.sgti.Data.DataTipoHora;
 import com.proyectodegrado.sgti.consultas.ConsultasTipoHora;
+import com.proyectodegrado.sgti.modelo.TipoHora;
 
 public class TipoHoraDAO {
 	
 	private ConsultasTipoHora consultasTipoHora;
 
 	
-	public void agregar(DataTipoHora dataTipoHora) throws FileNotFoundException, IOException, SQLException{
+	public void agregar(String tipo) throws FileNotFoundException, IOException, SQLException{
 		
-		consultasTipoHora.insertarTipoHora(dataTipoHora.getTipo());
+		consultasTipoHora.insertarTipoHora(tipo);
 	}
 	
-	public DataTipoHora seleccionarPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException{
-		DataTipoHora dataTipoHora= new DataTipoHora();
-		ResultSet rs = consultasTipoHora.verTipoHora(tipo);
-		if(rs.next()){
-			dataTipoHora.setId(rs.getInt("id"));
-			dataTipoHora.setTipo(rs.getString("tipo"));
+	public TipoHora seleccionarPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException{
+		TipoHora tipoHora= new TipoHora();
+		ResultSet resultSet = consultasTipoHora.verTipoHora(tipo);
+		if(resultSet.next()){
+			tipoHora.setId(resultSet.getInt("id"));
+			tipoHora.setTipo(resultSet.getString("tipo"));
 		}
-		return dataTipoHora;
+		return tipoHora;
 	}
 	
-	public List<DataTipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException{
-		List<DataTipoHora> dataTiposHora= new ArrayList<DataTipoHora>();
-		ResultSet rs = consultasTipoHora.verTiposHora();
-		while(rs.next()){
-			DataTipoHora dataTipoHora = new DataTipoHora();
-			dataTipoHora.setId(rs.getInt("id"));
-			dataTipoHora.setTipo(rs.getString("tipo"));
-			dataTiposHora.add(dataTipoHora);
+	public List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException{
+		List<TipoHora> tiposHora= new ArrayList<TipoHora>();
+		ResultSet resultSet = consultasTipoHora.verTiposHora();
+		while(resultSet.next()){
+			TipoHora dataTipoHora = new TipoHora();
+			dataTipoHora.setId(resultSet.getInt("id"));
+			dataTipoHora.setTipo(resultSet.getString("tipo"));
+			tiposHora.add(dataTipoHora);
 		}
-		return dataTiposHora;
+		return tiposHora;
 	}
 
 	public ConsultasTipoHora getConsultasTipoHora() {

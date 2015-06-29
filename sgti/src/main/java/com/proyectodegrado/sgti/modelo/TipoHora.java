@@ -1,6 +1,6 @@
-package com.proyectodegrado.sgti.Data;
+package com.proyectodegrado.sgti.modelo;
 
-public class DataTipoHora {
+public class TipoHora {
 
 	private int id;
 	private String tipo;

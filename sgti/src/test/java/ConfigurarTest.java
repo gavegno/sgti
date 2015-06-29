@@ -4,10 +4,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigurarTest {
-	
-	protected boolean habilitarTest;
+import org.springframework.context.support.ClassPathXmlApplicationContext;    
 
+public class ConfigurarTest {   
+	 
+	protected boolean habilitarTest;
+	
+	protected static ClassPathXmlApplicationContext context;  
+	
 	public boolean isHabilitarTest() {
 		
 		Properties localProperties = new Properties();

@@ -5,18 +5,44 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 		
+		<!-- Bean de conexion a la base de datos -->
 		<bean id="conexionBD" class="com.proyectodegrado.sgti.conexionbd.Conexion"/>
 		
+		<!-- Beans de consulta a la base de datos -->
 		<bean id="consultasTipoHora" class="com.proyectodegrado.sgti.consultas.ConsultasTipoHora">
 			<property name="conexionBD" ref="conexionBD"/>
 		</bean>
 		
+		<bean id="consultasUsuario" class="com.proyectodegrado.sgti.consultas.ConsultasUsuario">
+			<property name="conexionBD" ref="conexionBD"/>
+		</bean>
+		
+		<!-- Beans de DAOs -->
 		<bean id="tipoHoraDao" class="com.proyectodegrado.sgti.daos.TipoHoraDAO">
 			<property name="consultasTipoHora" ref="consultasTipoHora"/>
 		</bean>
 		
+		<bean id="usuarioDao" class="com.proyectodegrado.sgti.daos.UsuarioDAO">
+			<property name="consultasUsuario" ref="consultasUsuario"/>
+			<property name="consultasTipoHora" ref="consultasTipoHora"/>
+		</bean>
+		
+		<!-- Beans de servicios -->
 		<bean id="servicioTipoHora" class="com.proyectodegrado.sgti.servicios.impl.ServicioTipoHoraImpl">
 			<property name="tipoHoraDao" ref="tipoHoraDao"/>
 		</bean>
+		
+		<bean id="servicioUsuario" class="com.proyectodegrado.sgti.servicios.impl.ServicioUsuarioImpl">
+			<property name="usuarioDao" ref="usuarioDao"/>
+		</bean>
+		
+		<bean id="servicioUsuarioSocio" class="com.proyectodegrado.sgti.servicios.impl.ServicioUsuarioSocioImpl" 
+			parent="servicioUsuario"/>
+		
+		<bean id="servicioUsuarioTecnico" class="com.proyectodegrado.sgti.servicios.impl.ServicioUsuarioTecnicoImpl" 
+			parent="servicioUsuario"/>
+			
+		<bean id="servicioUsuarioContraparte" class="com.proyectodegrado.sgti.servicios.impl.ServicioUsuarioContraparteImpl" 
+			parent="servicioUsuario"/>
 		
 </beans>

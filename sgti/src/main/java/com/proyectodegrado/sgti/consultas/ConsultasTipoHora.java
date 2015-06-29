@@ -31,6 +31,15 @@ public class ConsultasTipoHora {
 		return resultSet;
 	}
 	
+	public ResultSet verTipoHoraPorId (int id) throws FileNotFoundException, IOException, SQLException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM tipohora AS t WHERE t.id=?");
+		preparedStatement.setInt(1, id);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
 	public ResultSet verTiposHora () throws FileNotFoundException, IOException, SQLException{
 		Connection con = conexionBD.conectar();
 		Statement stmt = con.createStatement();

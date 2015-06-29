@@ -26,6 +26,48 @@ WITH (
 ALTER TABLE tipohora
   OWNER TO root;
 
+-- Table: usuario
 
+-- DROP TABLE usuario;
+
+CREATE TABLE usuario
+(
+  id character varying NOT NULL,
+  nombre character varying NOT NULL,
+  apellido character varying NOT NULL,
+  contrasena character varying NOT NULL,
+  email character varying,
+  telefono character varying,
+  tipo character varying,
+  activo boolean,
+  CONSTRAINT usuario_id_primarikey PRIMARY KEY (id )
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE usuario
+  OWNER TO root;
+
+-- Table: usuario_tipohora
+
+-- DROP TABLE usuario_tipohora;
+
+CREATE TABLE usuario_tipohora
+(
+  id_tipohora integer NOT NULL,
+  id_usuario character varying NOT NULL,
+  CONSTRAINT "tipohora_usuario_primaryKey" PRIMARY KEY (id_tipohora , id_usuario ),
+  CONSTRAINT "id_tipohora_foreignKey" FOREIGN KEY (id_tipohora)
+      REFERENCES tipohora (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT "id_usuario_foreingKey" FOREIGN KEY (id_usuario)
+      REFERENCES usuario (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE usuario_tipohora
+  OWNER TO root;
 
 

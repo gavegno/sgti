@@ -6,46 +6,62 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.proyectodegrado.sgti.Data.DataTipoHora;
 import com.proyectodegrado.sgti.consultas.ConsultasTipoHora;
+import com.proyectodegrado.sgti.consultas.ConsultasUsuario;
+import com.proyectodegrado.sgti.daos.UsuarioDAO;
+import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
 
 public class ServicioTipoHoraTest extends ConfigurarTest{
 	
+	private static ServicioTipoHora servicioTipoHora;
+	private static ConsultasTipoHora consultasTipoHora;
+	
+	@BeforeClass
+	public static void prepararContexto(){
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		consultasTipoHora = (ConsultasTipoHora) context.getBean("consultasTipoHora");
+		servicioTipoHora = (ServicioTipoHora) context.getBean("servicioTipoHora");
+	}
+	
+	@AfterClass
+	public static void cerrarContexto(){
+		context.close();
+	}
+	
+	@After
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+		consultasTipoHora.borrarTipoHora("TIPO_TEST");
+		consultasTipoHora.borrarTipoHora("TIPO_TEST2");
+	}
+	
 	@Test
 	public void testearAgregar() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
-			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-			ServicioTipoHora servicioTipoHora = (ServicioTipoHora) context.getBean("servicioTipoHora");
-			ConsultasTipoHora consultasTipoHora = (ConsultasTipoHora) context.getBean("consultasTipoHora");
-			context.close();
-			DataTipoHora dataTipoHora = new DataTipoHora();
-			dataTipoHora.setTipo("TIPO_TEST");
-			servicioTipoHora.agregar(dataTipoHora);
+			TipoHora tipoHora = new TipoHora();
+			tipoHora.setTipo("TIPO_TEST");
+			servicioTipoHora.agregar(tipoHora);
 			assertTrue(servicioTipoHora.seleccionarPorTipo("TIPO_TEST").getTipo().equalsIgnoreCase("TIPO_TEST"));
-			consultasTipoHora.borrarTipoHora("TIPO_TEST");
 		}
 	}
 	
 	@Test
 	public void testearSeleccionar() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
-			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-			ServicioTipoHora servicioTipoHora = (ServicioTipoHora) context.getBean("servicioTipoHora");
-			ConsultasTipoHora consultasTipoHora = (ConsultasTipoHora) context.getBean("consultasTipoHora");
-			context.close();
-			DataTipoHora dataTipoHora = new DataTipoHora();
-			dataTipoHora.setTipo("TIPO_TEST");
-			DataTipoHora segundoDataTipoHora = new DataTipoHora();
+			TipoHora tipoHora = new TipoHora();
+			tipoHora.setTipo("TIPO_TEST");
+			TipoHora segundoDataTipoHora = new TipoHora();
 			segundoDataTipoHora.setTipo("TIPO_TEST2");
-			servicioTipoHora.agregar(dataTipoHora);
+			servicioTipoHora.agregar(tipoHora);
 			servicioTipoHora.agregar(segundoDataTipoHora);
 			assertTrue(servicioTipoHora.seleccionarTipos().size()==2);
-			consultasTipoHora.borrarTipoHora("TIPO_TEST");
-			consultasTipoHora.borrarTipoHora("TIPO_TEST2");
+
 		}
 	}
 
