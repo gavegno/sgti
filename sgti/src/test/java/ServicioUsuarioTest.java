@@ -107,7 +107,17 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO10).getTipo().equalsIgnoreCase(TIPO_SOCIO));
 		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO11).getTipo().equalsIgnoreCase(TIPO_TECNICO));
 		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO12).getTipo().equalsIgnoreCase(TIPO_CONTRAPARTE));
+	}
+	
+	@Test
+	public void testExisteUsuario() throws FileNotFoundException, IOException, SQLException{
+		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
+		servicioUsuarioSocio.agregar(usuario);
+		Usuario usuarioLoguear = new Usuario();
+		usuarioLoguear.setId(ID_USUARIO10);
+		usuarioLoguear.setContrasena(TEST_CONTRASENA);
 		
+		assertTrue(servicioUsuarioSocio.existeUsuario(usuario));
 	}
 	
 	@Test

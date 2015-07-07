@@ -43,6 +43,21 @@ public class UsuarioDAO {
 		return tiposHora;
 	}
 	
+	public Usuario seleccionarUsuarioPorIdContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException{
+		Usuario usuario= new Usuario();
+		ResultSet resultSet = consultasUsuario.verUsuarioPorIdContrasena(id, contrasena);
+		if(resultSet.next()){
+			usuario.setId(resultSet.getString("id"));
+			usuario.setNombre(resultSet.getString("nombre"));
+			usuario.setApellido(resultSet.getString("apellido"));
+			usuario.setEmail(resultSet.getString("email"));
+			usuario.setTelefono(resultSet.getString("telefono"));
+			usuario.setTipo(resultSet.getString("tipo"));
+			usuario.setActivo(resultSet.getBoolean("activo"));
+		}
+		return usuario;
+	}
+	
 	public Usuario seleccionarUsuarioPorId(String id) throws FileNotFoundException, IOException, SQLException{
 		Usuario usuario= new Usuario();
 		ResultSet resultSet = consultasUsuario.verUsuarioPorId(id);

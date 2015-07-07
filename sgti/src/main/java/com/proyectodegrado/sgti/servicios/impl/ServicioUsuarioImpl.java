@@ -44,6 +44,14 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	}
 	
 	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#existeUsuario(com.proyectodegrado.sgti.Data.DataUsuario)
+	 */
+	@Override
+	public boolean existeUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException{
+		return usuarioDao.seleccionarUsuarioPorIdContrasena(usuario.getId(), usuario.getContrasena()) != null;
+	}
+	
+	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#selecionarUsuario(java.lang.String)
 	 */
 	@Override

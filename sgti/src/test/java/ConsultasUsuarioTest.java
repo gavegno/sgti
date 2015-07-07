@@ -111,6 +111,19 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
+	public void testSeleccionarUsuarioPorIdContrasena() throws FileNotFoundException, IOException, SQLException{
+		if(isHabilitarTest()){
+			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
+			assertTrue(usuarioDAO.seleccionarUsuarioPorIdContrasena(ID_USUARIO10,TEST_CONTRASENA).getApellido().equalsIgnoreCase(TEST_APELLIDO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorIdContrasena(ID_USUARIO10,TEST_CONTRASENA).getNombre().equalsIgnoreCase(TEST_NOMBRE));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorIdContrasena(ID_USUARIO10,TEST_CONTRASENA).getEmail().equalsIgnoreCase(TEST_EMAIL));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorIdContrasena(ID_USUARIO10,TEST_CONTRASENA).getTelefono().equalsIgnoreCase(TEST_TELEFONO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorIdContrasena(ID_USUARIO10,TEST_CONTRASENA).getTipo().equalsIgnoreCase(TIPO_SOCIO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorIdContrasena(ID_USUARIO10,TEST_CONTRASENA).isActivo());
+		}
+	}
+	
+	@Test
 	public void testInsertarSeleccionarTiposHoraAUsuario() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
 			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);

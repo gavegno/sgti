@@ -57,6 +57,16 @@ public class ConsultasUsuario {
 		return resultSet;
 	}
 	
+	public ResultSet verUsuarioPorIdContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.id=? AND u.contrasena=?");
+		preparedStatement.setString(1, id);
+		preparedStatement.setString(2, contrasena);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
 	public ResultSet verUsuarioPorId(String id) throws FileNotFoundException, IOException, SQLException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.id=?");

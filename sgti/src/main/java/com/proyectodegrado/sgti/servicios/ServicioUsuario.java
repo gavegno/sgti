@@ -18,6 +18,9 @@ public interface ServicioUsuario {
 	
 	public List<TipoHora> verTiposHoraPorUsuario(Usuario usuario) 
 			throws FileNotFoundException, IOException, SQLException;
+	
+	public boolean existeUsuario(Usuario usuario) 
+			throws FileNotFoundException, IOException, SQLException;
 
 	public abstract Usuario selecionarUsuario(String id)
 			throws FileNotFoundException, IOException, SQLException;
