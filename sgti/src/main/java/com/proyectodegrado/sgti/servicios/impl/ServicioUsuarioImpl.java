@@ -20,8 +20,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 */
 	@Override
 	public void agregar(Usuario usuario) throws FileNotFoundException, IOException, SQLException{
-		usuario.setActivo(true);
-		usuarioDao.agregar(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getContrasena(), usuario.getEmail(), usuario.getTelefono(), usuario.getTipo(), usuario.isActivo());
+		usuarioDao.agregar(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getContrasena(), usuario.getEmail(), usuario.getTelefono(), usuario.getTipo(), true);
 	}
 	
 	/* (non-Javadoc)

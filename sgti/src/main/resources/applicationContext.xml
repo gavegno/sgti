@@ -17,6 +17,14 @@
 			<property name="conexionBD" ref="conexionBD"/>
 		</bean>
 		
+		<bean id="consultasCliente" class="com.proyectodegrado.sgti.consultas.ConsultasCliente">
+			<property name="conexionBD" ref="conexionBD"/>
+		</bean>
+		
+		<bean id="consultasConfiguracion" class="com.proyectodegrado.sgti.consultas.ConsultasConfiguracion">
+			<property name="conexionBD" ref="conexionBD"/>
+		</bean>
+		
 		<!-- Beans de DAOs -->
 		<bean id="tipoHoraDao" class="com.proyectodegrado.sgti.daos.TipoHoraDAO">
 			<property name="consultasTipoHora" ref="consultasTipoHora"/>
@@ -25,6 +33,14 @@
 		<bean id="usuarioDao" class="com.proyectodegrado.sgti.daos.UsuarioDAO">
 			<property name="consultasUsuario" ref="consultasUsuario"/>
 			<property name="consultasTipoHora" ref="consultasTipoHora"/>
+		</bean>
+		
+		<bean id="clienteDao" class="com.proyectodegrado.sgti.daos.ClienteDAO">
+			<property name="consultasCliente" ref="consultasCliente"/>
+		</bean>
+		
+		<bean id="configuracionDao" class="com.proyectodegrado.sgti.daos.ConfiguracionDAO">
+			<property name="consultasConfiguracion" ref="consultasConfiguracion"/>
 		</bean>
 		
 		<!-- Beans de servicios -->
@@ -44,5 +60,13 @@
 			
 		<bean id="servicioUsuarioContraparte" class="com.proyectodegrado.sgti.servicios.impl.ServicioUsuarioContraparteImpl" 
 			parent="servicioUsuario"/>
+			
+		<bean id="servicioCliente" class="com.proyectodegrado.sgti.servicios.impl.ServicioClienteImpl">
+			<property name="clienteDao" ref="clienteDao"/>
+		</bean>
+		
+		<bean id="servicioConfiguracion" class="com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracionImpl">
+			<property name="configuracionDao" ref="configuracionDao"/>
+		</bean>
 		
 </beans>

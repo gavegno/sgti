@@ -70,4 +70,56 @@ WITH (
 ALTER TABLE usuario_tipohora
   OWNER TO root;
 
+-- Table: cliente
+
+-- DROP TABLE cliente;
+
+CREATE TABLE cliente
+(
+  id serial NOT NULL,
+  nombre character varying NOT NULL,
+  direccion character varying,
+  telefono character varying,
+  activo boolean NOT NULL,
+  CONSTRAINT "cliente_primaryKey" PRIMARY KEY (id )
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cliente
+  OWNER TO root;
+
+-- Table: configuracion
+
+-- DROP TABLE configuracion;
+
+CREATE TABLE configuracion
+(
+  id serial NOT NULL,
+  fechainicio date,
+  fechafin date,
+  renovacion character varying,
+  periodorenovacion integer,
+  tipocontrato character varying,
+  computospaquete integer,
+  periodovalidezmes integer,
+  periodovalidezdia integer,
+  acumulacion boolean,
+  periodoacumulacion integer,
+  frecuenciainforme integer,
+  frecuenciafacturacion integer,
+  frecuenciacomputosextra integer,
+  tiemporespuesta character varying,
+  id_horariolaboral character varying,
+  id_contrato character varying,
+  CONSTRAINT "configuracion_primaryKey" PRIMARY KEY (id )
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE configuracion
+  OWNER TO root;
+
+
+
 
