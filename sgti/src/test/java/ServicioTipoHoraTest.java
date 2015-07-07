@@ -13,13 +13,13 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.proyectodegrado.sgti.consultas.ConsultasTipoHora;
-import com.proyectodegrado.sgti.consultas.ConsultasUsuario;
-import com.proyectodegrado.sgti.daos.UsuarioDAO;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
 
 public class ServicioTipoHoraTest extends ConfigurarTest{
 	
+	private static final String TIPO_TEST2 = "TIPO_TEST2";
+	private static final String TIPO_TEST = "TIPO_TEST";
 	private static ServicioTipoHora servicioTipoHora;
 	private static ConsultasTipoHora consultasTipoHora;
 	
@@ -37,17 +37,17 @@ public class ServicioTipoHoraTest extends ConfigurarTest{
 	
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
-		consultasTipoHora.borrarTipoHora("TIPO_TEST");
-		consultasTipoHora.borrarTipoHora("TIPO_TEST2");
+		consultasTipoHora.borrarTipoHora(TIPO_TEST);
+		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
 	}
 	
 	@Test
 	public void testearAgregar() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
 			TipoHora tipoHora = new TipoHora();
-			tipoHora.setTipo("TIPO_TEST");
+			tipoHora.setTipo(TIPO_TEST);
 			servicioTipoHora.agregar(tipoHora);
-			assertTrue(servicioTipoHora.seleccionarPorTipo("TIPO_TEST").getTipo().equalsIgnoreCase("TIPO_TEST"));
+			assertTrue(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getTipo().equalsIgnoreCase(TIPO_TEST));
 		}
 	}
 	
@@ -55,9 +55,9 @@ public class ServicioTipoHoraTest extends ConfigurarTest{
 	public void testearSeleccionar() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
 			TipoHora tipoHora = new TipoHora();
-			tipoHora.setTipo("TIPO_TEST");
+			tipoHora.setTipo(TIPO_TEST);
 			TipoHora segundoDataTipoHora = new TipoHora();
-			segundoDataTipoHora.setTipo("TIPO_TEST2");
+			segundoDataTipoHora.setTipo(TIPO_TEST2);
 			servicioTipoHora.agregar(tipoHora);
 			servicioTipoHora.agregar(segundoDataTipoHora);
 			assertTrue(servicioTipoHora.seleccionarTipos().size()==2);

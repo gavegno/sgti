@@ -22,6 +22,38 @@ import com.proyectodegrado.sgti.daos.UsuarioDAO;
 
 public class ConsultasUsuarioTest extends ConfigurarTest{
 	
+	private static final String TEST_TELEFONO2 = "12345679";
+
+	private static final String TEST_EMAIL2 = "test2@email.com";
+
+	private static final String TEST_CONTRASENA2 = "testContrasena2";
+
+	private static final String TEST_APELLIDO2 = "testApellido2";
+
+	private static final String TEST_NOMBRE2 = "testNombre2";
+
+	private static final String TIPO_SOCIO = "SOCIO";
+
+	private static final String TEST_TELEFONO = "12345678";
+
+	private static final String TEST_EMAIL = "test@email.com";
+
+	private static final String TEST_CONTRASENA = "testContrasena";
+
+	private static final String TEST_APELLIDO = "testApellido";
+
+	private static final String TEST_NOMBRE = "testNombre";
+
+	private static final String ID = "id";
+
+	private static final String ID_USUARIO10 = "10";
+
+	private static final String ID_USUARIO11 = "11";
+
+	private static final String TIPO_TEST2 = "TIPO_TEST2";
+
+	private static final String TIPO_TEST = "TIPO_TEST";
+
 	private static ConsultasUsuario consultasUsuario;
 	
 	private static UsuarioDAO usuarioDAO;
@@ -47,49 +79,49 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
 		borrarTiposHoraUsuario();
-		consultasUsuario.borrarUsuario("11");
-		consultasUsuario.borrarUsuario("10");
-		consultasTipoHora.borrarTipoHora("TIPO_TEST");
-		consultasTipoHora.borrarTipoHora("TIPO_TEST2");
+		consultasUsuario.borrarUsuario(ID_USUARIO11);
+		consultasUsuario.borrarUsuario(ID_USUARIO10);
+		consultasTipoHora.borrarTipoHora(TIPO_TEST);
+		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
 		
 	}
 
 	private void borrarTiposHoraUsuario() throws FileNotFoundException,	IOException, SQLException {
-		ResultSet tipoHoraTest = consultasTipoHora.verTipoHora("TIPO_TEST");
-		ResultSet tipoHoraTest2 = consultasTipoHora.verTipoHora("TIPO_TEST2");
+		ResultSet tipoHoraTest = consultasTipoHora.verTipoHora(TIPO_TEST);
+		ResultSet tipoHoraTest2 = consultasTipoHora.verTipoHora(TIPO_TEST2);
 		if(tipoHoraTest.next()){
-			consultasUsuario.borrarTipoHoraDeUsuario("10", tipoHoraTest.getInt("id"));
+			consultasUsuario.borrarTipoHoraDeUsuario(ID_USUARIO10, tipoHoraTest.getInt(ID));
 		}
 		if(tipoHoraTest2.next()){
-			consultasUsuario.borrarTipoHoraDeUsuario("10", tipoHoraTest2.getInt("id"));
+			consultasUsuario.borrarTipoHoraDeUsuario(ID_USUARIO10, tipoHoraTest2.getInt(ID));
 		}
 	}
 	
 	@Test
 	public void testInsertarSeleccionarUsuario() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
-			usuarioDAO.agregar("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", "SOCIO",true);
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getApellido().equalsIgnoreCase("testApellido"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getNombre().equalsIgnoreCase("testNombre"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getEmail().equalsIgnoreCase("test@email.com"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getTelefono().equalsIgnoreCase("12345678"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getTipo().equalsIgnoreCase("SOCIO"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").isActivo());
+			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getApellido().equalsIgnoreCase(TEST_APELLIDO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getNombre().equalsIgnoreCase(TEST_NOMBRE));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getEmail().equalsIgnoreCase(TEST_EMAIL));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getTelefono().equalsIgnoreCase(TEST_TELEFONO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getTipo().equalsIgnoreCase(TIPO_SOCIO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).isActivo());
 		}
 	}
 	
 	@Test
 	public void testInsertarSeleccionarTiposHoraAUsuario() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
-			usuarioDAO.agregar("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", "SOCIO",true);
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getApellido().equalsIgnoreCase("testApellido"));
-			tipoHoraDAO.agregar("TIPO_TEST");
-			tipoHoraDAO.agregar("TIPO_TEST2");
+			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getApellido().equalsIgnoreCase(TEST_APELLIDO));
+			tipoHoraDAO.agregar(TIPO_TEST);
+			tipoHoraDAO.agregar(TIPO_TEST2);
 			List<Integer> tiposHora = new ArrayList<Integer>();
-			tiposHora.add(tipoHoraDAO.seleccionarPorTipo("TIPO_TEST").getId());
-			tiposHora.add(tipoHoraDAO.seleccionarPorTipo("TIPO_TEST2").getId());
-			usuarioDAO.agregarTipoHoraUsuario(tiposHora, "10");
-			assertTrue(usuarioDAO.verTiposHoraPorUsuario("10").size()==2);
+			tiposHora.add(tipoHoraDAO.seleccionarPorTipo(TIPO_TEST).getId());
+			tiposHora.add(tipoHoraDAO.seleccionarPorTipo(TIPO_TEST2).getId());
+			usuarioDAO.agregarTipoHoraUsuario(tiposHora, ID_USUARIO10);
+			assertTrue(usuarioDAO.verTiposHoraPorUsuario(ID_USUARIO10).size()==2);
 			
 		}
 	}
@@ -97,10 +129,10 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	@Test
 	public void testInsertarSeleccionarUsuarios() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
-			usuarioDAO.agregar("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", "SOCIO",true);
-			usuarioDAO.agregar("11","testNombre2","testApellido2","testContrasena2","test2@email.com", "12345679", "TECNICO",true);
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getApellido().equalsIgnoreCase("testApellido"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("11").getApellido().equalsIgnoreCase("testApellido2"));
+			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
+			usuarioDAO.agregar(ID_USUARIO11,TEST_NOMBRE2,TEST_APELLIDO2,TEST_CONTRASENA2,TEST_EMAIL2, TEST_TELEFONO2, "TECNICO",true);
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getApellido().equalsIgnoreCase(TEST_APELLIDO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO11).getApellido().equalsIgnoreCase(TEST_APELLIDO2));
 			assertTrue(usuarioDAO.seleccionarUsuarios().size()==2);
 		}
 	}
@@ -108,28 +140,28 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	@Test
 	public void testEditarUsuario() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
-			usuarioDAO.agregar("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", "SOCIO",true);
-			usuarioDAO.editarUsuario("10","testNombre2","testApellido2","test2@email.com", "12345679");
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getApellido().equalsIgnoreCase("testApellido2"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getNombre().equalsIgnoreCase("testNombre2"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getEmail().equalsIgnoreCase("test2@email.com"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getTelefono().equalsIgnoreCase("12345679"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getTipo().equalsIgnoreCase("SOCIO"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").isActivo());
+			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
+			usuarioDAO.editarUsuario(ID_USUARIO10,TEST_NOMBRE2,TEST_APELLIDO2,TEST_EMAIL2, TEST_TELEFONO2);
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getApellido().equalsIgnoreCase(TEST_APELLIDO2));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getNombre().equalsIgnoreCase(TEST_NOMBRE2));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getEmail().equalsIgnoreCase(TEST_EMAIL2));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getTelefono().equalsIgnoreCase(TEST_TELEFONO2));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getTipo().equalsIgnoreCase(TIPO_SOCIO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).isActivo());
 		}
 	}
 	
 	@Test
 	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException{
 		if(isHabilitarTest()){
-			usuarioDAO.agregar("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", "SOCIO",true);
-			usuarioDAO.cambiarContraseña("10", "contrasenaModificada");
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getApellido().equalsIgnoreCase("testApellido"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getNombre().equalsIgnoreCase("testNombre"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getEmail().equalsIgnoreCase("test@email.com"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getTelefono().equalsIgnoreCase("12345678"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").getTipo().equalsIgnoreCase("SOCIO"));
-			assertTrue(usuarioDAO.seleccionarUsuarioPorId("10").isActivo());
+			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
+			usuarioDAO.cambiarContraseña(ID_USUARIO10, "contrasenaModificada");
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getApellido().equalsIgnoreCase(TEST_APELLIDO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getNombre().equalsIgnoreCase(TEST_NOMBRE));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getEmail().equalsIgnoreCase(TEST_EMAIL));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getTelefono().equalsIgnoreCase(TEST_TELEFONO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getTipo().equalsIgnoreCase(TIPO_SOCIO));
+			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).isActivo());
 		}
 	}
 

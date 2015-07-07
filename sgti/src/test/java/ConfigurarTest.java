@@ -6,7 +6,7 @@ import java.util.Properties;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;    
 
-public class ConfigurarTest {
+public class ConfigurarTest { 
 	   
 	protected boolean habilitarTest;
 	

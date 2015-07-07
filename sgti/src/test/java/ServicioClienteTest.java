@@ -18,6 +18,14 @@ import com.proyectodegrado.sgti.servicios.impl.ServicioCliente;
 
 public class ServicioClienteTest extends ConfigurarTest{
 	
+	private static final String DIRECCION_TEST_CAMBIADA = "DIRECCION_TEST_CAMBIADA";
+	private static final String TELEFONO_TEST2 = "12345679";
+	private static final String DIRECCION_TEST2 = "DIRECCION_TEST2";
+	private static final String TELEFONO_TEST = "12345678";
+	private static final String DIRECCION_TEST = "DIRECCION_TEST";
+	private static final String CLIENTE_TEST_EDITADO = "CLIENTE_TEST_EDITADO";
+	private static final String CLIENTE_TEST2 = "CLIENTE_TEST2";
+	private static final String CLIENTE_TEST = "CLIENTE_TEST";
 	private static ServicioCliente servicioCliente;
 	private static ConsultasCliente consultasCliente;
 	
@@ -35,93 +43,93 @@ public class ServicioClienteTest extends ConfigurarTest{
 	
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
-		consultasCliente.borrarCliente("CLIENTE_TEST");
-		consultasCliente.borrarCliente("CLIENTE_TEST2");
-		consultasCliente.borrarCliente("CLIENTE_TEST_EDITADO");
+		consultasCliente.borrarCliente(CLIENTE_TEST);
+		consultasCliente.borrarCliente(CLIENTE_TEST2);
+		consultasCliente.borrarCliente(CLIENTE_TEST_EDITADO);
 	}
 	
 	@Test
 	public void testAgregarCliente() throws FileNotFoundException, IOException, SQLException{
 		Cliente cliente = new Cliente();
-		cliente.setNombre("CLIENTE_TEST");
-		cliente.setDireccion("DIRECCION_TEST");
-		cliente.setTelefono("12345678");
+		cliente.setNombre(CLIENTE_TEST);
+		cliente.setDireccion(DIRECCION_TEST);
+		cliente.setTelefono(TELEFONO_TEST);
 		servicioCliente.agregar(cliente);
 		
 		assertTrue(servicioCliente.verClientes().size() == 1);
-		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase("CLIENTE_TEST"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase("DIRECCION_TEST"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase("12345678"));
+		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase(CLIENTE_TEST));
+		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase(DIRECCION_TEST));
+		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase(TELEFONO_TEST));
 		assertTrue(servicioCliente.verPorNombre(cliente).isActivo());
 	}
 	
 	@Test
 	public void testAgregarClientes() throws FileNotFoundException, IOException, SQLException{
 		Cliente cliente = new Cliente();
-		cliente.setNombre("CLIENTE_TEST");
-		cliente.setDireccion("DIRECCION_TEST");
-		cliente.setTelefono("12345678");
+		cliente.setNombre(CLIENTE_TEST);
+		cliente.setDireccion(DIRECCION_TEST);
+		cliente.setTelefono(TELEFONO_TEST);
 		
 		Cliente clienteNuevo = new Cliente();
-		clienteNuevo.setNombre("CLIENTE_TEST2");
-		clienteNuevo.setDireccion("DIRECCION_TEST2");
-		clienteNuevo.setTelefono("12345679");
+		clienteNuevo.setNombre(CLIENTE_TEST2);
+		clienteNuevo.setDireccion(DIRECCION_TEST2);
+		clienteNuevo.setTelefono(TELEFONO_TEST2);
 		
 		servicioCliente.agregar(cliente);
 		servicioCliente.agregar(clienteNuevo);
 		
 		assertTrue(servicioCliente.verClientes().size() == 2);
 		
-		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase("CLIENTE_TEST"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase("DIRECCION_TEST"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase("12345678"));
+		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase(CLIENTE_TEST));
+		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase(DIRECCION_TEST));
+		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase(TELEFONO_TEST));
 		assertTrue(servicioCliente.verPorNombre(cliente).isActivo());
 		
-		assertTrue(servicioCliente.verPorNombre(clienteNuevo).getNombre().equalsIgnoreCase("CLIENTE_TEST2"));
-		assertTrue(servicioCliente.verPorNombre(clienteNuevo).getDireccion().equalsIgnoreCase("DIRECCION_TEST2"));
-		assertTrue(servicioCliente.verPorNombre(clienteNuevo).getTelefono().equalsIgnoreCase("12345679"));
+		assertTrue(servicioCliente.verPorNombre(clienteNuevo).getNombre().equalsIgnoreCase(CLIENTE_TEST2));
+		assertTrue(servicioCliente.verPorNombre(clienteNuevo).getDireccion().equalsIgnoreCase(DIRECCION_TEST2));
+		assertTrue(servicioCliente.verPorNombre(clienteNuevo).getTelefono().equalsIgnoreCase(TELEFONO_TEST2));
 		assertTrue(servicioCliente.verPorNombre(clienteNuevo).isActivo());
 	}
 	
 	@Test
 	public void testEditarCliente() throws FileNotFoundException, IOException, SQLException{
 		Cliente cliente = new Cliente();
-		cliente.setNombre("CLIENTE_TEST");
-		cliente.setDireccion("DIRECCION_TEST");
-		cliente.setTelefono("12345678");
+		cliente.setNombre(CLIENTE_TEST);
+		cliente.setDireccion(DIRECCION_TEST);
+		cliente.setTelefono(TELEFONO_TEST);
 		servicioCliente.agregar(cliente);
 		
 		assertTrue(servicioCliente.verClientes().size() == 1);
-		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase("CLIENTE_TEST"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase("DIRECCION_TEST"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase("12345678"));
+		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase(CLIENTE_TEST));
+		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase(DIRECCION_TEST));
+		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase(TELEFONO_TEST));
 		assertTrue(servicioCliente.verPorNombre(cliente).isActivo());
 		
 		cliente.setId(servicioCliente.verPorNombre(cliente).getId());
-		cliente.setNombre("CLIENTE_TEST_EDITADO");
-		cliente.setDireccion("DIRECCION_TEST_CAMBIADA");
-		cliente.setTelefono("00000000");
+		cliente.setNombre(CLIENTE_TEST_EDITADO);
+		cliente.setDireccion(DIRECCION_TEST_CAMBIADA);
+		cliente.setTelefono(TELEFONO_TEST2);
 		servicioCliente.editarCliente(cliente);
 		
 		assertTrue(servicioCliente.verClientes().size() == 1);
-		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase("CLIENTE_TEST_EDITADO"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase("DIRECCION_TEST_CAMBIADA"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase("00000000"));
+		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase(CLIENTE_TEST_EDITADO));
+		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase(DIRECCION_TEST_CAMBIADA));
+		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase(TELEFONO_TEST2));
 		assertTrue(servicioCliente.verPorNombre(cliente).isActivo());
 	}
 	
 	@Test
 	public void testEliminarCliente() throws FileNotFoundException, IOException, SQLException{
 		Cliente cliente = new Cliente();
-		cliente.setNombre("CLIENTE_TEST");
-		cliente.setDireccion("DIRECCION_TEST");
-		cliente.setTelefono("12345678");
+		cliente.setNombre(CLIENTE_TEST);
+		cliente.setDireccion(DIRECCION_TEST);
+		cliente.setTelefono(TELEFONO_TEST);
 		servicioCliente.agregar(cliente);
 		
 		assertTrue(servicioCliente.verClientes().size() == 1);
-		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase("CLIENTE_TEST"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase("DIRECCION_TEST"));
-		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase("12345678"));
+		assertTrue(servicioCliente.verPorNombre(cliente).getNombre().equalsIgnoreCase(CLIENTE_TEST));
+		assertTrue(servicioCliente.verPorNombre(cliente).getDireccion().equalsIgnoreCase(DIRECCION_TEST));
+		assertTrue(servicioCliente.verPorNombre(cliente).getTelefono().equalsIgnoreCase(TELEFONO_TEST));
 		assertTrue(servicioCliente.verPorNombre(cliente).isActivo());
 		
 		cliente.setId(servicioCliente.verPorNombre(cliente).getId());

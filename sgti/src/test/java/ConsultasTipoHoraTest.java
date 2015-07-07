@@ -17,6 +17,10 @@ import com.proyectodegrado.sgti.daos.TipoHoraDAO;
 
 public class ConsultasTipoHoraTest extends ConfigurarTest{
 	
+	private static final String TIPO_TEST2 = "TIPO_TEST2";
+
+	private static final String TIPO_TEST = "TIPO_TEST";
+
 	private static ConsultasTipoHora consultasTipoHora;
 	
 	private static TipoHoraDAO tipoHoraDao;
@@ -35,8 +39,8 @@ public class ConsultasTipoHoraTest extends ConfigurarTest{
 	
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
-		consultasTipoHora.borrarTipoHora("TIPO_TEST");
-		consultasTipoHora.borrarTipoHora("TIPO_TEST2");
+		consultasTipoHora.borrarTipoHora(TIPO_TEST);
+		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
 	}
 	
 	
@@ -44,17 +48,16 @@ public class ConsultasTipoHoraTest extends ConfigurarTest{
 	public void testInsertarSeleccionarTipoHora() throws SQLException, FileNotFoundException, IOException{
 		if(isHabilitarTest()){
 			tipoHoraDao = (TipoHoraDAO) context.getBean("tipoHoraDao");
-			consultasTipoHora.insertarTipoHora("TIPO_TEST");
-			assertTrue(tipoHoraDao.seleccionarPorTipo("TIPO_TEST").getTipo().equalsIgnoreCase("TIPO_TEST"));
+			consultasTipoHora.insertarTipoHora(TIPO_TEST);
+			assertTrue(tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getTipo().equalsIgnoreCase(TIPO_TEST));
 		}
 	}
 	
 	@Test
 	public void testSeleccionarTiposHora() throws SQLException, FileNotFoundException, IOException{
 		if(isHabilitarTest()){
-			tipoHoraDao = (TipoHoraDAO) context.getBean("tipoHoraDao");
-			consultasTipoHora.insertarTipoHora("TIPO_TEST");
-			consultasTipoHora.insertarTipoHora("TIPO_TEST2");
+			consultasTipoHora.insertarTipoHora(TIPO_TEST);
+			consultasTipoHora.insertarTipoHora(TIPO_TEST2);
 			assertTrue(tipoHoraDao.seleccionarTipos().size()==2);
 		}
 	}

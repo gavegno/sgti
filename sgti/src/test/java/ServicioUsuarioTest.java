@@ -28,6 +28,24 @@ import com.proyectodegrado.sgti.servicios.impl.ServicioUsuarioTecnicoImpl;
 
 public class ServicioUsuarioTest extends ConfigurarTest{
 	
+	private static final String TEST_CONTRASENA2 = "testContrasena2";
+	private static final String TEST_EMAIL2 = "test2@email.com";
+	private static final String TEST_NOMBRE2 = "testNombre2";
+	private static final String TEST_APELLIDO2 = "testApellido2";
+	private static final String TEST_TELEFONO = "12345678";
+	private static final String TEST_EMAIL = "test@email.com";
+	private static final String TEST_CONTRASENA = "testContrasena";
+	private static final String TEST_APELLIDO = "testApellido";
+	private static final String TEST_NOMBRE = "testNombre";
+	private static final String TIPO_CONTRAPARTE = "CONTRAPARTE";
+	private static final String TIPO_TECNICO = "TECNICO";
+	private static final String TIPO_SOCIO = "SOCIO";
+	private static final String ID = "id";
+	private static final String TIPO_TEST2 = "TIPO_TEST2";
+	private static final String TIPO_TEST = "TIPO_TEST";
+	private static final String ID_USUARIO12 = "12";
+	private static final String ID_USUARIO11 = "11";
+	private static final String ID_USUARIO10 = "10";
 	private static ServicioUsuario servicioUsuario;
 	private static ServicioTipoHora servicioTipoHora;
 	private static ServicioUsuarioSocioImpl servicioUsuarioSocio;
@@ -58,97 +76,97 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
 		borrarTiposHoraUsuario();
-		consultasUsuario.borrarUsuario("10");
-		consultasUsuario.borrarUsuario("11");
-		consultasUsuario.borrarUsuario("12");
-		consultasTipoHora.borrarTipoHora("TIPO_TEST");
-		consultasTipoHora.borrarTipoHora("TIPO_TEST2");
+		consultasUsuario.borrarUsuario(ID_USUARIO10);
+		consultasUsuario.borrarUsuario(ID_USUARIO11);
+		consultasUsuario.borrarUsuario(ID_USUARIO12);
+		consultasTipoHora.borrarTipoHora(TIPO_TEST);
+		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
 	}
 	
 	private void borrarTiposHoraUsuario() throws FileNotFoundException,	IOException, SQLException {
-		ResultSet tipoHoraTest = consultasTipoHora.verTipoHora("TIPO_TEST");
-		ResultSet tipoHoraTest2 = consultasTipoHora.verTipoHora("TIPO_TEST2");
+		ResultSet tipoHoraTest = consultasTipoHora.verTipoHora(TIPO_TEST);
+		ResultSet tipoHoraTest2 = consultasTipoHora.verTipoHora(TIPO_TEST2);
 		if(tipoHoraTest.next()){
-			consultasUsuario.borrarTipoHoraDeUsuario("10", tipoHoraTest.getInt("id"));
+			consultasUsuario.borrarTipoHoraDeUsuario(ID_USUARIO10, tipoHoraTest.getInt(ID));
 		}
 		if(tipoHoraTest2.next()){
-			consultasUsuario.borrarTipoHoraDeUsuario("10", tipoHoraTest2.getInt("id"));
+			consultasUsuario.borrarTipoHoraDeUsuario(ID_USUARIO10, tipoHoraTest2.getInt(ID));
 		}
 	}
 	
 	@Test
 	public void testAgregarUsuario() throws FileNotFoundException, IOException, SQLException{
-		Usuario usuario = new Usuario("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", null,false, null);
-		Usuario usuarioSegundo = new Usuario("11","testNombre2","testApellido2","testContrasena2","test2@email.com", "12345679", null,false, null);
-		Usuario usuarioTercero = new Usuario("12","testNombre3","testApellido3","testContrasena3","test3@email.com", "12345680", null,false, null);
+		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
+		Usuario usuarioSegundo = new Usuario(ID_USUARIO11,TEST_NOMBRE2,TEST_APELLIDO2,TEST_CONTRASENA2,TEST_EMAIL2, "12345679", null,false, null);
+		Usuario usuarioTercero = new Usuario(ID_USUARIO12,"testNombre3","testApellido3","testContrasena3","test3@email.com", "12345680", null,false, null);
 		servicioUsuarioSocio.agregar(usuario);
 		servicioUsuarioTecnico.agregar(usuarioSegundo);
 		servicioUsuarioContraparte.agregar(usuarioTercero);
 		
 		assertTrue(servicioUsuario.seleccionarUsuarios().size() == 3);
-		assertTrue(servicioUsuario.selecionarUsuario("10").getTipo().equalsIgnoreCase("SOCIO"));
-		assertTrue(servicioUsuario.selecionarUsuario("11").getTipo().equalsIgnoreCase("TECNICO"));
-		assertTrue(servicioUsuario.selecionarUsuario("12").getTipo().equalsIgnoreCase("CONTRAPARTE"));
+		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO10).getTipo().equalsIgnoreCase(TIPO_SOCIO));
+		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO11).getTipo().equalsIgnoreCase(TIPO_TECNICO));
+		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO12).getTipo().equalsIgnoreCase(TIPO_CONTRAPARTE));
 		
 	}
 	
 	@Test
 	public void testAgregarUsuarioTipoHora() throws FileNotFoundException, IOException, SQLException{
-		Usuario usuario = new Usuario("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", null,false, null);
+		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		TipoHora tipoHora = new TipoHora();
-		tipoHora.setTipo("TIPO_TEST");
+		tipoHora.setTipo(TIPO_TEST);
 		List<TipoHora> tiposHora = new ArrayList<TipoHora>();
 		servicioUsuarioSocio.agregar(usuario);
 		servicioTipoHora.agregar(tipoHora);
-		tipoHora = servicioTipoHora.seleccionarPorTipo("TIPO_TEST");
+		tipoHora = servicioTipoHora.seleccionarPorTipo(TIPO_TEST);
 		tiposHora.add(tipoHora);
 		usuario.setUsuarioTipoHora(tiposHora);
 		servicioUsuario.agregarTipoHoraUsuario(usuario);
 		
-		assertTrue(servicioUsuario.selecionarUsuario("10").getTipo().equalsIgnoreCase("SOCIO"));
+		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO10).getTipo().equalsIgnoreCase(TIPO_SOCIO));
 		assertTrue(servicioUsuario.verTiposHoraPorUsuario(usuario).size() == 1);
-		assertTrue(servicioUsuario.verTiposHoraPorUsuario(usuario).get(0).getTipo().equalsIgnoreCase("TIPO_TEST"));
+		assertTrue(servicioUsuario.verTiposHoraPorUsuario(usuario).get(0).getTipo().equalsIgnoreCase(TIPO_TEST));
 		
 	}
 	
 	@Test
 	public void testEditarUsuario() throws FileNotFoundException, IOException, SQLException{
-		Usuario usuario = new Usuario("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", null,false, null);
+		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		servicioUsuarioSocio.agregar(usuario);
-		usuario.setApellido("testApellido2");
-		usuario.setNombre("testNombre2");
-		usuario.setEmail("test2@email.com");
+		usuario.setApellido(TEST_APELLIDO2);
+		usuario.setNombre(TEST_NOMBRE2);
+		usuario.setEmail(TEST_EMAIL2);
 		servicioUsuario.editarUsuario(usuario);
 		
 		assertTrue(servicioUsuario.seleccionarUsuarios().size() == 1);
-		assertTrue(servicioUsuario.selecionarUsuario("10").getApellido().equalsIgnoreCase("testApellido2"));
-		assertTrue(servicioUsuario.selecionarUsuario("10").getNombre().equalsIgnoreCase("testNombre2"));
-		assertTrue(servicioUsuario.selecionarUsuario("10").getEmail().equalsIgnoreCase("test2@email.com"));
+		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO10).getApellido().equalsIgnoreCase(TEST_APELLIDO2));
+		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO10).getNombre().equalsIgnoreCase(TEST_NOMBRE2));
+		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO10).getEmail().equalsIgnoreCase(TEST_EMAIL2));
 		
 	}
 	
 	@Test
 	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException{
-		Usuario usuario = new Usuario("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", null,false, null);
+		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		servicioUsuarioSocio.agregar(usuario);
-		assertTrue(usuarioDAO.verContraseñaUsuario("10").equalsIgnoreCase("testContrasena"));
+		assertTrue(usuarioDAO.verContraseñaUsuario(ID_USUARIO10).equalsIgnoreCase(TEST_CONTRASENA));
 		
-		usuario.setContrasena("testContrasena2");
+		usuario.setContrasena(TEST_CONTRASENA2);
 		servicioUsuario.cambiarContrasena(usuario);
 		assertTrue(servicioUsuario.seleccionarUsuarios().size() == 1);
-		assertTrue(usuarioDAO.verContraseñaUsuario("10").equalsIgnoreCase("testContrasena2"));
+		assertTrue(usuarioDAO.verContraseñaUsuario(ID_USUARIO10).equalsIgnoreCase(TEST_CONTRASENA2));
 		
 	}
 	
 	@Test
 	public void testEliminarUsuario() throws FileNotFoundException, IOException, SQLException{
-		Usuario usuario = new Usuario("10","testNombre","testApellido","testContrasena","test@email.com", "12345678", null,false, null);
+		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		servicioUsuarioSocio.agregar(usuario);
 		assertTrue(servicioUsuario.seleccionarUsuarios().size() == 1);
-		assertTrue(servicioUsuario.selecionarUsuario("10").isActivo());
+		assertTrue(servicioUsuario.selecionarUsuario(ID_USUARIO10).isActivo());
 		
 		servicioUsuario.eliminarUsuario(usuario);
-		assertTrue(!servicioUsuario.selecionarUsuario("10").isActivo());
+		assertTrue(!servicioUsuario.selecionarUsuario(ID_USUARIO10).isActivo());
 		
 	}
 

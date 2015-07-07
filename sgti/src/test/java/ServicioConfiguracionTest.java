@@ -21,6 +21,16 @@ import com.proyectodegrado.sgti.servicios.ServicioConfiguracion;
 
 public class ServicioConfiguracionTest extends ConfigurarTest{
 	
+	private static final String RENOVACION_TEST_EDITADA = "RENOVACION_TEST_EDITADA";
+
+	private static final String TIEMPO_RESPUESTA_TEST = "TIEMPO_RESPUESTA_TEST";
+
+	private static final String TIPO_CONTRATO_TEST = "TIPO_CONTRATO_TEST";
+
+	private static final String RENOVACION_TEST = "RENOVACION_TEST";
+
+	private static final String HORARIO_LABORAL_TEST = "HORARIO_LABORAL_TEST";
+
 	private static ConsultasConfiguracion consultasConfiguracion;
 	
 	private static ServicioConfiguracion servicioConfiguracion;
@@ -50,12 +60,12 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	public void testInsertar() throws FileNotFoundException, IOException, SQLException{
 		Configuracion configuracion = new Configuracion();
 		HorarioLaboral horarioLaboral = new HorarioLaboral();
-		horarioLaboral.setId("HORARIO_LABORAL_TEST");
+		horarioLaboral.setId(HORARIO_LABORAL_TEST);
 		configuracion.setFechaInicio(new Date());
 		configuracion.setFechaFin(new Date());
-		configuracion.setRenovacion("RENOVACION_TEST");
+		configuracion.setRenovacion(RENOVACION_TEST);
 		configuracion.setPeriodoRenovacion(12);
-		configuracion.setTipoContrato("TIPO_CONTRATO_TEST");
+		configuracion.setTipoContrato(TIPO_CONTRATO_TEST);
 		configuracion.setComputosPaquete(15);
 		configuracion.setPeriodoValidezMes(1);
 		configuracion.setPeriodoValidezDia(0);
@@ -64,27 +74,27 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 		configuracion.setFrecuenciaInforme(1);
 		configuracion.setFrecuenciaFacturacion(1);
 		configuracion.setFrecuenciaComputosExtra(3);
-		configuracion.setTiempoRespuesta("TIEMPO_RESPUESTA_TEST");
+		configuracion.setTiempoRespuesta(TIEMPO_RESPUESTA_TEST);
 		configuracion.setHorarioLaboral(horarioLaboral);
 		
 		servicioConfiguracion.insertar(configuracion);
 		configuracion.setId(configuracionDAO.verConfiguracionesPorContrato("").get(0).getId());
 		
-		assertTrue(servicioConfiguracion.seleccionarConfiguracion(configuracion.getId()).getRenovacion().equalsIgnoreCase("RENOVACION_TEST"));
-		assertTrue(servicioConfiguracion.seleccionarConfiguracion(configuracion.getId()).getTipoContrato().equalsIgnoreCase("TIPO_CONTRATO_TEST"));
-		assertTrue(servicioConfiguracion.seleccionarConfiguracion(configuracion.getId()).getTiempoRespuesta().equalsIgnoreCase("TIEMPO_RESPUESTA_TEST"));
+		assertTrue(servicioConfiguracion.seleccionarConfiguracion(configuracion.getId()).getRenovacion().equalsIgnoreCase(RENOVACION_TEST));
+		assertTrue(servicioConfiguracion.seleccionarConfiguracion(configuracion.getId()).getTipoContrato().equalsIgnoreCase(TIPO_CONTRATO_TEST));
+		assertTrue(servicioConfiguracion.seleccionarConfiguracion(configuracion.getId()).getTiempoRespuesta().equalsIgnoreCase(TIEMPO_RESPUESTA_TEST));
 	}
 	
 	@Test
 	public void testEditar() throws FileNotFoundException, IOException, SQLException{
 		Configuracion configuracion = new Configuracion();
 		HorarioLaboral horarioLaboral = new HorarioLaboral();
-		horarioLaboral.setId("HORARIO_LABORAL_TEST");
+		horarioLaboral.setId(HORARIO_LABORAL_TEST);
 		configuracion.setFechaInicio(new Date());
 		configuracion.setFechaFin(new Date());
-		configuracion.setRenovacion("RENOVACION_TEST");
+		configuracion.setRenovacion(RENOVACION_TEST);
 		configuracion.setPeriodoRenovacion(12);
-		configuracion.setTipoContrato("TIPO_CONTRATO_TEST");
+		configuracion.setTipoContrato(TIPO_CONTRATO_TEST);
 		configuracion.setComputosPaquete(15);
 		configuracion.setPeriodoValidezMes(1);
 		configuracion.setPeriodoValidezDia(0);
@@ -93,15 +103,15 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 		configuracion.setFrecuenciaInforme(1);
 		configuracion.setFrecuenciaFacturacion(1);
 		configuracion.setFrecuenciaComputosExtra(3);
-		configuracion.setTiempoRespuesta("TIEMPO_RESPUESTA_TEST");
+		configuracion.setTiempoRespuesta(TIEMPO_RESPUESTA_TEST);
 		configuracion.setHorarioLaboral(horarioLaboral);
 		
 		servicioConfiguracion.insertar(configuracion);
-		configuracion.setRenovacion("RENOVACION_TEST_EDITADA");
+		configuracion.setRenovacion(RENOVACION_TEST_EDITADA);
 		configuracion.setId(configuracionDAO.verConfiguracionesPorContrato("").get(0).getId());
 		servicioConfiguracion.editarConfiguracion(configuracion);
 		
-		assertTrue(servicioConfiguracion.seleccionarConfiguracion(configuracion.getId()).getRenovacion().equalsIgnoreCase("RENOVACION_TEST_EDITADA"));
+		assertTrue(servicioConfiguracion.seleccionarConfiguracion(configuracion.getId()).getRenovacion().equalsIgnoreCase(RENOVACION_TEST_EDITADA));
 	}
 
 }
