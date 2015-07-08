@@ -59,7 +59,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	@Test
 	public void testInsertar() throws FileNotFoundException, IOException, SQLException{
 		Configuracion configuracion = new Configuracion();
-		HorarioLaboral horarioLaboral = new HorarioLaboral();
+		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
 		horarioLaboral.setId(HORARIO_LABORAL_TEST);
 		configuracion.setFechaInicio(new Date());
 		configuracion.setFechaFin(new Date());
@@ -88,7 +88,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	@Test
 	public void testEditar() throws FileNotFoundException, IOException, SQLException{
 		Configuracion configuracion = new Configuracion();
-		HorarioLaboral horarioLaboral = new HorarioLaboral();
+		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
 		horarioLaboral.setId(HORARIO_LABORAL_TEST);
 		configuracion.setFechaInicio(new Date());
 		configuracion.setFechaFin(new Date());

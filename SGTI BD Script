@@ -121,5 +121,22 @@ ALTER TABLE configuracion
   OWNER TO root;
 
 
+-- Table: horario
+
+-- DROP TABLE horario;
+
+CREATE TABLE horario
+(
+  id character varying NOT NULL,
+  nombredia character varying NOT NULL,
+  horadesde character varying,
+  horahasta character varying,
+  CONSTRAINT "horario_primaryKey" PRIMARY KEY (nombredia , id )
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE horario
+  OWNER TO root;
 
 

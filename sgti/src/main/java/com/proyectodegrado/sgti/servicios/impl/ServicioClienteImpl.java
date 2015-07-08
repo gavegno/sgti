@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.proyectodegrado.sgti.daos.ClienteDAO;
 import com.proyectodegrado.sgti.modelo.Cliente;
+import com.proyectodegrado.sgti.servicios.ServicioCliente;
 
 public class ServicioClienteImpl implements ServicioCliente {
 	

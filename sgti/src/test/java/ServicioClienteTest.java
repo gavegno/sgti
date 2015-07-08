@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.proyectodegrado.sgti.consultas.ConsultasCliente;
 import com.proyectodegrado.sgti.modelo.Cliente;
-import com.proyectodegrado.sgti.servicios.impl.ServicioCliente;
+import com.proyectodegrado.sgti.servicios.ServicioCliente;
 
 public class ServicioClienteTest extends ConfigurarTest{
 	

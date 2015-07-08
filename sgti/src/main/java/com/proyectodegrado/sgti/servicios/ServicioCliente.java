@@ -1,4 +1,4 @@
-package com.proyectodegrado.sgti.servicios.impl;
+package com.proyectodegrado.sgti.servicios;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
