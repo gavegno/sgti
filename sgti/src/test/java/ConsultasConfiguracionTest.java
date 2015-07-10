@@ -94,7 +94,7 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 		configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
 				TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
 		
-		assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaInicio, fechaFinHasta.getTime(), CONTRATO_TEST).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
+		assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaInicio, fechaFinHasta.getTime()).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
 	}
 	
 	@Test
@@ -107,8 +107,8 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 		configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
 				TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
 		
-		assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaFin.getTime(), fechaFin.getTime(), CONTRATO_TEST).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
-		assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaInicio, fechaInicio, CONTRATO_TEST).size() == 0);
+		assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaFin.getTime(), fechaFin.getTime()).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
+		assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaInicio, fechaInicio).size() == 0);
 	}
 	
 	@Test

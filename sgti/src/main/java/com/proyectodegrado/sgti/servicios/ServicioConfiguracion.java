@@ -8,10 +8,13 @@ import com.proyectodegrado.sgti.modelo.Configuracion;
 
 public interface ServicioConfiguracion {
 
-	public abstract void insertar(Configuracion configuracion)
+	public abstract void insertar(Configuracion configuracion, String idContrato)
 			throws FileNotFoundException, IOException, SQLException;
 
 	public abstract Configuracion seleccionarConfiguracion(int id)
+			throws FileNotFoundException, SQLException, IOException;
+	
+	public abstract Configuracion seleccionarConfiguracionActual(String idContrato)
 			throws FileNotFoundException, SQLException, IOException;
 
 	public abstract void editarConfiguracion(Configuracion configuracion)

@@ -48,9 +48,57 @@ public class ConfiguracionDAO {
 		return configuracion;
 	}
 	
-	public List<Configuracion> verConfiguracionesEntreFechasFin(Date fechaFinMayorQue, Date fechaFinMenorQue, String idContrato) throws FileNotFoundException, SQLException, IOException{
+	public List<Configuracion> verConfiguracionesEntreFechasFin(Date fechaFinMayorQue, Date fechaFinMenorQue) throws FileNotFoundException, SQLException, IOException{
 		List<Configuracion> configuraciones = new ArrayList<Configuracion>();
-		ResultSet resultSet = consultasConfiguracion.verConfiguracionesEntreFechasFin(new java.sql.Date(fechaFinMayorQue.getTime()), new java.sql.Date(fechaFinMenorQue.getTime()), idContrato);
+		ResultSet resultSet = consultasConfiguracion.verConfiguracionesEntreFechasFin(new java.sql.Date(fechaFinMayorQue.getTime()), new java.sql.Date(fechaFinMenorQue.getTime()));
+		while(resultSet.next()){
+			Configuracion configuracion = new Configuracion();
+			configuracion.setId(resultSet.getInt("id"));
+			configuracion.setFechaInicio(resultSet.getDate("fechainicio"));
+			configuracion.setFechaFin(resultSet.getDate("fechafin"));
+			configuracion.setRenovacion(resultSet.getString("renovacion"));
+			configuracion.setPeriodoRenovacion(resultSet.getInt("periodorenovacion"));
+			configuracion.setTipoContrato(resultSet.getString("tipocontrato"));
+			configuracion.setComputosPaquete(resultSet.getInt("computospaquete"));
+			configuracion.setPeriodoValidezMes(resultSet.getInt("periodovalidezmes"));
+			configuracion.setPeriodoValidezDia(resultSet.getInt("periodovalidezdia"));
+			configuracion.setAcumulacion(resultSet.getBoolean("acumulacion"));
+			configuracion.setPeriodoAcumulacion(resultSet.getInt("periodoacumulacion"));
+			configuracion.setFrecuenciaInforme(resultSet.getInt("frecuenciainforme"));
+			configuracion.setFrecuenciaFacturacion(resultSet.getInt("frecuenciafacturacion"));
+			configuracion.setFrecuenciaComputosExtra(resultSet.getInt("frecuenciacomputosextra"));
+			configuracion.setTiempoRespuesta(resultSet.getString("tiemporespuesta"));
+			configuraciones.add(configuracion);
+		}
+		return configuraciones;
+	}
+	
+	public Configuracion verConfiguracionActual(String idContrato) throws FileNotFoundException, SQLException, IOException{
+		Configuracion configuracion = new Configuracion();
+		ResultSet resultSet = consultasConfiguracion.verConfiguracionActual(idContrato);
+		if(resultSet.next()){
+			configuracion.setId(resultSet.getInt("id"));
+			configuracion.setFechaInicio(resultSet.getDate("fechainicio"));
+			configuracion.setFechaFin(resultSet.getDate("fechafin"));
+			configuracion.setRenovacion(resultSet.getString("renovacion"));
+			configuracion.setPeriodoRenovacion(resultSet.getInt("periodorenovacion"));
+			configuracion.setTipoContrato(resultSet.getString("tipocontrato"));
+			configuracion.setComputosPaquete(resultSet.getInt("computospaquete"));
+			configuracion.setPeriodoValidezMes(resultSet.getInt("periodovalidezmes"));
+			configuracion.setPeriodoValidezDia(resultSet.getInt("periodovalidezdia"));
+			configuracion.setAcumulacion(resultSet.getBoolean("acumulacion"));
+			configuracion.setPeriodoAcumulacion(resultSet.getInt("periodoacumulacion"));
+			configuracion.setFrecuenciaInforme(resultSet.getInt("frecuenciainforme"));
+			configuracion.setFrecuenciaFacturacion(resultSet.getInt("frecuenciafacturacion"));
+			configuracion.setFrecuenciaComputosExtra(resultSet.getInt("frecuenciacomputosextra"));
+			configuracion.setTiempoRespuesta(resultSet.getString("tiemporespuesta"));
+		}
+		return configuracion;
+	}
+	
+	public List<Configuracion> verConfiguracionPorFecha(Date fecha, String idContrato) throws FileNotFoundException, SQLException, IOException{
+		List<Configuracion> configuraciones = new ArrayList<Configuracion>();
+		ResultSet resultSet = consultasConfiguracion.verConfiguracionPorFecha(new java.sql.Date(fecha.getTime()), idContrato);
 		while(resultSet.next()){
 			Configuracion configuracion = new Configuracion();
 			configuracion.setId(resultSet.getInt("id"));

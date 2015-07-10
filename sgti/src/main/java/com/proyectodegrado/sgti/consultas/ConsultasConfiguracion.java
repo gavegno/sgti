@@ -54,12 +54,31 @@ public class ConsultasConfiguracion {
 		return resultSet;
 	}
 	
-	public ResultSet verConfiguracionesEntreFechasFin(Date fechaMayorQue, Date fechaMenorQue, String idContrato) throws SQLException, FileNotFoundException, IOException{
+	public ResultSet verConfiguracionesEntreFechasFin(Date fechaMayorQue, Date fechaMenorQue) throws SQLException, FileNotFoundException, IOException{
 		Connection con = conexionBD.conectar();
-		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE c.fechafin BETWEEN ? AND ? AND c.id_contrato=?");
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE c.fechafin BETWEEN ? AND ?");
 		preparedStatement.setDate(1, fechaMayorQue);
 		preparedStatement.setDate(2, fechaMenorQue);
-		preparedStatement.setString(3, idContrato);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
+	public ResultSet verConfiguracionActual(String idContrato) throws SQLException, FileNotFoundException, IOException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE ? BETWEEN c.fechainicio AND c.fechafin AND c.id_contrato=?");
+		preparedStatement.setDate(1, new Date(new java.util.Date().getTime()));
+		preparedStatement.setString(2, idContrato);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
+	public ResultSet verConfiguracionPorFecha(Date fecha, String idContrato) throws SQLException, FileNotFoundException, IOException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE ? BETWEEN c.fechainicio AND c.fechafin AND c.id_contrato=?");
+		preparedStatement.setDate(1, fecha);
+		preparedStatement.setString(2, idContrato);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(con);
 		return resultSet;
