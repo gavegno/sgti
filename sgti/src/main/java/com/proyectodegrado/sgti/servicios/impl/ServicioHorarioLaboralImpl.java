@@ -23,6 +23,14 @@ public class ServicioHorarioLaboralImpl implements ServicioHorarioLaboral {
 	}
 	
 	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioHorarioLaboral#insertarDíaAHorarioLaboral(com.proyectodegrado.sgti.modelo.HorarioLaboral, com.proyectodegrado.sgti.modelo.Dia)
+	 */
+	@Override
+	public void insertarDíaAHorarioLaboral(HorarioLaboral horarioLaboral, Dia dia) throws FileNotFoundException, IOException, SQLException {
+		horarioLaboralDao.agregar(horarioLaboral.getId(), dia.getNombre(), dia.getHoraDesde(), dia.getHoraHasta());
+	}
+	
+	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioHorarioLaboral#seleccionarHorarioLaboral(java.lang.String)
 	 */
 	@Override

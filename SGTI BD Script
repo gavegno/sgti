@@ -139,4 +139,21 @@ WITH (
 ALTER TABLE horario
   OWNER TO root;
 
+-- Table: precio
+
+-- DROP TABLE precio;
+
+CREATE TABLE precio
+(
+  precio double precision NOT NULL,
+  fechadesde date NOT NULL,
+  fechahasta date NOT NULL,
+  idcontrato character varying NOT NULL,
+  CONSTRAINT "precio_primaryKey" PRIMARY KEY (precio , fechadesde , fechahasta , idcontrato )
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE precio
+  OWNER TO root;
 

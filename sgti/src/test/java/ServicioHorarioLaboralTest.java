@@ -63,6 +63,22 @@ public class ServicioHorarioLaboralTest extends ConfigurarTest{
 	}
 	
 	@Test
+	public void testInsertarDiaAHorarioLaboral() throws FileNotFoundException, IOException, SQLException{
+		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
+		Dia diaLunes = new Dia(LUNES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
+		Dia diaMartes = new Dia(MARTES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
+		List<Dia> dias = new ArrayList<Dia>();
+		dias.add(diaLunes);
+		horarioLaboral.setDias(dias);
+		
+		servicioHorarioLaboral.insertar(horarioLaboral);
+		assertTrue(servicioHorarioLaboral.seleccionarHorarioLaboral(horarioLaboral.getId()).getDias().size() == 1);
+		
+		servicioHorarioLaboral.insertarDíaAHorarioLaboral(horarioLaboral, diaMartes);
+		assertTrue(servicioHorarioLaboral.seleccionarHorarioLaboral(horarioLaboral.getId()).getDias().size() == 2);
+	}
+	
+	@Test
 	public void testEditarDia() throws FileNotFoundException, IOException, SQLException{
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
 		Dia diaLunes = new Dia(LUNES, HORARIO_ENTRADA1, HORARIO_SALIDA1);

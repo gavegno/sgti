@@ -11,6 +11,9 @@ public interface ServicioHorarioLaboral {
 
 	public abstract void insertar(HorarioLaboral horarioLaboral)
 			throws FileNotFoundException, IOException, SQLException;
+	
+	public abstract void insertarDíaAHorarioLaboral(HorarioLaboral horarioLaboral, Dia dia)
+			throws FileNotFoundException, IOException, SQLException;
 
 	public abstract HorarioLaboral seleccionarHorarioLaboral(
 			String idHorarioLaboral) throws FileNotFoundException, IOException,
