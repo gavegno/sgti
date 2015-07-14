@@ -30,6 +30,14 @@ public class ServicioTipoHoraImpl implements ServicioTipoHora {
 	}
 	
 	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.ServicioTipoHora#seleccionarPorId(int)
+	 */
+	@Override
+	public TipoHora seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException{
+		return tipoHoraDao.seleccionarPorId(id);
+	}
+	
+	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.ServicioTipoHora#seleccionarTipos()
 	 */
 	@Override

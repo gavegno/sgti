@@ -157,3 +157,24 @@ WITH (
 ALTER TABLE precio
   OWNER TO root;
 
+-- Table: contrato_tipohora
+
+-- DROP TABLE contrato_tipohora;
+
+CREATE TABLE contrato_tipohora
+(
+  idcontrato character varying NOT NULL,
+  idtipohora integer NOT NULL,
+  computos integer NOT NULL,
+  CONSTRAINT "contrato_tipohora_primeryKey" PRIMARY KEY (computos , idcontrato , idtipohora ),
+  CONSTRAINT "idTipohora_foreignKey" FOREIGN KEY (idtipohora)
+      REFERENCES tipohora (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE contrato_tipohora
+  OWNER TO root;
+
+

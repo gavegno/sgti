@@ -30,6 +30,16 @@ public class TipoHoraDAO {
 		return tipoHora;
 	}
 	
+	public TipoHora seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException{
+		TipoHora tipoHora= new TipoHora();
+		ResultSet resultSet = consultasTipoHora.verTipoHoraPorId(id);
+		if(resultSet.next()){
+			tipoHora.setId(resultSet.getInt("id"));
+			tipoHora.setTipo(resultSet.getString("tipo"));
+		}
+		return tipoHora;
+	}
+	
 	public List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException{
 		List<TipoHora> tiposHora= new ArrayList<TipoHora>();
 		ResultSet resultSet = consultasTipoHora.verTiposHora();

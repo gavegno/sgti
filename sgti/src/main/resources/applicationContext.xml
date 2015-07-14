@@ -33,6 +33,10 @@
 			<property name="conexionBD" ref="conexionBD"/>
 		</bean>
 		
+		<bean id="consultasContratoTipoHora" class="com.proyectodegrado.sgti.consultas.ConsultasContratoTipoHora">
+			<property name="conexionBD" ref="conexionBD"/>
+		</bean>
+		
 		<!-- Beans de DAOs -->
 		<bean id="tipoHoraDao" class="com.proyectodegrado.sgti.daos.TipoHoraDAO">
 			<property name="consultasTipoHora" ref="consultasTipoHora"/>
@@ -57,6 +61,11 @@
 		
 		<bean id="precioDao" class="com.proyectodegrado.sgti.daos.PrecioDAO">
 			<property name="consultasPrecio" ref="consultasPrecio"/>
+		</bean>
+		
+		<bean id="contratoTipoHoraDao" class="com.proyectodegrado.sgti.daos.ContratoTipoHoraDAO">
+			<property name="consultasContratoTipoHora" ref="consultasContratoTipoHora"/>
+			<property name="tipoHoraDao" ref="tipoHoraDao"/>
 		</bean>
 		
 		<!-- Beans de servicios -->
@@ -91,6 +100,10 @@
 		
 		<bean id="servicioPrecio" class="com.proyectodegrado.sgti.servicios.impl.ServicioPrecioImpl">
 			<property name="precioDao" ref="precioDao"/>
+		</bean>
+		
+		<bean id="servicioContratoTipoHora" class="com.proyectodegrado.sgti.servicios.impl.ServicioContratoTipoHoraImpl">
+			<property name="contratoTipoHoraDao" ref="contratoTipoHoraDao"/>
 		</bean>
 		
 </beans>
