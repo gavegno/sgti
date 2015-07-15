@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SGTI</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+    <link rel="stylesheet" href="css/bootstrap-clockpicker.css">
+    
+
+
+</head>
+<body>
+    <header>
+        <div class="container">
+        
+            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
+        
+        </div>
+    
+    </header>   
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-md-8">
+            <h2 class="text-center">Gestión de Días</h2>
+            <div>
+                <form class="form-horizontal">
+                    
+                    <div class="form-group">
+                        <label for="inputContrato" class="control-label">Seleccione el día:</label>
+                        <select class="form-control" id="inputContrato">
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miercoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sabado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>    
+                    </div>
+
+                    <div class="form-group">
+                        <div class="from-group clockpicker">
+                            <label for="inputHoraDesde" class="control-label">Hora desde:</label>
+                            <input type="text" class="form-control" id="inputHoraDesde" value="08:00">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="from-group clockpicker">
+                            <label for="inputHoraHasta" class="control-label">Hora hasta:</label>
+                            <input type="text" class="form-control" id="inputHoraHasta" value="18:00">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
+                    <button class="btn btn-default" type="button"> Cancelar </button>
+                </div>       
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"> </script>
+    <script src="js/bootstrap-clockpicker.js"></script>
+    <script type="text/javascript">
+$('.clockpicker').clockpicker({
+    placement: 'top',
+    align: 'left',
+    donetext: 'Listo'
+});
+</script> 
+
+</body>

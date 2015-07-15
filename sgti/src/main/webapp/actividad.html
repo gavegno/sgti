@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SGTI</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+    
+
+
+</head>
+<body>
+    <header>
+        <div class="container">
+        
+            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
+        
+        </div>
+    
+    </header>   
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-md-8">
+            <h2 class="text-center">Gestión de Actividades</h2>
+            <div>
+                <form class="form-horizontal">
+                    
+                    <div class="form-group">
+                        <label for="inputTipoActividad" class="control-label">Seleccione el tipo de actividad:</label>
+                        <select class="form-control" id="inputTipoActividad">
+                            <option value="Urgente">Urgente</option>
+                            <option value="Planificada">Planificada</option>
+                            <option value="OtroTipo1">Otro tipo 1</option>
+                            <option value="OtroTipo2">Otro tipo 2</option>
+                        </select>    
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputFechaHora" class="control-label">Fecha y hora de ejecución:</label>
+                        <input size="16" type="text" class="form_datetime" id="inputFechaHora">
+                        
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputTipoActividad" class="control-label">A ejecutar por:</label>
+                        <select class="form-control" id="inputTipoActividad">
+                            <option value="Tecnico1">Tecnico 1</option>
+                            <option value="Tecnico2">Tecnico 2</option>
+                            <option value="Socio1">Socio 1</option>
+                        </select>    
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputContrato" class="control-label">Seleccione el contrato:</label>
+                        <select class="form-control" id="inputContrato">
+                            <option value="Contrato1">Contrato1</option>
+                            <option value="Contrato2">Contrato2</option>
+                            <option value="Contrato3">Contrato3</option>
+                        </select>    
+                    </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
+                    <button class="btn btn-default" type="button"> Cancelar </button>
+                </div>       
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"> </script>
+    <script src="js/bootstrap-clockpicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript">
+$('.clockpicker').clockpicker({
+    placement: 'top',
+    align: 'left',
+    donetext: 'Listo'
+});
+</script> 
+
+<script type="text/javascript">
+    $(".form_datetime").datetimepicker({format: 'dd-mm-yyyy hh:ii'});
+</script>    
+
+</body>
