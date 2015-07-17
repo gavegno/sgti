@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,13 +21,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.proyectodegrado.sgti.consultas.ConsultasConfiguracion;
 import com.proyectodegrado.sgti.daos.ConfiguracionDAO;
 import com.proyectodegrado.sgti.modelo.Configuracion;
+import com.proyectodegrado.sgti.modelo.Dia;
 import com.proyectodegrado.sgti.modelo.HorarioLaboral;
 import com.proyectodegrado.sgti.servicios.ServicioConfiguracion;
 
 public class ServicioConfiguracionTest extends ConfigurarTest{
 	
-	private static final String CONTRATO_TEST = "CONTRATO_TEST";
-
 	private static final String RENOVACION_TEST_EDITADA = "RENOVACION_TEST_EDITADA";
 
 	private static final String TIEMPO_RESPUESTA_TEST = "TIEMPO_RESPUESTA_TEST";
@@ -53,6 +53,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 		consultasConfiguracion = (ConsultasConfiguracion) context.getBean("consultasConfiguracion");
 		servicioConfiguracion = (ServicioConfiguracion) context.getBean("servicioConfiguracion");
 		configuracionDAO = (ConfiguracionDAO) context.getBean("configuracionDao");
+		prepararContextoDeServicioContrato();
 	}
 	
 	@AfterClass
@@ -63,12 +64,15 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
 		consultasConfiguracion.borrarConfiguraciones();
+		borrarRelacionadoConContrato();
 	}
 	
 	@Test
 	public void testInsertar() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConServicioContrato();
 		Configuracion configuracion = new Configuracion();
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
+		horarioLaboral.setDias(new ArrayList<Dia>());
 		horarioLaboral.setId(HORARIO_LABORAL_TEST);
 		configuracion.setFechaInicio(new Date());
 		configuracion.setFechaFin(new Date());
@@ -96,9 +100,11 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	
 	@Test
 	public void testEditar() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConServicioContrato();
 		Configuracion configuracion = new Configuracion();
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
 		horarioLaboral.setId(HORARIO_LABORAL_TEST);
+		horarioLaboral.setDias(new ArrayList<Dia>());
 		configuracion.setFechaInicio(new Date());
 		configuracion.setFechaFin(new Date());
 		configuracion.setRenovacion(RENOVACION_TEST);
@@ -125,6 +131,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	
 	@Test
 	public void testConfiguracionSuperpuesta() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConServicioContrato();
 		Calendar fechaDesdeVieja = Calendar.getInstance();
 		Calendar fechaHastaVieja = Calendar.getInstance();
 		Calendar fechaDesde = Calendar.getInstance();
@@ -136,6 +143,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 		Configuracion configuracion = new Configuracion();
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
 		horarioLaboral.setId(HORARIO_LABORAL_TEST);
+		horarioLaboral.setDias(new ArrayList<Dia>());
 		configuracion.setFechaInicio(fechaDesdeVieja.getTime());
 		configuracion.setFechaFin(fechaHastaVieja.getTime());
 		configuracion.setRenovacion(RENOVACION_TEST);
@@ -163,6 +171,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	
 	@Test
 	public void testConfiguracionActual() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConServicioContrato();
 		Calendar fechaDesdeVieja = Calendar.getInstance();
 		Calendar fechaHastaVieja = Calendar.getInstance();
 		Calendar fechaDesde = Calendar.getInstance();
@@ -174,6 +183,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 		Configuracion configuracion = new Configuracion();
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
 		horarioLaboral.setId(HORARIO_LABORAL_TEST);
+		horarioLaboral.setDias(new ArrayList<Dia>());
 		configuracion.setFechaInicio(fechaDesdeVieja.getTime());
 		configuracion.setFechaFin(fechaHastaVieja.getTime());
 		configuracion.setRenovacion(RENOVACION_TEST);

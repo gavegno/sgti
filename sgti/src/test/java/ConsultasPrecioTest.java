@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,8 +19,6 @@ import com.proyectodegrado.sgti.daos.PrecioDAO;
 
 public class ConsultasPrecioTest extends ConfigurarTest{
 	
-	private static final String CONTRATO_TEST = "CONTRATO_TEST";
-
 	private static ConsultasPrecio consultasPrecio;
 	
 	private static PrecioDAO precioDao;
@@ -31,8 +28,9 @@ public class ConsultasPrecioTest extends ConfigurarTest{
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		consultasPrecio = (ConsultasPrecio) context.getBean("consultasPrecio");
 		precioDao = (PrecioDAO) context.getBean("precioDao");
+		prepararContextoDeConsultaContrato();
 	}
-	
+
 	@AfterClass
 	public static void cerrarContexto(){
 		context.close();
@@ -41,10 +39,12 @@ public class ConsultasPrecioTest extends ConfigurarTest{
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
 		consultasPrecio.borrarPrecios();
+		borrarRelacionadoConContrato();
 	}
-	
+
 	@Test
 	public void testInsertar() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConConsultasContrato();
 		Calendar fechaHasta = Calendar.getInstance();
 		fechaHasta.setTime(new Date());
 		fechaHasta.set(Calendar.YEAR, 2020);
@@ -53,5 +53,4 @@ public class ConsultasPrecioTest extends ConfigurarTest{
 		assertEquals(1, precioDao.verPrecios(CONTRATO_TEST).size());
 		assertTrue(5.0 == precioDao.verPrecioActual(CONTRATO_TEST).getPrecio());
 	}
-
 }

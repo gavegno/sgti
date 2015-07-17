@@ -34,6 +34,15 @@ public class ConsultasCliente {
 		return resultSet;
 	}
 	
+	public ResultSet verClientePorId (int id) throws FileNotFoundException, IOException, SQLException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM cliente AS c WHERE c.id=?");
+		preparedStatement.setInt(1, id);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
 	public ResultSet verClientes () throws FileNotFoundException, IOException, SQLException{
 		Connection con = conexionBD.conectar();
 		Statement stmt = con.createStatement();

@@ -44,6 +44,7 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 		contratoTipoHoraDao = (ContratoTipoHoraDAO) context.getBean("contratoTipoHoraDao");
 		consultasTipoHora = (ConsultasTipoHora) context.getBean("consultasTipoHora");
 		tipoHoraDao = (TipoHoraDAO) context.getBean("tipoHoraDao");
+		prepararContextoDeServicioContrato();
 	}
 	
 	@AfterClass
@@ -55,10 +56,12 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
 		consultasContratoTipoHora.borrarContratoTiposHora();
 		consultasTipoHora.borrarTipoHora(TIPO_TEST);
+		borrarRelacionadoConContrato();
 	}
 	
 	@Test
 	public void testInsertarContratoTipoHora() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConConsultasContrato();
 		tipoHoraDao.agregar(TIPO_TEST);
 		contratoTipoHoraDao.insertarContratoTipoHora(CONTRATO_TEST, tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(), COMPUTOS);
 		
@@ -71,6 +74,7 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 	
 	@Test
 	public void testEditarContratoTipoHora() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConConsultasContrato();
 		tipoHoraDao.agregar(TIPO_TEST);
 		contratoTipoHoraDao.insertarContratoTipoHora(CONTRATO_TEST, tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(), COMPUTOS);
 		

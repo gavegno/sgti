@@ -12,12 +12,15 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 	
 	private ConfiguracionDAO configuracionDao;
 	
+	private ServicioHorarioLaboral servicioHorarioLaboral;
+	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracion#insertar(com.proyectodegrado.sgti.modelo.Configuracion)
 	 */
 	@Override
 	public void insertar(Configuracion configuracion, String idContrato) throws FileNotFoundException, IOException, SQLException{
 		if(esPosibleInsertar(configuracion, idContrato)){
+			servicioHorarioLaboral.insertar(configuracion.getHorarioLaboral());
 			configuracionDao.insertarConfiguracion(configuracion.getFechaInicio(), configuracion.getFechaFin(), configuracion.getRenovacion(), 
 				configuracion.getPeriodoRenovacion(), configuracion.getTipoContrato(), configuracion.getComputosPaquete(), configuracion.getPeriodoValidezMes(),
 				configuracion.getPeriodoValidezDia(), configuracion.isAcumulacion(), configuracion.getPeriodoAcumulacion(), configuracion.getFrecuenciaInforme(), 
@@ -66,4 +69,15 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 	public void setConfiguracionDao(ConfiguracionDAO configuracionDao) {
 		this.configuracionDao = configuracionDao;
 	}
+
+	public ServicioHorarioLaboral getServicioHorarioLaboral() {
+		return servicioHorarioLaboral;
+	}
+
+	public void setServicioHorarioLaboral(
+			ServicioHorarioLaboral servicioHorarioLaboral) {
+		this.servicioHorarioLaboral = servicioHorarioLaboral;
+	}
+	
+	
 }

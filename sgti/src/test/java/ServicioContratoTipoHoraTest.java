@@ -50,6 +50,7 @@ public class ServicioContratoTipoHoraTest extends ConfigurarTest{
 		servicioContratoTipoHora = (ServicioContratoTipoHora) context.getBean("servicioContratoTipoHora");
 		consultasTipoHora = (ConsultasTipoHora) context.getBean("consultasTipoHora");
 		servicioTipoHora = (ServicioTipoHora) context.getBean("servicioTipoHora");
+		prepararContextoDeServicioContrato();
 	}
 	
 	@AfterClass
@@ -62,10 +63,12 @@ public class ServicioContratoTipoHoraTest extends ConfigurarTest{
 		consultasContratoTipoHora.borrarContratoTiposHora();
 		consultasTipoHora.borrarTipoHora(TIPO_TEST);
 		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+		borrarRelacionadoConContrato();
 	}
 	
 	@Test
 	public void testInsertar() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConServicioContrato();
 		TipoHora tipoHora = new TipoHora();
 		tipoHora.setTipo(TIPO_TEST);
 		servicioTipoHora.agregar(tipoHora);
@@ -83,6 +86,7 @@ public class ServicioContratoTipoHoraTest extends ConfigurarTest{
 	
 	@Test
 	public void testInsertarDosTipos() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConServicioContrato();
 		TipoHora tipoHora = new TipoHora();
 		tipoHora.setTipo(TIPO_TEST);
 		servicioTipoHora.agregar(tipoHora);
@@ -104,9 +108,11 @@ public class ServicioContratoTipoHoraTest extends ConfigurarTest{
 	
 	@Test
 	public void testEditar() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConServicioContrato();
 		TipoHora tipoHora = new TipoHora();
 		tipoHora.setTipo(TIPO_TEST);
 		servicioTipoHora.agregar(tipoHora);
+		tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
 		tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
 		TipoHoraComputo tipoHoraComputo = new TipoHoraComputo();
 		tipoHoraComputo.setTipoHora(tipoHora);

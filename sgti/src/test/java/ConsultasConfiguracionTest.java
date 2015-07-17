@@ -36,8 +36,6 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 
 	private static final String RENOVACION_TEST = "RENOVACION_TEST";
 
-	private static final String CONTRATO_TEST = "CONTRATO_TEST";
-
 	private static ConsultasConfiguracion consultasConfiguracion;
 	
 	private static ConfiguracionDAO configuracionDAO;
@@ -48,6 +46,7 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		consultasConfiguracion = (ConsultasConfiguracion) context.getBean("consultasConfiguracion");
 		configuracionDAO = (ConfiguracionDAO) context.getBean("configuracionDao");
+		prepararContextoDeConsultaContrato();
 	}
 	
 	@AfterClass
@@ -58,10 +57,12 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
 		consultasConfiguracion.borrarConfiguraciones();
+		borrarRelacionadoConContrato();
 	}
 	
 	@Test
 	public void testInsertarConfiguracion() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConConsultasContrato();
 		Date fechaInicio = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
 		Calendar fechaFin = Calendar.getInstance();
@@ -82,6 +83,7 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	
 	@Test
 	public void testVerConfiguracionesEntreFechas() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConConsultasContrato();
 		Date fechaInicio = new Date();
 		Calendar fechaFin = Calendar.getInstance();
 		fechaFin.set(Calendar.YEAR, 2017);
@@ -99,6 +101,7 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	
 	@Test
 	public void testVerConfiguracionesEntreFechasCasoBorde() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConConsultasContrato();
 		Date fechaInicio = new Date();
 		Calendar fechaFin = Calendar.getInstance();
 		fechaFin.set(Calendar.YEAR, 2017);
@@ -113,6 +116,7 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	
 	@Test
 	public void testEditarConfiguracion() throws FileNotFoundException, IOException, SQLException{
+		agregarRelacionadoConConsultasContrato();
 		Date fechaInicio = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
 		Calendar fechaFin = Calendar.getInstance();

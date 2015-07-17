@@ -37,6 +37,10 @@
 			<property name="conexionBD" ref="conexionBD"/>
 		</bean>
 		
+		<bean id="consultasContrato" class="com.proyectodegrado.sgti.consultas.ConsultasContrato">
+			<property name="conexionBD" ref="conexionBD"/>
+		</bean>
+		
 		<!-- Beans de DAOs -->
 		<bean id="tipoHoraDao" class="com.proyectodegrado.sgti.daos.TipoHoraDAO">
 			<property name="consultasTipoHora" ref="consultasTipoHora"/>
@@ -68,6 +72,16 @@
 			<property name="tipoHoraDao" ref="tipoHoraDao"/>
 		</bean>
 		
+		<bean id="contratoDao" class="com.proyectodegrado.sgti.daos.ContratoDAO">
+			<property name="consultasContrato" ref="consultasContrato"/>
+			<property name="configuracionDao" ref="configuracionDao"/>
+			<property name="horarioLaboralDao" ref="horarioLaboralDao"/>
+			<property name="precioDao" ref="precioDao"/>
+			<property name="contratoTipoHoraDao" ref="contratoTipoHoraDao"/>
+			<property name="clienteDao" ref="clienteDao"/>
+			<property name="usuarioDao" ref="usuarioDao"/>
+		</bean>
+		
 		<!-- Beans de servicios -->
 		<bean id="servicioTipoHora" class="com.proyectodegrado.sgti.servicios.impl.ServicioTipoHoraImpl">
 			<property name="tipoHoraDao" ref="tipoHoraDao"/>
@@ -90,12 +104,13 @@
 			<property name="clienteDao" ref="clienteDao"/>
 		</bean>
 		
-		<bean id="servicioConfiguracion" class="com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracionImpl">
-			<property name="configuracionDao" ref="configuracionDao"/>
-		</bean>
-		
 		<bean id="servicioHorarioLaboral" class="com.proyectodegrado.sgti.servicios.impl.ServicioHorarioLaboralImpl">
 			<property name="horarioLaboralDao" ref="horarioLaboralDao"/>
+		</bean>
+		
+		<bean id="servicioConfiguracion" class="com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracionImpl">
+			<property name="configuracionDao" ref="configuracionDao"/>
+			<property name="servicioHorarioLaboral" ref="servicioHorarioLaboral"/>
 		</bean>
 		
 		<bean id="servicioPrecio" class="com.proyectodegrado.sgti.servicios.impl.ServicioPrecioImpl">
@@ -104,6 +119,16 @@
 		
 		<bean id="servicioContratoTipoHora" class="com.proyectodegrado.sgti.servicios.impl.ServicioContratoTipoHoraImpl">
 			<property name="contratoTipoHoraDao" ref="contratoTipoHoraDao"/>
+		</bean>
+		
+		<bean id="servicioContrato" class="com.proyectodegrado.sgti.servicios.impl.ServicioContratoImpl">
+			<property name="contratoDao" ref="contratoDao"/>
+			<property name="servicioConfiguracion" ref="servicioConfiguracion"/>
+			<property name="servicioPrecio" ref="servicioPrecio"/>
+			<property name="servicioContratoTipoHora" ref="servicioContratoTipoHora"/>
+			<property name="servicioHorarioLaboral" ref="servicioHorarioLaboral"/>
+			<property name="servicioCliente" ref="servicioCliente"/>
+			<property name="servicioUsuarioContraparte" ref="servicioUsuarioContraparte"/>
 		</bean>
 		
 </beans>

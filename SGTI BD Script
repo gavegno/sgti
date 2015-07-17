@@ -112,7 +112,10 @@ CREATE TABLE configuracion
   tiemporespuesta character varying,
   id_horariolaboral character varying,
   id_contrato character varying,
-  CONSTRAINT "configuracion_primaryKey" PRIMARY KEY (id )
+  CONSTRAINT "configuracion_primaryKey" PRIMARY KEY (id ),
+  CONSTRAINT "configuracion_contrato_foreignKey" FOREIGN KEY (id_contrato)
+      REFERENCES contrato (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
@@ -120,6 +123,14 @@ WITH (
 ALTER TABLE configuracion
   OWNER TO root;
 
+-- Index: "fki_configuracion_contrato_foreignKey"
+
+-- DROP INDEX "fki_configuracion_contrato_foreignKey";
+
+CREATE INDEX "fki_configuracion_contrato_foreignKey"
+  ON configuracion
+  USING btree
+  (id_contrato COLLATE pg_catalog."default" );
 
 -- Table: horario
 
@@ -131,13 +142,26 @@ CREATE TABLE horario
   nombredia character varying NOT NULL,
   horadesde character varying,
   horahasta character varying,
-  CONSTRAINT "horario_primaryKey" PRIMARY KEY (nombredia , id )
+  idcontrato character varying,
+  CONSTRAINT "horario_primaryKey" PRIMARY KEY (nombredia , id ),
+  CONSTRAINT "horario_contrato_foreignKey" FOREIGN KEY (idcontrato)
+      REFERENCES contrato (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE horario
   OWNER TO root;
+
+-- Index: "fki_horario_contrato_foreignKey"
+
+-- DROP INDEX "fki_horario_contrato_foreignKey";
+
+CREATE INDEX "fki_horario_contrato_foreignKey"
+  ON horario
+  USING btree
+  (idcontrato COLLATE pg_catalog."default" );
 
 -- Table: precio
 
@@ -149,7 +173,10 @@ CREATE TABLE precio
   fechadesde date NOT NULL,
   fechahasta date NOT NULL,
   idcontrato character varying NOT NULL,
-  CONSTRAINT "precio_primaryKey" PRIMARY KEY (precio , fechadesde , fechahasta , idcontrato )
+  CONSTRAINT "precio_primaryKey" PRIMARY KEY (precio , fechadesde , fechahasta , idcontrato ),
+  CONSTRAINT "precio_contrato_foreignKey" FOREIGN KEY (idcontrato)
+      REFERENCES contrato (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
@@ -157,7 +184,16 @@ WITH (
 ALTER TABLE precio
   OWNER TO root;
 
--- Table: contrato_tipohora
+-- Index: "fki_precio_contrato_foreignKey"
+
+-- DROP INDEX "fki_precio_contrato_foreignKey";
+
+CREATE INDEX "fki_precio_contrato_foreignKey"
+  ON precio
+  USING btree
+  (idcontrato COLLATE pg_catalog."default" );
+
+- Table: contrato_tipohora
 
 -- DROP TABLE contrato_tipohora;
 
@@ -169,6 +205,9 @@ CREATE TABLE contrato_tipohora
   CONSTRAINT "contrato_tipohora_primeryKey" PRIMARY KEY (computos , idcontrato , idtipohora ),
   CONSTRAINT "idTipohora_foreignKey" FOREIGN KEY (idtipohora)
       REFERENCES tipohora (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT "tipohora_contrato_foreignKey" FOREIGN KEY (idcontrato)
+      REFERENCES contrato (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
@@ -176,5 +215,55 @@ WITH (
 );
 ALTER TABLE contrato_tipohora
   OWNER TO root;
+
+-- Index: "fki_tipohora_contrato_foreignKey"
+
+-- DROP INDEX "fki_tipohora_contrato_foreignKey";
+
+CREATE INDEX "fki_tipohora_contrato_foreignKey"
+  ON contrato_tipohora
+  USING btree
+  (idcontrato COLLATE pg_catalog."default" );
+
+-- Table: contrato
+
+-- DROP TABLE contrato;
+
+CREATE TABLE contrato
+(
+  id character varying NOT NULL,
+  cliente integer,
+  contraparte character varying,
+  CONSTRAINT "contrato_primeryKey" PRIMARY KEY (id ),
+  CONSTRAINT "contrato_cliente_foreignKey" FOREIGN KEY (cliente)
+      REFERENCES cliente (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT "contrato_contraparte_foreignKey" FOREIGN KEY (contraparte)
+      REFERENCES usuario (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE contrato
+  OWNER TO root;
+
+-- Index: "fki_contrato_cliente_foreignKey"
+
+-- DROP INDEX "fki_contrato_cliente_foreignKey";
+
+CREATE INDEX "fki_contrato_cliente_foreignKey"
+  ON contrato
+  USING btree
+  (cliente );
+
+-- Index: "fki_contrato_contraparte_foreignKey"
+
+-- DROP INDEX "fki_contrato_contraparte_foreignKey";
+
+CREATE INDEX "fki_contrato_contraparte_foreignKey"
+  ON contrato
+  USING btree
+  (contraparte COLLATE pg_catalog."default" );
 
 

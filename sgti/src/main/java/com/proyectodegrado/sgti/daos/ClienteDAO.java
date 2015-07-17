@@ -31,6 +31,19 @@ public class ClienteDAO {
 		return cliente;
 	}
 	
+	public Cliente seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException{
+		Cliente cliente = new Cliente();
+		ResultSet resultSet = consultasCliente.verClientePorId(id);
+		if(resultSet.next()){
+			cliente.setId(resultSet.getInt("id"));
+			cliente.setNombre(resultSet.getString("nombre"));
+			cliente.setDireccion(resultSet.getString("direccion"));
+			cliente.setTelefono(resultSet.getString("telefono"));
+			cliente.setActivo(resultSet.getBoolean("activo"));
+		}
+		return cliente;
+	}
+	
 	public List<Cliente> seleccionarClientes() throws FileNotFoundException, IOException, SQLException{
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		ResultSet resultSet = consultasCliente.verClientes();
