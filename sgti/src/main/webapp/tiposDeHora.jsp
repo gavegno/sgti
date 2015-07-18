@@ -15,7 +15,7 @@
     <header>
         <div class="container">
         
-            <h1>Sistema de GestiÃ³n de TÃ©cnicos e Incidentes</h1>
+            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
         
         </div>
     
@@ -24,12 +24,12 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">GestiÃ³n de Tipos de Hora</h2>
+            <h2 class="text-center">Gestión de Tipos de Hora</h2>
             <div>
-                <form class="form-horizontal" action="http://localhost:9080/CounterWebApp/tiposDeHora/ingresar" method="POST">
+                <form class="form-horizontal" action="/CounterWebApp/tiposDeHora/ingresar" method="POST">
                     
                     <div class="form-group">
-                        <label for="inputDescripcion" class="control-label">DescripciÃ³n:</label>
+                        <label for="inputDescripcion" class="control-label">Descripción:</label>
                         <input type="tipoHora" class="form-control" name="tipoHora" id="inputTipoHora" placeholder="tipo de hora" required autofocus>        
                     </div>
 
