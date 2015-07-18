@@ -168,7 +168,7 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
-			usuarioDAO.cambiarContraseña(ID_USUARIO10, "contrasenaModificada");
+			usuarioDAO.cambiarContrasena(ID_USUARIO10, "contrasenaModificada");
 			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getApellido().equalsIgnoreCase(TEST_APELLIDO));
 			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getNombre().equalsIgnoreCase(TEST_NOMBRE));
 			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getEmail().equalsIgnoreCase(TEST_EMAIL));

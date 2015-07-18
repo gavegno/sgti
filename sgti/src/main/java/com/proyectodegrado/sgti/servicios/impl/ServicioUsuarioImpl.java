@@ -80,7 +80,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 */
 	@Override
 	public void cambiarContrasena(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		usuarioDao.cambiarContraseña(usuario.getId(), usuario.getContrasena());
+		usuarioDao.cambiarContrasena(usuario.getId(), usuario.getContrasena());
 	}
 	
 	/* (non-Javadoc)

@@ -15,7 +15,7 @@
     <header>
         <div class="container">
         
-            <h1>Sistema de GestiÃ³n de TÃ©cnicos e Incidentes</h1>
+            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
         
         </div>
     
@@ -34,20 +34,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPassword" class="control-label">ContraseÃ±a:</label>
+                        <label for="inputPassword" class="control-label">Contraseña:</label>
                         <input type="password" name="passwordUsuario" class="form-control" id="inputPassword" placeholder="ContraseÃ±a" required>        
                     </div>
                 
                 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
-                    Iniciar sesiÃ³n</button>
+                    Iniciar sesión</button>
                 <!--    
                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">
                     Remember me
                 </label>
             -->
-                <a href="#" class="pull-right need-help">Â¿Ayuda? </a><span class="clearfix"></span>
+                <a href="#" class="pull-right need-help">¿Ayuda? </a><span class="clearfix"></span>
                 </form>
             </div>
         </div>

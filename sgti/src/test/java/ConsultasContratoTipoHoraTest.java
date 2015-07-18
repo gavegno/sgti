@@ -23,7 +23,7 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 
 	private static final int COMPUTOS = 3;
 
-	private static final int TAMAÑO_LISTA = 1;
+	private static final int TAMANO_LISTA = 1;
 
 	private static final String CONTRATO_TEST = "CONTRATO_TEST";
 
@@ -65,7 +65,7 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 		tipoHoraDao.agregar(TIPO_TEST);
 		contratoTipoHoraDao.insertarContratoTipoHora(CONTRATO_TEST, tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(), COMPUTOS);
 		
-		assertEquals(TAMAÑO_LISTA, contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).size());		
+		assertEquals(TAMANO_LISTA, contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).size());		
 		assertEquals(TIPO_TEST,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
 		assertEquals(tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(),contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
 		assertEquals(COMPUTOS,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
@@ -78,14 +78,14 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 		tipoHoraDao.agregar(TIPO_TEST);
 		contratoTipoHoraDao.insertarContratoTipoHora(CONTRATO_TEST, tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(), COMPUTOS);
 		
-		assertEquals(TAMAÑO_LISTA, contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).size());		
+		assertEquals(TAMANO_LISTA, contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).size());		
 		assertEquals(TIPO_TEST,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
 		assertEquals(tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(),contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
 		assertEquals(COMPUTOS,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
 		
 		contratoTipoHoraDao.editarContratoTipoHora(CONTRATO_TEST, tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(), COMPUTOS_EDITADOS);
 		
-		assertEquals(TAMAÑO_LISTA, contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).size());		
+		assertEquals(TAMANO_LISTA, contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).size());		
 		assertEquals(TIPO_TEST,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
 		assertEquals(tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(),contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
 		assertEquals(COMPUTOS_EDITADOS,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());

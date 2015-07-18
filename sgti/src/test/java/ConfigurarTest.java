@@ -53,7 +53,7 @@ public class ConfigurarTest {
 	   
 	private static final String EMAIL_TEST = "EMAIL_TEST";
 
-	private static final String CONTASEÑA_TEST = "CONTASEÑA_TEST";
+	private static final String CONTASENA_TEST = "CONTASENA_TEST";
 
 	private static final String APELLIDO_TEST = "APELLIDO_TEST";
 
@@ -169,7 +169,7 @@ public class ConfigurarTest {
 	
 	protected void agregarRelacionadoConConsultasContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
 		clienteDao.agregar(CLIENTE_TEST, DIRECCION_TEST, TELEFONO, true);
-		usuarioDao.agregar(USUARIO_TEST, NOMBRE_TEST, APELLIDO_TEST, CONTASEÑA_TEST, EMAIL_TEST, TELEFONO, "", true);
+		usuarioDao.agregar(USUARIO_TEST, NOMBRE_TEST, APELLIDO_TEST, CONTASENA_TEST, EMAIL_TEST, TELEFONO, "", true);
 		contratoDao.insertarContrato(CONTRATO_TEST, clienteDao.seleccionarPorNombre(CLIENTE_TEST).getId(), USUARIO_TEST);
 	}
 	
@@ -210,7 +210,7 @@ public class ConfigurarTest {
 	}
 
 	private Usuario crearUsuarioContraparte() {
-		return new Usuario(USUARIO_TEST, NOMBRE_TEST, APELLIDO_TEST, CONTASEÑA_TEST, EMAIL_TEST, TELEFONO, "", true, null);
+		return new Usuario(USUARIO_TEST, NOMBRE_TEST, APELLIDO_TEST, CONTASENA_TEST, EMAIL_TEST, TELEFONO, "", true, null);
 	}
 
 	private Cliente crearCliente() {

@@ -94,7 +94,7 @@ public class UsuarioDAO {
 		consultasUsuario.editarUsuario(id, nombre, apellido, email, telefono);
 	}
 	
-	public void cambiarContraseña(String id, String contrasena) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void cambiarContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasUsuario.cambiarContrasena(id, contrasena);
 	}
 	
@@ -102,7 +102,7 @@ public class UsuarioDAO {
 		consultasUsuario.cambiarActivo(id, activo);
 	}
 	
-	public String verContraseñaUsuario(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public String verContrasenaUsuario(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		ResultSet rs = consultasUsuario.verUsuarioPorId(id);
 		if(rs.next()){
 			return rs.getString("contrasena");

@@ -159,12 +159,12 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		servicioUsuarioSocio.agregar(usuario);
-		assertTrue(usuarioDAO.verContraseñaUsuario(ID_USUARIO10).equalsIgnoreCase(TEST_CONTRASENA));
+		assertTrue(usuarioDAO.verContrasenaUsuario(ID_USUARIO10).equalsIgnoreCase(TEST_CONTRASENA));
 		
 		usuario.setContrasena(TEST_CONTRASENA2);
 		servicioUsuario.cambiarContrasena(usuario);
 		assertTrue(servicioUsuario.seleccionarUsuarios().size() == 1);
-		assertTrue(usuarioDAO.verContraseñaUsuario(ID_USUARIO10).equalsIgnoreCase(TEST_CONTRASENA2));
+		assertTrue(usuarioDAO.verContrasenaUsuario(ID_USUARIO10).equalsIgnoreCase(TEST_CONTRASENA2));
 		
 	}
 	
