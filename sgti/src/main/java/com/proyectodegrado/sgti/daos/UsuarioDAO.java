@@ -18,17 +18,17 @@ public class UsuarioDAO {
 	
 	private ConsultasTipoHora consultasTipoHora;
 	
-	public void agregar(String id, String nombre, String apellido, String contrasena, String email, String telefono, String tipo, boolean activo) throws FileNotFoundException, IOException, SQLException{
+	public void agregar(String id, String nombre, String apellido, String contrasena, String email, String telefono, String tipo, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasUsuario.insetarUsuario(id, nombre, apellido, contrasena, email, telefono, tipo, activo);
 	}
 	
-	public void agregarTipoHoraUsuario(List<Integer> idTiposHora, String idUsuario ) throws FileNotFoundException, IOException, SQLException{
+	public void agregarTipoHoraUsuario(List<Integer> idTiposHora, String idUsuario ) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		for(int idTipoHora : idTiposHora){
 			consultasUsuario.insetarTipoHoraEnUsuario(idTipoHora, idUsuario);
 		}
 	}
 	
-	public List<TipoHora> verTiposHoraPorUsuario(String idUsuario) throws FileNotFoundException, IOException, SQLException{
+	public List<TipoHora> verTiposHoraPorUsuario(String idUsuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<TipoHora> tiposHora = new ArrayList<TipoHora>();
 		ResultSet resultSet = consultasUsuario.verTiposHoraPorUsuario(idUsuario);
 		while(resultSet.next()){
@@ -43,7 +43,7 @@ public class UsuarioDAO {
 		return tiposHora;
 	}
 	
-	public Usuario seleccionarUsuarioPorIdContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException{
+	public Usuario seleccionarUsuarioPorIdContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Usuario usuario= new Usuario();
 		ResultSet resultSet = consultasUsuario.verUsuarioPorIdContrasena(id, contrasena);
 		if(resultSet.next()){
@@ -58,7 +58,7 @@ public class UsuarioDAO {
 		return usuario;
 	}
 	
-	public Usuario seleccionarUsuarioPorId(String id) throws FileNotFoundException, IOException, SQLException{
+	public Usuario seleccionarUsuarioPorId(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Usuario usuario= new Usuario();
 		ResultSet resultSet = consultasUsuario.verUsuarioPorId(id);
 		if(resultSet.next()){
@@ -73,7 +73,7 @@ public class UsuarioDAO {
 		return usuario;
 	}
 	
-	public List<Usuario> seleccionarUsuarios() throws FileNotFoundException, IOException, SQLException{
+	public List<Usuario> seleccionarUsuarios() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		ResultSet resultSet = consultasUsuario.verUsuarios();
 		while(resultSet.next()){
@@ -90,19 +90,19 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 	
-	public void editarUsuario(String id, String nombre, String apellido, String email, String telefono) throws FileNotFoundException, IOException, SQLException{
+	public void editarUsuario(String id, String nombre, String apellido, String email, String telefono) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasUsuario.editarUsuario(id, nombre, apellido, email, telefono);
 	}
 	
-	public void cambiarContraseña(String id, String contrasena) throws FileNotFoundException, IOException, SQLException{
+	public void cambiarContraseña(String id, String contrasena) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasUsuario.cambiarContrasena(id, contrasena);
 	}
 	
-	public void cambiarActivo(String id, boolean activo) throws FileNotFoundException, IOException, SQLException{
+	public void cambiarActivo(String id, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasUsuario.cambiarActivo(id, activo);
 	}
 	
-	public String verContraseñaUsuario(String id) throws FileNotFoundException, IOException, SQLException{
+	public String verContraseñaUsuario(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		ResultSet rs = consultasUsuario.verUsuarioPorId(id);
 		if(rs.next()){
 			return rs.getString("contrasena");

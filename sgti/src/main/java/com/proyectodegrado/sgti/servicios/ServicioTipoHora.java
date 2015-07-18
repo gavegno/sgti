@@ -9,12 +9,12 @@ import com.proyectodegrado.sgti.modelo.TipoHora;
 
 public interface ServicioTipoHora {
 
-	public abstract void agregar(TipoHora dataTipoHora) throws FileNotFoundException, IOException, SQLException;
+	public abstract void agregar(TipoHora dataTipoHora) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
-	public abstract TipoHora seleccionarPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException;
+	public abstract TipoHora seleccionarPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 	
-	public abstract TipoHora seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException;
+	public abstract TipoHora seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
-	public abstract List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException;
+	public abstract List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 }

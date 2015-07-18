@@ -10,18 +10,18 @@ import com.proyectodegrado.sgti.modelo.Cliente;
 public interface ServicioCliente {
 
 	public abstract void agregar(Cliente cliente) throws FileNotFoundException,
-			IOException, SQLException;
+			IOException, SQLException, ClassNotFoundException;
 
 	public abstract Cliente verPorNombre(Cliente cliente)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 	public abstract List<Cliente> verClientes() throws FileNotFoundException,
-			IOException, SQLException;
+			IOException, SQLException, ClassNotFoundException;
 
 	public abstract void editarCliente(Cliente cliente)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 	public abstract void eliminarCliente(Cliente cliente)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 }

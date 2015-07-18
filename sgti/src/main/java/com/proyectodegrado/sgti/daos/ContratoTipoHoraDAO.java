@@ -17,11 +17,11 @@ public class ContratoTipoHoraDAO {
 	
 	private TipoHoraDAO tipoHoraDao;
 	
-	public void insertarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException{
+	public void insertarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasContratoTipoHora.insertarContratoTipoHora(idContrato, idTipoHora, computos);
 	}
 	
-	public List<TipoHoraComputo> verContratoTipoHora (String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public List<TipoHoraComputo> verContratoTipoHora (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<TipoHoraComputo> tiposHoraComputo = new ArrayList<TipoHoraComputo>();
 		ResultSet resultSet = consultasContratoTipoHora.verContratoTiposHora(idContrato);
 		while (resultSet.next()){
@@ -34,7 +34,7 @@ public class ContratoTipoHoraDAO {
 		return tiposHoraComputo;
 	}
 	
-	public void editarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException{
+	public void editarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasContratoTipoHora.editarContratoTipoHora(idContrato, idTipoHora, computos);
 	}
 

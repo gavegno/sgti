@@ -17,7 +17,7 @@ public class ServicioClienteImpl implements ServicioCliente {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioCliente#agregar(com.proyectodegrado.sgti.modelo.Cliente)
 	 */
 	@Override
-	public void agregar(Cliente cliente) throws FileNotFoundException, IOException, SQLException{
+	public void agregar(Cliente cliente) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		clienteDao.agregar(cliente.getNombre(), cliente.getDireccion(), cliente.getTelefono(), true);
 	}
 	
@@ -25,7 +25,7 @@ public class ServicioClienteImpl implements ServicioCliente {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioCliente#verPorNombre(com.proyectodegrado.sgti.modelo.Cliente)
 	 */
 	@Override
-	public Cliente verPorNombre(Cliente cliente) throws FileNotFoundException, IOException, SQLException{
+	public Cliente verPorNombre(Cliente cliente) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return clienteDao.seleccionarPorNombre(cliente.getNombre());
 	}
 	
@@ -33,7 +33,7 @@ public class ServicioClienteImpl implements ServicioCliente {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioCliente#verClientes()
 	 */
 	@Override
-	public List<Cliente> verClientes() throws FileNotFoundException, IOException, SQLException{
+	public List<Cliente> verClientes() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return clienteDao.seleccionarClientes();
 	}
 	
@@ -41,7 +41,7 @@ public class ServicioClienteImpl implements ServicioCliente {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioCliente#editarCliente(com.proyectodegrado.sgti.modelo.Cliente)
 	 */
 	@Override
-	public void editarCliente(Cliente cliente) throws FileNotFoundException, IOException, SQLException{
+	public void editarCliente(Cliente cliente) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		clienteDao.editarUsuario(cliente.getId(), cliente.getNombre(), cliente.getDireccion(), cliente.getTelefono());
 	}
 	
@@ -49,7 +49,7 @@ public class ServicioClienteImpl implements ServicioCliente {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioCliente#eliminarCliente(com.proyectodegrado.sgti.modelo.Cliente)
 	 */
 	@Override
-	public void eliminarCliente(Cliente cliente) throws FileNotFoundException, IOException, SQLException{
+	public void eliminarCliente(Cliente cliente) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		clienteDao.cambiarActivo(cliente.getId(), false);
 	}
 

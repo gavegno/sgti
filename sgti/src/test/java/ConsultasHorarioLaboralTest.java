@@ -37,13 +37,13 @@ public class ConsultasHorarioLaboralTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		horarioLaboralDao.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, LUNES);
 		horarioLaboralDao.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, MARTES);
 	}
 	
 	@Test
-	public void testInsertarHorarioLaboral() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertarHorarioLaboral() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		horarioLaboralDao.agregar(HORARIO_LABORAL_TEST, LUNES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
 		horarioLaboralDao.agregar(HORARIO_LABORAL_TEST, MARTES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
 		
@@ -51,7 +51,7 @@ public class ConsultasHorarioLaboralTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarDia() throws FileNotFoundException, IOException, SQLException{
+	public void testEditarDia() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		horarioLaboralDao.agregar(HORARIO_LABORAL_TEST, LUNES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
 		
 		assertEquals(horarioLaboralDao.seleccionarHorarioLaboral(HORARIO_LABORAL_TEST).getDias().size(), 1);

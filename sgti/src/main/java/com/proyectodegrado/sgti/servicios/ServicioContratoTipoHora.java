@@ -11,13 +11,13 @@ public interface ServicioContratoTipoHora {
 
 	public abstract void insertar(String idContrato,
 			TipoHoraComputo tipoHoraComputo) throws FileNotFoundException,
-			IOException, SQLException;
+			IOException, SQLException, ClassNotFoundException;
 
 	public abstract List<TipoHoraComputo> verContratoTipoHora(String idContrato)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 	public abstract void editarContratoTipoHora(String idContrato,
 			TipoHoraComputo tipoHoraComputo) throws FileNotFoundException,
-			IOException, SQLException;
+			IOException, SQLException, ClassNotFoundException;
 
 }

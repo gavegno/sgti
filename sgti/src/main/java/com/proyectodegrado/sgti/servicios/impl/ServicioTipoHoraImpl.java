@@ -17,7 +17,7 @@ public class ServicioTipoHoraImpl implements ServicioTipoHora {
 	 * @see com.proyectodegrado.sgti.servicios.ServicioTipoHora#agregar(com.proyectodegrado.sgti.Data.DataTipoHora)
 	 */
 	@Override
-	public void agregar(TipoHora dataTipoHora) throws FileNotFoundException, IOException, SQLException{
+	public void agregar(TipoHora dataTipoHora) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		tipoHoraDao.agregar(dataTipoHora.getTipo());
 	}
 	
@@ -25,7 +25,7 @@ public class ServicioTipoHoraImpl implements ServicioTipoHora {
 	 * @see com.proyectodegrado.sgti.servicios.ServicioTipoHora#seleccionarPorTipo(java.lang.String)
 	 */
 	@Override
-	public TipoHora seleccionarPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException{
+	public TipoHora seleccionarPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return tipoHoraDao.seleccionarPorTipo(tipo);
 	}
 	
@@ -33,7 +33,7 @@ public class ServicioTipoHoraImpl implements ServicioTipoHora {
 	 * @see com.proyectodegrado.sgti.servicios.ServicioTipoHora#seleccionarPorId(int)
 	 */
 	@Override
-	public TipoHora seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException{
+	public TipoHora seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return tipoHoraDao.seleccionarPorId(id);
 	}
 	
@@ -41,7 +41,7 @@ public class ServicioTipoHoraImpl implements ServicioTipoHora {
 	 * @see com.proyectodegrado.sgti.servicios.ServicioTipoHora#seleccionarTipos()
 	 */
 	@Override
-	public List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException{
+	public List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return tipoHoraDao.seleccionarTipos();
 	}
 

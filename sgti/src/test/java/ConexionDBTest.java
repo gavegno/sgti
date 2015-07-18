@@ -20,7 +20,7 @@ public class ConexionDBTest extends ConfigurarTest{
 	private Conexion conexionBD;
 	
 	@Test
-	public void testearConexionBD() throws SQLException, FileNotFoundException, IOException{
+	public void testearConexionBD() throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			Conexion conexion = (Conexion) context.getBean("conexionBD");

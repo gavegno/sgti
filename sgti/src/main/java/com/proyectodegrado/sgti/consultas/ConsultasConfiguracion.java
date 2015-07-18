@@ -18,7 +18,7 @@ public class ConsultasConfiguracion {
 	public void insertarConfiguracion(Date fechaInicio, Date fechaFin, String renovacion, int periodoRenovacion,
 			 String tipoContrato, int computosPaquete, int periodoValidezMes, int periodoValidezDia, boolean acumulacion,
 			 int periodoAcumulacion, int frecuenciaInforme, int frecuenciaFacturacion, int frecuenciaComputosExtra,
-			 String tiempoRespuesta, String idHorarioLaboral, String idContrato) throws FileNotFoundException, IOException, SQLException{
+			 String tiempoRespuesta, String idHorarioLaboral, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO configuracion(fechainicio,fechafin,renovacion,periodorenovacion,tipocontrato,"
 				+ "computospaquete,periodovalidezmes,"
@@ -45,7 +45,7 @@ public class ConsultasConfiguracion {
 		conexionBD.cerrar(con);
 	}
 	
-	public ResultSet verConfiguracion(int id) throws SQLException, FileNotFoundException, IOException{
+	public ResultSet verConfiguracion(int id) throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE c.id=?");
 		preparedStatement.setInt(1, id);
@@ -54,7 +54,7 @@ public class ConsultasConfiguracion {
 		return resultSet;
 	}
 	
-	public ResultSet verConfiguracionesEntreFechasFin(Date fechaMayorQue, Date fechaMenorQue) throws SQLException, FileNotFoundException, IOException{
+	public ResultSet verConfiguracionesEntreFechasFin(Date fechaMayorQue, Date fechaMenorQue) throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE c.fechafin BETWEEN ? AND ?");
 		preparedStatement.setDate(1, fechaMayorQue);
@@ -64,7 +64,7 @@ public class ConsultasConfiguracion {
 		return resultSet;
 	}
 	
-	public ResultSet verConfiguracionActual(String idContrato) throws SQLException, FileNotFoundException, IOException{
+	public ResultSet verConfiguracionActual(String idContrato) throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE ? BETWEEN c.fechainicio AND c.fechafin AND c.id_contrato=?");
 		preparedStatement.setDate(1, new Date(new java.util.Date().getTime()));
@@ -74,7 +74,7 @@ public class ConsultasConfiguracion {
 		return resultSet;
 	}
 	
-	public ResultSet verConfiguracionPorFecha(Date fecha, String idContrato) throws SQLException, FileNotFoundException, IOException{
+	public ResultSet verConfiguracionPorFecha(Date fecha, String idContrato) throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE ? BETWEEN c.fechainicio AND c.fechafin AND c.id_contrato=?");
 		preparedStatement.setDate(1, fecha);
@@ -84,7 +84,7 @@ public class ConsultasConfiguracion {
 		return resultSet;
 	}
 	
-	public ResultSet verConfiguracionesPorContrato(String idContrato) throws SQLException, FileNotFoundException, IOException{
+	public ResultSet verConfiguracionesPorContrato(String idContrato) throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE c.id_contrato=?");
 		preparedStatement.setString(1, idContrato);
@@ -96,7 +96,7 @@ public class ConsultasConfiguracion {
 	public void editarConfiguracion(int id, Date fechaInicio, Date fechaFin, String renovacion, int periodoRenovacion,
 			 String tipoContrato, int computosPaquete, int periodoValidezMes, int periodoValidezDia, boolean acumulacion,
 			 int periodoAcumulacion, int frecuenciaInforme, int frecuenciaFacturacion, int frecuenciaComputosExtra,
-			 String tiempoRespuesta, String idHorarioLaboral) throws SQLException, FileNotFoundException, IOException{
+			 String tiempoRespuesta, String idHorarioLaboral) throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("UPDATE configuracion AS c SET fechainicio=?,fechafin=?,renovacion=?,periodorenovacion=?,tipocontrato=?,"
 				+ "computospaquete=?,periodovalidezmes=?,periodovalidezdia=?,acumulacion=?,periodoacumulacion=?,frecuenciainforme=?,frecuenciafacturacion=?,"
@@ -121,7 +121,7 @@ public class ConsultasConfiguracion {
 		conexionBD.cerrar(con);
 	}
 	
-	public void borrarConfiguraciones () throws FileNotFoundException, IOException, SQLException{
+	public void borrarConfiguraciones () throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		Statement statement = con.createStatement();
 		statement.executeUpdate("DELETE FROM configuracion");

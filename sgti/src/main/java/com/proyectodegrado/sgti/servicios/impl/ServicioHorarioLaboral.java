@@ -10,19 +10,19 @@ import com.proyectodegrado.sgti.modelo.HorarioLaboral;
 public interface ServicioHorarioLaboral {
 
 	public abstract void insertar(HorarioLaboral horarioLaboral)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 	
 	public abstract void insertarDíaAHorarioLaboral(HorarioLaboral horarioLaboral, Dia dia)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 	public abstract HorarioLaboral seleccionarHorarioLaboral(
 			String idHorarioLaboral) throws FileNotFoundException, IOException,
-			SQLException;
+			SQLException, ClassNotFoundException;
 
 	public abstract void editarDiaDeHorarioLaboral(String idHorarioLboral,
-			Dia dia) throws FileNotFoundException, IOException, SQLException;
+			Dia dia) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 	public abstract void borrarDiaDeHorarioLaboral(String idHorarioLaboral,
-			Dia dia) throws FileNotFoundException, IOException, SQLException;
+			Dia dia) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 }

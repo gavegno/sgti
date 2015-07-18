@@ -15,7 +15,7 @@ public class ConsultasPrecio {
 	
 	private Conexion conexionBD;
 	
-	public void insertarPrecio (double precio, Date fechadesde, Date fechahasta, String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public void insertarPrecio (double precio, Date fechadesde, Date fechahasta, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO precio(precio,fechadesde,fechahasta,idcontrato) VALUES (?,?,?,?)");
 		preparedStatement.setDouble(1, precio);
@@ -26,7 +26,7 @@ public class ConsultasPrecio {
 		conexionBD.cerrar(con);
 	}
 	
-	public ResultSet verPrecios (String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verPrecios (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM precio AS p WHERE p.idcontrato=?");
 		preparedStatement.setString(1, idContrato);
@@ -35,7 +35,7 @@ public class ConsultasPrecio {
 		return resultSet;
 	}
 	
-	public ResultSet verPrecioActual (String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verPrecioActual (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM precio AS p WHERE p.idcontrato=? AND ? BETWEEN p.fechadesde AND p.fechahasta ");
 		preparedStatement.setString(1, idContrato);
@@ -45,7 +45,7 @@ public class ConsultasPrecio {
 		return resultSet;
 	}
 	
-	public ResultSet verPreciosPorFecha (String idContrato, Date fecha) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verPreciosPorFecha (String idContrato, Date fecha) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM precio AS p WHERE p.idcontrato=? AND ? BETWEEN p.fechadesde AND p.fechahasta ");
 		preparedStatement.setString(1, idContrato);
@@ -55,7 +55,7 @@ public class ConsultasPrecio {
 		return resultSet;
 	}
 	
-	public void borrarPrecios() throws FileNotFoundException, IOException, SQLException{
+	public void borrarPrecios() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		Statement statement = con.createStatement();
 		statement.executeUpdate("DELETE FROM precio");

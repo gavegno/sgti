@@ -42,14 +42,14 @@ public class ServicioClienteTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasCliente.borrarCliente(CLIENTE_TEST);
 		consultasCliente.borrarCliente(CLIENTE_TEST2);
 		consultasCliente.borrarCliente(CLIENTE_TEST_EDITADO);
 	}
 	
 	@Test
-	public void testAgregarCliente() throws FileNotFoundException, IOException, SQLException{
+	public void testAgregarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Cliente cliente = new Cliente();
 		cliente.setNombre(CLIENTE_TEST);
 		cliente.setDireccion(DIRECCION_TEST);
@@ -64,7 +64,7 @@ public class ServicioClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testAgregarClientes() throws FileNotFoundException, IOException, SQLException{
+	public void testAgregarClientes() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Cliente cliente = new Cliente();
 		cliente.setNombre(CLIENTE_TEST);
 		cliente.setDireccion(DIRECCION_TEST);
@@ -92,7 +92,7 @@ public class ServicioClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarCliente() throws FileNotFoundException, IOException, SQLException{
+	public void testEditarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Cliente cliente = new Cliente();
 		cliente.setNombre(CLIENTE_TEST);
 		cliente.setDireccion(DIRECCION_TEST);
@@ -119,7 +119,7 @@ public class ServicioClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEliminarCliente() throws FileNotFoundException, IOException, SQLException{
+	public void testEliminarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Cliente cliente = new Cliente();
 		cliente.setNombre(CLIENTE_TEST);
 		cliente.setDireccion(DIRECCION_TEST);

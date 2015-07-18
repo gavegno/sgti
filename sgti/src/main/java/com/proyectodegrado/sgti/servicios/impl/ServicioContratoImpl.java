@@ -34,7 +34,7 @@ public class ServicioContratoImpl implements ServicioContrato {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContrato#insertar(com.proyectodegrado.sgti.modelo.Contrato)
 	 */
 	@Override
-	public void insertar (Contrato contrato) throws FileNotFoundException, IOException, SQLException{
+	public void insertar (Contrato contrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		contratoDao.insertarContrato(contrato.getId(), contrato.getCliente().getId(), contrato.getContraparte().getId());
 	}
 	
@@ -42,7 +42,7 @@ public class ServicioContratoImpl implements ServicioContrato {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContrato#insertarCompleto(com.proyectodegrado.sgti.modelo.Contrato)
 	 */
 	@Override
-	public void insertarCompleto (Contrato contrato) throws FileNotFoundException, IOException, SQLException{
+	public void insertarCompleto (Contrato contrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		servicioUsuarioContraparte.agregar(contrato.getContraparte());
 		servicioCliente.agregar(contrato.getCliente());
 		Cliente cliente = prepararCliente(contrato);
@@ -54,13 +54,13 @@ public class ServicioContratoImpl implements ServicioContrato {
 	}
 
 	private Cliente prepararCliente(Contrato contrato)
-			throws FileNotFoundException, IOException, SQLException {
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
 		Cliente cliente = contrato.getCliente();
 		cliente.setId(servicioCliente.verPorNombre(cliente).getId());
 		return cliente;
 	}
 	
-	public List<Contrato> verContratos () throws FileNotFoundException, IOException, SQLException{
+	public List<Contrato> verContratos () throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return contratoDao.verContratos();
 	}
 

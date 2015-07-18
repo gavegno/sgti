@@ -55,13 +55,13 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasConfiguracion.borrarConfiguraciones();
 		borrarRelacionadoConContrato();
 	}
 	
 	@Test
-	public void testInsertarConfiguracion() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertarConfiguracion() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConConsultasContrato();
 		Date fechaInicio = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
@@ -82,7 +82,7 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testVerConfiguracionesEntreFechas() throws FileNotFoundException, IOException, SQLException{
+	public void testVerConfiguracionesEntreFechas() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConConsultasContrato();
 		Date fechaInicio = new Date();
 		Calendar fechaFin = Calendar.getInstance();
@@ -100,7 +100,7 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testVerConfiguracionesEntreFechasCasoBorde() throws FileNotFoundException, IOException, SQLException{
+	public void testVerConfiguracionesEntreFechasCasoBorde() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConConsultasContrato();
 		Date fechaInicio = new Date();
 		Calendar fechaFin = Calendar.getInstance();
@@ -115,7 +115,7 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarConfiguracion() throws FileNotFoundException, IOException, SQLException{
+	public void testEditarConfiguracion() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConConsultasContrato();
 		Date fechaInicio = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);

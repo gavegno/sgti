@@ -74,7 +74,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		borrarTiposHoraUsuario();
 		consultasUsuario.borrarUsuario(ID_USUARIO10);
 		consultasUsuario.borrarUsuario(ID_USUARIO11);
@@ -83,7 +83,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
 	}
 	
-	private void borrarTiposHoraUsuario() throws FileNotFoundException,	IOException, SQLException {
+	private void borrarTiposHoraUsuario() throws FileNotFoundException,	IOException, SQLException, ClassNotFoundException {
 		ResultSet tipoHoraTest = consultasTipoHora.verTipoHora(TIPO_TEST);
 		ResultSet tipoHoraTest2 = consultasTipoHora.verTipoHora(TIPO_TEST2);
 		if(tipoHoraTest.next()){
@@ -95,7 +95,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testAgregarUsuario() throws FileNotFoundException, IOException, SQLException{
+	public void testAgregarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		Usuario usuarioSegundo = new Usuario(ID_USUARIO11,TEST_NOMBRE2,TEST_APELLIDO2,TEST_CONTRASENA2,TEST_EMAIL2, "12345679", null,false, null);
 		Usuario usuarioTercero = new Usuario(ID_USUARIO12,"testNombre3","testApellido3","testContrasena3","test3@email.com", "12345680", null,false, null);
@@ -110,7 +110,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testExisteUsuario() throws FileNotFoundException, IOException, SQLException{
+	public void testExisteUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		servicioUsuarioSocio.agregar(usuario);
 		Usuario usuarioLoguear = new Usuario();
@@ -121,7 +121,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testAgregarUsuarioTipoHora() throws FileNotFoundException, IOException, SQLException{
+	public void testAgregarUsuarioTipoHora() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		TipoHora tipoHora = new TipoHora();
 		tipoHora.setTipo(TIPO_TEST);
@@ -140,7 +140,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarUsuario() throws FileNotFoundException, IOException, SQLException{
+	public void testEditarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		servicioUsuarioSocio.agregar(usuario);
 		usuario.setApellido(TEST_APELLIDO2);
@@ -156,7 +156,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException{
+	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		servicioUsuarioSocio.agregar(usuario);
 		assertTrue(usuarioDAO.verContraseñaUsuario(ID_USUARIO10).equalsIgnoreCase(TEST_CONTRASENA));
@@ -169,7 +169,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEliminarUsuario() throws FileNotFoundException, IOException, SQLException{
+	public void testEliminarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 		servicioUsuarioSocio.agregar(usuario);
 		assertTrue(servicioUsuario.seleccionarUsuarios().size() == 1);

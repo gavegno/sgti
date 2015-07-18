@@ -1,22 +1,21 @@
 package com.proyectodegrado.sgti.conexionbd;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class Conexion {
 	
-	public Connection conectar() throws FileNotFoundException, IOException, SQLException{
-		Properties localProperties = new Properties();
+	public Connection conectar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		//Properties localProperties = new Properties();
 		Connection conn = null;
-			localProperties.load(new FileInputStream("src/main/resources/local.properties"));
-			String connectString = localProperties.getProperty("conexionBD.connectString");
-			String user = localProperties.getProperty("conexionBD.username");
-			String password = localProperties.getProperty("conexionBD.password");
+			//localProperties.load(new FileInputStream("src/main/resources/local.properties"));
+			String connectString = "jdbc:postgresql://localhost:5432/sgti";//localProperties.getProperty("conexionBD.connectString");
+			String user = "root";//localProperties.getProperty("conexionBD.username");
+			String password = "admin";//localProperties.getProperty("conexionBD.password");
+			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(connectString, user, password);
 			return conn;
 	}

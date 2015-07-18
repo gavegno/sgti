@@ -47,14 +47,14 @@ public class ConsultasClienteTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasCliente.borrarCliente(CLIENTE_TEST);
 		consultasCliente.borrarCliente(CLIENTE_TEST2);
 		consultasCliente.borrarCliente(CLIENTE_TEST_EDITADO);
 	}
 	
 	@Test
-	public void testAgregarCliente() throws FileNotFoundException, IOException, SQLException{
+	public void testAgregarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		clienteDAO.agregar(CLIENTE_TEST, DIRECCION_TEST, TELEFONO_TEST, true);
 		
 		assertTrue(clienteDAO.seleccionarClientes().size()==1);
@@ -65,7 +65,7 @@ public class ConsultasClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testAgregarClientes() throws FileNotFoundException, IOException, SQLException{
+	public void testAgregarClientes() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		clienteDAO.agregar(CLIENTE_TEST, DIRECCION_TEST, TELEFONO_TEST, true);
 		clienteDAO.agregar(CLIENTE_TEST2, "DIRECCION_TEST2", "12345679", false);
 		assertTrue(clienteDAO.seleccionarClientes().size()==2);
@@ -81,7 +81,7 @@ public class ConsultasClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarCliente() throws FileNotFoundException, IOException, SQLException{
+	public void testEditarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		clienteDAO.agregar(CLIENTE_TEST, DIRECCION_TEST, TELEFONO_TEST, true);
 		assertTrue(clienteDAO.seleccionarClientes().size()==1);
 		assertTrue(clienteDAO.seleccionarPorNombre(CLIENTE_TEST).getNombre().equalsIgnoreCase(CLIENTE_TEST));
@@ -99,7 +99,7 @@ public class ConsultasClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testCambiarActivo() throws FileNotFoundException, IOException, SQLException{
+	public void testCambiarActivo() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		clienteDAO.agregar(CLIENTE_TEST, DIRECCION_TEST, TELEFONO_TEST, true);
 		
 		assertTrue(clienteDAO.seleccionarClientes().size()==1);

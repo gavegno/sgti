@@ -14,7 +14,7 @@ public class ConsultasCliente {
 	
 	private Conexion conexionBD;
 	
-	public void insertarCliente(String nombre, String direccion, String telefono, boolean activo) throws FileNotFoundException, IOException, SQLException{
+	public void insertarCliente(String nombre, String direccion, String telefono, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO cliente(nombre,direccion,telefono, activo) VALUES (?,?,?,?)");
 		preparedStatement.setString(1, nombre);
@@ -25,7 +25,7 @@ public class ConsultasCliente {
 		conexionBD.cerrar(con);
 	}
 	
-	public ResultSet verClientePorNombre (String nombre) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verClientePorNombre (String nombre) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM cliente AS c WHERE c.nombre=?");
 		preparedStatement.setString(1, nombre);
@@ -34,7 +34,7 @@ public class ConsultasCliente {
 		return resultSet;
 	}
 	
-	public ResultSet verClientePorId (int id) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verClientePorId (int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM cliente AS c WHERE c.id=?");
 		preparedStatement.setInt(1, id);
@@ -43,7 +43,7 @@ public class ConsultasCliente {
 		return resultSet;
 	}
 	
-	public ResultSet verClientes () throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verClientes () throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		Statement stmt = con.createStatement();
 		ResultSet resultSet = stmt.executeQuery("SELECT * FROM cliente");
@@ -51,7 +51,7 @@ public class ConsultasCliente {
 		return resultSet;
 	}
 	
-	public void cambiarActivo(int id, boolean activo) throws FileNotFoundException, IOException, SQLException{
+	public void cambiarActivo(int id, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("UPDATE cliente AS c SET activo=? WHERE c.id=?");
 		preparedStatement.setBoolean(1, activo);
@@ -60,7 +60,7 @@ public class ConsultasCliente {
 		conexionBD.cerrar(con);
 	}
 	
-	public void editarCliente(int id, String nombre, String direccion, String telefono) throws FileNotFoundException, IOException, SQLException{
+	public void editarCliente(int id, String nombre, String direccion, String telefono) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE cliente AS c SET nombre=?, direccion=?, telefono=? WHERE c.id=?");
 		preparedStatement.setString(1,nombre);
@@ -71,7 +71,7 @@ public class ConsultasCliente {
 		conexionBD.cerrar(connection);
 	}
 	
-	public void borrarCliente (String nombre) throws FileNotFoundException, IOException, SQLException{
+	public void borrarCliente (String nombre) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM cliente AS c WHERE c.nombre =?");
 		preparedStatement.setString(1, nombre);

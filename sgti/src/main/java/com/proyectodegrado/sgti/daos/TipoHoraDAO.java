@@ -15,12 +15,12 @@ public class TipoHoraDAO {
 	private ConsultasTipoHora consultasTipoHora;
 
 	
-	public void agregar(String tipo) throws FileNotFoundException, IOException, SQLException{
+	public void agregar(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		
 		consultasTipoHora.insertarTipoHora(tipo);
 	}
 	
-	public TipoHora seleccionarPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException{
+	public TipoHora seleccionarPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		TipoHora tipoHora= new TipoHora();
 		ResultSet resultSet = consultasTipoHora.verTipoHora(tipo);
 		if(resultSet.next()){
@@ -30,7 +30,7 @@ public class TipoHoraDAO {
 		return tipoHora;
 	}
 	
-	public TipoHora seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException{
+	public TipoHora seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		TipoHora tipoHora= new TipoHora();
 		ResultSet resultSet = consultasTipoHora.verTipoHoraPorId(id);
 		if(resultSet.next()){
@@ -40,7 +40,7 @@ public class TipoHoraDAO {
 		return tipoHora;
 	}
 	
-	public List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException{
+	public List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<TipoHora> tiposHora= new ArrayList<TipoHora>();
 		ResultSet resultSet = consultasTipoHora.verTiposHora();
 		while(resultSet.next()){

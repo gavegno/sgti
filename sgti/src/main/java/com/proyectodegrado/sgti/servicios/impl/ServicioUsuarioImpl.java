@@ -19,7 +19,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#agregar(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */
 	@Override
-	public void agregar(Usuario usuario) throws FileNotFoundException, IOException, SQLException{
+	public void agregar(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		usuarioDao.agregar(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getContrasena(), usuario.getEmail(), usuario.getTelefono(), usuario.getTipo(), true);
 	}
 	
@@ -27,7 +27,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#agregarTipoHoraUsuario(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */
 	@Override
-	public void agregarTipoHoraUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException{
+	public void agregarTipoHoraUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<Integer> tipoHoraids = new ArrayList<Integer>();
 		for(TipoHora tipoHora: usuario.getUsuarioTipoHora()){
 			tipoHoraids.add(tipoHora.getId());
@@ -39,7 +39,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#verTiposHoraPorUsuario(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */
 	@Override
-	public List<TipoHora> verTiposHoraPorUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException{
+	public List<TipoHora> verTiposHoraPorUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return usuarioDao.verTiposHoraPorUsuario(usuario.getId());
 	}
 	
@@ -47,7 +47,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#existeUsuario(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */
 	@Override
-	public boolean existeUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException{
+	public boolean existeUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return usuarioDao.seleccionarUsuarioPorIdContrasena(usuario.getId(), usuario.getContrasena()) != null;
 	}
 	
@@ -55,7 +55,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#selecionarUsuario(java.lang.String)
 	 */
 	@Override
-	public Usuario selecionarUsuario(String id) throws FileNotFoundException, IOException, SQLException{
+	public Usuario selecionarUsuario(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return usuarioDao.seleccionarUsuarioPorId(id);
 	}
 	
@@ -63,7 +63,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#seleccionarUsuarios()
 	 */
 	@Override
-	public List<Usuario> seleccionarUsuarios() throws FileNotFoundException, IOException, SQLException{
+	public List<Usuario> seleccionarUsuarios() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return usuarioDao.seleccionarUsuarios();
 	}
 	
@@ -71,7 +71,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#editarUsuario(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */
 	@Override
-	public void editarUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException{
+	public void editarUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		usuarioDao.editarUsuario(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getTelefono());
 	}
 	
@@ -79,7 +79,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#cambiarContrasena(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */
 	@Override
-	public void cambiarContrasena(Usuario usuario) throws FileNotFoundException, IOException, SQLException{
+	public void cambiarContrasena(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		usuarioDao.cambiarContraseña(usuario.getId(), usuario.getContrasena());
 	}
 	
@@ -87,7 +87,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#eliminarUsuario(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */
 	@Override
-	public void eliminarUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException{
+	public void eliminarUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		usuarioDao.cambiarActivo(usuario.getId(), false);
 	}
 

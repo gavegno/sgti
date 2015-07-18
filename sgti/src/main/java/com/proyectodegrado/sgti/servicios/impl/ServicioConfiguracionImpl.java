@@ -18,7 +18,7 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracion#insertar(com.proyectodegrado.sgti.modelo.Configuracion)
 	 */
 	@Override
-	public void insertar(Configuracion configuracion, String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public void insertar(Configuracion configuracion, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(esPosibleInsertar(configuracion, idContrato)){
 			servicioHorarioLaboral.insertar(configuracion.getHorarioLaboral());
 			configuracionDao.insertarConfiguracion(configuracion.getFechaInicio(), configuracion.getFechaFin(), configuracion.getRenovacion(), 
@@ -35,7 +35,7 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracion#seleccionarConfiguracion(int)
 	 */
 	@Override
-	public Configuracion seleccionarConfiguracion(int id) throws FileNotFoundException, SQLException, IOException{
+	public Configuracion seleccionarConfiguracion(int id) throws FileNotFoundException, SQLException, IOException, ClassNotFoundException{
 		return configuracionDao.verConfiguracion(id);
 	}
 	
@@ -43,7 +43,7 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracion#seleccionarConfiguracionActual(String)
 	 */
 	@Override
-	public Configuracion seleccionarConfiguracionActual(String idContrato)	throws FileNotFoundException, SQLException, IOException{
+	public Configuracion seleccionarConfiguracionActual(String idContrato)	throws FileNotFoundException, SQLException, IOException, ClassNotFoundException{
 		return configuracionDao.verConfiguracionActual(idContrato);
 	}
 	
@@ -51,14 +51,14 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracion#editarConfiguracion(com.proyectodegrado.sgti.modelo.Configuracion)
 	 */
 	@Override
-	public void editarConfiguracion(Configuracion configuracion) throws FileNotFoundException, SQLException, IOException{
+	public void editarConfiguracion(Configuracion configuracion) throws FileNotFoundException, SQLException, IOException, ClassNotFoundException{
 		configuracionDao.editarConfiguracion(configuracion.getId(), configuracion.getFechaInicio(), configuracion.getFechaFin(), configuracion.getRenovacion(),
 				configuracion.getPeriodoRenovacion(), configuracion.getTipoContrato(), configuracion.getComputosPaquete(), configuracion.getPeriodoValidezMes(),
 				configuracion.getPeriodoValidezDia(), configuracion.isAcumulacion(), configuracion.getPeriodoAcumulacion(), configuracion.getFrecuenciaInforme(),
 				configuracion.getFrecuenciaFacturacion(), configuracion.getFrecuenciaComputosExtra(), configuracion.getTiempoRespuesta(), configuracion.getHorarioLaboral().getId());
 	}
 	
-	private boolean esPosibleInsertar(Configuracion configuracion, String idContrato) throws FileNotFoundException, SQLException, IOException{
+	private boolean esPosibleInsertar(Configuracion configuracion, String idContrato) throws FileNotFoundException, SQLException, IOException, ClassNotFoundException{
 		return configuracionDao.verConfiguracionPorFecha(configuracion.getFechaInicio(), idContrato).size() == 0 && configuracionDao.verConfiguracionPorFecha(configuracion.getFechaFin(), idContrato).size() == 0;
 	}
 

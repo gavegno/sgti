@@ -15,13 +15,13 @@ public class HorarioLaboralDAO {
 	
 	private ConsultasHorarioLaboral consultasHorarioLaboral;
 	
-	public void agregar(String idHorarioLaboral, String nombreDia, String horaDesde, String horaHasta) throws FileNotFoundException, IOException, SQLException{
+	public void agregar(String idHorarioLaboral, String nombreDia, String horaDesde, String horaHasta) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 
 	consultasHorarioLaboral.insertarDiaAHorarioLaboral(idHorarioLaboral, nombreDia, horaDesde, horaHasta);
 	
 	}
 	
-	public HorarioLaboral seleccionarHorarioLaboral(String idHorarioLaboral) throws FileNotFoundException, IOException, SQLException{
+	public HorarioLaboral seleccionarHorarioLaboral(String idHorarioLaboral) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		HorarioLaboral horarioLaboral= new HorarioLaboral(idHorarioLaboral);
 		List<Dia> dias = new ArrayList<Dia>();
 		ResultSet resultSet = consultasHorarioLaboral.verHorarioLaboral(idHorarioLaboral);
@@ -36,13 +36,13 @@ public class HorarioLaboralDAO {
 		return horarioLaboral;
 	}
 	
-	public void editarDiaDeHorarioLaboral(String idHorarioLaboral, String nombreDia, String horaDesde, String horaHasta) throws FileNotFoundException, IOException, SQLException{
+	public void editarDiaDeHorarioLaboral(String idHorarioLaboral, String nombreDia, String horaDesde, String horaHasta) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 
 		consultasHorarioLaboral.editarDiaDeHorarioLaboral(idHorarioLaboral, nombreDia, horaDesde, horaHasta);
 		
 	}
 	
-	public void borrarDiaDeHorarioLaboral(String idHorarioLaboral, String nombreDia) throws FileNotFoundException, IOException, SQLException{
+	public void borrarDiaDeHorarioLaboral(String idHorarioLaboral, String nombreDia) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 
 		consultasHorarioLaboral.borrarDiaDeHorarioLaboral(idHorarioLaboral, nombreDia);
 		

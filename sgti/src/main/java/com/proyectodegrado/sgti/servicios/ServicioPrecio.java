@@ -10,12 +10,12 @@ import com.proyectodegrado.sgti.modelo.Precio;
 public interface ServicioPrecio {
 
 	public abstract void insertar(Precio precio, String idContrato)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 	public abstract List<Precio> seleccionarPrecios(String idContrato)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 	public abstract Precio seleccionarPrecioActual(String idContrato)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 }

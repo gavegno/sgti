@@ -36,13 +36,13 @@ public class ServicioTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasTipoHora.borrarTipoHora(TIPO_TEST);
 		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
 	}
 	
 	@Test
-	public void testearAgregar() throws FileNotFoundException, IOException, SQLException{
+	public void testearAgregar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			TipoHora tipoHora = new TipoHora();
 			tipoHora.setTipo(TIPO_TEST);
@@ -52,7 +52,7 @@ public class ServicioTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testearSeleccionar() throws FileNotFoundException, IOException, SQLException{
+	public void testearSeleccionar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			TipoHora tipoHora = new TipoHora();
 			tipoHora.setTipo(TIPO_TEST);

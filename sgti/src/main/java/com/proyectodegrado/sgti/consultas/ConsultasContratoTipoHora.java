@@ -14,7 +14,7 @@ public class ConsultasContratoTipoHora {
 	
 	private Conexion conexionBD;
 	
-	public void insertarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException{
+	public void insertarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO contrato_tipohora(idcontrato, idtipohora, computos) VALUES (?,?,?)");
 		preparedStatement.setString(1, idContrato);
@@ -24,7 +24,7 @@ public class ConsultasContratoTipoHora {
 		conexionBD.cerrar(con);
 	}
 	
-	public ResultSet verContratoTiposHora (String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verContratoTiposHora (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM contrato_tipohora AS c WHERE c.idcontrato=?");
 		preparedStatement.setString(1, idContrato);
@@ -33,7 +33,7 @@ public class ConsultasContratoTipoHora {
 		return resultSet;
 	}
 	
-	public void editarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException{
+	public void editarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("UPDATE contrato_tipohora SET computos=? WHERE idcontrato=? AND idtipohora=?");
 		preparedStatement.setInt(1, computos);
@@ -43,7 +43,7 @@ public class ConsultasContratoTipoHora {
 		conexionBD.cerrar(con);
 	}
 	
-	public void borrarContratoTiposHora () throws FileNotFoundException, IOException, SQLException{
+	public void borrarContratoTiposHora () throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		Statement statement = con.createStatement();
 		statement.executeUpdate("DELETE FROM contrato_tipohora");

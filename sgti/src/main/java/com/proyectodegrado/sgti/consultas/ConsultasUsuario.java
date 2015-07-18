@@ -14,7 +14,7 @@ public class ConsultasUsuario {
 	
 	private Conexion conexionBD;
 	
-	public void insetarUsuario(String id, String nombre, String apellido, String contrasena, String email, String telefono, String tipo, boolean activo) throws FileNotFoundException, IOException, SQLException{
+	public void insetarUsuario(String id, String nombre, String apellido, String contrasena, String email, String telefono, String tipo, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO usuario(id,nombre,apellido,contrasena,email,telefono,tipo,activo) VALUES (?,?,?,?,?,?,?,?)");
 		preparedStatement.setString(1, id);
@@ -30,7 +30,7 @@ public class ConsultasUsuario {
 		
 	}
 	
-	public void insetarTipoHoraEnUsuario(int idTipoHora, String idUsuario) throws FileNotFoundException, IOException, SQLException{
+	public void insetarTipoHoraEnUsuario(int idTipoHora, String idUsuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO usuario_tipohora(id_tipohora,id_usuario) VALUES (?,?)");
 		preparedStatement.setInt(1, idTipoHora);
@@ -40,7 +40,7 @@ public class ConsultasUsuario {
 		
 	}
 	
-	public ResultSet verTiposHoraPorUsuario(String idUsuario) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verTiposHoraPorUsuario(String idUsuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario_tipohora AS u WHERE u.id_usuario=?");
 		preparedStatement.setString(1, idUsuario);
@@ -49,7 +49,7 @@ public class ConsultasUsuario {
 		return resultSet;
 	}
 	
-	public ResultSet verUsuarios() throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verUsuarios() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery("SELECT * FROM usuario");
@@ -57,7 +57,7 @@ public class ConsultasUsuario {
 		return resultSet;
 	}
 	
-	public ResultSet verUsuarioPorIdContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verUsuarioPorIdContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.id=? AND u.contrasena=?");
 		preparedStatement.setString(1, id);
@@ -67,7 +67,7 @@ public class ConsultasUsuario {
 		return resultSet;
 	}
 	
-	public ResultSet verUsuarioPorId(String id) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verUsuarioPorId(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.id=?");
 		preparedStatement.setString(1, id);
@@ -76,7 +76,7 @@ public class ConsultasUsuario {
 		return resultSet;
 	}
 	
-	public void editarUsuario(String id, String nombre, String apellido, String email, String telefono) throws FileNotFoundException, IOException, SQLException{
+	public void editarUsuario(String id, String nombre, String apellido, String email, String telefono) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario AS u SET nombre=?, apellido=?, email=?, telefono=? WHERE u.id=?");
 		preparedStatement.setString(1,nombre);
@@ -88,7 +88,7 @@ public class ConsultasUsuario {
 		conexionBD.cerrar(connection);
 	}
 	
-	public void cambiarContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException{
+	public void cambiarContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario AS u SET contrasena=? WHERE u.id=?");
 		preparedStatement.setString(1, contrasena);
@@ -97,7 +97,7 @@ public class ConsultasUsuario {
 		conexionBD.cerrar(connection);
 	}
 	
-	public void cambiarActivo(String id, boolean activo) throws FileNotFoundException, IOException, SQLException{
+	public void cambiarActivo(String id, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario AS u SET activo=? WHERE u.id=?");
 		preparedStatement.setBoolean(1, activo);
@@ -106,7 +106,7 @@ public class ConsultasUsuario {
 		conexionBD.cerrar(connection);
 	}
 	
-	public void borrarUsuario (String id) throws FileNotFoundException, IOException, SQLException{
+	public void borrarUsuario (String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM usuario AS u WHERE u.id =?");
 		preparedStatement.setString(1, id);
@@ -114,7 +114,7 @@ public class ConsultasUsuario {
 		conexionBD.cerrar(con);
 	}
 	
-	public void borrarTipoHoraDeUsuario (String idUsuario, int idTipoHora) throws FileNotFoundException, IOException, SQLException{
+	public void borrarTipoHoraDeUsuario (String idUsuario, int idTipoHora) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM usuario_tipohora AS u WHERE u.id_usuario =? AND u.id_tipohora =?");
 		preparedStatement.setString(1, idUsuario);

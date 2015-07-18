@@ -26,11 +26,11 @@ public class ContratoDAO {
 	
 	private UsuarioDAO usuarioDao;
 	
-	public void insertarContrato (String id, int idCliente, String idContraparte) throws FileNotFoundException, IOException, SQLException{
+	public void insertarContrato (String id, int idCliente, String idContraparte) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasContrato.insertarContrato(id, idCliente, idContraparte);
 	}
 	
-	public List<Contrato> verContratos () throws FileNotFoundException, IOException, SQLException{
+	public List<Contrato> verContratos () throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<Contrato> contratos = new ArrayList<Contrato>();
 		ResultSet resultSet = consultasContrato.verContratos();
 		while(resultSet.next()){

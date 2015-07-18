@@ -9,9 +9,9 @@ import com.proyectodegrado.sgti.modelo.Contrato;
 public interface ServicioContrato {
 
 	public abstract void insertar(Contrato contrato)
-			throws FileNotFoundException, IOException, SQLException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 	void insertarCompleto(Contrato contrato) throws FileNotFoundException,
-			IOException, SQLException;
+			IOException, SQLException, ClassNotFoundException;
 
 }

@@ -131,4 +131,16 @@
 			<property name="servicioUsuarioContraparte" ref="servicioUsuarioContraparte"/>
 		</bean>
 		
+		<!-- Controllers -->
+		<bean id="tipoHoraController" class="com.proyectodegrado.sgti.controller.TipoHoraController">
+			<property name="fachadaTipoHora" ref="fachadaTipoHora"/>
+		</bean>
+		
+		
+		<!-- Fachadas -->
+		
+		<bean id="fachadaTipoHora" class="com.proyectodegrado.sgti.fachada.FachadaTipoHora">
+			<property name="servicioTipoHora" ref="servicioTipoHora"/>
+		</bean>
+		
 </beans>

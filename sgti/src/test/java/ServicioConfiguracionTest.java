@@ -62,13 +62,13 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasConfiguracion.borrarConfiguraciones();
 		borrarRelacionadoConContrato();
 	}
 	
 	@Test
-	public void testInsertar() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConServicioContrato();
 		Configuracion configuracion = new Configuracion();
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
@@ -99,7 +99,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditar() throws FileNotFoundException, IOException, SQLException{
+	public void testEditar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConServicioContrato();
 		Configuracion configuracion = new Configuracion();
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
@@ -130,7 +130,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testConfiguracionSuperpuesta() throws FileNotFoundException, IOException, SQLException{
+	public void testConfiguracionSuperpuesta() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConServicioContrato();
 		Calendar fechaDesdeVieja = Calendar.getInstance();
 		Calendar fechaHastaVieja = Calendar.getInstance();
@@ -170,7 +170,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testConfiguracionActual() throws FileNotFoundException, IOException, SQLException{
+	public void testConfiguracionActual() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConServicioContrato();
 		Calendar fechaDesdeVieja = Calendar.getInstance();
 		Calendar fechaHastaVieja = Calendar.getInstance();

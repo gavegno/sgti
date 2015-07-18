@@ -15,11 +15,11 @@ public class PrecioDAO {
 	
 	private ConsultasPrecio consultasPrecio;
 	
-	public void insertarPrecio (double precio, Date fechadesde, Date fechahasta, String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public void insertarPrecio (double precio, Date fechadesde, Date fechahasta, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasPrecio.insertarPrecio(precio, new java.sql.Date(fechadesde.getTime()), new java.sql.Date(fechahasta.getTime()), idContrato);
 	}
 	
-	public List<Precio> verPrecios (String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public List<Precio> verPrecios (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<Precio> precios = new ArrayList<Precio>();
 		ResultSet resultSet = consultasPrecio.verPrecios(idContrato);
 		while(resultSet.next()){
@@ -32,7 +32,7 @@ public class PrecioDAO {
 		return precios;
 	}
 	
-	public Precio verPrecioActual (String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public Precio verPrecioActual (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Precio precio = new Precio();
 		ResultSet resultSet = consultasPrecio.verPrecioActual(idContrato);
 		if(resultSet.next()){
@@ -43,7 +43,7 @@ public class PrecioDAO {
 		return precio;
 	}
 	
-	public List<Precio> verPreciosPorFecha (String idContrato, Date fecha) throws FileNotFoundException, IOException, SQLException{
+	public List<Precio> verPreciosPorFecha (String idContrato, Date fecha) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<Precio> precios = new ArrayList<Precio>();
 		ResultSet resultSet = consultasPrecio.verPreciosPorFecha(idContrato, new java.sql.Date(fecha.getTime()));
 		while(resultSet.next()){

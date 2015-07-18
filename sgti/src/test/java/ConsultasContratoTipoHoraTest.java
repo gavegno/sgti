@@ -53,14 +53,14 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasContratoTipoHora.borrarContratoTiposHora();
 		consultasTipoHora.borrarTipoHora(TIPO_TEST);
 		borrarRelacionadoConContrato();
 	}
 	
 	@Test
-	public void testInsertarContratoTipoHora() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertarContratoTipoHora() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConConsultasContrato();
 		tipoHoraDao.agregar(TIPO_TEST);
 		contratoTipoHoraDao.insertarContratoTipoHora(CONTRATO_TEST, tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(), COMPUTOS);
@@ -73,7 +73,7 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarContratoTipoHora() throws FileNotFoundException, IOException, SQLException{
+	public void testEditarContratoTipoHora() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConConsultasContrato();
 		tipoHoraDao.agregar(TIPO_TEST);
 		contratoTipoHoraDao.insertarContratoTipoHora(CONTRATO_TEST, tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(), COMPUTOS);

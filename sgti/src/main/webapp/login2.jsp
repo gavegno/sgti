@@ -1,11 +1,12 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login SGTI</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/styles.css" />" rel="stylesheet">
     
 
 
@@ -23,18 +24,18 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">Iniciar sesión</h1>
+            <h1 class="text-center login-title">Iniciar sesi�n</h1>
             <div class="account-wall">
-                <form class="form-signin">
+                <form class="form-signin" action="http://localhost:9080/CounterWebApp/login2/loguearse" method="POST">
                     
                     <div class="form-group">
                         <label for="inputUsuario" class="control-label">Usuario:</label>
-                        <input type="usuario" class="form-control" id="inputUsuario" placeholder="Usuario" required autofocus>        
+                        <input type="usuario" name="idUsuario" class="form-control" id="inputUsuario" placeholder="Usuario" required autofocus>        
                     </div>
 
                     <div class="form-group">
                         <label for="inputPassword" class="control-label">Contraseña:</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña" required>        
+                        <input type="password" name="passwordUsuario" class="form-control" id="inputPassword" placeholder="Contraseña" required>        
                     </div>
                 
                 

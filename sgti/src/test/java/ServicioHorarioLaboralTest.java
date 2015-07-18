@@ -41,7 +41,7 @@ public class ServicioHorarioLaboralTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Dia diaLunes = new Dia(LUNES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
 		Dia diaMartes = new Dia(MARTES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
 		servicioHorarioLaboral.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, diaLunes);
@@ -49,7 +49,7 @@ public class ServicioHorarioLaboralTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testInsertarHorarioLaboral() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertarHorarioLaboral() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
 		Dia diaLunes = new Dia(LUNES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
 		Dia diaMartes = new Dia(MARTES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
@@ -63,7 +63,7 @@ public class ServicioHorarioLaboralTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testInsertarDiaAHorarioLaboral() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertarDiaAHorarioLaboral() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
 		Dia diaLunes = new Dia(LUNES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
 		Dia diaMartes = new Dia(MARTES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
@@ -79,7 +79,7 @@ public class ServicioHorarioLaboralTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarDia() throws FileNotFoundException, IOException, SQLException{
+	public void testEditarDia() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
 		Dia diaLunes = new Dia(LUNES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
 		List<Dia> dias = new ArrayList<Dia>();

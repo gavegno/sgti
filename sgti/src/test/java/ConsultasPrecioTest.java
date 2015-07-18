@@ -37,13 +37,13 @@ public class ConsultasPrecioTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasPrecio.borrarPrecios();
 		borrarRelacionadoConContrato();
 	}
 
 	@Test
-	public void testInsertar() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConConsultasContrato();
 		Calendar fechaHasta = Calendar.getInstance();
 		fechaHasta.setTime(new Date());

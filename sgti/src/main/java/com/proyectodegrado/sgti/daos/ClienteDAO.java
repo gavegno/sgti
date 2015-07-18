@@ -14,11 +14,11 @@ public class ClienteDAO {
 	
 	private ConsultasCliente consultasCliente;
 	
-	public void agregar(String nombre, String direccion, String telefono, boolean activo) throws FileNotFoundException, IOException, SQLException{
+	public void agregar(String nombre, String direccion, String telefono, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasCliente.insertarCliente(nombre, direccion, telefono, activo);
 	}
 	
-	public Cliente seleccionarPorNombre(String nombre) throws FileNotFoundException, IOException, SQLException{
+	public Cliente seleccionarPorNombre(String nombre) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Cliente cliente = new Cliente();
 		ResultSet resultSet = consultasCliente.verClientePorNombre(nombre);
 		if(resultSet.next()){
@@ -31,7 +31,7 @@ public class ClienteDAO {
 		return cliente;
 	}
 	
-	public Cliente seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException{
+	public Cliente seleccionarPorId(int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Cliente cliente = new Cliente();
 		ResultSet resultSet = consultasCliente.verClientePorId(id);
 		if(resultSet.next()){
@@ -44,7 +44,7 @@ public class ClienteDAO {
 		return cliente;
 	}
 	
-	public List<Cliente> seleccionarClientes() throws FileNotFoundException, IOException, SQLException{
+	public List<Cliente> seleccionarClientes() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		ResultSet resultSet = consultasCliente.verClientes();
 		while(resultSet.next()){
@@ -59,11 +59,11 @@ public class ClienteDAO {
 		return clientes;
 	}
 	
-	public void cambiarActivo(int id, boolean activo) throws FileNotFoundException, IOException, SQLException{
+	public void cambiarActivo(int id, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasCliente.cambiarActivo(id, activo);
 	}
 	
-	public void editarUsuario(int id, String nombre, String direccion, String telefono) throws FileNotFoundException, IOException, SQLException{
+	public void editarUsuario(int id, String nombre, String direccion, String telefono) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasCliente.editarCliente(id, nombre, direccion, telefono);
 	}
 

@@ -20,7 +20,7 @@ public class ServicioContratoTipoHoraImpl implements ServicioContratoTipoHora {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContratoTipoHora#insertar(java.lang.String, com.proyectodegrado.sgti.modelo.TipoHoraComputo)
 	 */
 	@Override
-	public void insertar(String idContrato, TipoHoraComputo tipoHoraComputo) throws FileNotFoundException, IOException, SQLException{
+	public void insertar(String idContrato, TipoHoraComputo tipoHoraComputo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		contratoTipoHoraDao.insertarContratoTipoHora(idContrato, tipoHoraComputo.getTipoHora().getId(), tipoHoraComputo.getComputo());
 	}
 	
@@ -28,7 +28,7 @@ public class ServicioContratoTipoHoraImpl implements ServicioContratoTipoHora {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContratoTipoHora#verContratoTipoHora(java.lang.String)
 	 */
 	@Override
-	public List<TipoHoraComputo> verContratoTipoHora (String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public List<TipoHoraComputo> verContratoTipoHora (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return contratoTipoHoraDao.verContratoTipoHora(idContrato);
 	}
 	
@@ -36,7 +36,7 @@ public class ServicioContratoTipoHoraImpl implements ServicioContratoTipoHora {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContratoTipoHora#editarContratoTipoHora(java.lang.String, com.proyectodegrado.sgti.modelo.TipoHoraComputo)
 	 */
 	@Override
-	public void editarContratoTipoHora (String idContrato, TipoHoraComputo tipoHoraComputo) throws FileNotFoundException, IOException, SQLException{
+	public void editarContratoTipoHora (String idContrato, TipoHoraComputo tipoHoraComputo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		contratoTipoHoraDao.editarContratoTipoHora(idContrato, tipoHoraComputo.getTipoHora().getId(), tipoHoraComputo.getComputo());
 	}
 

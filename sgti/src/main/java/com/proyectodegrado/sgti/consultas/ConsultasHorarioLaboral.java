@@ -13,7 +13,7 @@ public class ConsultasHorarioLaboral {
 	
 	private Conexion conexionBD;
 	
-	public void insertarDiaAHorarioLaboral (String idHorarioLaboral, String nombreDia, String horaDesde, String horaHasta) throws FileNotFoundException, IOException, SQLException{
+	public void insertarDiaAHorarioLaboral (String idHorarioLaboral, String nombreDia, String horaDesde, String horaHasta) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO horario(id,nombredia,horadesde,horahasta) VALUES (?,?,?,?)");
 		preparedStatement.setString(1, idHorarioLaboral);
@@ -24,7 +24,7 @@ public class ConsultasHorarioLaboral {
 		conexionBD.cerrar(con);
 	}
 	
-	public ResultSet verHorarioLaboral (String idHorarioLaboral) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verHorarioLaboral (String idHorarioLaboral) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM horario AS h WHERE h.id=?");
 		preparedStatement.setString(1, idHorarioLaboral);
@@ -33,7 +33,7 @@ public class ConsultasHorarioLaboral {
 		return resultSet;
 	}
 	
-	public void editarDiaDeHorarioLaboral(String idHorarioLaboral, String nombreDia, String horaDesde, String horaHasta) throws FileNotFoundException, IOException, SQLException{
+	public void editarDiaDeHorarioLaboral(String idHorarioLaboral, String nombreDia, String horaDesde, String horaHasta) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE horario AS h SET horadesde=?, horahasta=? WHERE h.id=? AND h.nombredia=?");
 		preparedStatement.setString(1,horaDesde);
@@ -44,7 +44,7 @@ public class ConsultasHorarioLaboral {
 		conexionBD.cerrar(connection);
 	}
 	
-	public void borrarDiaDeHorarioLaboral (String idHorarioLaboral, String nombreDia) throws FileNotFoundException, IOException, SQLException{
+	public void borrarDiaDeHorarioLaboral (String idHorarioLaboral, String nombreDia) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM horario AS h WHERE h.id =? AND h.nombredia=?");
 		preparedStatement.setString(1, idHorarioLaboral);

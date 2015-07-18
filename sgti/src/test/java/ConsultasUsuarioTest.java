@@ -77,7 +77,7 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		borrarTiposHoraUsuario();
 		consultasUsuario.borrarUsuario(ID_USUARIO11);
 		consultasUsuario.borrarUsuario(ID_USUARIO10);
@@ -86,7 +86,7 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 		
 	}
 
-	private void borrarTiposHoraUsuario() throws FileNotFoundException,	IOException, SQLException {
+	private void borrarTiposHoraUsuario() throws FileNotFoundException,	IOException, SQLException, ClassNotFoundException {
 		ResultSet tipoHoraTest = consultasTipoHora.verTipoHora(TIPO_TEST);
 		ResultSet tipoHoraTest2 = consultasTipoHora.verTipoHora(TIPO_TEST2);
 		if(tipoHoraTest.next()){
@@ -98,7 +98,7 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testInsertarSeleccionarUsuario() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertarSeleccionarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
 			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getApellido().equalsIgnoreCase(TEST_APELLIDO));
@@ -111,7 +111,7 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testSeleccionarUsuarioPorIdContrasena() throws FileNotFoundException, IOException, SQLException{
+	public void testSeleccionarUsuarioPorIdContrasena() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
 			assertTrue(usuarioDAO.seleccionarUsuarioPorIdContrasena(ID_USUARIO10,TEST_CONTRASENA).getApellido().equalsIgnoreCase(TEST_APELLIDO));
@@ -124,7 +124,7 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testInsertarSeleccionarTiposHoraAUsuario() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertarSeleccionarTiposHoraAUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
 			assertTrue(usuarioDAO.seleccionarUsuarioPorId(ID_USUARIO10).getApellido().equalsIgnoreCase(TEST_APELLIDO));
@@ -140,7 +140,7 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testInsertarSeleccionarUsuarios() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertarSeleccionarUsuarios() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
 			usuarioDAO.agregar(ID_USUARIO11,TEST_NOMBRE2,TEST_APELLIDO2,TEST_CONTRASENA2,TEST_EMAIL2, TEST_TELEFONO2, "TECNICO",true);
@@ -151,7 +151,7 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarUsuario() throws FileNotFoundException, IOException, SQLException{
+	public void testEditarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
 			usuarioDAO.editarUsuario(ID_USUARIO10,TEST_NOMBRE2,TEST_APELLIDO2,TEST_EMAIL2, TEST_TELEFONO2);
@@ -165,7 +165,7 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException{
+	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			usuarioDAO.agregar(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, TIPO_SOCIO,true);
 			usuarioDAO.cambiarContraseña(ID_USUARIO10, "contrasenaModificada");

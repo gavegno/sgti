@@ -38,14 +38,14 @@ public class ConsultasTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasTipoHora.borrarTipoHora(TIPO_TEST);
 		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
 	}
 	
 	
 	@Test
-	public void testInsertarSeleccionarTipoHora() throws SQLException, FileNotFoundException, IOException{
+	public void testInsertarSeleccionarTipoHora() throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			tipoHoraDao = (TipoHoraDAO) context.getBean("tipoHoraDao");
 			consultasTipoHora.insertarTipoHora(TIPO_TEST);
@@ -54,7 +54,7 @@ public class ConsultasTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testSeleccionarTiposHora() throws SQLException, FileNotFoundException, IOException{
+	public void testSeleccionarTiposHora() throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			consultasTipoHora.insertarTipoHora(TIPO_TEST);
 			consultasTipoHora.insertarTipoHora(TIPO_TEST2);

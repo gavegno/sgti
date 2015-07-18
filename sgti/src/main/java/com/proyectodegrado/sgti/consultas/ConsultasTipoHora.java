@@ -14,7 +14,7 @@ public class ConsultasTipoHora {
 	
 	private Conexion conexionBD;
 	
-	public void insertarTipoHora (String tipo) throws FileNotFoundException, IOException, SQLException{
+	public void insertarTipoHora (String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO tipohora(tipo) VALUES (?)");
 		preparedStatement.setString(1, tipo);
@@ -22,7 +22,7 @@ public class ConsultasTipoHora {
 		conexionBD.cerrar(con);
 	}
 	
-	public ResultSet verTipoHora (String tipo) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verTipoHora (String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM tipohora AS t WHERE t.tipo=?");
 		preparedStatement.setString(1, tipo);
@@ -31,7 +31,7 @@ public class ConsultasTipoHora {
 		return resultSet;
 	}
 	
-	public ResultSet verTipoHoraPorId (int id) throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verTipoHoraPorId (int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM tipohora AS t WHERE t.id=?");
 		preparedStatement.setInt(1, id);
@@ -40,7 +40,7 @@ public class ConsultasTipoHora {
 		return resultSet;
 	}
 	
-	public ResultSet verTiposHora () throws FileNotFoundException, IOException, SQLException{
+	public ResultSet verTiposHora () throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		Statement stmt = con.createStatement();
 		ResultSet resultSet = stmt.executeQuery("SELECT * FROM tipohora");
@@ -48,7 +48,7 @@ public class ConsultasTipoHora {
 		return resultSet;
 	}
 	
-	public void borrarTipoHora (String tipo) throws FileNotFoundException, IOException, SQLException{
+	public void borrarTipoHora (String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM tipohora AS t WHERE t.tipo =?");
 		preparedStatement.setString(1, tipo);

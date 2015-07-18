@@ -17,7 +17,7 @@ public class ServicioPrecioImpl implements ServicioPrecio {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioPrecio#insertar(com.proyectodegrado.sgti.modelo.Precio, java.lang.String)
 	 */
 	@Override
-	public void insertar(Precio precio, String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public void insertar(Precio precio, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(esPosibleInsertar(precio,idContrato)){
 			precioDao.insertarPrecio(precio.getPrecio(), precio.getFechaDesde(), precio.getFechaHasta(), idContrato);
 		}else{
@@ -29,7 +29,7 @@ public class ServicioPrecioImpl implements ServicioPrecio {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioPrecio#verPrecios(java.lang.String)
 	 */
 	@Override
-	public List<Precio> seleccionarPrecios (String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public List<Precio> seleccionarPrecios (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return precioDao.verPrecios(idContrato);
 	}
 	
@@ -37,11 +37,11 @@ public class ServicioPrecioImpl implements ServicioPrecio {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioPrecio#verPrecioActual(java.lang.String)
 	 */
 	@Override
-	public Precio seleccionarPrecioActual (String idContrato) throws FileNotFoundException, IOException, SQLException{
+	public Precio seleccionarPrecioActual (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return precioDao.verPrecioActual(idContrato);
 	}
 	
-	private boolean esPosibleInsertar(Precio precio, String idContrato) throws FileNotFoundException, IOException, SQLException{
+	private boolean esPosibleInsertar(Precio precio, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return precioDao.verPreciosPorFecha(idContrato, precio.getFechaDesde()).size() == 0 && precioDao.verPreciosPorFecha(idContrato, precio.getFechaHasta()).size() == 0;
 	}
 

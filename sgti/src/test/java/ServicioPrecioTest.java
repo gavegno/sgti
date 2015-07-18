@@ -48,13 +48,13 @@ public class ServicioPrecioTest extends ConfigurarTest{
 	}
 	
 	@After
-	public void borrarDatos() throws FileNotFoundException, IOException, SQLException{
+	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasPrecio.borrarPrecios();
 		borrarRelacionadoConContrato();
 	}
 	
 	@Test
-	public void testInsertar() throws FileNotFoundException, IOException, SQLException{
+	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConServicioContrato();
 		SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
 		Calendar fechaHasta = Calendar.getInstance();
@@ -69,7 +69,7 @@ public class ServicioPrecioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testPrecioVigente() throws FileNotFoundException, IOException, SQLException{
+	public void testPrecioVigente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConServicioContrato();
 		SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
 		Calendar fechaDesdeVieja = Calendar.getInstance();
@@ -90,7 +90,7 @@ public class ServicioPrecioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testPreciosSuperpuestos() throws FileNotFoundException, IOException, SQLException{
+	public void testPreciosSuperpuestos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		agregarRelacionadoConServicioContrato();
 		Calendar fechaDesdeVieja = Calendar.getInstance();
 		Calendar fechaHastaVieja = Calendar.getInstance();

@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,8 +42,6 @@ public class ConfigurarTest {
 	private static final int COMPUTOS = 3; 
 
 	private static final String TIPO_TEST = "TIPO_TEST";
-	
-	private static final String FORMATO_FECHA = "yyyy-MM-dd";
 	
 	private static final String TIEMPO_RESPUESTA_TEST = "TIEMPO_RESPUESTA_TEST";
 
@@ -121,7 +118,7 @@ public class ConfigurarTest {
 		
 	}
 	
-	protected void borrarRelacionadoConContrato() throws FileNotFoundException, IOException, SQLException {
+	protected void borrarRelacionadoConContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
 		consultasConfiguracion.borrarConfiguraciones();
 		horarioLaboralDao.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, "LUNES");
 		horarioLaboralDao.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, "MARTES");
@@ -170,13 +167,13 @@ public class ConfigurarTest {
 		horarioLaboralDao = (HorarioLaboralDAO) context.getBean("horarioLaboralDao");
 	}
 	
-	protected void agregarRelacionadoConConsultasContrato() throws FileNotFoundException, IOException, SQLException {
+	protected void agregarRelacionadoConConsultasContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
 		clienteDao.agregar(CLIENTE_TEST, DIRECCION_TEST, TELEFONO, true);
 		usuarioDao.agregar(USUARIO_TEST, NOMBRE_TEST, APELLIDO_TEST, CONTASEÑA_TEST, EMAIL_TEST, TELEFONO, "", true);
 		contratoDao.insertarContrato(CONTRATO_TEST, clienteDao.seleccionarPorNombre(CLIENTE_TEST).getId(), USUARIO_TEST);
 	}
 	
-	protected void agregarRelacionadoConServicioContrato() throws FileNotFoundException, IOException, SQLException {
+	protected void agregarRelacionadoConServicioContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
 		Cliente cliente = crearCliente();
 		servicioCliente.agregar(cliente);
 		cliente.setId(servicioCliente.verPorNombre(cliente).getId());
@@ -191,7 +188,7 @@ public class ConfigurarTest {
 		
 	}
 	
-	protected void agregarContrato() throws FileNotFoundException, IOException, SQLException {
+	protected void agregarContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
 		Cliente cliente = crearCliente();
 		Usuario contraparte = crearUsuarioContraparte();
 		List<Configuracion> configuraciones = new ArrayList<Configuracion>();
@@ -260,7 +257,7 @@ public class ConfigurarTest {
 		return new Precio(5.5, new Date(), fechaHasta.getTime());
 	}
 	
-	private TipoHoraComputo crearTipoHoraComputo() throws FileNotFoundException, IOException, SQLException{
+	private TipoHoraComputo crearTipoHoraComputo() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		TipoHora tipoHora = new TipoHora();
 		tipoHora.setTipo(TIPO_TEST);
 		servicioTipoHora.agregar(tipoHora);
