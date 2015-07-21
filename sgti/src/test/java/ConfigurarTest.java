@@ -39,7 +39,7 @@ import com.proyectodegrado.sgti.servicios.impl.ServicioUsuarioContraparteImpl;
 
 public class ConfigurarTest {   
 	
-	private static final int COMPUTOS = 3; 
+	private static final int COMPUTOS = 3;  
 
 	private static final String TIPO_TEST = "TIPO_TEST";
 	

@@ -30,6 +30,7 @@
                     
                     <div class="form-group">
                         <label for="inputDescripcion" class="control-label">Descripción:</label>
+                        <label for="inputDescripcion" class="control-label">Tipo:</label>
                         <input type="tipoHora" class="form-control" name="tipoHora" id="inputTipoHora" placeholder="tipo de hora" required autofocus>        
                     </div>
 

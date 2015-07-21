@@ -25,12 +25,11 @@ public class TipoHoraController {
 			fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
 			fachadaTipoHora.insertarTipoHora(tipoHora);
 			context.close();
-			
-		} catch (IOException | SQLException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			return new ModelAndView("redirect:/tiposDeHora.jsp?status=success");
+		}catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			return new ModelAndView("redirect:/tiposDeHora.jsp?status=fail");
 		}
-		return new ModelAndView("redirect:/tiposDeHora.jsp");
 	}
 
 	public FachadaTipoHora getFachadaTipoHora() {
