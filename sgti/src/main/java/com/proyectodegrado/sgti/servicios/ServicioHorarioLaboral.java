@@ -1,8 +1,9 @@
-package com.proyectodegrado.sgti.servicios.impl;
+package com.proyectodegrado.sgti.servicios;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.proyectodegrado.sgti.modelo.Dia;
 import com.proyectodegrado.sgti.modelo.HorarioLaboral;
@@ -24,5 +25,9 @@ public interface ServicioHorarioLaboral {
 
 	public abstract void borrarDiaDeHorarioLaboral(String idHorarioLaboral,
 			Dia dia) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
+
+	public List<HorarioLaboral> seleccionarHorariosLaborales()
+			throws FileNotFoundException, IOException, SQLException,
+			ClassNotFoundException;
 
 }

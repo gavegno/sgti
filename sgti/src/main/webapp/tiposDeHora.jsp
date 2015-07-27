@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/styles.css" />">
-    
-
-
+     <%@ include file="header.jsp" %>
 </head>
 <body>
     <header>
@@ -33,16 +31,11 @@
                         <label for="inputDescripcion" class="control-label">Tipo:</label>
                         <input type="tipoHora" class="form-control" name="tipoHora" id="inputTipoHora" placeholder="tipo de hora" required autofocus>        
                     </div>
-
-                
-                    
                 
                 <div class="form-group">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
                     <button class="btn btn-default" type="button"> Cancelar </button>
                 </div>       
-
-
 
                 </form>
             </div>

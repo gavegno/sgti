@@ -73,6 +73,23 @@ public class UsuarioDAO {
 		return usuario;
 	}
 	
+	public List<Usuario> seleccionarUsuariosPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		ResultSet resultSet = consultasUsuario.verUsuariosPorTipo(tipo);
+		while(resultSet.next()){
+			Usuario usuario= new Usuario();
+			usuario.setId(resultSet.getString("id"));
+			usuario.setNombre(resultSet.getString("nombre"));
+			usuario.setApellido(resultSet.getString("apellido"));
+			usuario.setEmail(resultSet.getString("email"));
+			usuario.setTelefono(resultSet.getString("telefono"));
+			usuario.setTipo(resultSet.getString("tipo"));
+			usuario.setActivo(resultSet.getBoolean("activo"));
+			usuarios.add(usuario);
+		}
+		return usuarios;
+	}
+	
 	public List<Usuario> seleccionarUsuarios() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		ResultSet resultSet = consultasUsuario.verUsuarios();

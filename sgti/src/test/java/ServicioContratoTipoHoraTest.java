@@ -22,25 +22,12 @@ import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
 public class ServicioContratoTipoHoraTest extends ConfigurarTest{
 	
 	private static final int COMPUTOS_EDITADO = 5;
-
-	private static final int COMPUTOS = 3;
-
 	private static final int TAMANO_LISTA = 1;
-	
 	private static final int TAMANO_LISTA2 = 2;
-
-	private static final String CONTRATO_TEST = "CONTRATO_TEST";
-
-	private static final String TIPO_TEST = "TIPO_TEST";
-	
-	private static final String TIPO_TEST2 = "TIPO_TEST2";
 	
 	private static ServicioContratoTipoHora servicioContratoTipoHora;
-	
 	private static ConsultasContratoTipoHora consultasContratoTipoHora;
-	
 	private static ServicioTipoHora servicioTipoHora;
-	
 	private static ConsultasTipoHora consultasTipoHora;
 	
 	@BeforeClass
@@ -60,77 +47,85 @@ public class ServicioContratoTipoHoraTest extends ConfigurarTest{
 	
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		consultasContratoTipoHora.borrarContratoTiposHora();
-		consultasTipoHora.borrarTipoHora(TIPO_TEST);
-		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
-		borrarRelacionadoConContrato();
+		if(isHabilitarTest()){
+			consultasContratoTipoHora.borrarContratoTiposHora();
+			consultasTipoHora.borrarTipoHora(TIPO_TEST);
+			consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+			borrarRelacionadoConContrato();
+		}
 	}
 	
 	@Test
 	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		agregarRelacionadoConServicioContrato();
-		TipoHora tipoHora = new TipoHora();
-		tipoHora.setTipo(TIPO_TEST);
-		servicioTipoHora.agregar(tipoHora);
-		tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
-		TipoHoraComputo tipoHoraComputo = new TipoHoraComputo();
-		tipoHoraComputo.setTipoHora(tipoHora);
-		tipoHoraComputo.setComputo(COMPUTOS);
-		servicioContratoTipoHora.insertar(CONTRATO_TEST, tipoHoraComputo);
-		
-		assertEquals(TAMANO_LISTA, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).size());
-		assertEquals(TIPO_TEST, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
-		assertEquals(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId(), servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
-		assertEquals(COMPUTOS, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+		if(isHabilitarTest()){
+			agregarRelacionadoConServicioContrato();
+			TipoHora tipoHora = new TipoHora();
+			tipoHora.setTipo(TIPO_TEST);
+			servicioTipoHora.agregar(tipoHora);
+			tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
+			TipoHoraComputo tipoHoraComputo = new TipoHoraComputo();
+			tipoHoraComputo.setTipoHora(tipoHora);
+			tipoHoraComputo.setComputo(COMPUTOS);
+			servicioContratoTipoHora.insertar(CONTRATO_TEST, tipoHoraComputo);
+			
+			assertEquals(TAMANO_LISTA, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).size());
+			assertEquals(TIPO_TEST, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
+			assertEquals(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId(), servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
+			assertEquals(COMPUTOS, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+		}
 	}
 	
 	@Test
 	public void testInsertarDosTipos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		agregarRelacionadoConServicioContrato();
-		TipoHora tipoHora = new TipoHora();
-		tipoHora.setTipo(TIPO_TEST);
-		servicioTipoHora.agregar(tipoHora);
-		tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
-		TipoHoraComputo tipoHoraComputo = new TipoHoraComputo();
-		tipoHoraComputo.setTipoHora(tipoHora);
-		tipoHoraComputo.setComputo(COMPUTOS);
-		servicioContratoTipoHora.insertar(CONTRATO_TEST, tipoHoraComputo);
-		tipoHora.setTipo(TIPO_TEST2);
-		servicioTipoHora.agregar(tipoHora);
-		tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST2).getId());
-		servicioContratoTipoHora.insertar(CONTRATO_TEST, tipoHoraComputo);
-		
-		assertEquals(TAMANO_LISTA2, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).size());
-		assertEquals(TIPO_TEST, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
-		assertEquals(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId(), servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
-		assertEquals(COMPUTOS, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+		if(isHabilitarTest()){
+			agregarRelacionadoConServicioContrato();
+			TipoHora tipoHora = new TipoHora();
+			tipoHora.setTipo(TIPO_TEST);
+			servicioTipoHora.agregar(tipoHora);
+			tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
+			TipoHoraComputo tipoHoraComputo = new TipoHoraComputo();
+			tipoHoraComputo.setTipoHora(tipoHora);
+			tipoHoraComputo.setComputo(COMPUTOS);
+			servicioContratoTipoHora.insertar(CONTRATO_TEST, tipoHoraComputo);
+			tipoHora.setTipo(TIPO_TEST2);
+			servicioTipoHora.agregar(tipoHora);
+			tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST2).getId());
+			servicioContratoTipoHora.insertar(CONTRATO_TEST, tipoHoraComputo);
+			
+			assertEquals(TAMANO_LISTA2, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).size());
+			assertEquals(TIPO_TEST, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
+			assertEquals(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId(), servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
+			assertEquals(COMPUTOS, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+		}
 	}
 	
 	@Test
 	public void testEditar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		agregarRelacionadoConServicioContrato();
-		TipoHora tipoHora = new TipoHora();
-		tipoHora.setTipo(TIPO_TEST);
-		servicioTipoHora.agregar(tipoHora);
-		tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
-		tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
-		TipoHoraComputo tipoHoraComputo = new TipoHoraComputo();
-		tipoHoraComputo.setTipoHora(tipoHora);
-		tipoHoraComputo.setComputo(COMPUTOS);
-		servicioContratoTipoHora.insertar(CONTRATO_TEST, tipoHoraComputo);
-		
-		assertEquals(TAMANO_LISTA, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).size());
-		assertEquals(TIPO_TEST, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
-		assertEquals(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId(), servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
-		assertEquals(COMPUTOS, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
-		
-		tipoHoraComputo.setComputo(COMPUTOS_EDITADO);
-		servicioContratoTipoHora.editarContratoTipoHora(CONTRATO_TEST, tipoHoraComputo);
-		
-		assertEquals(TAMANO_LISTA, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).size());
-		assertEquals(TIPO_TEST, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
-		assertEquals(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId(), servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
-		assertEquals(COMPUTOS_EDITADO, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+		if(isHabilitarTest()){
+			agregarRelacionadoConServicioContrato();
+			TipoHora tipoHora = new TipoHora();
+			tipoHora.setTipo(TIPO_TEST);
+			servicioTipoHora.agregar(tipoHora);
+			tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
+			tipoHora.setId(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId());
+			TipoHoraComputo tipoHoraComputo = new TipoHoraComputo();
+			tipoHoraComputo.setTipoHora(tipoHora);
+			tipoHoraComputo.setComputo(COMPUTOS);
+			servicioContratoTipoHora.insertar(CONTRATO_TEST, tipoHoraComputo);
+			
+			assertEquals(TAMANO_LISTA, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).size());
+			assertEquals(TIPO_TEST, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
+			assertEquals(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId(), servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
+			assertEquals(COMPUTOS, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+			
+			tipoHoraComputo.setComputo(COMPUTOS_EDITADO);
+			servicioContratoTipoHora.editarContratoTipoHora(CONTRATO_TEST, tipoHoraComputo);
+			
+			assertEquals(TAMANO_LISTA, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).size());
+			assertEquals(TIPO_TEST, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
+			assertEquals(servicioTipoHora.seleccionarPorTipo(TIPO_TEST).getId(), servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
+			assertEquals(COMPUTOS_EDITADO, servicioContratoTipoHora.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+		}
 		
 	}
 

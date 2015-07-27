@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.proyectodegrado.sgti.conexionbd.Conexion;
 
@@ -29,6 +30,14 @@ public class ConsultasHorarioLaboral {
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM horario AS h WHERE h.id=?");
 		preparedStatement.setString(1, idHorarioLaboral);
 		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
+	public ResultSet verHorariosLaborales () throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		Statement statement = con.createStatement();
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM horario");
 		conexionBD.cerrar(con);
 		return resultSet;
 	}

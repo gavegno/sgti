@@ -164,4 +164,23 @@
 			<property name="servicioTipoHora" ref="servicioTipoHora"/>
 		</bean>
 		
+		<bean id="fachadaContrato" class="com.proyectodegrado.sgti.fachada.FachadaContrato">
+			<property name="servicioUsuario" ref="servicioUsuario"/>
+			<property name="servicioContrato" ref="servicioContrato"/>
+			<property name="servicioCliente" ref="servicioCliente"/>
+		</bean>
+		
+		<bean id="fachadaPrecio" class="com.proyectodegrado.sgti.fachada.FachadaPrecio">
+			<property name="servicioPrecio" ref="servicioPrecio"/>
+		</bean>
+		
+		<bean id="fachadaConfiguracion" class="com.proyectodegrado.sgti.fachada.FachadaConfiguracion">
+			<property name="servicioConfiguracion" ref="servicioConfiguracion"/>
+			<property name="servicioHorarioLaboral" ref="servicioHorarioLaboral"/>
+		</bean>
+		
+		<bean id="fachadaHorarioLaboral" class="com.proyectodegrado.sgti.fachada.FachadaHorarioLaboral">
+			<property name="servicioHorarioLaboral" ref="servicioHorarioLaboral"/>
+		</bean>
+		
 </beans>

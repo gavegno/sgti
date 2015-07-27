@@ -21,23 +21,12 @@ import com.proyectodegrado.sgti.daos.ConfiguracionDAO;
 public class ConsultasConfiguracionTest extends ConfigurarTest{
 	
 	private static final String TIEMPO_RESPUESTA_TEST2 = "TIEMPO_RESPUESTA_TEST2";
-
-	private static final String TIPO_TEST2 = "TIPO_TEST2";
-
 	private static final String RENOVACION_TEST2 = "RENOVACION_TEST2";
-
 	private static final String FORMATO_FECHA = "yyyy-MM-dd";
-
 	private static final String HORARIO_TEST = "HORARIO_TEST";
-
 	private static final String TIEMPO_ESPUESTA_TEST = "TIEMPO_ESPUESTA_TEST";
 
-	private static final String TIPO_TEST = "TIPO_TEST";
-
-	private static final String RENOVACION_TEST = "RENOVACION_TEST";
-
 	private static ConsultasConfiguracion consultasConfiguracion;
-	
 	private static ConfiguracionDAO configuracionDAO;
 	
 	@BeforeClass
@@ -56,94 +45,104 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		consultasConfiguracion.borrarConfiguraciones();
-		borrarRelacionadoConContrato();
+		if(isHabilitarTest()){
+			consultasConfiguracion.borrarConfiguraciones();
+			borrarRelacionadoConContrato();
+		}
 	}
 	
 	@Test
 	public void testInsertarConfiguracion() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		agregarRelacionadoConConsultasContrato();
-		Date fechaInicio = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
-		Calendar fechaFin = Calendar.getInstance();
-		fechaFin.set(Calendar.YEAR, 2017);
-		fechaFin.set(Calendar.MONTH, 12);
-		fechaFin.set(Calendar.DAY_OF_MONTH, 31);
-		configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
-				TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
-		
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).size() == 1);
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).isAcumulacion());
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getRenovacion().equalsIgnoreCase(RENOVACION_TEST));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTiempoRespuesta().equalsIgnoreCase(TIEMPO_ESPUESTA_TEST));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaInicio().toString().equalsIgnoreCase(dateFormat.format(fechaInicio)));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaFin().toString().equalsIgnoreCase(dateFormat.format(fechaFin.getTime())));
+		if(isHabilitarTest()){
+			agregarRelacionadoConConsultasContrato();
+			Date fechaInicio = new Date();
+			SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
+			Calendar fechaFin = Calendar.getInstance();
+			fechaFin.set(Calendar.YEAR, 2017);
+			fechaFin.set(Calendar.MONTH, 12);
+			fechaFin.set(Calendar.DAY_OF_MONTH, 31);
+			configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
+					TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
+			
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).size() == 1);
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).isAcumulacion());
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getRenovacion().equalsIgnoreCase(RENOVACION_TEST));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTiempoRespuesta().equalsIgnoreCase(TIEMPO_ESPUESTA_TEST));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaInicio().toString().equalsIgnoreCase(dateFormat.format(fechaInicio)));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaFin().toString().equalsIgnoreCase(dateFormat.format(fechaFin.getTime())));
+		}
 	}
 	
 	@Test
 	public void testVerConfiguracionesEntreFechas() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		agregarRelacionadoConConsultasContrato();
-		Date fechaInicio = new Date();
-		Calendar fechaFin = Calendar.getInstance();
-		fechaFin.set(Calendar.YEAR, 2017);
-		fechaFin.set(Calendar.MONTH, 12);
-		fechaFin.set(Calendar.DAY_OF_MONTH, 31);
-		Calendar fechaFinHasta = Calendar.getInstance();
-		fechaFinHasta.set(Calendar.YEAR, 2019);
-		fechaFinHasta.set(Calendar.MONTH, 12);
-		fechaFinHasta.set(Calendar.DAY_OF_MONTH, 31);
-		configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
-				TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
-		
-		assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaInicio, fechaFinHasta.getTime()).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
+		if(isHabilitarTest()){
+			agregarRelacionadoConConsultasContrato();
+			Date fechaInicio = new Date();
+			Calendar fechaFin = Calendar.getInstance();
+			fechaFin.set(Calendar.YEAR, 2017);
+			fechaFin.set(Calendar.MONTH, 12);
+			fechaFin.set(Calendar.DAY_OF_MONTH, 31);
+			Calendar fechaFinHasta = Calendar.getInstance();
+			fechaFinHasta.set(Calendar.YEAR, 2019);
+			fechaFinHasta.set(Calendar.MONTH, 12);
+			fechaFinHasta.set(Calendar.DAY_OF_MONTH, 31);
+			configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
+					TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
+			
+			assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaInicio, fechaFinHasta.getTime()).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
+		}
 	}
 	
 	@Test
 	public void testVerConfiguracionesEntreFechasCasoBorde() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		agregarRelacionadoConConsultasContrato();
-		Date fechaInicio = new Date();
-		Calendar fechaFin = Calendar.getInstance();
-		fechaFin.set(Calendar.YEAR, 2017);
-		fechaFin.set(Calendar.MONTH, 12);
-		fechaFin.set(Calendar.DAY_OF_MONTH, 31);
-		configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
-				TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
-		
-		assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaFin.getTime(), fechaFin.getTime()).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
-		assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaInicio, fechaInicio).size() == 0);
+		if(isHabilitarTest()){
+			agregarRelacionadoConConsultasContrato();
+			Date fechaInicio = new Date();
+			Calendar fechaFin = Calendar.getInstance();
+			fechaFin.set(Calendar.YEAR, 2017);
+			fechaFin.set(Calendar.MONTH, 12);
+			fechaFin.set(Calendar.DAY_OF_MONTH, 31);
+			configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
+					TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
+			
+			assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaFin.getTime(), fechaFin.getTime()).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
+			assertTrue(configuracionDAO.verConfiguracionesEntreFechasFin(fechaInicio, fechaInicio).size() == 0);
+		}
 	}
 	
 	@Test
 	public void testEditarConfiguracion() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		agregarRelacionadoConConsultasContrato();
-		Date fechaInicio = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
-		Calendar fechaFin = Calendar.getInstance();
-		fechaFin.set(Calendar.YEAR, 2017);
-		fechaFin.set(Calendar.MONTH, 12);
-		fechaFin.set(Calendar.DAY_OF_MONTH, 31);
-		configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
-				TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
+		if(isHabilitarTest()){
+			agregarRelacionadoConConsultasContrato();
+			Date fechaInicio = new Date();
+			SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
+			Calendar fechaFin = Calendar.getInstance();
+			fechaFin.set(Calendar.YEAR, 2017);
+			fechaFin.set(Calendar.MONTH, 12);
+			fechaFin.set(Calendar.DAY_OF_MONTH, 31);
+			configuracionDAO.insertarConfiguracion(fechaInicio, fechaFin.getTime(), RENOVACION_TEST, 3, TIPO_TEST, 12, 0, 7, true, 1, 1, 3, 3, 
+					TIEMPO_ESPUESTA_TEST, HORARIO_TEST, CONTRATO_TEST);
+			
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).size() == 1);
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).isAcumulacion());
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getRenovacion().equalsIgnoreCase(RENOVACION_TEST));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTiempoRespuesta().equalsIgnoreCase(TIEMPO_ESPUESTA_TEST));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaInicio().toString().equalsIgnoreCase(dateFormat.format(fechaInicio)));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaFin().toString().equalsIgnoreCase(dateFormat.format(fechaFin.getTime())));
 		
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).size() == 1);
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).isAcumulacion());
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getRenovacion().equalsIgnoreCase(RENOVACION_TEST));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTiempoRespuesta().equalsIgnoreCase(TIEMPO_ESPUESTA_TEST));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaInicio().toString().equalsIgnoreCase(dateFormat.format(fechaInicio)));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaFin().toString().equalsIgnoreCase(dateFormat.format(fechaFin.getTime())));
-	
-		
-		configuracionDAO.editarConfiguracion(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getId(), fechaInicio, fechaFin.getTime(), 
-				RENOVACION_TEST2, 1, TIPO_TEST2, 10, 2, 0, false, 2, 2, 2, 2, TIEMPO_RESPUESTA_TEST2, "HORARIO_TEST2");
-		
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).size() == 1);
-		assertTrue(!configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).isAcumulacion());
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getRenovacion().equalsIgnoreCase(RENOVACION_TEST2));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST2));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTiempoRespuesta().equalsIgnoreCase(TIEMPO_RESPUESTA_TEST2));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaInicio().toString().equalsIgnoreCase(dateFormat.format(fechaInicio)));
-		assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaFin().toString().equalsIgnoreCase(dateFormat.format(fechaFin.getTime())));
+			
+			configuracionDAO.editarConfiguracion(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getId(), fechaInicio, fechaFin.getTime(), 
+					RENOVACION_TEST2, 1, TIPO_TEST2, 10, 2, 0, false, 2, 2, 2, 2, TIEMPO_RESPUESTA_TEST2, "HORARIO_TEST2");
+			
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).size() == 1);
+			assertTrue(!configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).isAcumulacion());
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getRenovacion().equalsIgnoreCase(RENOVACION_TEST2));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTipoContrato().equalsIgnoreCase(TIPO_TEST2));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getTiempoRespuesta().equalsIgnoreCase(TIEMPO_RESPUESTA_TEST2));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaInicio().toString().equalsIgnoreCase(dateFormat.format(fechaInicio)));
+			assertTrue(configuracionDAO.verConfiguracionesPorContrato(CONTRATO_TEST).get(0).getFechaFin().toString().equalsIgnoreCase(dateFormat.format(fechaFin.getTime())));
+		}
 	}
 }

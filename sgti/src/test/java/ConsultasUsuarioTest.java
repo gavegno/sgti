@@ -23,43 +23,23 @@ import com.proyectodegrado.sgti.daos.UsuarioDAO;
 public class ConsultasUsuarioTest extends ConfigurarTest{
 	
 	private static final String TEST_TELEFONO2 = "12345679";
-
 	private static final String TEST_EMAIL2 = "test2@email.com";
-
 	private static final String TEST_CONTRASENA2 = "testContrasena2";
-
 	private static final String TEST_APELLIDO2 = "testApellido2";
-
 	private static final String TEST_NOMBRE2 = "testNombre2";
-
 	private static final String TIPO_SOCIO = "SOCIO";
-
 	private static final String TEST_TELEFONO = "12345678";
-
 	private static final String TEST_EMAIL = "test@email.com";
-
 	private static final String TEST_CONTRASENA = "testContrasena";
-
 	private static final String TEST_APELLIDO = "testApellido";
-
 	private static final String TEST_NOMBRE = "testNombre";
-
 	private static final String ID = "id";
-
 	private static final String ID_USUARIO10 = "10";
-
 	private static final String ID_USUARIO11 = "11";
 
-	private static final String TIPO_TEST2 = "TIPO_TEST2";
-
-	private static final String TIPO_TEST = "TIPO_TEST";
-
 	private static ConsultasUsuario consultasUsuario;
-	
 	private static UsuarioDAO usuarioDAO;
-	
 	private static TipoHoraDAO tipoHoraDAO;
-	
 	private static ConsultasTipoHora consultasTipoHora;
 	
 	@BeforeClass
@@ -78,11 +58,13 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 	
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		borrarTiposHoraUsuario();
-		consultasUsuario.borrarUsuario(ID_USUARIO11);
-		consultasUsuario.borrarUsuario(ID_USUARIO10);
-		consultasTipoHora.borrarTipoHora(TIPO_TEST);
-		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+		if(isHabilitarTest()){
+			borrarTiposHoraUsuario();
+			consultasUsuario.borrarUsuario(ID_USUARIO11);
+			consultasUsuario.borrarUsuario(ID_USUARIO10);
+			consultasTipoHora.borrarTipoHora(TIPO_TEST);
+			consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+		}
 		
 	}
 

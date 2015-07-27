@@ -36,6 +36,28 @@ public class HorarioLaboralDAO {
 		return horarioLaboral;
 	}
 	
+	public List<HorarioLaboral> seleccionarHorariosLaborales() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		List<HorarioLaboral> horariosLaborales = new ArrayList<HorarioLaboral>();
+		List<Dia> dias = new ArrayList<Dia>();
+		List<String> HorariosAgregados = new ArrayList<String>();
+		ResultSet resultSet = consultasHorarioLaboral.verHorariosLaborales();
+		while(resultSet.next()){
+			if(!HorariosAgregados.contains(resultSet.getString("id"))){
+				HorarioLaboral horarioLaboral= new HorarioLaboral(resultSet.getString("id"));
+				Dia dia = new Dia();
+				dia.setNombre(resultSet.getString("nombredia"));
+				dia.setHoraDesde(resultSet.getString("horadesde"));
+				dia.setHoraHasta(resultSet.getString("horahasta"));
+				dias.add(dia);
+				horarioLaboral.setDias(dias);
+				horariosLaborales.add(horarioLaboral);
+				HorariosAgregados.add(resultSet.getString("id"));
+			}
+		}
+		
+		return horariosLaborales;
+	}
+	
 	public void editarDiaDeHorarioLaboral(String idHorarioLaboral, String nombreDia, String horaDesde, String horaHasta) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 
 		consultasHorarioLaboral.editarDiaDeHorarioLaboral(idHorarioLaboral, nombreDia, horaDesde, horaHasta);

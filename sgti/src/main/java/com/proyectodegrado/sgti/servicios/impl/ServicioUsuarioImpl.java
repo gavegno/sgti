@@ -13,7 +13,7 @@ import com.proyectodegrado.sgti.servicios.ServicioUsuario;
 
 public class ServicioUsuarioImpl implements ServicioUsuario {
 	
-	private UsuarioDAO usuarioDao;
+	protected UsuarioDAO usuarioDao;
 	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#agregar(com.proyectodegrado.sgti.Data.DataUsuario)

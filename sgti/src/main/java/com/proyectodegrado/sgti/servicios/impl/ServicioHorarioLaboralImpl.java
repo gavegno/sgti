@@ -3,10 +3,12 @@ package com.proyectodegrado.sgti.servicios.impl;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.proyectodegrado.sgti.daos.HorarioLaboralDAO;
 import com.proyectodegrado.sgti.modelo.Dia;
 import com.proyectodegrado.sgti.modelo.HorarioLaboral;
+import com.proyectodegrado.sgti.servicios.ServicioHorarioLaboral;
 
 public class ServicioHorarioLaboralImpl implements ServicioHorarioLaboral {
 	
@@ -36,6 +38,14 @@ public class ServicioHorarioLaboralImpl implements ServicioHorarioLaboral {
 	@Override
 	public HorarioLaboral seleccionarHorarioLaboral(String idHorarioLaboral) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return horarioLaboralDao.seleccionarHorarioLaboral(idHorarioLaboral);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioHorarioLaboral#seleccionarHorariosLaborales()
+	 */
+	@Override
+	public List<HorarioLaboral> seleccionarHorariosLaborales() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		return horarioLaboralDao.seleccionarHorariosLaborales();
 	}
 	
 	/* (non-Javadoc)

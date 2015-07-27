@@ -2,6 +2,7 @@ package com.proyectodegrado.sgti.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,11 +22,11 @@ public class UsuarioController {
 	private FachadaUsuario fachadaUsuario;
 	
 	@RequestMapping(value = "/ingresarUsuario", method = RequestMethod.POST)
-	public ModelAndView ingresarUsuario(@RequestParam("id") final String id, @RequestParam("contrasena") final String contrasena, @RequestParam("nombre") final String nombre, @RequestParam("apellido") final String apellido, @RequestParam("email") final String email, @RequestParam("telefono") final String telefono, @RequestParam("tipo") final String tipo, @RequestParam("tipoHora") final List<String> tipoHora){
+	public ModelAndView ingresarUsuario(@RequestParam("id") final String id, @RequestParam("contrasena") final String contrasena, @RequestParam("nombre") final String nombre, @RequestParam("apellido") final String apellido, @RequestParam("email") final String email, @RequestParam("telefono") final String telefono, @RequestParam("tipo") final String tipo, @RequestParam(value = "tipoHora", required = false) final List<String> tipoHora){
 		try {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
-			fachadaUsuario.ingresarUsuario(id, nombre, apellido, contrasena, email, telefono, tipo, tipoHora);
+			fachadaUsuario.ingresarUsuario(id, nombre, apellido, contrasena, email, telefono, tipo, tipoHora == null ? new ArrayList<String>() : tipoHora);
 			context.close();
 			return new ModelAndView("redirect:/tecnicos/ingresar?status=success");
 		} catch (ClassNotFoundException | IOException | SQLException e) {
@@ -37,17 +38,15 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/ingresar", method = RequestMethod.GET)
 	public String cargarPagina(Model model){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
 		try {
-			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
-			List<String> list = fachadaUsuario.verTiposDeHora();
-			context.close();
-			model.addAttribute("tipos", list);
-			
+			model.addAttribute("tipos", fachadaUsuario.verTiposDeHora());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
 			
 		}
+		context.close();
 		return "tecnicos";
 	}
 	

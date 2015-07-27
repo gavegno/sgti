@@ -37,68 +37,46 @@ import com.proyectodegrado.sgti.servicios.ServicioContrato;
 import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
 import com.proyectodegrado.sgti.servicios.impl.ServicioUsuarioContraparteImpl;
 
-public class ConfigurarTest {   
+public class ConfigurarTest {
 	
-	private static final int COMPUTOS = 3;  
-
-	private static final String TIPO_TEST = "TIPO_TEST";
-	
-	private static final String TIEMPO_RESPUESTA_TEST = "TIEMPO_RESPUESTA_TEST";
-
-	private static final String TIPO_CONTRATO_TEST = "TIPO_CONTRATO_TEST";
-
-	private static final String RENOVACION_TEST = "RENOVACION_TEST";
-
-	private static final String HORARIO_LABORAL_TEST = "HORARIO_LABORAL_TEST";
-	   
-	private static final String EMAIL_TEST = "EMAIL_TEST";
-
-	private static final String CONTASENA_TEST = "CONTASENA_TEST";
-
-	private static final String APELLIDO_TEST = "APELLIDO_TEST";
-
-	private static final String NOMBRE_TEST = "NOMBRE_TEST";
-
-	private static final String DIRECCION_TEST = "DIRECCION_TEST";
-
+	protected static final String HORARIO_SALIDA2 = "18:30";
+	protected static final String HORARIO_ENTRADA2 = "09:30";
+	protected static final String HORARIO_SALIDA1 = "18:00";
+	protected static final String HORARIO_ENTRADA1 = "09:00";
+	protected static final String LUNES = "LUNES";
+	protected static final String MARTES = "MARTES";
+	protected static final int COMPUTOS = 3;   
+	protected static final String TIPO_TEST = "TIPO_TEST";
+	protected static final String TIEMPO_RESPUESTA_TEST = "TIEMPO_RESPUESTA_TEST";
+	protected static final String TIPO_CONTRATO_TEST = "TIPO_CONTRATO_TEST";
+	protected static final String RENOVACION_TEST = "RENOVACION_TEST";
+	protected static final String HORARIO_LABORAL_TEST = "HORARIO_LABORAL_TEST";
+	protected static final String EMAIL_TEST = "EMAIL_TEST";
+	protected static final String CONTASENA_TEST = "CONTASENA_TEST";
+	protected static final String APELLIDO_TEST = "APELLIDO_TEST";
+	protected static final String NOMBRE_TEST = "NOMBRE_TEST";
+	protected static final String DIRECCION_TEST = "DIRECCION_TEST";
 	protected static final String USUARIO_TEST = "USUARIO_TEST";
-
 	protected static final String TELEFONO = "123456789";
-
 	protected static final String CLIENTE_TEST = "CLIENTE_TEST";
-
 	protected static final String CONTRATO_TEST = "CONTRATO_TEST";
+	protected static final String TIPO_TEST2 = "TIPO_TEST2";
 	
 	protected boolean habilitarTest;
-	
 	protected static ContratoDAO contratoDao;
-	
 	protected static ClienteDAO clienteDao;
-	
 	protected static UsuarioDAO usuarioDao;
-	
 	protected static ConsultasContrato consultasContrato;
-	
 	protected static ConsultasCliente consultasCliente;
-	
 	protected static ConsultasUsuario consultasUsuario;
-	
 	protected static ServicioUsuarioContraparteImpl servicioUsuario;
-	
 	protected static ServicioCliente servicioCliente;
-	
 	protected static ServicioContrato servicioContrato;
-	
 	private static ServicioTipoHora servicioTipoHora;
-	
 	private static ConsultasConfiguracion consultasConfiguracion;
-	
 	private static ConsultasPrecio consultasPrecio;
-	
 	private static ConsultasContratoTipoHora consultasContratoTipoHora;
-	
 	private static ConsultasTipoHora consultasTipoHora;
-	
 	private static HorarioLaboralDAO horarioLaboralDao;
 	
 	protected static ClassPathXmlApplicationContext context;  
@@ -120,8 +98,8 @@ public class ConfigurarTest {
 	
 	protected void borrarRelacionadoConContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
 		consultasConfiguracion.borrarConfiguraciones();
-		horarioLaboralDao.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, "LUNES");
-		horarioLaboralDao.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, "MARTES");
+		horarioLaboralDao.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, LUNES);
+		horarioLaboralDao.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, MARTES);
 		consultasPrecio.borrarPrecios();
 		consultasContratoTipoHora.borrarContratoTiposHora();
 		consultasTipoHora.borrarTipoHora(TIPO_TEST);
@@ -219,8 +197,8 @@ public class ConfigurarTest {
 
 	private HorarioLaboral crearHorarioLaboral() {
 		HorarioLaboral horarioLaboral = new HorarioLaboral(HORARIO_LABORAL_TEST);
-		Dia diaLunes = new Dia("LUNES", "09:00", "18:00");
-		Dia diaMartes = new Dia("MARTES", "09:00", "18:00");
+		Dia diaLunes = new Dia(LUNES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
+		Dia diaMartes = new Dia(MARTES, HORARIO_ENTRADA1, HORARIO_SALIDA1);
 		List<Dia> dias = new ArrayList<Dia>();
 		dias.add(diaLunes);
 		dias.add(diaMartes);

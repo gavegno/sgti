@@ -12,6 +12,7 @@ import com.proyectodegrado.sgti.servicios.ServicioCliente;
 import com.proyectodegrado.sgti.servicios.ServicioConfiguracion;
 import com.proyectodegrado.sgti.servicios.ServicioContrato;
 import com.proyectodegrado.sgti.servicios.ServicioContratoTipoHora;
+import com.proyectodegrado.sgti.servicios.ServicioHorarioLaboral;
 import com.proyectodegrado.sgti.servicios.ServicioPrecio;
 
 public class ServicioContratoImpl implements ServicioContrato {

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <title>Login SGTI</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
@@ -30,7 +30,7 @@
                     
                     <div class="form-group">
                         <label for="inputUsuario" class="control-label">Usuario:</label>
-                        <input type="usuario" name="idUsuario" class="form-control" id="inputUsuario" placeholder="Usuario" required autofocus>        
+                        <input type="text" name="idUsuario" class="form-control" id="inputUsuario" placeholder="Usuario" required autofocus>        
                     </div>
 
                     <div class="form-group">

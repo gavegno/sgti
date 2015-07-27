@@ -76,6 +76,15 @@ public class ConsultasUsuario {
 		return resultSet;
 	}
 	
+	public ResultSet verUsuariosPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.tipo=?");
+		preparedStatement.setString(1, tipo);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
 	public void editarUsuario(String id, String nombre, String apellido, String email, String telefono) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario AS u SET nombre=?, apellido=?, email=?, telefono=? WHERE u.id=?");

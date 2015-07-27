@@ -24,11 +24,9 @@ public class FachadaCliente {
 	public Cliente verClientePorNombre(String nombre) 
 			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException	
 	{
-		Cliente clienteBuscar = new Cliente();
-		clienteBuscar.setNombre(nombre);
-		Cliente clienteResultado = servicioCliente.verPorNombre(clienteBuscar);
-		
-		return clienteResultado;
+		Cliente cliente = new Cliente();
+		cliente.setNombre(nombre);
+		return servicioCliente.verPorNombre(cliente);
 	}
 	
 	public List<Cliente> verClientes() 
@@ -46,9 +44,7 @@ public class FachadaCliente {
 		cliente.setNombre(nombre);
 		cliente.setDireccion(direccion);
 		cliente.setTelefono(telefono);
-		
 		servicioCliente.editarCliente(cliente);
-		
 	}
 	
 	

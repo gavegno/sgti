@@ -44,6 +44,14 @@ public class FachadaUsuario {
 		servicioUsuario.agregarTipoHoraUsuario(usuario);
 	}
 	
+	public Usuario seleccionarUsuario(String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioUsuario.selecionarUsuario(id);
+	}
+	
+	public List<Usuario> verUsuariosContraparte() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioUsuarioContraparte.seleccionarUsuarios();
+	}
+	
 	public List<String> verTiposDeHora() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		List<String> nombreTipos = new ArrayList<String>();
 		for(TipoHora tipoHora : servicioTipoHora.seleccionarTipos()){

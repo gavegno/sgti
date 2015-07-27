@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/styles.css" />">
+    <%@ include file="header.jsp" %>
 </head>
 <body>
     <header>
@@ -29,22 +30,22 @@
                 
                 	<div class="form-group">
                         <label for="inputId" class="control-label">Id:</label>
-                        <input type="id" class="form-control" name="id" id="inputId" placeholder="Id" required autofocus>        
+                        <input type="text" class="form-control" name="id" id="inputId" placeholder="Id" required autofocus>        
                     </div>
                     
                     <div class="form-group">
                         <label for="inputContrasena" class="control-label">Contraseña:</label>
-                        <input type="id" class="form-control" name="contrasena" id="inputContrasena" placeholder="Contraseña" required autofocus>        
+                        <input type="password" class="form-control" name="contrasena" id="inputContrasena" placeholder="Contraseña" required autofocus>        
                     </div>
                     
                     <div class="form-group">
                         <label for="inputNombre" class="control-label">Nombre:</label>
-                        <input type="nombre" class="form-control" name="nombre" id="inputNombre" placeholder="Nombre" required autofocus>        
+                        <input type="text" class="form-control" name="nombre" id="inputNombre" placeholder="Nombre" required autofocus>        
                     </div>
 
                     <div class="form-group">
                         <label for="inputApellido" class="control-label">Apellido:</label>
-                        <input type="apellido" class="form-control" name="apellido" id="inputApellido" placeholder="Apellido" required autofocus>        
+                        <input type="text" class="form-control" name="apellido" id="inputApellido" placeholder="Apellido" required autofocus>        
                     </div>
 
                     <div class="form-group">
@@ -54,7 +55,7 @@
 
                     <div class="form-group">
                         <label for="inputTelefono" class="control-label">TelÃ©fono:</label>
-                        <input type="telefono" class="form-control" name="telefono" id="inputTelefono" placeholder="TelÃ©fono" required autofocus>        
+                        <input type="number" class="form-control" name="telefono" id="inputTelefono" placeholder="TelÃ©fono" required autofocus>        
                     </div>
 
                     <div class="form-group">

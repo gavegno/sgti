@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import com.proyectodegrado.sgti.daos.ConfiguracionDAO;
 import com.proyectodegrado.sgti.modelo.Configuracion;
 import com.proyectodegrado.sgti.servicios.ServicioConfiguracion;
+import com.proyectodegrado.sgti.servicios.ServicioHorarioLaboral;
 
 public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 	
@@ -20,7 +21,6 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 	@Override
 	public void insertar(Configuracion configuracion, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(esPosibleInsertar(configuracion, idContrato)){
-			servicioHorarioLaboral.insertar(configuracion.getHorarioLaboral());
 			configuracionDao.insertarConfiguracion(configuracion.getFechaInicio(), configuracion.getFechaFin(), configuracion.getRenovacion(), 
 				configuracion.getPeriodoRenovacion(), configuracion.getTipoContrato(), configuracion.getComputosPaquete(), configuracion.getPeriodoValidezMes(),
 				configuracion.getPeriodoValidezDia(), configuracion.isAcumulacion(), configuracion.getPeriodoAcumulacion(), configuracion.getFrecuenciaInforme(), 

@@ -18,8 +18,6 @@ import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
 
 public class ServicioTipoHoraTest extends ConfigurarTest{
 	
-	private static final String TIPO_TEST2 = "TIPO_TEST2";
-	private static final String TIPO_TEST = "TIPO_TEST";
 	private static ServicioTipoHora servicioTipoHora;
 	private static ConsultasTipoHora consultasTipoHora;
 	
@@ -37,8 +35,10 @@ public class ServicioTipoHoraTest extends ConfigurarTest{
 	
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		consultasTipoHora.borrarTipoHora(TIPO_TEST);
-		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+		if(isHabilitarTest()){
+			consultasTipoHora.borrarTipoHora(TIPO_TEST);
+			consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+		}
 	}
 	
 	@Test

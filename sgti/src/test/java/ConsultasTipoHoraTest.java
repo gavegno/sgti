@@ -17,12 +17,7 @@ import com.proyectodegrado.sgti.daos.TipoHoraDAO;
 
 public class ConsultasTipoHoraTest extends ConfigurarTest{
 	
-	private static final String TIPO_TEST2 = "TIPO_TEST2";
-
-	private static final String TIPO_TEST = "TIPO_TEST";
-
 	private static ConsultasTipoHora consultasTipoHora;
-	
 	private static TipoHoraDAO tipoHoraDao;
 	
 	@BeforeClass
@@ -39,8 +34,10 @@ public class ConsultasTipoHoraTest extends ConfigurarTest{
 	
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		consultasTipoHora.borrarTipoHora(TIPO_TEST);
-		consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+		if(isHabilitarTest()){
+			consultasTipoHora.borrarTipoHora(TIPO_TEST);
+			consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+		}
 	}
 	
 	
