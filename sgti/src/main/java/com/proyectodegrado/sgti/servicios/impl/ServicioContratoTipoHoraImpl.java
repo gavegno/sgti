@@ -8,13 +8,10 @@ import java.util.List;
 import com.proyectodegrado.sgti.daos.ContratoTipoHoraDAO;
 import com.proyectodegrado.sgti.modelo.TipoHoraComputo;
 import com.proyectodegrado.sgti.servicios.ServicioContratoTipoHora;
-import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
 
 public class ServicioContratoTipoHoraImpl implements ServicioContratoTipoHora {
 	
 	private ContratoTipoHoraDAO contratoTipoHoraDao;
-	
-	private ServicioTipoHora servicioTipoHora;
 	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContratoTipoHora#insertar(java.lang.String, com.proyectodegrado.sgti.modelo.TipoHoraComputo)

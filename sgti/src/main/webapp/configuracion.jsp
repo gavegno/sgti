@@ -12,7 +12,7 @@
     <header>
         <div class="container">
         
-            <h1>Sistema de Gesti贸n de T茅cnicos e Incidentes</h1>
+            <h1>Sistema de Gesti髇 de T閏nicos e Incidentes</h1>
         
         </div>
     
@@ -21,7 +21,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gesti贸n de Configuraci贸n</h2>
+            <h2 class="text-center">Gesti髇 de Configuraci髇</h2>
             <div>
                 <form class="form-horizontal" action="/CounterWebApp/configuracion/ingresarConfiguracion" method="POST">
 
@@ -37,17 +37,14 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="inputPeriodoRenovacion" class="control-label">Periodo de renovaci贸n: </label>
-                        <input type="number" class="form-control" name="periodoRenovacion" id="inputPeriodoRenovacion" placeholder="Periodo de renovaci贸n" required>
-                        <label class="control-label">meses.</label>
+                        <label for="inputPeriodoRenovacion" class="control-label">Periodo de renovaci髇 (meses): </label>
+                        <input type="number" class="form-control" name="periodoRenovacion" id="inputPeriodoRenovacion" placeholder="Periodo de renovaci髇" required>
                     </div> 
-
-
                     
                     <div class="form-group">
-                        <label for="inputTipoRenovacion" class="control-label">Tipo de renovaci贸n:</label>
+                        <label for="inputTipoRenovacion" class="control-label">Tipo de renovaci髇:</label>
                         <select class="form-control" name="tipoRenovacion" id="inputTipoRenovacion" required>
-                            <option value="Automatica">Autom谩tica</option>
+                            <option value="Automatica">Autom醫ica</option>
                             <option value="Manual">Manual</option>
                         </select>    
                     </div>
@@ -72,14 +69,14 @@
                         <label for="inputPeriodoValidez" class="control-label">Periodo de validez: </label>
                         <input type="number" class="form-control" name="periodoValidez" id="inputPeriodoValidez" placeholder="Periodo de validez" required>
                         <select class="form-control" name="unidadValidez" id="inputUnidadValidez" required>
-                            <option value="Dias">Dias</option>
-                            <option value="Meses">Meses</option>
+                            <option value="Dias">Dia(s)</option>
+                            <option value="Meses">Mes(es)</option>
                         </select>  
                     </div> 
                     
 
                     <div class="form-group">
-                        <label for="inputAcumulacion" class="control-label">驴Acumulaci贸n de c贸mputos?:</label>
+                        <label for="inputAcumulacion" class="control-label">緼cumulaci髇 de c髆putos?:</label>
                         <Select class="form-control" name="acumulacion" id="inputAcumulacion" required>
                         	<option value="true">SI</option>
                             <option value="false">NO</option>
@@ -87,23 +84,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPeriodoAcumulacion" class="control-label">Periodo de acumulaci贸n: </label>
-                        <input type="number" class="form-control" name="periodoAcumulacion" id="inputPeriodoAcumulacion" placeholder="Cantidad">meses
+                        <label for="inputPeriodoAcumulacion" class="control-label">Periodo de acumulaci髇 (meses): </label>
+                        <input type="number" class="form-control" name="periodoAcumulacion" id="inputPeriodoAcumulacion" placeholder="Cantidad">
                     </div> 
 
                     <div class="form-group">
-                        <label for="inputFrecuenciaInforme" class="control-label">Frecuencia de informe: </label>
-                        <input type="number" class="form-control" name="frecuenciaInforme" id="inputFrecuenciaInforme" placeholder="Cantidad" required>meses
+                        <label for="inputFrecuenciaInforme" class="control-label">Frecuencia de informe (meses): </label>
+                        <input type="number" class="form-control" name="frecuenciaInforme" id="inputFrecuenciaInforme" placeholder="Cantidad" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputFrecuenciaFacturacion" class="control-label">Frecuencia de facturaci贸n: </label>
-                        <input type="number" class="form-control" name="frecuenciaFacturacion" id="inputFrecuenciaFacturacion" placeholder="Cantidad" required>meses
+                        <label for="inputFrecuenciaFacturacion" class="control-label">Frecuencia de facturaci髇 (meses): </label>
+                        <input type="number" class="form-control" name="frecuenciaFacturacion" id="inputFrecuenciaFacturacion" placeholder="Cantidad" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputFrecuenciaExtras" class="control-label">Frecuencia de c贸mputos extra: </label>
-                        <input type="number" class="form-control" name="frecuenciaExtra" id="inputFrecuenciaExtras" placeholder="Cantidad" required>meses
+                        <label for="inputFrecuenciaExtras" class="control-label">Frecuencia de c髆putos extra (meses): </label>
+                        <input type="number" class="form-control" name="frecuenciaExtra" id="inputFrecuenciaExtras" placeholder="Cantidad" required>
                     </div>
 
                  <div class="form-group">

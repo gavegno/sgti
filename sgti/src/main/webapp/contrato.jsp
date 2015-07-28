@@ -13,7 +13,7 @@
     <header>
         <div class="container">
         
-            <h1>Sistema de GestiÃ³n de TÃ©cnicos e Incidentes</h1>
+            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
         
         </div>
     
@@ -22,7 +22,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">GestiÃ³n de Contratos</h2>
+            <h2 class="text-center">Gestión de Contratos</h2>
             <div>
                 <form class="form-horizontal" action="ingresarContrato" method="POST">
                     
@@ -58,6 +58,4 @@
         </div>
     </div>
 </div>
-   <!--  <script src="<c:url value="/resources/js/jquery.js"/>"></script>
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"> </script>   -->
 </body>

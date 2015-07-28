@@ -139,6 +139,7 @@
 		<!-- Controllers -->
 		<bean id="tipoHoraController" class="com.proyectodegrado.sgti.controller.TipoHoraController">
 			<property name="fachadaTipoHora" ref="fachadaTipoHora"/>
+			<property name="fachadaUsuario" ref="fachadaUsuario"/>
 		</bean>
 		
 		<bean id="clienteController" class="com.proyectodegrado.sgti.controller.ClienteController">
@@ -150,6 +151,7 @@
 		
 		<bean id="fachadaTipoHora" class="com.proyectodegrado.sgti.fachada.FachadaTipoHora">
 			<property name="servicioTipoHora" ref="servicioTipoHora"/>
+			<property name="servicioContratoTipoHora" ref="servicioContratoTipoHora"/>
 		</bean>
 		
 		<bean id="fachadaCliente" class="com.proyectodegrado.sgti.fachada.FachadaCliente">

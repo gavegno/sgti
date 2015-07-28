@@ -34,30 +34,29 @@ public class ConfiguracionController {
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");
-		model.addAttribute("idContrato", idContrato);
 		try {
 			fachadaConfiguracion.insertarConfiguracion(fechaDesde, fechaHasta, periodoRenovacion, tipoRenovacion, tipoContrato, computos, unidadValidez, periodoValidez, convertirBoolean(acumulacion), periodoAcumulacion, frecuenciaInforme, frecuenciaFacturacion, frecuenciaComputosExtra, tiempoRespuesta, horarioLaboral, idContrato);
 		} catch (ClassNotFoundException | IOException | SQLException| ParseException e) {
 			e.printStackTrace();
+			model.addAttribute("idContrato", idContrato);
 			return "/CounterWebApp/configuracion?status=fail";
 		}finally{
 			context.close();
 		}
-	
-		return "redirect:/CounterWebApp/paginaPrincipal.jsp?status=success";
+		return "redirect:/paginaPrincipal.jsp?status=success";
 	}
 	
 	@RequestMapping(value="/ingresar", method = RequestMethod.POST)
 	public String cargarPagina(Model model, @RequestParam("idContrato") final String idContrato){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHorarioLaboral = (FachadaHorarioLaboral) context.getBean("fachadaHorarioLaboral");
-		model.addAttribute("idContrato", idContrato);
 		try {
 			model.addAttribute("horariosLaborales", fachadaHorarioLaboral.verHorariosLaborales());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
 			return "/CounterWebApp/configuracion?status=fail";
 		}finally{
+			model.addAttribute("idContrato", idContrato);
 			context.close();
 		}
 		return "configuracion";

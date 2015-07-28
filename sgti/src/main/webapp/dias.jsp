@@ -14,7 +14,7 @@
     <header>
         <div class="container">
         
-            <h1>Sistema de GestiÃ³n de TÃ©cnicos e Incidentes</h1>
+            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
         
         </div>
     
@@ -23,7 +23,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">GestiÃ³n de DÃ­as</h2>
+            <h2 class="text-center">Gestión de Días</h2>
             <div>
                 <form class="form-horizontal" action="/CounterWebApp/dias/ingresardia" method="POST">
                 
@@ -33,7 +33,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="inputContrato" class="control-label">Seleccione el dÃ­a:</label>
+                        <label for="inputContrato" class="control-label">Seleccione el dí­a:</label>
                         <select class="form-control" id="inputContrato" name="nombreDia">
                             <option value="Lunes">Lunes</option>
                             <option value="Martes">Martes</option>
