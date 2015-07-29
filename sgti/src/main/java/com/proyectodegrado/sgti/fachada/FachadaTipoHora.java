@@ -3,6 +3,8 @@ package com.proyectodegrado.sgti.fachada;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.modelo.TipoHoraComputo;
@@ -25,6 +27,14 @@ public class FachadaTipoHora {
 		TipoHora tipoHora = servicioTipoHora.seleccionarPorTipo(nombreTipoHora);
 		TipoHoraComputo tipoHoraComputo = new TipoHoraComputo(tipoHora, computo);
 		servicioContratoTipoHora.insertar(idContrato, tipoHoraComputo);
+	}
+	
+	public List<String> verTiposDeHora() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		List<String> nombreTipos = new ArrayList<String>();
+		for(TipoHora tipoHora : servicioTipoHora.seleccionarTipos()){
+			nombreTipos.add(tipoHora.getTipo());
+		}
+		return nombreTipos;
 	}
 
 	public ServicioTipoHora getServicioTipoHora() {

@@ -12,15 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
-import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
 @RequestMapping("/tiposDeHora")
 public class TipoHoraController {
 	
 	private FachadaTipoHora fachadaTipoHora;
-	
-	private FachadaUsuario fachadaUsuario;
 	
 	@RequestMapping(value = "/ingresar", method = RequestMethod.POST)
 	public ModelAndView ingresarTipoHora(@RequestParam("tipoHora") final String tipoHora){
@@ -41,10 +38,9 @@ public class TipoHoraController {
 	public String ingresarComputoTipoDeHora(Model model, @RequestParam("tipoHora") final String nombreTipoHora, @RequestParam("computos") final int computo, @RequestParam("idContrato") final String idContrato){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
-		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
 		try {
 			fachadaTipoHora.insertarContratoTipoHora(idContrato, nombreTipoHora, computo);
-			model.addAttribute("tiposDeHora", fachadaUsuario.verTiposDeHora());
+			model.addAttribute("tiposDeHora", fachadaTipoHora.verTiposDeHora());
 		}catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			return "tipoHoraComputo?status=fail";
@@ -62,13 +58,4 @@ public class TipoHoraController {
 	public void setFachadaTipoHora(FachadaTipoHora fachadaTipoHora) {
 		this.fachadaTipoHora = fachadaTipoHora;
 	}
-
-	public FachadaUsuario getFachadaUsuario() {
-		return fachadaUsuario;
-	}
-
-	public void setFachadaUsuario(FachadaUsuario fachadaUsuario) {
-		this.fachadaUsuario = fachadaUsuario;
-	}
-	
 }

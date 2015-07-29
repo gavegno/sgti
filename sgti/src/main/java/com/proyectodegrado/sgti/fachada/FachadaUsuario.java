@@ -52,14 +52,6 @@ public class FachadaUsuario {
 		return servicioUsuarioContraparte.seleccionarUsuarios();
 	}
 	
-	public List<String> verTiposDeHora() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
-		List<String> nombreTipos = new ArrayList<String>();
-		for(TipoHora tipoHora : servicioTipoHora.seleccionarTipos()){
-			nombreTipos.add(tipoHora.getTipo());
-		}
-		return nombreTipos;
-	}
-
 	public ServicioUsuarioSocioImpl getServicioUsuarioSocio() {
 		return servicioUsuarioSocio;
 	}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
@@ -20,6 +21,8 @@ import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 public class UsuarioController {
 	
 	private FachadaUsuario fachadaUsuario;
+	
+	private FachadaTipoHora fachadaTipoHora;
 	
 	@RequestMapping(value = "/ingresarUsuario", method = RequestMethod.POST)
 	public ModelAndView ingresarUsuario(@RequestParam("id") final String id, @RequestParam("contrasena") final String contrasena, @RequestParam("nombre") final String nombre, @RequestParam("apellido") final String apellido, @RequestParam("email") final String email, @RequestParam("telefono") final String telefono, @RequestParam("tipo") final String tipo, @RequestParam(value = "tipoHora", required = false) final List<String> tipoHora){
@@ -39,9 +42,9 @@ public class UsuarioController {
 	@RequestMapping(value = "/ingresar", method = RequestMethod.GET)
 	public String cargarPagina(Model model){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
 		try {
-			model.addAttribute("tipos", fachadaUsuario.verTiposDeHora());
+			model.addAttribute("tipos", fachadaTipoHora.verTiposDeHora());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
 			

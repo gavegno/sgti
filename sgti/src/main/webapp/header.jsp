@@ -30,6 +30,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Horas <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="tiposDeHora.jsp">Agregar tipo de hora</a></li>
+            <li><a href="agregarHorarioLaboral.jsp">Agregar Horario Laboral</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Ejemplo separado</a></li>
             <li role="separator" class="divider"></li>

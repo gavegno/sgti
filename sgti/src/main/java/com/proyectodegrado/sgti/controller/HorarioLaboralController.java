@@ -36,6 +36,23 @@ public class HorarioLaboralController {
 		return "dias";
 	}
 	
+	@RequestMapping(value="/ingresarHorarioLaboral", method = RequestMethod.POST)
+	public String ingresarHorarioLaboral(Model model, @RequestParam("idHorarioLaboral") final String id, @RequestParam("nombreDia") final String nombreDia, 
+			@RequestParam("horaDesde") final String horaDesde, @RequestParam("horaHasta") final String horaHasta){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaHorarioLaboral = (FachadaHorarioLaboral) context.getBean("fachadaHorarioLaboral");
+		try {
+			fachadaHorarioLaboral.insertarDiaHorarioLaboral(id, nombreDia, horaDesde, horaHasta);
+		} catch (ClassNotFoundException | IOException | SQLException e) {
+			e.printStackTrace();
+			return "agregarHorarioLaboral?status=fail";
+		}finally{
+			model.addAttribute("idHorarioLaboral", id);
+			context.close();
+		}
+		return "agregarHorarioLaboral";
+	}
+	
 	@RequestMapping(value="/ingresar", method = RequestMethod.POST)
 	public String cargarPagina(Model model, @RequestParam("idContrato") final String idContrato){
 		model.addAttribute("idContrato", idContrato);

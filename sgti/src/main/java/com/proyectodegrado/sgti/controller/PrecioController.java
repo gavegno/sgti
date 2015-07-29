@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyectodegrado.sgti.fachada.FachadaPrecio;
-import com.proyectodegrado.sgti.fachada.FachadaUsuario;
+import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 
 @Controller
 @RequestMapping("/precio")
@@ -20,17 +20,17 @@ public class PrecioController {
 	
 	private FachadaPrecio fachadaPrecio;
 	
-	private FachadaUsuario fachadaUsuario;
+	private FachadaTipoHora fachadaTipoHora;
 	
 	@RequestMapping(value="/ingresarPrecio", method = RequestMethod.POST)
 	public String cargarPrecio(Model model, @RequestParam("fechaDesde") final String fechaDesde, @RequestParam("fechaHasta") final String fechaHasta, @RequestParam("precio") final double precioAgregar, @RequestParam("idContrato") final String idContrato){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaPrecio = (FachadaPrecio) context.getBean("fachadaPrecio");
-		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
 		model.addAttribute("idContrato", idContrato);
 		try {
 			fachadaPrecio.insertarPrecio(fechaDesde, fechaHasta, precioAgregar, idContrato);
-			model.addAttribute("tiposDeHora", fachadaUsuario.verTiposDeHora());
+			model.addAttribute("tiposDeHora", fachadaTipoHora.verTiposDeHora());
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
 			return "return:/CounterWebApp/precio?status=fail";
