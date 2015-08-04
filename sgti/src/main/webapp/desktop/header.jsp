@@ -18,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/CounterWebApp/paginaPrincipal.jsp">SGTI - Itapúa</a>
+      <a class="navbar-brand" href="/CounterWebApp/desktop/paginaPrincipal.jsp">SGTI - Itapúa</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -41,7 +41,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/CounterWebApp/tecnicos/ingresar">Agregar usuario</a></li>
+            <li><a href="/CounterWebApp/desktop/tecnicos/ingresar">Agregar usuario</a></li>
             <li><a href="#">Modificar usuario</a></li>
             <li><a href="#">Eliminar usuario</a></li>
             <li role="separator" class="divider"></li>
@@ -54,7 +54,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/CounterWebApp/clientes.jsp">Agregar cliente</a></li>
+            <li><a href="/CounterWebApp/desktop/clientes.jsp">Agregar cliente</a></li>
             <li><a href="#">Modificar cliente</a></li>
             <li><a href="#">Eliminar cliente</a></li>
             <li role="separator" class="divider"></li>
@@ -67,7 +67,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contratos <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/CounterWebApp/contrato/ingresar">Crear contrato</a></li>
+            <li><a href="/CounterWebApp/desktop/contrato/ingresar">Crear contrato</a></li>
             <li><a href="#">Ver contratos</a></li>
             <li><a href="#">Modificar contrato</a></li>
             <li role="separator" class="divider"></li>

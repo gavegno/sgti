@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.proyectodegrado.sgti.fachada.FachadaHorarioLaboral;
 
 @Controller
-@RequestMapping("/dias")
+@RequestMapping("/desktop/dias")
 public class HorarioLaboralController {
 	
 	private FachadaHorarioLaboral fachadaHorarioLaboral;
@@ -23,17 +23,20 @@ public class HorarioLaboralController {
 			@RequestParam("horaDesde") final String horaDesde, @RequestParam("horaHasta") final String horaHasta, @RequestParam("idContrato") final String idContrato){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHorarioLaboral = (FachadaHorarioLaboral) context.getBean("fachadaHorarioLaboral");
+		String mensaje = "El día se ha asignago correctamente al horario laboral";
 		try {
 			fachadaHorarioLaboral.insertarDiaHorarioLaboral(id, nombreDia, horaDesde, horaHasta);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			return "dias?status=fail";
+			mensaje = e.getMessage();
+			return "desktop/dias";
 		}finally{
 			model.addAttribute("idHorarioLaboral", id);
 			model.addAttribute("idContrato", idContrato);
+			model.addAttribute("message", mensaje);
 			context.close();
 		}
-		return "dias";
+		return "desktop/dias";
 	}
 	
 	@RequestMapping(value="/ingresarHorarioLaboral", method = RequestMethod.POST)
@@ -41,22 +44,25 @@ public class HorarioLaboralController {
 			@RequestParam("horaDesde") final String horaDesde, @RequestParam("horaHasta") final String horaHasta){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHorarioLaboral = (FachadaHorarioLaboral) context.getBean("fachadaHorarioLaboral");
+		String mensaje = "El día se ha asignago correctamente al horario laboral";
 		try {
 			fachadaHorarioLaboral.insertarDiaHorarioLaboral(id, nombreDia, horaDesde, horaHasta);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
+			mensaje = e.getMessage();
 			return "agregarHorarioLaboral?status=fail";
 		}finally{
 			model.addAttribute("idHorarioLaboral", id);
+			model.addAttribute("message", mensaje);
 			context.close();
 		}
-		return "agregarHorarioLaboral";
+		return "desktop/agregarHorarioLaboral";
 	}
 	
 	@RequestMapping(value="/ingresar", method = RequestMethod.POST)
 	public String cargarPagina(Model model, @RequestParam("idContrato") final String idContrato){
 		model.addAttribute("idContrato", idContrato);
-		return "dias";
+		return "desktop/dias";
 	}
 
 }
