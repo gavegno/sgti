@@ -22,7 +22,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Contratos</h2>
+            <h2 class="text-center">Clientes</h2>
             <div>
                 <form class="form-horizontal">
                     
@@ -32,9 +32,9 @@
                             <thead>
                                 <tr>
                                     
-                                    <th>Cliente</th>
-                                    <th>Contraparte</th>
-                                    <th>Configuración</th>
+                                    <th>Nombre</th>
+                                    <th>Dirección</th>
+                                    <th>Teléfono</th>
                                 </tr>
                             </thead>
                             
@@ -43,16 +43,16 @@
                             <tr >
                                 
                                 <td class="vert-align">Tienda Inglesa S.A.</td>
-                                <td class="vert-align">Carlos Perez</td>
-                                <td class="vert-align">Configuracion?</td>                                                    
+                                <td class="vert-align">Av. Italia 1234</td>
+                                <td class="vert-align">26112541</td>                                                    
                                 <td class="vert-align"><a class="btn btn-info" href="{site_url()}admin/info/1">Ver</a></td>
 
                             </tr>
                             <tr >
                                 
-                                <td class="vert-align">Tienda Inglesa S.A.</td>
-                                <td class="vert-align">Carlos Perez</td>
-                                <td class="vert-align">Configuracion?</td>                                                    
+                                <td class="vert-align">Mosca Hnos.</td>
+                                <td class="vert-align">Ellauri 971</td>
+                                <td class="vert-align">27115977</td>                                                    
                                 <td class="vert-align"><a class="btn btn-info" href="{site_url()}admin/info/2">Ver</a></td>
 
                             </tr>
