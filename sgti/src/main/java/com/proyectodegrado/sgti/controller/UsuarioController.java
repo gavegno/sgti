@@ -11,13 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
-@RequestMapping("/tecnicos")
+@RequestMapping("/desktop/tecnicos")
 public class UsuarioController {
 	
 	private FachadaUsuario fachadaUsuario;
@@ -25,18 +24,22 @@ public class UsuarioController {
 	private FachadaTipoHora fachadaTipoHora;
 	
 	@RequestMapping(value = "/ingresarUsuario", method = RequestMethod.POST)
-	public ModelAndView ingresarUsuario(@RequestParam("id") final String id, @RequestParam("contrasena") final String contrasena, @RequestParam("nombre") final String nombre, @RequestParam("apellido") final String apellido, @RequestParam("email") final String email, @RequestParam("telefono") final String telefono, @RequestParam("tipo") final String tipo, @RequestParam(value = "tipoHora", required = false) final List<String> tipoHora){
+	public String ingresarUsuario(Model model, @RequestParam("id") final String id, @RequestParam("contrasena") final String contrasena, @RequestParam("nombre") final String nombre, @RequestParam("apellido") final String apellido, @RequestParam("email") final String email, @RequestParam("telefono") final String telefono, @RequestParam("tipo") final String tipo, @RequestParam(value = "tipoHora", required = false) final List<String> tipoHora){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		String mensaje = "El usuario ha sido creado correctamente";
 		try {
-			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
 			fachadaUsuario.ingresarUsuario(id, nombre, apellido, contrasena, email, telefono, tipo, tipoHora == null ? new ArrayList<String>() : tipoHora);
-			context.close();
-			return new ModelAndView("redirect:/tecnicos/ingresar?status=success");
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			return new ModelAndView("redirect:/tecnicos/ingresar?status=fail");
+			mensaje = e.getMessage();
+			return cargarPagina(model);
 			
+		}finally{
+			model.addAttribute("message", mensaje);
+			context.close();
 		}
+		return "desktop/tecnicos/ingresar";
 	}
 	
 	@RequestMapping(value = "/ingresar", method = RequestMethod.GET)
@@ -47,10 +50,11 @@ public class UsuarioController {
 			model.addAttribute("tipos", fachadaTipoHora.verTiposDeHora());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			
+			model.addAttribute("message", e.getMessage());
+		}finally{
+			context.close();
 		}
-		context.close();
-		return "tecnicos";
+		return "desktop/tecnicos";
 	}
 	
 	public FachadaUsuario getFachadaUsuario() {

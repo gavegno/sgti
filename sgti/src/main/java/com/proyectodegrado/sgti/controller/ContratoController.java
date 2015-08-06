@@ -15,7 +15,7 @@ import com.proyectodegrado.sgti.fachada.FachadaContrato;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
-@RequestMapping("/contrato")
+@RequestMapping("/desktop/contrato")
 public class ContratoController {
 	
 	private FachadaContrato fachadaContrato;
@@ -33,26 +33,32 @@ public class ContratoController {
 			model.addAttribute("contrapartes", fachadaUsuario.verUsuariosContraparte());
 			model.addAttribute("clientes", fachadaCliente.verClientes());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			model.addAttribute("message", e.getMessage());
+			return "desktop/contrato";
+		}finally{
+			context.close();
 		}
-		context.close();
-		return "contrato";
+		return "desktop/contrato";
 	}
 	
 	@RequestMapping(value="/ingresarContrato", method = RequestMethod.POST)
 	public String cargarContrato(Model model, @RequestParam("id") final String id, @RequestParam("cliente") final String nombreCliente, @RequestParam("contraparte") final String idContraparte){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
+		String mensaje = "El contrato fue ingresado correctamente";
 		try {
 			fachadaContrato.ingresarContrato(id, idContraparte, nombreCliente);
-			model.addAttribute("idContrato", id);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			mensaje = e.getMessage();
+			return cargarPagina(model);
+		}finally{
+			model.addAttribute("idContrato", id);
+			model.addAttribute("message", mensaje);
+			context.close();
 		}
-		context.close();
-		return "precio";
+		return "desktop/precio";
 	}
 	
 }

@@ -9,6 +9,7 @@
     <link href="<c:url value="/resources/styles.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/css/datepicker.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-clockpicker.css" />" rel="stylesheet">
+    <%@ include file="header.jsp" %>
 </head>
 <body>
     <header>
@@ -25,7 +26,7 @@
         <div class="col-sm-10 col-md-8">
             <h2 class="text-center">Gestión de Días</h2>
             <div>
-                <form class="form-horizontal" action="/CounterWebApp/dias/ingresarHorarioLaboral" method="POST">
+                <form class="form-horizontal" action="/CounterWebApp/desktop/dias/ingresarHorarioLaboral" method="POST">
                 
                 	<div class="form-group">
                         <label for="inputId" class="control-label">Id:</label>
@@ -71,7 +72,7 @@
                 </div>       
                 </form>
                
-                <form class="form-horizontal" action="/CounterWebApp/paginaPrincipal.jsp" method="POST">
+                <form class="form-horizontal" action="/CounterWebApp/dekstop/paginaPrincipal.jsp" method="POST">
                 <div class="form-group">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Finalizar </button>
                 </div>

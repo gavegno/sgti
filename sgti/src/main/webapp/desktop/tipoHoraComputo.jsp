@@ -23,7 +23,7 @@
         <div class="col-sm-10 col-md-8">
             <h2 class="text-center">Gestión de Tipo de hora y cómputo</h2>
             <div>
-                <form class="form-horizontal" action="/CounterWebApp/tiposDeHora/ingresarComputo" method="POST">
+                <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/ingresarComputo" method="POST">
                     
                      <div class="form-group">
                         <label for="inputTipoHora" class="control-label">Tipo de hora:</label>
@@ -47,7 +47,7 @@
 				<input type="hidden" name="idContrato" value="${idContrato}"/>
 
                 </form>
-                <form class="form-horizontal" action="/CounterWebApp/dias/ingresar" method="POST">
+                <form class="form-horizontal" action="/CounterWebApp/desktop/dias/ingresar" method="POST">
                 <input type="hidden" class="form-control" name="idContrato" id="inputHoraHasta" value="${idContrato}">
                 <div class="form-group">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Siguiente </button>

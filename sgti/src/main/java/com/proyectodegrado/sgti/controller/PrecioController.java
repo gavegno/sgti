@@ -15,7 +15,7 @@ import com.proyectodegrado.sgti.fachada.FachadaPrecio;
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 
 @Controller
-@RequestMapping("/precio")
+@RequestMapping("/desktop/precio")
 public class PrecioController {
 	
 	private FachadaPrecio fachadaPrecio;
@@ -27,17 +27,20 @@ public class PrecioController {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaPrecio = (FachadaPrecio) context.getBean("fachadaPrecio");
 		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
-		model.addAttribute("idContrato", idContrato);
+		String mensaje = "El precio fue ingresado correctamente";
 		try {
 			fachadaPrecio.insertarPrecio(fechaDesde, fechaHasta, precioAgregar, idContrato);
 			model.addAttribute("tiposDeHora", fachadaTipoHora.verTiposDeHora());
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
-			return "return:/CounterWebApp/precio?status=fail";
+			mensaje = e.getMessage();
+			return "desktop/precio";
 		}finally{
+			model.addAttribute("idContrato", idContrato);
+			model.addAttribute("message", mensaje);
 			context.close();
 		}
-		return "tipoHoraComputo";
+		return "desktop/tipoHoraComputo";
 	}
 
 }

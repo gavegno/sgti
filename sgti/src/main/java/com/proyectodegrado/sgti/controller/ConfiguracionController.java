@@ -15,7 +15,7 @@ import com.proyectodegrado.sgti.fachada.FachadaConfiguracion;
 import com.proyectodegrado.sgti.fachada.FachadaHorarioLaboral;
 
 @Controller
-@RequestMapping("/configuracion")
+@RequestMapping("desktop/configuracion")
 public class ConfiguracionController {
 	
 	private FachadaConfiguracion fachadaConfiguracion;
@@ -34,16 +34,19 @@ public class ConfiguracionController {
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");
+		String mensaje = "La configuración se ha creado correctamente";
 		try {
 			fachadaConfiguracion.insertarConfiguracion(fechaDesde, fechaHasta, periodoRenovacion, tipoRenovacion, tipoContrato, computos, unidadValidez, periodoValidez, convertirBoolean(acumulacion), periodoAcumulacion, frecuenciaInforme, frecuenciaFacturacion, frecuenciaComputosExtra, tiempoRespuesta, horarioLaboral, idContrato);
 		} catch (ClassNotFoundException | IOException | SQLException| ParseException e) {
 			e.printStackTrace();
 			model.addAttribute("idContrato", idContrato);
-			return "/CounterWebApp/configuracion?status=fail";
+			mensaje = e.getMessage();
+			return cargarPagina(model, idContrato);
 		}finally{
+			model.addAttribute("message", mensaje);
 			context.close();
 		}
-		return "redirect:/paginaPrincipal.jsp?status=success";
+		return "redirect:/desktop/paginaPrincipal.jsp?status=success";
 	}
 	
 	@RequestMapping(value="/ingresar", method = RequestMethod.POST)
@@ -54,12 +57,13 @@ public class ConfiguracionController {
 			model.addAttribute("horariosLaborales", fachadaHorarioLaboral.verHorariosLaborales());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			return "/CounterWebApp/configuracion?status=fail";
+			model.addAttribute("message", e.getMessage());
+			return "desktop/configuracion";
 		}finally{
 			model.addAttribute("idContrato", idContrato);
 			context.close();
 		}
-		return "configuracion";
+		return "desktop/configuracion";
 	}
 	
 	private boolean convertirBoolean(String booleanString){

@@ -23,7 +23,7 @@
         <div class="col-sm-10 col-md-8">
             <h2 class="text-center">Gestión de Precios</h2>
             <div>
-                <form class="form-horizontal" action="/CounterWebApp/precio/ingresarPrecio" method="POST">
+                <form class="form-horizontal" action="/CounterWebApp/desktop/precio/ingresarPrecio" method="POST">
                     
                     <div class="form-group">
                         <label for="inputFechaDesde" class="control-label">Fecha Desde</label>

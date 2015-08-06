@@ -26,7 +26,7 @@
         <div class="col-sm-10 col-md-8">
             <h2 class="text-center">GestiÃ³n de Precios</h2>
             <div>
-                <form class="form-horizontal" action="ingresarUsuario" method="POST">
+                <form class="form-horizontal" action="/CounterWebApp/desktop/tecnicos/ingresarUsuario" method="POST">
                 
                 	<div class="form-group">
                         <label for="inputId" class="control-label">Id:</label>

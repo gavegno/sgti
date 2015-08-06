@@ -9,46 +9,49 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 
 @Controller
-@RequestMapping("/tiposDeHora")
+@RequestMapping("/desktop/tiposDeHora")
 public class TipoHoraController {
 	
 	private FachadaTipoHora fachadaTipoHora;
 	
 	@RequestMapping(value = "/ingresar", method = RequestMethod.POST)
-	public ModelAndView ingresarTipoHora(@RequestParam("tipoHora") final String tipoHora){
+	public String ingresarTipoHora(Model model,@RequestParam("tipoHora") final String tipoHora){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
 		try {
 			fachadaTipoHora.insertarTipoHora(tipoHora);
 		}catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			return new ModelAndView("redirect:/tiposDeHora.jsp?status=fail");
+			model.addAttribute("message", e.getMessage());
+			return "desktop/tiposDeHora";
 		}finally{
 			context.close();
 		}
-		return new ModelAndView("redirect:/tiposDeHora.jsp?status=success");
+		return "desktop/tiposDeHora";
 	}
 	
 	@RequestMapping(value = "/ingresarComputo", method = RequestMethod.POST)
 	public String ingresarComputoTipoDeHora(Model model, @RequestParam("tipoHora") final String nombreTipoHora, @RequestParam("computos") final int computo, @RequestParam("idContrato") final String idContrato){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
+		String mensaje = "Se ha asignado correctamente el cómputo al tipo de hora";
 		try {
 			fachadaTipoHora.insertarContratoTipoHora(idContrato, nombreTipoHora, computo);
 			model.addAttribute("tiposDeHora", fachadaTipoHora.verTiposDeHora());
 		}catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			return "tipoHoraComputo?status=fail";
+			mensaje = e.getMessage();
+			return "desktop/tipoHoraComputo";
 		}finally{
 			model.addAttribute("idContrato", idContrato);
+			model.addAttribute("message", mensaje);
 			context.close();
 		}
-		return "tipoHoraComputo";
+		return "desktop/tipoHoraComputo";
 	}
 
 	public FachadaTipoHora getFachadaTipoHora() {
