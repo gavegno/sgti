@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.proyectodegrado.sgti.daos.ClienteDAO;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Cliente;
 import com.proyectodegrado.sgti.servicios.ServicioCliente;
 
@@ -17,8 +18,12 @@ public class ServicioClienteImpl implements ServicioCliente {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioCliente#agregar(com.proyectodegrado.sgti.modelo.Cliente)
 	 */
 	@Override
-	public void agregar(Cliente cliente) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		clienteDao.agregar(cliente.getNombre(), cliente.getDireccion(), cliente.getTelefono(), true);
+	public void agregar(Cliente cliente) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
+		if(clienteDao.seleccionarPorNombre(cliente.getNombre()).getNombre() == null){
+			clienteDao.agregar(cliente.getNombre(), cliente.getDireccion(), cliente.getTelefono(), true);
+		}else{
+			throw new SgtiException("El cliente ya existe en el sistema");
+		}
 	}
 	
 	/* (non-Javadoc)

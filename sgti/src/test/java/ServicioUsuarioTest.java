@@ -18,6 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.proyectodegrado.sgti.consultas.ConsultasTipoHora;
 import com.proyectodegrado.sgti.consultas.ConsultasUsuario;
 import com.proyectodegrado.sgti.daos.UsuarioDAO;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.modelo.Usuario;
 import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
@@ -96,7 +97,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testAgregarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testAgregarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 			Usuario usuarioSegundo = new Usuario(ID_USUARIO11,TEST_NOMBRE2,TEST_APELLIDO2,TEST_CONTRASENA2,TEST_EMAIL2, "12345679", null,false, null);
@@ -113,7 +114,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testExisteUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testExisteUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 			servicioUsuarioSocio.agregar(usuario);
@@ -126,7 +127,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testAgregarUsuarioTipoHora() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testAgregarUsuarioTipoHora() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 			TipoHora tipoHora = new TipoHora();
@@ -147,7 +148,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testEditarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 			servicioUsuarioSocio.agregar(usuario);
@@ -165,7 +166,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testCambiarContrasena() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 			servicioUsuarioSocio.agregar(usuario);
@@ -180,7 +181,7 @@ public class ServicioUsuarioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEliminarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testEliminarUsuario() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Usuario usuario = new Usuario(ID_USUARIO10,TEST_NOMBRE,TEST_APELLIDO,TEST_CONTRASENA,TEST_EMAIL, TEST_TELEFONO, null,false, null);
 			servicioUsuarioSocio.agregar(usuario);

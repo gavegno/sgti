@@ -3,10 +3,15 @@ package com.proyectodegrado.sgti.servicios.impl;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import com.proyectodegrado.sgti.daos.ContratoDAO;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Cliente;
+import com.proyectodegrado.sgti.modelo.Configuracion;
 import com.proyectodegrado.sgti.modelo.Contrato;
 import com.proyectodegrado.sgti.servicios.ServicioCliente;
 import com.proyectodegrado.sgti.servicios.ServicioConfiguracion;
@@ -35,15 +40,19 @@ public class ServicioContratoImpl implements ServicioContrato {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContrato#insertar(com.proyectodegrado.sgti.modelo.Contrato)
 	 */
 	@Override
-	public void insertar (Contrato contrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void insertar (Contrato contrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
+		if(contratoDao.verContrato(contrato.getId()).getId() == null){
 		contratoDao.insertarContrato(contrato.getId(), contrato.getCliente().getId(), contrato.getContraparte().getId());
+		}else{
+			throw new SgtiException("Ya existe un contrato con el mismo id");
+		}
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContrato#insertarCompleto(com.proyectodegrado.sgti.modelo.Contrato)
 	 */
 	@Override
-	public void insertarCompleto (Contrato contrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void insertarCompleto (Contrato contrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		servicioUsuarioContraparte.agregar(contrato.getContraparte());
 		servicioCliente.agregar(contrato.getCliente());
 		Cliente cliente = prepararCliente(contrato);
@@ -52,6 +61,64 @@ public class ServicioContratoImpl implements ServicioContrato {
 		servicioPrecio.insertar(contrato.getPrecio().get(0), contrato.getId());
 		servicioContratoTipoHora.insertar(contrato.getId(), contrato.getTipoHoraComputo().get(0));
 		
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContrato#seleccionarContratos()
+	 */
+	@Override
+	public List<Contrato> seleccionarContratos() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return contratoDao.verContratos();
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContrato#seleccionarContratosVigentes()
+	 */
+	@Override
+	public List<Contrato> seleccionarContratosVigentes() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		List<Contrato> contratos = new ArrayList<Contrato>();
+		for(Contrato contrato : contratoDao.verContratos()){
+			if(servicioConfiguracion.seleccionarConfiguracionActual(contrato.getId()).getFechaInicio() != null){
+				contratos.add(contrato);
+			}
+		}
+		return contratos;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContrato#proximaFechaInforme(java.lang.String)
+	 */
+	@Override
+	public Date proximaFechaInforme(String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Contrato contrato = contratoDao.verContrato(id);
+		Configuracion configuracion = servicioConfiguracion.seleccionarConfiguracionActual(id);
+		int frecuenciaInforme = configuracion.getFrecuenciaInforme();
+		Calendar calendar = Calendar.getInstance();
+		if(contrato.getUltimaFechaInforme() != null){
+			calendar.setTime(contrato.getUltimaFechaInforme());
+		}else{
+			calendar.setTime(configuracion.getFechaInicio());
+		}
+		calendar.add(Calendar.MONTH, frecuenciaInforme);
+		return calendar.getTime();
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContrato#proximaFechaFacturacion(java.lang.String)
+	 */
+	@Override
+	public Date proximaFechaFacturacion(String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Contrato contrato = contratoDao.verContrato(id);
+		Configuracion configuracion = servicioConfiguracion.seleccionarConfiguracionActual(id);
+		int frecuenciaFacturacion = configuracion.getFrecuenciaFacturacion();
+		Calendar calendar = Calendar.getInstance();
+		if(contrato.getUltimaFechaFacturacion() != null){
+			calendar.setTime(contrato.getUltimaFechaFacturacion());
+		}else{
+			calendar.setTime(configuracion.getFechaInicio());
+		}
+		calendar.add(Calendar.MONTH, frecuenciaFacturacion);
+		return calendar.getTime();
 	}
 
 	private Cliente prepararCliente(Contrato contrato)

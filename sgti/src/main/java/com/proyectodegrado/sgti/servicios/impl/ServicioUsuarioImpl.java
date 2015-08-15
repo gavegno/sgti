@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.proyectodegrado.sgti.daos.UsuarioDAO;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.modelo.Usuario;
 import com.proyectodegrado.sgti.servicios.ServicioUsuario;
@@ -19,8 +20,12 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#agregar(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */
 	@Override
-	public void agregar(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		usuarioDao.agregar(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getContrasena(), usuario.getEmail(), usuario.getTelefono(), usuario.getTipo(), true);
+	public void agregar(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
+		if(usuarioDao.seleccionarUsuarioPorId(usuario.getId()).getId() == null){
+			usuarioDao.agregar(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getContrasena(), usuario.getEmail(), usuario.getTelefono(), usuario.getTipo(), true);
+		}else{
+			throw new SgtiException("El usuario ingresado ya existe");
+		}
 	}
 	
 	/* (non-Javadoc)

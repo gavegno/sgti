@@ -18,6 +18,7 @@ import org.junit.rules.ExpectedException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.proyectodegrado.sgti.consultas.ConsultasPrecio;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Precio;
 import com.proyectodegrado.sgti.servicios.ServicioPrecio;
 
@@ -53,7 +54,7 @@ public class ServicioPrecioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
@@ -70,7 +71,7 @@ public class ServicioPrecioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testPrecioVigente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testPrecioVigente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
@@ -93,7 +94,7 @@ public class ServicioPrecioTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testPreciosSuperpuestos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testPreciosSuperpuestos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			Calendar fechaDesdeVieja = Calendar.getInstance();

@@ -46,6 +46,14 @@
 			<property name="conexionBD" ref="conexionBD"/>
 		</bean>
 		
+		<bean id="consultasActividad" class="com.proyectodegrado.sgti.consultas.ConsultasActividad">
+			<property name="conexionBD" ref="conexionBD"/>
+		</bean>
+		
+		<bean id="consultasHora" class="com.proyectodegrado.sgti.consultas.ConsultasHora">
+			<property name="conexionBD" ref="conexionBD"/>
+		</bean>
+		
 		<!-- Beans de DAOs -->
 		<bean id="tipoHoraDao" class="com.proyectodegrado.sgti.daos.TipoHoraDAO">
 			<property name="consultasTipoHora" ref="consultasTipoHora"/>
@@ -85,6 +93,15 @@
 			<property name="contratoTipoHoraDao" ref="contratoTipoHoraDao"/>
 			<property name="clienteDao" ref="clienteDao"/>
 			<property name="usuarioDao" ref="usuarioDao"/>
+		</bean>
+		
+		<bean id="actividadDao" class="com.proyectodegrado.sgti.daos.ActividadDAO">
+			<property name="consultasActividad" ref="consultasActividad"/>
+		</bean>
+		
+		<bean id="horaDao" class="com.proyectodegrado.sgti.daos.HoraDAO">
+			<property name="consultasHora" ref="consultasHora"/>
+			<property name="tipoHoraDao" ref="tipoHoraDao"/>
 		</bean>
 		
 		<!-- Beans de servicios -->
@@ -136,6 +153,14 @@
 			<property name="servicioUsuarioContraparte" ref="servicioUsuarioContraparte"/>
 		</bean>
 		
+		<bean id="servicioActividad" class="com.proyectodegrado.sgti.servicios.impl.ServicioActividadImpl">
+			<property name="actividadDao" ref="actividadDao"/>
+		</bean>
+		
+		<bean id="servicioHora" class="com.proyectodegrado.sgti.servicios.impl.ServicioHoraImpl">
+			<property name="horaDao" ref="horaDao"/>
+		</bean>
+		
 		<!-- Fachadas -->
 		
 		<bean id="fachadaTipoHora" class="com.proyectodegrado.sgti.fachada.FachadaTipoHora">
@@ -172,6 +197,15 @@
 		
 		<bean id="fachadaHorarioLaboral" class="com.proyectodegrado.sgti.fachada.FachadaHorarioLaboral">
 			<property name="servicioHorarioLaboral" ref="servicioHorarioLaboral"/>
+		</bean>
+		
+		<bean id="fachadaActividad" class="com.proyectodegrado.sgti.fachada.FachadaActividad">
+			<property name="servicioActividad" ref="servicioActividad"/>
+		</bean>
+		
+		<bean id="fachadaHora" class="com.proyectodegrado.sgti.fachada.FachadaHora">
+			<property name="servicioHora" ref="servicioHora"/>
+			<property name="servicioContrato" ref="servicioContrato"/>
 		</bean>
 		
 </beans>

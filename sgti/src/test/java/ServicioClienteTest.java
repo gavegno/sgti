@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.proyectodegrado.sgti.consultas.ConsultasCliente;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Cliente;
 import com.proyectodegrado.sgti.servicios.ServicioCliente;
 
@@ -50,7 +51,7 @@ public class ServicioClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testAgregarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testAgregarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Cliente cliente = new Cliente();
 			cliente.setNombre(CLIENTE_TEST);
@@ -67,7 +68,7 @@ public class ServicioClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testAgregarClientes() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testAgregarClientes() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Cliente cliente = new Cliente();
 			cliente.setNombre(CLIENTE_TEST);
@@ -97,7 +98,7 @@ public class ServicioClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testEditarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Cliente cliente = new Cliente();
 			cliente.setNombre(CLIENTE_TEST);
@@ -126,7 +127,7 @@ public class ServicioClienteTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEliminarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testEliminarCliente() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			Cliente cliente = new Cliente();
 			cliente.setNombre(CLIENTE_TEST);

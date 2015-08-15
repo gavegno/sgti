@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
@@ -32,14 +33,17 @@ public class UsuarioController {
 			fachadaUsuario.ingresarUsuario(id, nombre, apellido, contrasena, email, telefono, tipo, tipoHora == null ? new ArrayList<String>() : tipoHora);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
+			mensaje = "Ha ocurrido un error";
+			return cargarPagina(model);
+		} catch (SgtiException e) {
+			e.printStackTrace();
 			mensaje = e.getMessage();
 			return cargarPagina(model);
-			
 		}finally{
 			model.addAttribute("message", mensaje);
 			context.close();
 		}
-		return "desktop/tecnicos";
+		return cargarPagina(model);
 	}
 	
 	@RequestMapping(value = "/ingresar", method = RequestMethod.GET)

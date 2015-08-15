@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import com.proyectodegrado.sgti.daos.ConfiguracionDAO;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Configuracion;
 import com.proyectodegrado.sgti.servicios.ServicioConfiguracion;
 import com.proyectodegrado.sgti.servicios.ServicioHorarioLaboral;
@@ -19,7 +20,7 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracion#insertar(com.proyectodegrado.sgti.modelo.Configuracion)
 	 */
 	@Override
-	public void insertar(Configuracion configuracion, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void insertar(Configuracion configuracion, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(esPosibleInsertar(configuracion, idContrato)){
 			configuracionDao.insertarConfiguracion(configuracion.getFechaInicio(), configuracion.getFechaFin(), configuracion.getRenovacion(), 
 				configuracion.getPeriodoRenovacion(), configuracion.getTipoContrato(), configuracion.getComputosPaquete(), configuracion.getPeriodoValidezMes(),
@@ -27,7 +28,7 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 				configuracion.getFrecuenciaFacturacion(), configuracion.getFrecuenciaComputosExtra(), configuracion.getTiempoRespuesta(), 
 				configuracion.getHorarioLaboral().getId(), idContrato);
 		}else{
-			throw new SQLException("La configuración ingresada se superpone con otro precio");
+			throw new SgtiException("La configuración ingresada se superpone con otra configuracion");
 		}
 	}
 	

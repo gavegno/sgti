@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.modelo.Usuario;
 import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
@@ -26,7 +27,7 @@ public class FachadaUsuario {
 	
 	private ServicioTipoHora servicioTipoHora;
 	
-	public void ingresarUsuario(String id, String nombre, String apellido, String contrasena, String email, String telefono, String tipo, List<String> tiposDeTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+	public void ingresarUsuario(String id, String nombre, String apellido, String contrasena, String email, String telefono, String tipo, List<String> tiposDeTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, SgtiException{
 		List<TipoHora> tiposHora = new ArrayList<TipoHora>();
 		for(String tipoDeTipoHora : tiposDeTipoHora){
 			TipoHora tipoHora = servicioTipoHora.seleccionarPorTipo(tipoDeTipoHora);
@@ -65,6 +66,14 @@ public class FachadaUsuario {
 	
 	public List<Usuario> verUsuariosContraparte() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		return servicioUsuarioContraparte.seleccionarUsuarios();
+	}
+	
+	public List<Usuario> seleccionarUsuariosTecnico() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioUsuarioTecnico.seleccionarUsuarios();
+	}
+	
+	public List<Usuario> seleccionarUsuariosSocio() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioUsuarioSocio.seleccionarUsuarios();
 	}
 	
 	public ServicioUsuarioSocioImpl getServicioUsuarioSocio() {

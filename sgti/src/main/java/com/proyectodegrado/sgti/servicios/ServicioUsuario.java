@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.modelo.Usuario;
 
 public interface ServicioUsuario {
 
 	public abstract void agregar(Usuario dataUsuario)
-			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException;
 	
 	public void agregarTipoHoraUsuario(Usuario usuario) 
 			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;

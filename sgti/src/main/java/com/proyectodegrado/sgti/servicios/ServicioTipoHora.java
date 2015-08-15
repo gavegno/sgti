@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 
 public interface ServicioTipoHora {
 
-	public abstract void agregar(TipoHora dataTipoHora) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
+	public abstract void agregar(TipoHora dataTipoHora) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException;
 
 	public abstract TipoHora seleccionarPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 	

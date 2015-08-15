@@ -23,6 +23,7 @@ import com.proyectodegrado.sgti.daos.ClienteDAO;
 import com.proyectodegrado.sgti.daos.ContratoDAO;
 import com.proyectodegrado.sgti.daos.HorarioLaboralDAO;
 import com.proyectodegrado.sgti.daos.UsuarioDAO;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Cliente;
 import com.proyectodegrado.sgti.modelo.Configuracion;
 import com.proyectodegrado.sgti.modelo.Contrato;
@@ -37,9 +38,9 @@ import com.proyectodegrado.sgti.servicios.ServicioContrato;
 import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
 import com.proyectodegrado.sgti.servicios.impl.ServicioUsuarioContraparteImpl;
 
-public class ConfigurarTest {
+public class ConfigurarTest { 
 	
-	protected static final String HORARIO_SALIDA2 = "18:30";
+	protected static final String HORARIO_SALIDA2 = "18:30"; 
 	protected static final String HORARIO_ENTRADA2 = "09:30";
 	protected static final String HORARIO_SALIDA1 = "18:00";
 	protected static final String HORARIO_ENTRADA1 = "09:00";
@@ -57,10 +58,15 @@ public class ConfigurarTest {
 	protected static final String NOMBRE_TEST = "NOMBRE_TEST";
 	protected static final String DIRECCION_TEST = "DIRECCION_TEST";
 	protected static final String USUARIO_TEST = "USUARIO_TEST";
+	protected static final String USUARIO_TEST2 = "USUARIO_TEST2";
 	protected static final String TELEFONO = "123456789";
 	protected static final String CLIENTE_TEST = "CLIENTE_TEST";
 	protected static final String CONTRATO_TEST = "CONTRATO_TEST";
 	protected static final String TIPO_TEST2 = "TIPO_TEST2";
+	protected static final String FORMATO_FECHA = "yyyy-MM-dd";
+	protected static final String TIPO_ACTIVIDAD_TEST = "TIPO_ACTIVIDAD_TEST";
+	protected static final String ACTIVIDAD_TEST = "ACTIVIDAD_TEST";
+	protected static final String ACTIVIDAD_TEST2 = "ACTIVIDAD_TEST2";
 	
 	protected boolean habilitarTest;
 	protected static ContratoDAO contratoDao;
@@ -151,7 +157,7 @@ public class ConfigurarTest {
 		contratoDao.insertarContrato(CONTRATO_TEST, clienteDao.seleccionarPorNombre(CLIENTE_TEST).getId(), USUARIO_TEST);
 	}
 	
-	protected void agregarRelacionadoConServicioContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
+	protected void agregarRelacionadoConServicioContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException {
 		Cliente cliente = crearCliente();
 		servicioCliente.agregar(cliente);
 		cliente.setId(servicioCliente.verPorNombre(cliente).getId());
@@ -166,7 +172,7 @@ public class ConfigurarTest {
 		
 	}
 	
-	protected void agregarContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
+	protected void agregarContrato() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException {
 		Cliente cliente = crearCliente();
 		Usuario contraparte = crearUsuarioContraparte();
 		List<Configuracion> configuraciones = new ArrayList<Configuracion>();
@@ -235,7 +241,7 @@ public class ConfigurarTest {
 		return new Precio(5.5, new Date(), fechaHasta.getTime());
 	}
 	
-	private TipoHoraComputo crearTipoHoraComputo() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	private TipoHoraComputo crearTipoHoraComputo() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		TipoHora tipoHora = new TipoHora();
 		tipoHora.setTipo(TIPO_TEST);
 		servicioTipoHora.agregar(tipoHora);

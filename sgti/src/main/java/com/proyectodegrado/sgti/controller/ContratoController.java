@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaCliente;
 import com.proyectodegrado.sgti.fachada.FachadaContrato;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
@@ -43,13 +44,17 @@ public class ContratoController {
 	}
 	
 	@RequestMapping(value="/ingresarContrato", method = RequestMethod.POST)
-	public String cargarContrato(Model model, @RequestParam("id") final String id, @RequestParam("cliente") final String nombreCliente, @RequestParam("contraparte") final String idContraparte){
+	public String cargarPagina(Model model, @RequestParam("id") final String id, @RequestParam("cliente") final String nombreCliente, @RequestParam("contraparte") final String idContraparte){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
 		String mensaje = "El contrato fue ingresado correctamente";
 		try {
 			fachadaContrato.ingresarContrato(id, idContraparte, nombreCliente);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
+			e.printStackTrace();
+			mensaje = "Ha ocurrido un error";
+			return cargarPagina(model);
+		} catch (SgtiException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
 			return cargarPagina(model);

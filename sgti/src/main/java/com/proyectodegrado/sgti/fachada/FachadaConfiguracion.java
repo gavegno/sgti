@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Configuracion;
 import com.proyectodegrado.sgti.modelo.HorarioLaboral;
 import com.proyectodegrado.sgti.servicios.ServicioConfiguracion;
@@ -27,7 +28,7 @@ public class FachadaConfiguracion {
 			@RequestParam("acumulacion") final boolean acumulacion, @RequestParam("periodoAcumulacion") final int periodoAcumulacion, 
 			@RequestParam("frecuenciaInforme") final int frecuenciaInforme, @RequestParam("frecuenciaFacturacion") final int frecuenciaFacturacion, 
 			@RequestParam("frecuenciaExtra") final int frecuenciaComputosExtra, @RequestParam("respuesta") final String tiempoRespuesta, 
-			@RequestParam("horarioLaboral") final String horarioLaboral, @RequestParam("idContrato") final String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+			@RequestParam("horarioLaboral") final String horarioLaboral, @RequestParam("idContrato") final String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException, SgtiException{
 		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Configuracion configuracion = new Configuracion();
 		configuracion.setFechaInicio(simpleFateFormat.parse(fechaDesde));

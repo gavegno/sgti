@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.modelo.TipoHoraComputo;
 import com.proyectodegrado.sgti.servicios.ServicioContratoTipoHora;
@@ -17,7 +18,7 @@ public class FachadaTipoHora {
 	
 	private ServicioContratoTipoHora servicioContratoTipoHora;
 	
-	public void insertarTipoHora(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void insertarTipoHora(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		TipoHora tipoHora = new TipoHora();
 		tipoHora.setTipo(tipo);
 		servicioTipoHora.agregar(tipoHora);

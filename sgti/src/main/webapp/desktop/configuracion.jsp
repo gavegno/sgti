@@ -7,12 +7,21 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/styles.css" />" rel="stylesheet">
+    <%
+		String usuario=(String)session.getAttribute("usuario");
+    	request.removeAttribute("usuario");
+		if(usuario==null)
+		{
+			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+		}
+	%>
 </head>
 <body>
     <header>
         <div class="container">
         
             <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
+            ${message}
         
         </div>
     
@@ -38,7 +47,7 @@
                     
                     <div class="form-group">
                         <label for="inputPeriodoRenovacion" class="control-label">Periodo de renovación (meses): </label>
-                        <input type="number" class="form-control" name="periodoRenovacion" id="inputPeriodoRenovacion" placeholder="Periodo de renovación" required>
+                        <input type="number" class="form-control" name="periodoRenovacion" id="inputPeriodoRenovacion" placeholder="Periodo de renovación" required value="0">
                     </div> 
                     
                     <div class="form-group">
@@ -60,14 +69,14 @@
 
                     <div class="form-group">
                         <label for="inputComputos" class="control-label">Cantidad de cÃ³mputos:</label>
-                        <input type="number" class="form-control" name="computos" id="inputComputos" placeholder="Cantidad" required>
+                        <input type="number" class="form-control" name="computos" id="inputComputos" placeholder="Cantidad" required value="0">
                     </div>
 
 
 
                     <div class="form-group">
                         <label for="inputPeriodoValidez" class="control-label">Periodo de validez: </label>
-                        <input type="number" class="form-control" name="periodoValidez" id="inputPeriodoValidez" placeholder="Periodo de validez" required>
+                        <input type="number" class="form-control" name="periodoValidez" id="inputPeriodoValidez" placeholder="Periodo de validez" required value="0">
                         <select class="form-control" name="unidadValidez" id="inputUnidadValidez" required>
                             <option value="Dias">Dia(s)</option>
                             <option value="Meses">Mes(es)</option>
@@ -85,23 +94,25 @@
 
                     <div class="form-group">
                         <label for="inputPeriodoAcumulacion" class="control-label">Periodo de acumulación (meses): </label>
-                        <input type="number" class="form-control" name="periodoAcumulacion" id="inputPeriodoAcumulacion" placeholder="Cantidad">
+                        <input type="number" class="form-control" name="periodoAcumulacion" id="inputPeriodoAcumulacion" placeholder="Cantidad" value="0">
                     </div> 
 
                     <div class="form-group">
                         <label for="inputFrecuenciaInforme" class="control-label">Frecuencia de informe (meses): </label>
-                        <input type="number" class="form-control" name="frecuenciaInforme" id="inputFrecuenciaInforme" placeholder="Cantidad" required>
+                        <input type="number" class="form-control" name="frecuenciaInforme" id="inputFrecuenciaInforme" placeholder="Cantidad" required value="0">
                     </div>
 
                     <div class="form-group">
                         <label for="inputFrecuenciaFacturacion" class="control-label">Frecuencia de facturación (meses): </label>
-                        <input type="number" class="form-control" name="frecuenciaFacturacion" id="inputFrecuenciaFacturacion" placeholder="Cantidad" required>
+                        <input type="number" class="form-control" name="frecuenciaFacturacion" id="inputFrecuenciaFacturacion" placeholder="Cantidad" required value="0">
                     </div>
 
-                    <div class="form-group">
+                   <!--  <div class="form-group">
                         <label for="inputFrecuenciaExtras" class="control-label">Frecuencia de cómputos extra (meses): </label>
                         <input type="number" class="form-control" name="frecuenciaExtra" id="inputFrecuenciaExtras" placeholder="Cantidad" required>
-                    </div>
+                    </div> -->
+                    
+                    <input type="hidden" class="form-control" name="frecuenciaExtra" id="inputFrecuenciaExtras" placeholder="Cantidad" value="0">
 
                  <div class="form-group">
                         <label for="inputHorarioLaboral" class="control-label">HorarioLaboral:</label>

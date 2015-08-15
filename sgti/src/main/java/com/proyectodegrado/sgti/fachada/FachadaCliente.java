@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Cliente;
 import com.proyectodegrado.sgti.servicios.ServicioCliente;
 
@@ -13,7 +14,7 @@ public class FachadaCliente {
 	private ServicioCliente servicioCliente;
 	
 	public void insertarCliente(String nombre, String direccion, String telefono) 
-			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		Cliente cliente = new Cliente();
 		cliente.setNombre(nombre);
 		cliente.setDireccion(direccion);

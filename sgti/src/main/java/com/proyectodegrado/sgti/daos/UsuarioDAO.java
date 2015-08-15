@@ -69,6 +69,7 @@ public class UsuarioDAO {
 			usuario.setTelefono(resultSet.getString("telefono"));
 			usuario.setTipo(resultSet.getString("tipo"));
 			usuario.setActivo(resultSet.getBoolean("activo"));
+			usuario.setContrasena(resultSet.getString("contrasena"));
 		}
 		return usuario;
 	}

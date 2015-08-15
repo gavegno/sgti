@@ -61,6 +61,22 @@ public class ContratoDAO {
 		}
 		return contratos;
 	}
+	public Contrato verContrato (String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Contrato contrato = new Contrato();
+		ResultSet resultSet = consultasContrato.verContrato(id);
+		if(resultSet.next()){
+			contrato.setId(resultSet.getString("id"));
+			contrato.setConfiguraciones(configuracionDao.verConfiguracionesPorContrato(contrato.getId()));
+			contrato.setPrecio(precioDao.verPrecios(contrato.getId()));
+			contrato.setTipoHoraComputo(contratoTipoHoraDao.verContratoTipoHora(contrato.getId()));
+			contrato.setCliente(clienteDao.seleccionarPorId(resultSet.getInt("cliente")));
+			contrato.setContraparte(usuarioDao.seleccionarUsuarioPorId(resultSet.getString("contraparte")));
+			contrato.setUltimaFechaInforme(resultSet.getDate("ultimafechainforme"));
+			contrato.setUltimaFechaFacturacion(resultSet.getDate("ultimafechaFacturacion"));
+			contrato.setUltimaFechaComputacion(resultSet.getDate("ultimafechaComputacion"));
+		}
+		return contrato;
+	}
 	
 	public List<Contrato> verContratosPorContraparte (String idContraparte) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<Contrato> contratos = new ArrayList<Contrato>();

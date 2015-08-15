@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/styles.css" />">
     <%@ include file="header.jsp" %>
+    <%@ page session="true" %>
+    <%
+		String usuario=(String)session.getAttribute("usuario");
+    	request.removeAttribute("usuario");
+		if(usuario==null)
+		{
+			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+		}
+	%>
 </head>
 <body>
 </body>

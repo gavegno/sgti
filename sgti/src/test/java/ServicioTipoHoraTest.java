@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.proyectodegrado.sgti.consultas.ConsultasTipoHora;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
 
@@ -42,7 +43,7 @@ public class ServicioTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testearAgregar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testearAgregar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			TipoHora tipoHora = new TipoHora();
 			tipoHora.setTipo(TIPO_TEST);
@@ -52,7 +53,7 @@ public class ServicioTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testearSeleccionar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testearSeleccionar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			TipoHora tipoHora = new TipoHora();
 			tipoHora.setTipo(TIPO_TEST);

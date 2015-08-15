@@ -10,6 +10,14 @@
     <link href="<c:url value="/resources/css/css/datepicker.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-clockpicker.css" />" rel="stylesheet">
     <%@ include file="header.jsp" %>
+        <%
+		String usuario=(String)session.getAttribute("usuario");
+    	request.removeAttribute("usuario");
+		if(usuario==null)
+		{
+			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+		}
+	%>
 </head>
 <body>
     <header>

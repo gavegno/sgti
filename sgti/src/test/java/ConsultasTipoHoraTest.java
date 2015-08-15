@@ -44,8 +44,7 @@ public class ConsultasTipoHoraTest extends ConfigurarTest{
 	@Test
 	public void testInsertarSeleccionarTipoHora() throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		if(isHabilitarTest()){
-			tipoHoraDao = (TipoHoraDAO) context.getBean("tipoHoraDao");
-			consultasTipoHora.insertarTipoHora(TIPO_TEST);
+			tipoHoraDao.agregar(TIPO_TEST);
 			assertTrue(tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getTipo().equalsIgnoreCase(TIPO_TEST));
 		}
 	}
@@ -53,8 +52,8 @@ public class ConsultasTipoHoraTest extends ConfigurarTest{
 	@Test
 	public void testSeleccionarTiposHora() throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		if(isHabilitarTest()){
-			consultasTipoHora.insertarTipoHora(TIPO_TEST);
-			consultasTipoHora.insertarTipoHora(TIPO_TEST2);
+			tipoHoraDao.agregar(TIPO_TEST);
+			tipoHoraDao.agregar(TIPO_TEST2);
 			assertTrue(tipoHoraDao.seleccionarTipos().size()==2);
 		}
 	}

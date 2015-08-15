@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 
 @Controller
@@ -22,13 +23,19 @@ public class TipoHoraController {
 	public String ingresarTipoHora(Model model,@RequestParam("tipoHora") final String tipoHora){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
+		String mensaje = "El tipo de hora fue ingresado correctamente";
 		try {
 			fachadaTipoHora.insertarTipoHora(tipoHora);
 		}catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			model.addAttribute("message", e.getMessage());
+			mensaje = "Ha ocurrido un error";
+			return "desktop/tiposDeHora";
+		} catch (SgtiException e) {
+			e.printStackTrace();
+			mensaje = e.getMessage();
 			return "desktop/tiposDeHora";
 		}finally{
+			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "desktop/tiposDeHora";

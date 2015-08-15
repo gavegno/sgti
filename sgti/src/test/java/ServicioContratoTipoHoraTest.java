@@ -14,6 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.proyectodegrado.sgti.consultas.ConsultasContratoTipoHora;
 import com.proyectodegrado.sgti.consultas.ConsultasTipoHora;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.modelo.TipoHoraComputo;
 import com.proyectodegrado.sgti.servicios.ServicioContratoTipoHora;
@@ -56,7 +57,7 @@ public class ServicioContratoTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			TipoHora tipoHora = new TipoHora();
@@ -76,7 +77,7 @@ public class ServicioContratoTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testInsertarDosTipos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testInsertarDosTipos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			TipoHora tipoHora = new TipoHora();
@@ -100,7 +101,7 @@ public class ServicioContratoTipoHoraTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testEditar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			TipoHora tipoHora = new TipoHora();

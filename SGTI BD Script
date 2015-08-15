@@ -279,17 +279,13 @@ CREATE TABLE actividad
   tipo character varying,
   fechacreacion date,
   fechaactividad date,
-  socio character varying,
-  tecnico character varying,
+  usuario character varying,
   contrato character varying,
   periodo integer,
   id character varying NOT NULL,
   CONSTRAINT "actividad_primaryKey" PRIMARY KEY (id ),
   CONSTRAINT "contrato_actividad_foreignKey" FOREIGN KEY (contrato)
       REFERENCES contrato (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT "socio_actividad_foreignKey" FOREIGN KEY (socio)
-      REFERENCES usuario (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
@@ -314,7 +310,8 @@ CREATE INDEX "fki_contrato_actividad_foreignKey"
 CREATE INDEX "fki_socio_actividad_foreignKey"
   ON actividad
   USING btree
-  (socio COLLATE pg_catalog."default" );
+  (usuario COLLATE pg_catalog."default" );
+
 
 -- Table: hora
 
@@ -337,6 +334,8 @@ CREATE TABLE hora
   actividad character varying,
   tipohora integer,
   descripcion character varying,
+  informada boolean,
+  facturada boolean,
   CONSTRAINT "hora_primaryKey" PRIMARY KEY (id ),
   CONSTRAINT "contrato_hora_foreignKey" FOREIGN KEY (contrato)
       REFERENCES contrato (id) MATCH SIMPLE
@@ -350,6 +349,4 @@ WITH (
 );
 ALTER TABLE hora
   OWNER TO root;
-
-
 

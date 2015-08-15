@@ -22,7 +22,6 @@ public class ConsultasConfiguracionTest extends ConfigurarTest{
 	
 	private static final String TIEMPO_RESPUESTA_TEST2 = "TIEMPO_RESPUESTA_TEST2";
 	private static final String RENOVACION_TEST2 = "RENOVACION_TEST2";
-	private static final String FORMATO_FECHA = "yyyy-MM-dd";
 	private static final String HORARIO_TEST = "HORARIO_TEST";
 	private static final String TIEMPO_ESPUESTA_TEST = "TIEMPO_ESPUESTA_TEST";
 

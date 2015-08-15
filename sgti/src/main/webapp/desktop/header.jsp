@@ -29,12 +29,14 @@
          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Horas <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="tiposDeHora.jsp">Agregar tipo de hora</a></li>
-            <li><a href="agregarHorarioLaboral.jsp">Agregar Horario Laboral</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Ejemplo separado</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Otro ejemplo separado</a></li>
+          	<c:if test="${tipoUsuario == 'SOCIO'}">
+          		<li><a href="/CounterWebApp/desktop/tiposDeHora.jsp">Agregar tipo de hora</a></li>
+          		<li><a href="/CounterWebApp/desktop/agregarHorarioLaboral.jsp">Agregar Horario Laboral</a></li>
+          		<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
+          	</c:if>
+            <c:if test="${tipoUsuario == 'TECNICO'}">
+            	<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
+            </c:if>
           </ul>
         </li>
 
@@ -75,16 +77,30 @@
             <li><a href="#">Ejemplo separado</a></li>
           </ul>
         </li>
+
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actividad <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <c:if test="${tipoUsuario == 'SOCIO'}">
+            <li><a href="/CounterWebApp/desktop/actividad/ingresar">Crear actividad</a></li>
+            <li><a href="/CounterWebApp/desktop/actividad/ver">Ver actividades</a></li>
+            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver Mis Actividades</a></li>
+          </c:if>
+          <c:if test="${tipoUsuario == 'TECNICO'}">
+            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver Mis Actividades</a></li>
+          </c:if>
+          </ul>
+        </li>
+        
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Enlace ejemplo</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Ver mis datos</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Cerrar sesión</a></li>
+            <li><a href="/CounterWebApp/desktop/login/logout">Cerrar sesión</a></li>
           </ul>
         </li>
       </ul>

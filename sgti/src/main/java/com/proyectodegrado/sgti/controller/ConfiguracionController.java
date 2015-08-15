@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaConfiguracion;
 import com.proyectodegrado.sgti.fachada.FachadaHorarioLaboral;
 
@@ -40,6 +41,10 @@ public class ConfiguracionController {
 		} catch (ClassNotFoundException | IOException | SQLException| ParseException e) {
 			e.printStackTrace();
 			model.addAttribute("idContrato", idContrato);
+			mensaje = "Ha ocurrido un error";
+			return cargarPagina(model, idContrato);
+		} catch (SgtiException e) {
+			e.printStackTrace();
 			mensaje = e.getMessage();
 			return cargarPagina(model, idContrato);
 		}finally{

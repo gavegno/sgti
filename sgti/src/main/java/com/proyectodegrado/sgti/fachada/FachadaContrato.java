@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Cliente;
 import com.proyectodegrado.sgti.modelo.Contrato;
 import com.proyectodegrado.sgti.servicios.ServicioCliente;
@@ -19,7 +20,7 @@ public class FachadaContrato {
 	
 	private ServicioCliente servicioCliente;
 	
-	public void ingresarContrato(String id, String idContraparte, String nombreCliente) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+	public void ingresarContrato(String id, String idContraparte, String nombreCliente) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, SgtiException{
 		Contrato contrato = new Contrato();
 		contrato.setId(id);
 		contrato.setContraparte(servicioUsuario.selecionarUsuario(idContraparte));
@@ -35,6 +36,14 @@ public class FachadaContrato {
 	
 	public List<Contrato> verContratosPorContraparte(String idContraparte) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return servicioContrato.verContratosPorContraparte(idContraparte);
+	}
+	
+	public List<Contrato> seleccionarContratos() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioContrato.seleccionarContratos();
+	}
+	
+	public List<Contrato> seleccionarContratosVigentes() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioContrato.seleccionarContratosVigentes();
 	}
 	
 	public ServicioContrato getServicioContrato() {

@@ -7,14 +7,22 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/styles.css" />">
-     <%@ include file="header.jsp" %>
+    <%@ include file="header.jsp" %>
+    <%
+		String usuarioSesion=(String)session.getAttribute("usuario");
+    	request.removeAttribute("usuario");
+		if(usuarioSesion==null)
+		{
+			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+		}
+	%> 
 </head>
 <body>
     <header>
         <div class="container">
         
             <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        
+        	${message}
         </div>
     
     </header>   

@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Cliente;
 
 public interface ServicioCliente {
 
 	public abstract void agregar(Cliente cliente) throws FileNotFoundException,
-			IOException, SQLException, ClassNotFoundException;
+			IOException, SQLException, ClassNotFoundException, SgtiException;
 
 	public abstract Cliente verPorNombre(Cliente cliente)
 			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;

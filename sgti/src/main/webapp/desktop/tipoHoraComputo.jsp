@@ -7,6 +7,14 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/styles.css" />" rel="stylesheet">
+    <%
+		String usuario=(String)session.getAttribute("usuario");
+    	request.removeAttribute("usuario");
+		if(usuario==null)
+		{
+			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+		}
+	%>
 </head>
 <body>
     <header>

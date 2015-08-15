@@ -1,5 +1,6 @@
 package com.proyectodegrado.sgti.modelo;
 
+import java.util.Date;
 import java.util.List;
 
 public class Contrato {
@@ -15,6 +16,12 @@ public class Contrato {
 	private Cliente cliente;
 	
 	private Usuario contraparte;
+	
+	private Date ultimaFechaInforme;
+	
+	private Date ultimaFechaFacturacion;
+	
+	private Date ultimaFechaComputacion;
 
 	public String getId() {
 		return id;
@@ -63,5 +70,28 @@ public class Contrato {
 	public void setContraparte(Usuario contraparte) {
 		this.contraparte = contraparte;
 	}
-	
+
+	public Date getUltimaFechaInforme() {
+		return ultimaFechaInforme;
+	}
+
+	public void setUltimaFechaInforme(Date ultimaFechaInforme) {
+		this.ultimaFechaInforme = ultimaFechaInforme;
+	}
+
+	public Date getUltimaFechaFacturacion() {
+		return ultimaFechaFacturacion;
+	}
+
+	public void setUltimaFechaFacturacion(Date ultimaFechaFacturacion) {
+		this.ultimaFechaFacturacion = ultimaFechaFacturacion;
+	}
+
+	public Date getUltimaFechaComputacion() {
+		return ultimaFechaComputacion;
+	}
+
+	public void setUltimaFechaComputacion(Date ultimaFechaComputacion) {
+		this.ultimaFechaComputacion = ultimaFechaComputacion;
+	}
 }

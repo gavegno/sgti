@@ -20,6 +20,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.proyectodegrado.sgti.consultas.ConsultasConfiguracion;
 import com.proyectodegrado.sgti.daos.ConfiguracionDAO;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Configuracion;
 import com.proyectodegrado.sgti.modelo.Dia;
 import com.proyectodegrado.sgti.modelo.HorarioLaboral;
@@ -59,7 +60,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testInsertar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			Configuracion configuracion = new Configuracion();
@@ -92,7 +93,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testEditar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testEditar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			Configuracion configuracion = new Configuracion();
@@ -125,7 +126,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testConfiguracionSuperpuesta() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testConfiguracionSuperpuesta() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			Calendar fechaDesdeVieja = Calendar.getInstance();
@@ -167,7 +168,7 @@ public class ServicioConfiguracionTest extends ConfigurarTest{
 	}
 	
 	@Test
-	public void testConfiguracionActual() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void testConfiguracionActual() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
 		if(isHabilitarTest()){
 			agregarRelacionadoConServicioContrato();
 			Calendar fechaDesdeVieja = Calendar.getInstance();

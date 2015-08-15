@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.proyectodegrado.sgti.daos.TipoHoraDAO;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.servicios.ServicioTipoHora;
 
@@ -17,8 +18,12 @@ public class ServicioTipoHoraImpl implements ServicioTipoHora {
 	 * @see com.proyectodegrado.sgti.servicios.ServicioTipoHora#agregar(com.proyectodegrado.sgti.Data.DataTipoHora)
 	 */
 	@Override
-	public void agregar(TipoHora dataTipoHora) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		tipoHoraDao.agregar(dataTipoHora.getTipo());
+	public void agregar(TipoHora dataTipoHora) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
+		if(tipoHoraDao.seleccionarPorTipo(dataTipoHora.getTipo()).getTipo() == null){
+			tipoHoraDao.agregar(dataTipoHora.getTipo());
+		}else{
+			throw new SgtiException("El tipo de hora ingresado ya existe");
+		}
 	}
 	
 	/* (non-Javadoc)

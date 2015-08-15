@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaPrecio;
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 
@@ -33,8 +34,11 @@ public class PrecioController {
 			model.addAttribute("tiposDeHora", fachadaTipoHora.verTiposDeHora());
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
-			mensaje = e.getMessage();
+			mensaje = "Ha ocurrido un error";
 			return "desktop/precio";
+		} catch (SgtiException e) {
+			e.printStackTrace();
+			mensaje = e.getMessage();
 		}finally{
 			model.addAttribute("idContrato", idContrato);
 			model.addAttribute("message", mensaje);
