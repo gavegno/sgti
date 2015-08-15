@@ -15,7 +15,7 @@
     <header>
         <div class="container">
         
-            <h1>Sistema de GestiÃ³n de TÃ©cnicos e Incidentes</h1>
+            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
         
         </div>
     
@@ -24,7 +24,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">GestiÃ³n de Precios</h2>
+            <h2 class="text-center">Gestión de Usuarios</h2>
             <div>
                 <form class="form-horizontal" action="/CounterWebApp/desktop/tecnicos/ingresarUsuario" method="POST">
                 
@@ -54,13 +54,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputTelefono" class="control-label">TelÃ©fono:</label>
-                        <input type="number" class="form-control" name="telefono" id="inputTelefono" placeholder="TelÃ©fono" required autofocus>        
+                        <label for="inputTelefono" class="control-label">Teléfono:</label>
+                        <input type="number" class="form-control" name="telefono" id="inputTelefono" placeholder="Teléfono" required autofocus>        
                     </div>
 
                     <div class="form-group">
                         <label for="inputTipo" class="control-label">Tipo de usuario:</label>
-                        <select class="form-control" name="tipo" id="inputTipo" onChange="document.getElementById('inputTipoHora').disabled = (this.value=='Contraparte')">
+                        <select class="form-control" name="tipo" id="inputTipo" onChange="document.getElementById('inputTipoHora').disabled = (this.value=='CONTRAPARTE')">
                             <option value="SOCIO">SOCIO</option>
                             <option value="TECNICO">TECNICO</option>
                             <option value="CONTRAPARTE">CONTRAPARTE</option>

@@ -41,6 +41,15 @@ public class ConsultasContrato {
 		return resultSet;
 	}
 	
+	public ResultSet verContratosPorContraparte (String idContraparte) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM contrato AS c WHERE c.contraparte=?");
+		preparedStatement.setString(1, idContraparte);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
 	public void borrarContratos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		Statement statement = con.createStatement();

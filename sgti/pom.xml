@@ -98,6 +98,7 @@
 				<downloadJavadocs>false</downloadJavadocs>
 				<!-- Avoid type mvn eclipse:eclipse -Dwtpversion=2.0 -->
 				<wtpversion>2.0</wtpversion>
+				<encoding>UTF-8</encoding>
 			</configuration>
 		  </plugin>
  
@@ -109,6 +110,7 @@
 			<configuration>
 				<source>${jdk.version}</source>
 				<target>${jdk.version}</target>
+				<encoding>UTF-8</encoding>
 			</configuration>
 		  </plugin>
  
@@ -119,6 +121,7 @@
 			<version>2.2</version>
 			<configuration>
 				<path>/CounterWebApp</path>
+				<encoding>UTF-8</encoding>
 			</configuration>
 		  </plugin>
 
@@ -127,6 +130,7 @@
             		<configuration>
                 		<source>1.7</source>
                 		<target>1.7</target>
+						<encoding>UTF-8</encoding>
             		</configuration>
         	 </plugin>
  

@@ -42,7 +42,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/CounterWebApp/desktop/tecnicos/ingresar">Agregar usuario</a></li>
-            <li><a href="#">Modificar usuario</a></li>
+            <li><a href="/CounterWebApp/desktop/tecnicos/tabla">Ver y modificar usuario</a></li>
             <li><a href="#">Eliminar usuario</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Ejemplo separado</a></li>
@@ -55,7 +55,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/CounterWebApp/desktop/clientes.jsp">Agregar cliente</a></li>
-            <li><a href="#">Modificar cliente</a></li>
+            <li><a href="/CounterWebApp/desktop/cliente/tabla">Ver y modificar cliente</a></li>
             <li><a href="#">Eliminar cliente</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Ejemplo separado</a></li>
@@ -69,6 +69,7 @@
           <ul class="dropdown-menu">
             <li><a href="/CounterWebApp/desktop/contrato/ingresar">Crear contrato</a></li>
             <li><a href="#">Ver contratos</a></li>
+            <li><a href="/CounterWebApp/desktop/contrato/tabla">Ver contratos por contraparte</a></li>
             <li><a href="#">Modificar contrato</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Ejemplo separado</a></li>

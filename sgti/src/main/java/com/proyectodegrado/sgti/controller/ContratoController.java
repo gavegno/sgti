@@ -61,4 +61,24 @@ public class ContratoController {
 		return "desktop/precio";
 	}
 	
+	//Carga la tabla de clientes, donde se permitirá editarlos.
+		@RequestMapping(value = "/tabla", method = RequestMethod.GET)
+		public String cargarTablaContratosPorContraparte(Model model)//, @RequestParam("id") final String idContraparte)
+		{	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+			fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
+			String idContraparteHARDCODED = "petecoJr";
+			try {
+				model.addAttribute("contratos", fachadaContrato.verContratosPorContraparte(idContraparteHARDCODED));
+				
+			} catch (IOException | SQLException | ClassNotFoundException e) {
+				e.printStackTrace();
+				//mensaje = e.getMessage();
+				return "desktop/tablaContratosCliente";
+			}finally{
+				//model.addAttribute("message", mensaje);
+				context.close();
+			}
+			return "desktop/tablaContratosCliente";
+		}
+	
 }

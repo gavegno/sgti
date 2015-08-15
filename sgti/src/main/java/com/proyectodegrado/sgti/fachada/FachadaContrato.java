@@ -3,6 +3,7 @@ package com.proyectodegrado.sgti.fachada;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.proyectodegrado.sgti.modelo.Cliente;
 import com.proyectodegrado.sgti.modelo.Contrato;
@@ -26,6 +27,14 @@ public class FachadaContrato {
 		cliente.setNombre(nombreCliente);
 		contrato.setCliente(servicioCliente.verPorNombre(cliente));
 		servicioContrato.insertar(contrato);
+	}
+	
+	public List<Contrato> verContratosPorCliente(int idCliente) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		return servicioContrato.verContratosPorCliente(idCliente);
+	}
+	
+	public List<Contrato> verContratosPorContraparte(String idContraparte) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		return servicioContrato.verContratosPorContraparte(idContraparte);
 	}
 	
 	public ServicioContrato getServicioContrato() {

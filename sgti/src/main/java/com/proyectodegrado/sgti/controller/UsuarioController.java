@@ -39,7 +39,7 @@ public class UsuarioController {
 			model.addAttribute("message", mensaje);
 			context.close();
 		}
-		return "desktop/tecnicos/ingresar";
+		return "desktop/tecnicos";
 	}
 	
 	@RequestMapping(value = "/ingresar", method = RequestMethod.GET)
@@ -57,6 +57,71 @@ public class UsuarioController {
 		return "desktop/tecnicos";
 	}
 	
+	//Carga la tabla de usuarios, donde se permitirá editarlos.
+		@RequestMapping(value = "/tabla", method = RequestMethod.GET)
+		public String cargarTablaUsuarios(Model model)
+		{	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+			String mensaje = "";
+			try {
+				model.addAttribute("usuarios", fachadaUsuario.seleccionarUsuarios());
+				
+			} catch (IOException | SQLException | ClassNotFoundException e) {
+				e.printStackTrace();
+				mensaje = e.getMessage();
+				return "desktop/tablaUsuarios";
+			}finally{
+				model.addAttribute("message", mensaje);
+				context.close();
+			}
+			return "desktop/tablaUsuarios";
+		}
+		
+		//Carga la página de editar usuario, con el seleccionado en la tabla.
+		@RequestMapping(value="/editar", method = RequestMethod.POST)
+		public String cargarUsuario(Model model, 
+				@RequestParam("id") final String id){
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+			String mensaje = "El usuario fue cargado para modificar correctamente";
+			try {			
+				model.addAttribute("usuario", fachadaUsuario.seleccionarUsuario(id));
+				
+			} catch (ClassNotFoundException | IOException | SQLException e) {
+				e.printStackTrace();
+				mensaje = e.getMessage();
+				return "desktop/editarTecnicos";
+			}finally{
+				model.addAttribute("message", mensaje);
+				context.close();
+			}
+			return "desktop/editarTecnicos";
+		}
+		
+		@RequestMapping(value = "/editarUsuarioOk", method = RequestMethod.POST)
+		public String editarUsuario(Model model, 
+				@RequestParam("id") final String id, 
+				@RequestParam("nombre") final String nombre, 
+				@RequestParam("apellido") final String apellido, 
+				@RequestParam("email") final String email, 
+				@RequestParam("telefono") final String telefono){
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+			String mensaje = "Se enviaron los datos de Usuario a modificar";
+			try {			
+				fachadaUsuario.editarUsuario(id, nombre, apellido, email, telefono);
+				
+			} catch (ClassNotFoundException | IOException | SQLException e) {
+				e.printStackTrace();
+				mensaje = e.getMessage();
+				return cargarTablaUsuarios(model);
+			}finally{
+				model.addAttribute("message", mensaje);
+				context.close();
+			}
+			return cargarTablaUsuarios(model);
+		}
+		
 	public FachadaUsuario getFachadaUsuario() {
 		return fachadaUsuario;
 	}

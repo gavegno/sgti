@@ -44,8 +44,23 @@ public class FachadaUsuario {
 		servicioUsuario.agregarTipoHoraUsuario(usuario);
 	}
 	
+	public void editarUsuario(String id, String nombre, String apellido, String email, String telefono) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Usuario usuario = new Usuario();
+		usuario.setId(id);
+		usuario.setNombre(nombre);
+		usuario.setApellido(apellido);
+		usuario.setEmail(email);
+		usuario.setTelefono(telefono);
+		servicioUsuario.editarUsuario(usuario);
+		
+	}
+	
 	public Usuario seleccionarUsuario(String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		return servicioUsuario.selecionarUsuario(id);
+	}
+	
+	public List<Usuario> seleccionarUsuarios() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioUsuario.seleccionarUsuarios();
 	}
 	
 	public List<Usuario> verUsuariosContraparte() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
