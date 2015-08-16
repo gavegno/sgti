@@ -159,6 +159,8 @@
 		
 		<bean id="servicioHora" class="com.proyectodegrado.sgti.servicios.impl.ServicioHoraImpl">
 			<property name="horaDao" ref="horaDao"/>
+			<property name="servicioConfiguracion" ref="servicioConfiguracion"/>
+			<property name="servicioContrato" ref="servicioContrato"/>
 		</bean>
 		
 		<!-- Fachadas -->

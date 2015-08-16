@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.proyectodegrado.sgti.modelo.Hora;
@@ -55,6 +56,18 @@ public class FachadaHora {
 		servicioHora.editar(hora);
 	}
 	
+	public void editarHoraDetalle(final int id, final String fechaInformar, final String fechaFacturar, final String fechaComputar) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException{
+		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Hora hora = new Hora();
+		hora.setId(id);
+		
+		
+		hora.setFechaInformar(simpleFateFormat.parse(fechaInformar));
+		hora.setFechaFacturar(simpleFateFormat.parse(fechaFacturar));
+		hora.setFechaComputar(simpleFateFormat.parse(fechaComputar));
+		servicioHora.editarDetalle(hora);
+	}
+	
 	public List<Hora> seleccionarHorasPorUsuario(final String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
 		return servicioHora.seleccionarHorasRegistradasPorUsuario(idUsuario);
 	}
@@ -85,5 +98,13 @@ public class FachadaHora {
 
 	public void setServicioContrato(ServicioContrato servicioContrato) {
 		this.servicioContrato = servicioContrato;
+	}
+	
+	public List<Date> proximas3FechasInforme(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioHora.proximas3FechasInforme(idContrato);
+	}
+	
+	public List<Date> proximas3FechasFacturacion(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioHora.proximas3FechasFacturacion(idContrato);
 	}
 }

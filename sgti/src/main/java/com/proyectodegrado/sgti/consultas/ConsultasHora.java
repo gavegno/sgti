@@ -121,6 +121,18 @@ public class ConsultasHora {
 		conexionBD.cerrar(connection);
 	}
 	
+	public void editarHoraFechas(int id, Date fechaInformar, Date fechaFacturar, Date fechaComputar) throws SQLException, FileNotFoundException, ClassNotFoundException, IOException{
+		
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE hora AS h SET fechainformar=?, fechafacturar=?, fechacomputar=? WHERE h.id=?");
+		preparedStatement.setDate(1,fechaInformar);
+		preparedStatement.setDate(2,fechaFacturar);
+		preparedStatement.setDate(3,fechaComputar);
+		preparedStatement.setInt(4, id);
+		preparedStatement.executeUpdate();
+		conexionBD.cerrar(connection);
+	}
+	
 	public void borrarHora (int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM hora AS h WHERE h.id =?");

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import com.proyectodegrado.sgti.modelo.Hora;
@@ -41,5 +42,17 @@ public interface ServicioHora {
 
 	Hora seleccionarHora(int id) throws FileNotFoundException,
 			ClassNotFoundException, IOException, SQLException, ParseException;
+
+	List<Date> proximas3FechasInforme(String idContrato)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
+	List<Date> proximas3FechasFacturacion(String idContrato)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
+	void editarDetalle(Hora hora) throws FileNotFoundException,
+			ClassNotFoundException, SQLException, IOException;
+
 
 }

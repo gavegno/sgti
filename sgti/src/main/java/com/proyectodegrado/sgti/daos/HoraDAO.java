@@ -213,6 +213,15 @@ public class HoraDAO {
 				tipoHoraDao.seleccionarPorTipo(hora.getNombreTipoHora()).getId(), hora.getDescripcion(), hora.isValidada(), hora.isInformada(), hora.isFacturada());
 	}
 	
+	public void editarHoraDetalle(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
+		consultasHora.editarHoraFechas(
+				hora.getId(), 
+				new java.sql.Date(hora.getFechaInformar().getTime()), 
+				new java.sql.Date(hora.getFechaFacturar().getTime()), 
+				new java.sql.Date(hora.getFechaComputar().getTime()));
+	}	
+	
+	
 	public void borrar(int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		consultasHora.borrarHora(id);
 	}

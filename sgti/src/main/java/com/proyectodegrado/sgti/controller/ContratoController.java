@@ -3,6 +3,8 @@ package com.proyectodegrado.sgti.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,14 +68,14 @@ public class ContratoController {
 		return "desktop/precio";
 	}
 	
-	//Carga la tabla de clientes, donde se permitirá editarlos.
+	//Carga la tabla de contratos, donde se permitirá editarlos.
 		@RequestMapping(value = "/tabla", method = RequestMethod.GET)
-		public String cargarTablaContratosPorContraparte(Model model)//, @RequestParam("id") final String idContraparte)
+		public String cargarTablaContratosPorContraparte(Model model, HttpServletRequest request)//, @RequestParam("id") final String idContraparte)
 		{	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
-			String idContraparteHARDCODED = "petecoJr";
+			String idUsuario = (String) request.getSession().getAttribute("usuario");
 			try {
-				model.addAttribute("contratos", fachadaContrato.verContratosPorContraparte(idContraparteHARDCODED));
+				model.addAttribute("contratos", fachadaContrato.verContratosPorContraparte(idUsuario));
 				
 			} catch (IOException | SQLException | ClassNotFoundException e) {
 				e.printStackTrace();

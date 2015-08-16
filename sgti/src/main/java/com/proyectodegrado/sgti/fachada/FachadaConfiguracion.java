@@ -53,6 +53,8 @@ public class FachadaConfiguracion {
 		
 	}
 	
+	
+	
 	public List<HorarioLaboral> verHorariosLaborales() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		return servicioHorarioLaboral.seleccionarHorariosLaborales();
 	}

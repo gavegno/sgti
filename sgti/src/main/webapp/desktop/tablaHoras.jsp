@@ -171,11 +171,15 @@
         <input class="form-control" type="hidden" name="fechainformar" value="${horasRegistrada.fechaInformar}" >
         <input class="form-control" type="hidden" name="fechafacturar" value="${horasRegistrada.fechaFacturar}" >
         <input class="form-control" type="hidden" name="fechacomputar" value="${horasRegistrada.fechaComputar}" >
-        <td class="vert-align"><button id="addRow" class="btn btn-primary" onclick="document.getElementById('filaNueva').hidden = false" >Editar </td>
+        <td class="vert-align"><button id="addRow" class="btn btn-primary" onclick="document.getElementById('filaNueva').hidden = false" >Editar</td>
         </form>
+        <form class="form-horizontal" action="/CounterWebApp/desktop/hora/detalleHora" method="POST">
+            <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >
+        <td class="vert-align"><button id="plus" class="btn btn-primary glyphicon glyphicon-plus" onclick="document.getElementById('filaNueva').hidden = false" ></td>
+         </form>
         <form class="form-horizontal" action="/CounterWebApp/desktop/hora/copiarHora" method="POST">
         <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >
-        <td class="vert-align"><button id="addRow" class="btn btn-primary" onclick="document.getElementById('filaNueva').hidden = false" >copiar </td>
+        <td class="vert-align"><button id="addRow" class="btn btn-primary" onclick="document.getElementById('filaNueva').hidden = false" >Copiar</td>
          </form>
       </tr>
      </c:forEach>
