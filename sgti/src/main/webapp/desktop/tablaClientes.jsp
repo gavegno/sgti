@@ -8,84 +8,62 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/styles.css" />">
     <%@ include file="header.jsp" %>
+    <%
+		String usuarioSesion=(String)session.getAttribute("usuario");
+    	request.removeAttribute("usuario");
+		if(usuarioSesion==null)
+		{
+			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+		}
+	%>
 </head>
 <body>
-    <header>
-        <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        
-        </div>
-    
-    </header>   
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
 <br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Clientes</h2>
+            <h2 class="text-center container">Clientes</h2>
             <div>
-                
-                    
-                    <div class="form-group">
+                    <div class="form-group container">
                         <table class="table table-hover">
-
                             <thead>
                                 <tr>
-                                    
                                     <th>Nombre</th>
-                                    <th>Dirección</th>
-                                    <th>Teléfono</th>
+                                    <th>Direcci�n</th>
+                                    <th>Tel�fono</th>
                                 </tr>
                             </thead>
-                            
                             <tbody>
-
-
                             <c:forEach items="${clientes}" var="cliente" >
-                                <form action="/CounterWebApp/desktop/cliente/editar" method="POST">
-                                <tr >
-                                    <td><input class="vert-align" name="nombre" value="${cliente.nombre}" hidden><c:out value="${cliente.nombre}" /></td>
-                                    <td><input class="vert-align" name="direccion" value="${cliente.direccion}" hidden><c:out value="${cliente.direccion}" /></td>
-                                    <td><input class="vert-align" name="telefono" value="${cliente.telefono}" hidden><c:out value="${cliente.telefono}" /></td>
+                            <tr>
+                                <form class="form-control" action="/CounterWebApp/desktop/cliente/editar" method="POST">
+                                
+                                    <td><input class="form-control" type="text" name="nombre" value="${cliente.nombre}" disabled="disabled"></td>
+                                    <td><input class="form-control" type="text" name="direccion" value="${cliente.direccion}" disabled="disabled"></td>
+                                    <td><input class="form-control" type="text" name="telefono" value="${cliente.telefono}" disabled="disabled"></td>
                                     <td class="vert-align"><button class="btn btn-info" id="boton" type="submit"> Editar </button></td>
-                                </tr>
+                                <input class="vert-align" name="nombre" type="hidden" value="${cliente.nombre}">
                                 </form>
+                            </tr>
                             </c:forEach>
-
-<!--
-
-
-
-                            <tr >
-                                
-                                <td class="vert-align">Tienda Inglesa S.A.</td>
-                                <td class="vert-align">Av. Italia 1234</td>
-                                <td class="vert-align">26112541</td>                                                    
-                                <td class="vert-align"><a class="btn btn-info" href="{site_url()}admin/info/1">Ver</a></td>
-
-                            </tr>
-                            <tr >
-                                
-                                <td class="vert-align">Mosca Hnos.</td>
-                                <td class="vert-align">Ellauri 971</td>
-                                <td class="vert-align">27115977</td>                                                    
-                                <td class="vert-align"><a class="btn btn-info" href="{site_url()}admin/info/2">Ver</a></td>
-
-                            </tr>
-                        -->
                            </tbody>
                         </table>
 
-
-
-
-                
             </div>
         </div>
     </div>
 </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"> </script>
-    
-
 </body>

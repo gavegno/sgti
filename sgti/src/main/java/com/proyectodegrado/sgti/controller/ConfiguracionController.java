@@ -19,16 +19,18 @@ import com.proyectodegrado.sgti.fachada.FachadaHorarioLaboral;
 @RequestMapping("desktop/configuracion")
 public class ConfiguracionController {
 	
+	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
+
 	private FachadaConfiguracion fachadaConfiguracion;
 	
 	private FachadaHorarioLaboral fachadaHorarioLaboral;
 	
 	@RequestMapping(value="/ingresarConfiguracion", method = RequestMethod.POST)
-	public String cargarPrecio(Model model, @RequestParam("fechaDesde") final String fechaDesde, @RequestParam("fechaHasta") final String fechaHasta, 
+	public String ingresarConfiguracion(Model model, @RequestParam("fechaDesde") final String fechaDesde, @RequestParam("fechaHasta") final String fechaHasta, 
 			@RequestParam("periodoRenovacion") final int periodoRenovacion, @RequestParam("tipoRenovacion") final String tipoRenovacion, 
 			@RequestParam("tipoContrato") final String tipoContrato, @RequestParam("computos") final int computos, 
 			@RequestParam("unidadValidez") final String unidadValidez, @RequestParam("periodoValidez") final int periodoValidez, 
-			@RequestParam("acumulacion") final String acumulacion, @RequestParam("periodoAcumulacion") final int periodoAcumulacion, 
+			@RequestParam("acumulacion") final String acumulacion, @RequestParam(required=false, value="periodoAcumulacion") final Integer periodoAcumulacion, 
 			@RequestParam("frecuenciaInforme") final int frecuenciaInforme, @RequestParam("frecuenciaFacturacion") final int frecuenciaFacturacion, 
 			@RequestParam("frecuenciaExtra") final int frecuenciaComputosExtra, @RequestParam("respuesta") final String tiempoRespuesta, 
 			@RequestParam("horarioLaboral") final String horarioLaboral, @RequestParam("idContrato") final String idContrato){
@@ -38,17 +40,19 @@ public class ConfiguracionController {
 		String mensaje = "La configuración se ha creado correctamente";
 		try {
 			fachadaConfiguracion.insertarConfiguracion(fechaDesde, fechaHasta, periodoRenovacion, tipoRenovacion, tipoContrato, computos, unidadValidez, periodoValidez, convertirBoolean(acumulacion), periodoAcumulacion, frecuenciaInforme, frecuenciaFacturacion, frecuenciaComputosExtra, tiempoRespuesta, horarioLaboral, idContrato);
+			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException| ParseException e) {
 			e.printStackTrace();
 			model.addAttribute("idContrato", idContrato);
-			mensaje = "Ha ocurrido un error";
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model, idContrato);
 		} catch (SgtiException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
+			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model, idContrato);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "redirect:/desktop/paginaPrincipal.jsp?status=success";
@@ -62,7 +66,7 @@ public class ConfiguracionController {
 			model.addAttribute("horariosLaborales", fachadaHorarioLaboral.verHorariosLaborales());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return "desktop/configuracion";
 		}finally{
 			model.addAttribute("idContrato", idContrato);

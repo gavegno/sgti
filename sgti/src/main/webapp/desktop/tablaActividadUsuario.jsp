@@ -20,17 +20,21 @@
       
 </head>
 <body>
-     <header>
-        <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        
-        </div>
-    
-    </header>   
-</head>
-<body>
-    <div class="container">
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
+<br><br>
+<div class="container">
   <table id="mt" class="table table-hover">
     <thead>
       <tr>
@@ -56,11 +60,6 @@
      </c:forEach>
     </tbody>
   </table>
-<!--
-  <br>
-  <button id="addRow" class="btn btn-primary">
-    Add row
-  </div> -->
 </div>
 </body>
 </html>

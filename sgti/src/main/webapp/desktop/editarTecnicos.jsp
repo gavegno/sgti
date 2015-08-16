@@ -12,54 +12,50 @@
     <%@ include file="header.jsp" %>
 </head>
 <body>
-    <header>
-        <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        
-        </div>
-    
-    </header>   
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
 <br><br>
 <div class="container">
     <div class="row">
-        <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gestión de Usuarios</h2>
-            <div>
-                <form class="form-horizontal" action="/CounterWebApp/desktop/tecnicos/editarUsuarioOk" method="POST">
-                
-                	<div class="form-group">
+        <div class="container col-sm-6 col-md-6 ">
+            <h2 class="container text-center">Gestión de Usuarios</h2>
+            <div class="form-group container">
+                <form class="form-vertical" action="/CounterWebApp/desktop/tecnicos/editarUsuarioOk" method="POST">
+                	<div class="container form-group ">
                         <label for="inputId" class="control-label">Id:</label>
-                        <input type="text" name="id" value="${usuario.id}" hidden><c:out value="${usuario.id}" /></input>        
+                        <input type="text" class="container form-group" name="id" value="${usuario.id}" disabled="disabled"> </input> 
+                        <input type="hidden" name="id" value="${usuario.id}" hidden> </input>        
                     </div>
-                    
-                    <div class="form-group">
+                    <div class="container form-group ">
                         <label for="inputNombre" class="control-label">Nombre:</label>
-                        <input type="text" name="nombre" value="${usuario.nombre}"></input>        
+                        <input type="text" class="form-control" name="nombre" value="${usuario.nombre}"></input>        
                     </div>
-
-                    <div class="form-group">
+                    <div class="container form-group ">
                         <label for="inputApellido" class="control-label">Apellido:</label>
-                        <input type="text" name="apellido" value="${usuario.apellido}"></input>        
+                        <input type="text" class="form-control" name="apellido" value="${usuario.apellido}"></input>        
                     </div>
-
-                    <div class="form-group">
+                    <div class="container form-group ">
                         <label for="inputEmail" class="control-label">Email:</label>
-                        <input type="text" name="email" value="${usuario.email}"></input>        
+                        <input type="text" class="form-control" name="email" value="${usuario.email}"></input>        
                     </div>
-
-                    <div class="form-group">
+                    <div class="container form-group ">
                         <label for="inputTelefono" class="control-label">Teléfono:</label>
-                        <input type="text" name="telefono" value="${usuario.telefono}"></input>        
+                        <input type="text" class="form-control" name="telefono" value="${usuario.telefono}"></input>        
                     </div>
-                    
-                
-                <div class="form-group">
+                <div class="container form-group">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
-                    <button class="btn btn-default" type="button"> Cancelar </button>
-                </div>       
-
-
+                    <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
 
                 </form>
             </div>

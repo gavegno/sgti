@@ -26,72 +26,74 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Ejemplo <span class="sr-only">(current)</span></a></li>
         
-         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Horas <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-          	<c:if test="${tipoUsuario == 'SOCIO'}">
-          		<li><a href="/CounterWebApp/desktop/tiposDeHora.jsp">Agregar tipo de hora</a></li>
-          		<li><a href="/CounterWebApp/desktop/agregarHorarioLaboral.jsp">Agregar Horario Laboral</a></li>
-          		<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
-          	</c:if>
-            <c:if test="${tipoUsuario == 'TECNICO'}">
-            	<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
-            </c:if>
-          </ul>
-        </li>
+        <c:if test="${tipoUsuario == 'SOCIO' || tipoUsuario == 'TECNICO'}">
+	         <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Horas <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	          	<c:if test="${tipoUsuario == 'SOCIO'}">
+	          		<li><a href="/CounterWebApp/desktop/tiposDeHora.jsp">Agregar tipo de hora</a></li>
+	          		<li><a href="/CounterWebApp/desktop/agregarHorarioLaboral.jsp">Agregar Horario Laboral</a></li>
+	          		<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
+	          	</c:if>
+	            <c:if test="${tipoUsuario == 'TECNICO'}">
+	            	<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
+	            </c:if>
+	          </ul>
+	        </li>
+        </c:if>
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/CounterWebApp/desktop/tecnicos/ingresar">Agregar usuario</a></li>
-            <li><a href="/CounterWebApp/desktop/tecnicos/tabla">Ver y modificar usuario</a></li>
-            <li><a href="#">Eliminar usuario</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Ejemplo separado</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Otro ejemplo separado</a></li>
-          </ul>
-        </li>
+		<c:if test="${tipoUsuario == 'SOCIO'}">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="/CounterWebApp/desktop/tecnicos/ingresar">Agregar usuario</a></li>
+	            <li><a href="/CounterWebApp/desktop/tecnicos/tabla">Ver y modificar usuario</a></li>
+	            <li><a href="#">Eliminar usuario</a></li>
+	          </ul>
+	        </li>
+        </c:if>
         
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/CounterWebApp/desktop/clientes.jsp">Agregar cliente</a></li>
-            <li><a href="/CounterWebApp/desktop/cliente/tabla">Ver y modificar cliente</a></li>
-            <li><a href="#">Eliminar cliente</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Ejemplo separado</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Otro ejemplo separado</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contratos <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/CounterWebApp/desktop/contrato/ingresar">Crear contrato</a></li>
-            <li><a href="#">Ver contratos</a></li>
-            <li><a href="/CounterWebApp/desktop/contrato/tabla">Ver contratos por contraparte</a></li>
-            <li><a href="#">Modificar contrato</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Ejemplo separado</a></li>
-          </ul>
-        </li>
-
-		<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actividad <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-          <c:if test="${tipoUsuario == 'SOCIO'}">
-            <li><a href="/CounterWebApp/desktop/actividad/ingresar">Crear actividad</a></li>
-            <li><a href="/CounterWebApp/desktop/actividad/ver">Ver actividades</a></li>
-            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver Mis Actividades</a></li>
-          </c:if>
-          <c:if test="${tipoUsuario == 'TECNICO'}">
-            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver Mis Actividades</a></li>
-          </c:if>
-          </ul>
-        </li>
-        
+        <c:if test="${tipoUsuario == 'SOCIO'}">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="/CounterWebApp/desktop/clientes.jsp">Agregar cliente</a></li>
+	            <li><a href="/CounterWebApp/desktop/cliente/tabla">Ver y modificar cliente</a></li>
+	            <li><a href="#">Eliminar cliente</a></li>
+	          </ul>
+	        </li>
+		</c:if>
+		
+		<c:if test="${tipoUsuario == 'SOCIO' || tipoUsuario == 'CONTRAPARTE'}">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contratos <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	          <c:if test="${tipoUsuario == 'SOCIO'}">
+	            <li><a href="/CounterWebApp/desktop/contrato/ingresar">Crear contrato</a></li>
+	            <li><a href="#">Ver contratos</a></li>
+	            <li><a href="#">Modificar contrato</a></li>
+	          </c:if>
+	          <c:if test="${tipoUsuario == 'CONTRAPARTE'}">
+	            <li><a href="/CounterWebApp/desktop/contrato/tabla">Ver mis contratos</a></li>
+	          </c:if>
+	          </ul>
+	        </li>
+		</c:if>
+		<c:if test="${tipoUsuario == 'SOCIO' || tipoUsuario == 'TECNICO'}">
+			<li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actividad <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	          <c:if test="${tipoUsuario == 'SOCIO'}">
+	            <li><a href="/CounterWebApp/desktop/actividad/ingresar">Crear actividad</a></li>
+	            <li><a href="/CounterWebApp/desktop/actividad/ver">Ver actividades</a></li>
+	            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver Mis Actividades</a></li>
+	          </c:if>
+	          <c:if test="${tipoUsuario == 'TECNICO'}">
+	            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver Mis Actividades</a></li>
+	          </c:if>
+	          </ul>
+	        </li>
+        </c:if>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -107,6 +109,16 @@
     </div>
   </div>
 </nav>
-
-    <script src="<c:url value="/resources/js/jquery.js"/>"></script>
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"> </script> 
+</head>
+<body>
+	<header>
+        <div class="container">
+            <h1 class="text-center" >Sistema de Gestión de Técnicos e Incidentes</h1>
+        </div>
+    
+    </header>
+    
+<script src="<c:url value="/resources/js/jquery.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"> </script> 
+</body>
+    

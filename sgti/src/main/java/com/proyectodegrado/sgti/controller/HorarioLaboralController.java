@@ -16,6 +16,7 @@ import com.proyectodegrado.sgti.fachada.FachadaHorarioLaboral;
 @RequestMapping("/desktop/dias")
 public class HorarioLaboralController {
 	
+	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 	private FachadaHorarioLaboral fachadaHorarioLaboral;
 	
 	@RequestMapping(value="/ingresardia", method = RequestMethod.POST)
@@ -26,17 +27,18 @@ public class HorarioLaboralController {
 		String mensaje = "El día se ha asignago correctamente al horario laboral";
 		try {
 			fachadaHorarioLaboral.insertarDiaHorarioLaboral(id, nombreDia, horaDesde, horaHasta);
+			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			mensaje = e.getMessage();
-			return "desktop/dias";
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
+			return cargarPagina(model,idContrato);
 		}finally{
 			model.addAttribute("idHorarioLaboral", id);
 			model.addAttribute("idContrato", idContrato);
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
-		return "desktop/dias";
+		return cargarPagina(model,idContrato);
 	}
 	
 	@RequestMapping(value="/ingresarHorarioLaboral", method = RequestMethod.POST)
@@ -47,10 +49,12 @@ public class HorarioLaboralController {
 		String mensaje = "El día se ha asignago correctamente al horario laboral";
 		try {
 			fachadaHorarioLaboral.insertarDiaHorarioLaboral(id, nombreDia, horaDesde, horaHasta);
+			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			mensaje = e.getMessage();
-			return "agregarHorarioLaboral?status=fail";
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
+			return "desktop/agregarHorarioLaboral";
 		}finally{
 			model.addAttribute("idHorarioLaboral", id);
 			model.addAttribute("message", mensaje);

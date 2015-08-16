@@ -20,6 +20,8 @@ import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 @RequestMapping("/desktop/tecnicos")
 public class UsuarioController {
 	
+	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
+
 	private FachadaUsuario fachadaUsuario;
 	
 	private FachadaTipoHora fachadaTipoHora;
@@ -31,16 +33,18 @@ public class UsuarioController {
 		String mensaje = "El usuario ha sido creado correctamente";
 		try {
 			fachadaUsuario.ingresarUsuario(id, nombre, apellido, contrasena, email, telefono, tipo, tipoHora == null ? new ArrayList<String>() : tipoHora);
+			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			mensaje = "Ha ocurrido un error";
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model);
 		} catch (SgtiException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
+			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarPagina(model);
@@ -54,7 +58,7 @@ public class UsuarioController {
 			model.addAttribute("tipos", fachadaTipoHora.verTiposDeHora());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute("errorMessage", e.getMessage());
 		}finally{
 			context.close();
 		}
@@ -66,16 +70,13 @@ public class UsuarioController {
 		public String cargarTablaUsuarios(Model model)
 		{	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
-			String mensaje = "";
 			try {
 				model.addAttribute("usuarios", fachadaUsuario.seleccionarUsuarios());
-				
 			} catch (IOException | SQLException | ClassNotFoundException e) {
 				e.printStackTrace();
-				mensaje = e.getMessage();
+				model.addAttribute("errorMessage", MENSAJE_ERROR);
 				return "desktop/tablaUsuarios";
 			}finally{
-				model.addAttribute("message", mensaje);
 				context.close();
 			}
 			return "desktop/tablaUsuarios";
@@ -87,16 +88,13 @@ public class UsuarioController {
 				@RequestParam("id") final String id){
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
-			String mensaje = "El usuario fue cargado para modificar correctamente";
 			try {			
 				model.addAttribute("usuario", fachadaUsuario.seleccionarUsuario(id));
-				
 			} catch (ClassNotFoundException | IOException | SQLException e) {
 				e.printStackTrace();
-				mensaje = e.getMessage();
-				return "desktop/editarTecnicos";
+				model.addAttribute("errorMessage", MENSAJE_ERROR);
+				return cargarTablaUsuarios(model);
 			}finally{
-				model.addAttribute("message", mensaje);
 				context.close();
 			}
 			return "desktop/editarTecnicos";
@@ -111,16 +109,16 @@ public class UsuarioController {
 				@RequestParam("telefono") final String telefono){
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
-			String mensaje = "Se enviaron los datos de Usuario a modificar";
+			String mensaje = "El usuario se editó correctamente";
 			try {			
 				fachadaUsuario.editarUsuario(id, nombre, apellido, email, telefono);
-				
+				model.addAttribute("message", mensaje);
 			} catch (ClassNotFoundException | IOException | SQLException e) {
 				e.printStackTrace();
 				mensaje = e.getMessage();
+				model.addAttribute("errorMessage", mensaje);
 				return cargarTablaUsuarios(model);
 			}finally{
-				model.addAttribute("message", mensaje);
 				context.close();
 			}
 			return cargarTablaUsuarios(model);

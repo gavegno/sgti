@@ -19,38 +19,47 @@
 <body>
     <header>
         <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-            ${message}
-        
+            <h1 class="text-center">Sistema de Gestión de Técnicos e Incidentes</h1>
         </div>
+    </header>
     
-    </header>   
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+   
 <br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gestión de Configuración</h2>
-            <div>
+            <h2 class="container text-center">Gestión de Configuración</h2>
+            <div class="form-group container">
                 <form class="form-horizontal" action="/CounterWebApp/desktop/configuracion/ingresarConfiguracion" method="POST">
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputFechaDesde" class="control-label">Inicio de vigencia</label>
                         <input  type="date" class="form-control" placeholder="Fecha Desde"  name="fechaDesde" id="FechaDesde" required>
                     </div>
                     
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputFechaHasta" class="control-label">Fin de vigencia</label>
                         <input  type="date" class="form-control" placeholder="Fecha Hasta"  name="fechaHasta" id="FechaHasta">
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputPeriodoRenovacion" class="control-label">Periodo de renovación (meses): </label>
                         <input type="number" class="form-control" name="periodoRenovacion" id="inputPeriodoRenovacion" placeholder="Periodo de renovación" required value="0">
                     </div> 
                     
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputTipoRenovacion" class="control-label">Tipo de renovación:</label>
                         <select class="form-control" name="tipoRenovacion" id="inputTipoRenovacion" required>
                             <option value="Automatica">Automática</option>
@@ -58,7 +67,7 @@
                         </select>    
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputTipoContrato" class="control-label">Tipo de contrato:</label>
                         <select class="form-control" name="tipoContrato" id="inputTipoContrato" required>
                             <option value="PrecioFijo">Precio fijo</option>
@@ -67,14 +76,12 @@
                         </select>    
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputComputos" class="control-label">Cantidad de cÃ³mputos:</label>
+                    <div class="form-group container">
+                        <label for="inputComputos" class="control-label">Cantidad de cómputos:</label>
                         <input type="number" class="form-control" name="computos" id="inputComputos" placeholder="Cantidad" required value="0">
                     </div>
 
-
-
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputPeriodoValidez" class="control-label">Periodo de validez: </label>
                         <input type="number" class="form-control" name="periodoValidez" id="inputPeriodoValidez" placeholder="Periodo de validez" required value="0">
                         <select class="form-control" name="unidadValidez" id="inputUnidadValidez" required>
@@ -84,25 +91,25 @@
                     </div> 
                     
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputAcumulacion" class="control-label">¿Acumulación de cómputos?:</label>
-                        <Select class="form-control" name="acumulacion" id="inputAcumulacion" required>
+                        <Select class="form-control" name="acumulacion" id="inputAcumulacion" required onChange="document.getElementById('inputPeriodoAcumulacion').disabled = (this.value=='false')">
                         	<option value="true">SI</option>
                             <option value="false">NO</option>
                         </select> 
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputPeriodoAcumulacion" class="control-label">Periodo de acumulación (meses): </label>
                         <input type="number" class="form-control" name="periodoAcumulacion" id="inputPeriodoAcumulacion" placeholder="Cantidad" value="0">
                     </div> 
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputFrecuenciaInforme" class="control-label">Frecuencia de informe (meses): </label>
                         <input type="number" class="form-control" name="frecuenciaInforme" id="inputFrecuenciaInforme" placeholder="Cantidad" required value="0">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputFrecuenciaFacturacion" class="control-label">Frecuencia de facturación (meses): </label>
                         <input type="number" class="form-control" name="frecuenciaFacturacion" id="inputFrecuenciaFacturacion" placeholder="Cantidad" required value="0">
                     </div>
@@ -114,7 +121,7 @@
                     
                     <input type="hidden" class="form-control" name="frecuenciaExtra" id="inputFrecuenciaExtras" placeholder="Cantidad" value="0">
 
-                 <div class="form-group">
+                 <div class="form-group container">
                         <label for="inputHorarioLaboral" class="control-label">HorarioLaboral:</label>
                         <select class="form-control" name="horarioLaboral" id="inputHorarioLaboral" required>
                             <c:forEach items="${horariosLaborales}" var="horarioLaboral" >
@@ -123,16 +130,16 @@
                         </select>  
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputRespuesta" class="control-label">Tiempo de respuesta:</label>
                         <textarea id="inputRespuesta" name="respuesta" class="form-control" rows="3"></textarea>   
                     </div>
                     
                 <input type="hidden" name="idContrato" value="${idContrato}"/>
 
-                <div class="form-group">
+                <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Siguiente </button>
-                    <button class="btn btn-default" type="button"> Cancelar </button>
+                   <!--  <button class="btn btn-default" type="button"> Cancelar </button> -->
                 </div>       
 
                 </form>

@@ -15,7 +15,7 @@
     <header>
         <div class="container">
         
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
+            <h1 class="text-center">Sistema de Gestión de Técnicos e Incidentes</h1>
         
         </div>
     
@@ -35,7 +35,7 @@
 
                     <div class="form-group">
                         <label for="inputPassword" class="control-label">Contraseña:</label>
-                        <input type="password" name="passwordUsuario" class="form-control" id="inputPassword" placeholder="ContraseÃ±a" required>        
+                        <input type="password" name="passwordUsuario" class="form-control" id="inputPassword" placeholder="Contraseña" required>        
                     </div>
                 
                 

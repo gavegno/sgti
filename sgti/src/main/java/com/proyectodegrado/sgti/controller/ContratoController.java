@@ -21,6 +21,8 @@ import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 @RequestMapping("/desktop/contrato")
 public class ContratoController {
 	
+	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
+
 	private FachadaContrato fachadaContrato;
 	
 	private FachadaCliente fachadaCliente;
@@ -37,7 +39,7 @@ public class ContratoController {
 			model.addAttribute("clientes", fachadaCliente.verClientes());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return "desktop/contrato";
 		}finally{
 			context.close();
@@ -52,17 +54,19 @@ public class ContratoController {
 		String mensaje = "El contrato fue ingresado correctamente";
 		try {
 			fachadaContrato.ingresarContrato(id, idContraparte, nombreCliente);
+			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			mensaje = "Ha ocurrido un error";
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model);
 		} catch (SgtiException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
+			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model);
 		}finally{
 			model.addAttribute("idContrato", id);
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "desktop/precio";
@@ -79,10 +83,9 @@ public class ContratoController {
 				
 			} catch (IOException | SQLException | ClassNotFoundException e) {
 				e.printStackTrace();
-				//mensaje = e.getMessage();
+				model.addAttribute("errorMessage", MENSAJE_ERROR);
 				return "desktop/tablaContratosCliente";
 			}finally{
-				//model.addAttribute("message", mensaje);
 				context.close();
 			}
 			return "desktop/tablaContratosCliente";

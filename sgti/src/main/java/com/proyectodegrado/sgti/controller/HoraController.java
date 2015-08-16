@@ -24,6 +24,8 @@ import com.proyectodegrado.sgti.modelo.Hora;
 @RequestMapping("/desktop/hora")
 public class HoraController {
 	
+	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
+
 	private FachadaHora fachadaHora;
 	
 	private FachadaTipoHora fachadaTipoHora;
@@ -48,7 +50,7 @@ public class HoraController {
 		} catch (ClassNotFoundException | IOException | SQLException
 				| ParseException e) {
 			e.printStackTrace();
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return "desktop/tablaHoras";
 		}finally{
 			context.close();
@@ -66,13 +68,13 @@ public class HoraController {
 		try {
 			String idUsuario = (String) request.getSession().getAttribute("usuario");
 			fachadaHora.registrarHora(fechaDesde, fechaHasta, tipoHora, remoto, idUsuario, idContrato, idActividad, descripcion);
-		} catch (ClassNotFoundException | SQLException | IOException
-				| ParseException e) {
+			model.addAttribute("message", mensaje);
+		} catch (ClassNotFoundException | SQLException | IOException | ParseException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
+			model.addAttribute("errorMessage", mensaje);
 			cargarPagina(model, request);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarPagina(model, request);
@@ -86,16 +88,16 @@ public class HoraController {
 			@RequestParam("fechacomputar") final String fechaComputar){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
-		String mensaje = " ";
+		String mensaje = "La Hora fue editada correctamente";
 		try {
 			fachadaHora.editarHora(fechaDesde, fechaHasta, tipoHora, remoto, idContrato, idActividad, descripcion, id, fechaInformar, fechaFacturar, fechaComputar);
-		} catch (ClassNotFoundException | SQLException | IOException
-				| ParseException e) {
+			model.addAttribute("message", mensaje);
+		} catch (ClassNotFoundException | SQLException | IOException | ParseException e) {
 			e.printStackTrace();
-			mensaje = e.getMessage();
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			cargarPagina(model, request);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarPagina(model, request);
@@ -165,10 +167,10 @@ public class HoraController {
 		} catch (ClassNotFoundException | SQLException | IOException
 				| ParseException e) {
 			e.printStackTrace();
-			mensaje = e.getMessage();
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			cargarPagina(model, request);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarPagina(model, request);

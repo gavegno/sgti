@@ -44,7 +44,7 @@ public class ActividadController {
 			model.addAttribute("contratos", fachadaContrato.seleccionarContratos());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return "desktop/actividad";
 		}finally{
 			context.close();
@@ -54,23 +54,25 @@ public class ActividadController {
 	
 	@RequestMapping(value="/ingresarActividad", method = RequestMethod.POST)
 	public String insertarActividad(Model model, @RequestParam("id") final String id, @RequestParam("tipo") final String tipo, 
-			@RequestParam("periodo") final int periodo, @RequestParam("fecha") final String fecha, @RequestParam("usuario") final String usuario,
+			@RequestParam(required=false, value="periodo") final Integer periodo, @RequestParam("fecha") final String fecha, @RequestParam("usuario") final String usuario,
 			@RequestParam("contrato") final String contrato){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
 		String mensaje = "La actividad fue ingresada correctamente";
 		try {
 			fachadaActividad.ingresarActividad(id, tipo, periodo, fecha, usuario, contrato);
+			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
 			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model);
 		} catch (SgtiException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
+			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarPagina(model);
@@ -85,12 +87,13 @@ public class ActividadController {
 		String mensaje = "La actividad fue editada correctamente";
 		try {
 			fachadaActividad.editarActividad(id, tipo, periodo, fecha, usuario, contrato);
+			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
 			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			return cargarTablaActividades(model);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarTablaActividades(model);
@@ -103,12 +106,13 @@ public class ActividadController {
 		String mensaje = "La actividad fue eliminada correctamente";
 		try {
 			fachadaActividad.borrarActividad(id);
+			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
 			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			return cargarTablaActividades(model);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarTablaActividades(model);
@@ -126,7 +130,7 @@ public class ActividadController {
 			model.addAttribute("usuarios", usuarios);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			model.addAttribute("message", MENSAJE_ERROR);
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return cargarPagina(model);
 		}finally{
 			context.close();
@@ -143,7 +147,7 @@ public class ActividadController {
 			model.addAttribute("actividades", fachadaActividad.seleccionarActividadesPorUsuario(idUsuario));
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			model.addAttribute("message", MENSAJE_ERROR);
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return "/desktop/tablaActividad";
 		}finally{
 			context.close();

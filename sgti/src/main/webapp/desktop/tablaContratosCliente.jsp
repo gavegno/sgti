@@ -10,14 +10,19 @@
     <%@ include file="header.jsp" %>
 </head>
 <body>
-    <header>
-        <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        
-        </div>
-    
-    </header>   
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
 <br><br>
 <div class="container">
     <div class="row">
@@ -61,8 +66,4 @@
         </div>
     </div>
 </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"> </script>
-    
-
 </body>
