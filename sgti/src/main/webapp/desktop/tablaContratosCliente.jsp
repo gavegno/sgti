@@ -21,7 +21,6 @@
 <br><br>
 <div class="container">
     <div class="row">
-        <div class="col-sm-10 col-md-8">
             <h2 class="text-center">Contratos</h2>
             <div>
                 <form class="form-horizontal">
@@ -42,10 +41,12 @@
                             <c:forEach items="${contratos}" var="contrato" >
                                 <form action="/CounterWebApp/desktop/tecnicos/editar" method="POST">
                                 <tr >
-                                    <td><input class="vert-align" name="id" value="${contrato.id}" hidden><c:out value="${contrato.id}" /></td>
-                                    <td><input class="vert-align" name="cliente" value="${contrato.cliente.nombre}" hidden><c:out value="${contrato.cliente.nombre}" /></td>
-                                    <td><input class="vert-align" name="contraparte" value="${contrato.contraparte.id}" hidden><c:out value="${contrato.contraparte.id}" /></td>
+                                    <td><input class="vert-align form-control" name="id" value="${contrato.id}" disabled="disabled"></td>
+                                    <td><input class="vert-align form-control" name="cliente" value="${contrato.cliente.nombre}" disabled="disabled"></td>
+                                    <td><input class="vert-align form-control" name="contraparte" value="${contrato.contraparte.id}" disabled="disabled"></td>
+                                    <!--
                                     <td class="vert-align"><button class="btn btn-info" id="boton" type="submit"> Ver </button></td>
+                                -->
                                 </tr>
                                 </form>
                             </c:forEach>
@@ -59,10 +60,5 @@
                 </form>
             </div>
         </div>
-    </div>
 </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"> </script>
-    
-
 </body>
