@@ -17,6 +17,7 @@ import com.proyectodegrado.sgti.fachada.FachadaCliente;
 @RequestMapping("/desktop/cliente")
 public class ClienteController {
 	
+	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 	private FachadaCliente fachadaCliente;
 	
 	//ingreso de un nuevo cliente.
@@ -27,17 +28,18 @@ public class ClienteController {
 		String mensaje = "El cliente fue ingresado correctamente";
 		try {
 			fachadaCliente.insertarCliente(nombre, direccion, telefono);
-			
+			model.addAttribute("message", mensaje);
 		} catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			mensaje = "Ha ocurrido un error";
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			return "/desktop/clientes";
 		} catch (SgtiException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
+			model.addAttribute("errorMessage", mensaje);
 			return "desktop/clientes";
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "desktop/clientes";
@@ -50,13 +52,11 @@ public class ClienteController {
 		fachadaCliente = (FachadaCliente) context.getBean("fachadaCliente");
 		try {
 			model.addAttribute("clientes", fachadaCliente.verClientes());
-			
 		} catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			//mensaje = e.getMessage();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return "desktop/tablaClientes";
 		}finally{
-			//model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "desktop/tablaClientes";
@@ -68,16 +68,13 @@ public class ClienteController {
 			@RequestParam("nombre") final String nombre){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaCliente = (FachadaCliente) context.getBean("fachadaCliente");
-		String mensaje = "El cliente fue cargado para modificar correctamente";
 		try {			
 			model.addAttribute("cliente", fachadaCliente.verClientePorNombre(nombre));
-			
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			mensaje = e.getMessage();
+			model.addAttribute("erroMessage", MENSAJE_ERROR);
 			return "desktop/editarCliente";
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "desktop/editarCliente";
@@ -90,14 +87,13 @@ public class ClienteController {
 		String mensaje = "El cliente fue modificado correctamente";
 		try {
 			fachadaCliente.editarCliente(nombre, direccion, telefono);
-			
-			
+			model.addAttribute("message", mensaje);
 		} catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			mensaje = e.getMessage();
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
 			return cargarTablaCliente(model);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarTablaCliente(model);

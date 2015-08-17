@@ -22,16 +22,19 @@
 	%>
 </head>
 <body>
-     <header>
-        <div class="container">
-        
-            <h1>Sistema de Gestió de Técnicos e Incidentes</h1>
-        
-        </div>
-    
-    </header>   
-</head>
-<body>
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
     <div class="container">
   <table id="mt" class="table table-hover">
     <thead>
@@ -191,9 +194,7 @@
     Add row
   </div> -->
 </div>
-    <script type="text/javascript" src="<c:url value="/resources/js/jquery.js" />"></script>
-    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"> </script>
-    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datetimepicker.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datetimepicker.js" />"></script> 
     <script type="text/javascript">
     $(".form_datetime").datetimepicker({format: 'dd-mm-yyyy hh:ii a'});
 </script> 

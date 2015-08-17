@@ -26,16 +26,18 @@ public class TipoHoraController {
 		String mensaje = "El tipo de hora fue ingresado correctamente";
 		try {
 			fachadaTipoHora.insertarTipoHora(tipoHora);
+			model.addAttribute("message", mensaje);
 		}catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			mensaje = "Ha ocurrido un error";
+			model.addAttribute("errorMessage", mensaje);
 			return "desktop/tiposDeHora";
 		} catch (SgtiException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
+			model.addAttribute("errorMessage", mensaje);
 			return "desktop/tiposDeHora";
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "desktop/tiposDeHora";
@@ -49,13 +51,14 @@ public class TipoHoraController {
 		try {
 			fachadaTipoHora.insertarContratoTipoHora(idContrato, nombreTipoHora, computo);
 			model.addAttribute("tiposDeHora", fachadaTipoHora.verTiposDeHora());
+			model.addAttribute("message", mensaje);
 		}catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
+			model.addAttribute("errorMessage", mensaje);
 			return "desktop/tipoHoraComputo";
 		}finally{
 			model.addAttribute("idContrato", idContrato);
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "desktop/tipoHoraComputo";

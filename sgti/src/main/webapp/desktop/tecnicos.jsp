@@ -20,53 +20,58 @@
 	%>
 </head>
 <body>
-    <header>
-        <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        	${message}
-        </div>
-    
-    </header>   
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
 <br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gestión de Usuarios</h2>
-            <div>
+            <h2 class="container text-center">Gestión de Usuarios</h2>
+            <div class="form-group container">
                 <form class="form-horizontal" action="/CounterWebApp/desktop/tecnicos/ingresarUsuario" method="POST">
                 
-                	<div class="form-group">
+                	<div class="form-group container">
                         <label for="inputId" class="control-label">Id:</label>
                         <input type="text" class="form-control" name="id" id="inputId" placeholder="Id" required autofocus>        
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputContrasena" class="control-label">Contraseña:</label>
                         <input type="password" class="form-control" name="contrasena" id="inputContrasena" placeholder="Contraseña" required autofocus>        
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputNombre" class="control-label">Nombre:</label>
                         <input type="text" class="form-control" name="nombre" id="inputNombre" placeholder="Nombre" required autofocus>        
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputApellido" class="control-label">Apellido:</label>
                         <input type="text" class="form-control" name="apellido" id="inputApellido" placeholder="Apellido" required autofocus>        
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputEmail" class="control-label">Email:</label>
                         <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email" required autofocus>        
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputTelefono" class="control-label">Teléfono:</label>
                         <input type="number" class="form-control" name="telefono" id="inputTelefono" placeholder="Teléfono" required autofocus>        
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputTipo" class="control-label">Tipo de usuario:</label>
                         <select class="form-control" name="tipo" id="inputTipo" onChange="document.getElementById('inputTipoHora').disabled = (this.value=='CONTRAPARTE')">
                             <option value="SOCIO">SOCIO</option>
@@ -75,7 +80,7 @@
                         </select>    
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputTipoHora" class="control-label">Tipo de hora:</label>
                         <select multiple class="form-control" name="tipoHora" id="inputTipoHora">
                         	<c:forEach items="${tipos}" var="tipo" >
@@ -83,15 +88,11 @@
                         	</c:forEach>
                         </select>
                     </div>
-                    
                 
-                <div class="form-group">
+                <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
-                    <button class="btn btn-default" type="button"> Cancelar </button>
+                    <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
                 </div>       
-
-
-
                 </form>
             </div>
         </div>

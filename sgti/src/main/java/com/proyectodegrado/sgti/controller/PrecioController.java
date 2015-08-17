@@ -32,16 +32,17 @@ public class PrecioController {
 		try {
 			fachadaPrecio.insertarPrecio(fechaDesde, fechaHasta, precioAgregar, idContrato);
 			model.addAttribute("tiposDeHora", fachadaTipoHora.verTiposDeHora());
+			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
 			mensaje = "Ha ocurrido un error";
+			model.addAttribute("errorMessage", mensaje);
 			return "desktop/precio";
 		} catch (SgtiException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
 		}finally{
 			model.addAttribute("idContrato", idContrato);
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "desktop/tipoHoraComputo";

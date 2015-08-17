@@ -19,21 +19,31 @@
 <body>
     <header>
         <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        
+            <h1 class="text-center">Sistema de Gestión de Técnicos e Incidentes</h1>
         </div>
-    
-    </header>   
+    </header>
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
 <br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gestión de Tipo de hora y cómputo</h2>
-            <div>
+            <h2 class="container text-center">Gestión de Tipo de hora y cómputo</h2>
+            <div class="form-group container">
                 <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/ingresarComputo" method="POST">
                     
-                     <div class="form-group">
+                     <div class="form-group container">
                         <label for="inputTipoHora" class="control-label">Tipo de hora:</label>
                         <select class="form-control" name="tipoHora" id="inputTipoHora">
                         	<c:forEach items="${tiposDeHora}" var="tipo" >
@@ -42,14 +52,14 @@
                         </select>
                     </div>
         
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputComputos" class="control-label">Cómputos a consumir</label>
                         <input  type="number" name="computos" class="form-control" placeholder="Cómputos" id="computos">
                     </div>
                 
-                <div class="form-group">
+                <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Agregar </button>
-                    <button class="btn btn-default" type="button"> Cancelar </button>
+                   <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
                 </div>       
 
 				<input type="hidden" name="idContrato" value="${idContrato}"/>
@@ -57,7 +67,7 @@
                 </form>
                 <form class="form-horizontal" action="/CounterWebApp/desktop/dias/ingresar" method="POST">
                 <input type="hidden" class="form-control" name="idContrato" id="inputHoraHasta" value="${idContrato}">
-                <div class="form-group">
+                <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Siguiente </button>
                 </div>
                 </form>

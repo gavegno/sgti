@@ -21,31 +21,41 @@
 <body>
     <header>
         <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        
+            <h1 class="text-center">Sistema de Gestión de Técnicos e Incidentes</h1>
         </div>
-    
-    </header>   
+    </header>
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
 <br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gestión de Días</h2>
-            <div>
+            <h2 class="container text-center">Gestión de Días</h2>
+            <div class="form-group container">
                 <form class="form-horizontal" action="/CounterWebApp/desktop/dias/ingresardia" method="POST">
                 
-                	<div class="form-group">
+                	<div class="form-group container">
                         <label for="inputId" class="control-label">Id:</label>
                         <input type="text" name="idHorarioLaboral" value="${idHorarioLaboral}" class="form-control" id="inputIdHorarioLaboral" placeholder="Horario Laboral" required autofocus>        
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputContrato" class="control-label">Seleccione el dí­a:</label>
                         <select class="form-control" id="inputContrato" name="nombreDia">
                             <option value="Lunes">Lunes</option>
                             <option value="Martes">Martes</option>
-                            <option value="Miercoles">MiÃ©rcoles</option>
+                            <option value="Miercoles">Miércoles</option>
                             <option value="Jueves">Jueves</option>
                             <option value="Viernes">Viernes</option>
                             <option value="SÃ¡bado">Sabado</option>
@@ -53,7 +63,7 @@
                         </select>    
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <div class="from-group clockpicker">
                             <label for="inputHoraDesde" class="control-label">Hora desde:</label>
                             <input type="text" class="form-control" name="horaDesde" id="inputHoraDesde" value="08:00">
@@ -63,7 +73,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <div class="from-group clockpicker">
                             <label for="inputHoraHasta" class="control-label">Hora hasta:</label>
                             <input type="text" class="form-control" name="horaHasta" id="inputHoraHasta" value="18:00">
@@ -73,9 +83,9 @@
                         </div>
                     </div>
 
-                <div class="form-group">
+                <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Agregar </button>
-                    <button class="btn btn-default" type="button"> Cancelar </button>
+                    <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
                 </div>       
 
 				<input type="hidden" class="form-control" name="idContrato" id="inputHoraHasta" value="${idContrato}">
@@ -84,7 +94,7 @@
                
                 <form class="form-horizontal" action="/CounterWebApp/desktop/configuracion/ingresar" method="POST">
                 <input type="hidden" class="form-control" name="idContrato" id="inputHoraHasta" value="${idContrato}">
-                <div class="form-group">
+                <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Siguiente </button>
                 </div>
                 </form>

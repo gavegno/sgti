@@ -19,38 +19,48 @@
 <body>
     <header>
         <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        
+            <h1 class="text-center">Sistema de Gestión de Técnicos e Incidentes</h1>
         </div>
-    
-    </header>   
+    </header>
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
 <br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gestión de Precios</h2>
-            <div>
-                <form class="form-horizontal" action="/CounterWebApp/desktop/precio/ingresarPrecio" method="POST">
+            <h2 class="container text-center">Gestión de Precios</h2>
+            <div class="form-group container">
+                <form class="form-horizontal container" action="/CounterWebApp/desktop/precio/ingresarPrecio" method="POST">
                     
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputFechaDesde" class="control-label">Fecha Desde</label>
                         <input  type="date" name="fechaDesde" class="form-control" placeholder="Fecha Desde"  id="FechaDesde" required>
                     </div>
         
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputFechaHasta" class="control-label">Fecha Hasta</label>
                         <input  type="date" name="fechaHasta" class="form-control" placeholder="Fecha Hasta"  id="FechaHasta">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputPrecio" class="control-label">Precio:</label>
-                        <input type="number" name="precio" class="form-control" id="inputPrecio" placeholder="Precio" required autofocus>        
+                        <input type="number" step="any" name="precio" class="form-control" id="inputPrecio" placeholder="Precio" required autofocus>        
                     </div>
                 
-                <div class="form-group">
+                <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Siguiente </button>
-                    <button class="btn btn-default" type="button"> Cancelar </button>
+                   <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
                 </div>       
 
 				<input type="hidden" name="idContrato" value="${idContrato}"/>

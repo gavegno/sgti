@@ -18,48 +18,51 @@
 	%>
 </head>
 <body>
-    <header>
-        <div class="container">
-        
-            <h1>Sistema de Gestión de Técnicos e Incidentes</h1>
-        	${message}
-        </div>
-    
-    </header>   
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+        	
 <br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gestión de Actividades</h2>
-            <div>
+            <h2 class="container text-center">Gestión de Actividades</h2>
+            <div class="form-group container">
                 <form class="form-horizontal" action="/CounterWebApp/desktop/actividad/ingresarActividad" method="POST">
-					<div class="form-group">
+					
+					<div class="form-group container">
                         <label for="inputId" class="control-label">Identificador:</label>
                         <input type="text" class="form-control" id="inputid" name="id" required="required">
-                        </div>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputTipoActividad" class="control-label">Seleccione el tipo de actividad:</label>
-                        <select class="form-control" id="inputTipoActividad" name="tipo">
-                            <option value="comun">COMÚN</option>
+                        <select class="form-control" id="inputTipoActividad" name="tipo" onChange="document.getElementById('inputperiodo').disabled = (this.value=='comun')">
                             <option value="Periodica">PERIÓDICA</option>
+                            <option value="comun">COMÚN</option>
                         </select>    
                     </div>
 
-					<div class="form-group">
-                        <label for="inputPeriodo" class="control-label">Período:</label>
-                        <input type="number" class="form-control" id="inputperiodo" name="periodo">
-                        </div>
+					<div class="form-group container">
+                        <label for="inputPeriodo" class="control-label">Período (Día(s)):</label>
+                        <input type="number" class="form-control" id="inputperiodo" value="0" name="periodo">
                     </div>
-
-                    <div class="form-group">
+					
+                    <div class="form-group container">
                         <label for="inputFechaHora" class="control-label">Fecha:</label>
-                        <input type="date" class="form_datetime" id="inputFechaHora" name="fecha" required="required">
+                        <input type="date" class="form-control" id="inputFechaHora" name="fecha" required="required">
                         </div>
-                    </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputUsuario" class="control-label">A ejecutar por:</label>
                         <select class="form-control" id="inputUsuario" name="usuario">
 							<option value="">--Sin asignar--</option>
@@ -69,7 +72,7 @@
                         </select>    
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputContrato" class="control-label">Seleccione el contrato:</label>
                         <select class="form-control" id="inputContrato" name="contrato">
                             <c:forEach items="${contratos}" var="contrato" >
@@ -78,9 +81,9 @@
                         </select>    
                     </div>
 
-                <div class="form-group">
+                <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
-                    <button class="btn btn-default" type="button"> Cancelar </button>
+                    <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
                 </div>       
                 </form>
             </div>

@@ -31,12 +31,12 @@ public class LoginController {
 				request.getSession().setAttribute("usuario", idUsuario);
 				request.getSession().setAttribute("tipoUsuario", usuario.getTipo());
 			}else{
-				model.addAttribute("mensaje", "El usuario o contraseña no es correcto");
+				model.addAttribute("message", "El usuario o contraseña no es correcto");
 				return "/desktop/login2";
 			}
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
-			model.addAttribute("mensaje", "Ocurrió un error al tratar de loguear el usuario");
+			model.addAttribute("message", "Ocurrió un error al tratar de loguear el usuario");
 			return "/desktop/login2";
 		}finally{
 			context.close();

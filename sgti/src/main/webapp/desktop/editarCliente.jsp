@@ -10,45 +10,47 @@
     <%@ include file="header.jsp" %>
 </head>
 <body>
-    <header>
-        <div class="container">
-        
-            <h1>Sistema de Gesti√≥n de T√©cnicos e Incidentes</h1>
-        
-        </div>
-    
-    </header>   
+
+<c:if test="${not empty message}">
+	<div class="alert alert-success">
+		${message}
+	</div>
+</c:if>
+
+<c:if test="${not empty errorMessage}">
+	<div class="alert alert-danger">
+		${errorMessage}
+	</div>
+</c:if>
+
 <br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gesti√≥n de Clientes</h2>
-            <div>
+            <h2 class="container text-center">GestiÛn de Clientes</h2>
+            <div class="form-group container">
                 <form class="form-horizontal" action="/CounterWebApp/desktop/cliente/editarClienteOk" method="POST">
-                    
-                    
-                    <div class="form-group">
+                    <div class="form-group container">
                         <label for="inputNombre" class="control-label">Nombre:</label>
-                        <input type="text" name="clienteNombre" value="${cliente.nombre}" hidden><c:out value="${cliente.nombre}" /></input>        
+                        <input type="text" class="form-control" name="clienteNombre" value="${cliente.nombre}" disabled="disabled"></input>
+                        <input type="hidden" name="clienteNombre" value="${cliente.nombre}"></input>       
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputDireccion" class="control-label">Direcci√≥n:</label>
-                        <input type="text" name="clienteDireccion" value="${cliente.direccion}"></input>
+                    <div class="form-group container">
+                        <label for="inputDireccion" class="control-label">DirecciÛn:</label>
+                        <input type="text" class="form-control" name="clienteDireccion" value="${cliente.direccion}"></input>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputTelefono" class="control-label">Tel√©fono:</label>
-                        <input type="text" name="clienteTelefono" value="${cliente.telefono}"></input>
+                    <div class="form-group container">
+                        <label for="inputTelefono" class="control-label">TelÈfono:</label>
+                        <input type="text" class="form-control" name="clienteTelefono" value="${cliente.telefono}"></input>
                     </div>
                     
                 
-                <div class="form-group">
+                <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
-                    <button class="btn btn-default" type="button"> Cancelar </button>
+                    <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
                 </div>       
-
-
 
                 </form>
             </div>
