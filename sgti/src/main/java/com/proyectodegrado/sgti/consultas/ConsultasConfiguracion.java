@@ -74,6 +74,15 @@ public class ConsultasConfiguracion {
 		return resultSet;
 	}
 	
+	public ResultSet verConfiguracionActualTodos() throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE ? BETWEEN c.fechainicio AND c.fechafin");
+		preparedStatement.setDate(1, new Date(new java.util.Date().getTime()));
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
 	public ResultSet verConfiguracionPorFecha(Date fecha, String idContrato) throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE ? BETWEEN c.fechainicio AND c.fechafin AND c.id_contrato=?");
@@ -86,12 +95,14 @@ public class ConsultasConfiguracion {
 	
 	public ResultSet verConfiguracionesPorContrato(String idContrato) throws SQLException, FileNotFoundException, IOException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
-		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE c.id_contrato=?");
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c WHERE c.id_contrato=? ORDER BY c.fechainicio DESC");
 		preparedStatement.setString(1, idContrato);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(con);
 		return resultSet;
 	}
+	
+	
 	
 	public void editarConfiguracion(int id, Date fechaInicio, Date fechaFin, String renovacion, int periodoRenovacion,
 			 String tipoContrato, int computosPaquete, int periodoValidezMes, int periodoValidezDia, boolean acumulacion,
@@ -127,6 +138,57 @@ public class ConsultasConfiguracion {
 		statement.executeUpdate("DELETE FROM configuracion");
 		conexionBD.cerrar(con);
 	}
+	
+	public void borrarConfiguracion(int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM configuracion AS c WHERE c.id =?");
+		preparedStatement.setInt(1, id);
+		preparedStatement.executeUpdate();
+		conexionBD.cerrar(con);
+	}
+	
+	public ResultSet saberSiEsPosibleInsertarNuevaConfig(Date inicio, Date fin, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c "+
+				"WHERE c.id_contrato=? AND ( "+
+				"(? BETWEEN c.fechainicio AND c.fechafin) OR "+ 
+				"(? BETWEEN c.fechainicio AND c.fechafin) OR "+
+				"((c.fechainicio > ?) AND c.fechafin < ?));");
+		preparedStatement.setString(1, idContrato);
+		preparedStatement.setDate(2, inicio);
+		preparedStatement.setDate(3, fin);
+		preparedStatement.setDate(4, inicio);
+		preparedStatement.setDate(5, fin);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
+	public ResultSet saberSiEsPosibleEditarConfig(Date inicio, Date fin, String idContrato, 
+			int idConfiguracion) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM configuracion AS c "+
+				"WHERE c.id_contrato=? AND ( "+
+				"(? BETWEEN c.fechainicio AND c.fechafin) OR "+ 
+				"(? BETWEEN c.fechainicio AND c.fechafin) OR "+
+				"((c.fechainicio > ?) AND c.fechafin < ?)) "
+				+ "AND NOT (c.id = ?);");
+		preparedStatement.setString(1, idContrato);
+		preparedStatement.setDate(2, inicio);
+		preparedStatement.setDate(3, fin);
+		preparedStatement.setDate(4, inicio);
+		preparedStatement.setDate(5, fin);
+		preparedStatement.setInt(6, idConfiguracion);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
+	
 
 	public Conexion getConexionBD() {
 		return conexionBD;

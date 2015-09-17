@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.security.NoSuchAlgorithmException;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.TipoHora;
@@ -27,13 +28,16 @@ public class FachadaUsuario {
 	
 	private ServicioTipoHora servicioTipoHora;
 	
-	public void ingresarUsuario(String id, String nombre, String apellido, String contrasena, String email, String telefono, String tipo, List<String> tiposDeTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, SgtiException{
+	public void ingresarUsuario(String id, String nombre, String apellido, String contrasena, String email, String telefono, String tipo, List<String> tiposDeTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, SgtiException, NoSuchAlgorithmException{
 		List<TipoHora> tiposHora = new ArrayList<TipoHora>();
 		for(String tipoDeTipoHora : tiposDeTipoHora){
 			TipoHora tipoHora = servicioTipoHora.seleccionarPorTipo(tipoDeTipoHora);
 			tiposHora.add(tipoHora);
 		}
-		Usuario usuario = new Usuario(id, nombre, apellido, contrasena, email, telefono, tipo, true, null);
+	
+		String contrasenaHash = servicioUsuario.get_MD5_SecurePassword(contrasena);
+		
+		Usuario usuario = new Usuario(id, nombre, apellido, contrasenaHash, email, telefono, tipo, true, null);
 		if(tipo.equalsIgnoreCase("SOCIO")){
 			servicioUsuarioSocio.agregar(usuario);
 		}else if(tipo.equalsIgnoreCase("TECNICO")){
@@ -45,6 +49,14 @@ public class FachadaUsuario {
 		servicioUsuario.agregarTipoHoraUsuario(usuario);
 	}
 	
+	public void cambiarContrasena(String id, String contrasena) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Usuario usuario = new Usuario();
+		usuario.setId(id);
+		usuario.setContrasena(contrasena);
+		servicioUsuario.cambiarContrasena(usuario);
+		
+	}
+	
 	public void editarUsuario(String id, String nombre, String apellido, String email, String telefono) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		Usuario usuario = new Usuario();
 		usuario.setId(id);
@@ -54,6 +66,18 @@ public class FachadaUsuario {
 		usuario.setTelefono(telefono);
 		servicioUsuario.editarUsuario(usuario);
 		
+	}
+	
+	public boolean usuarioEsSocio (String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		Usuario usuario = servicioUsuario.selecionarUsuario(id);
+		return (usuario.getTipo().equalsIgnoreCase("SOCIO"));		
+	}
+	
+	
+	
+	public String get_MD5_SecurePassword(String passwordToHash) throws NoSuchAlgorithmException{
+		return servicioUsuario.get_MD5_SecurePassword(passwordToHash);
 	}
 	
 	public Usuario seleccionarUsuario(String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{

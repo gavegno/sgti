@@ -60,7 +60,7 @@ public class ServicioPrecioTest extends ConfigurarTest{
 			SimpleDateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
 			Calendar fechaHasta = Calendar.getInstance();
 			fechaHasta.set(Calendar.YEAR, 2020);
-			Precio precio = new Precio(5.5, new Date(), fechaHasta.getTime());
+			Precio precio = new Precio(5.5, 6.5, new Date(), fechaHasta.getTime());
 			servicioPrecio.insertar(precio, CONTRATO_TEST);
 			
 			assertEquals(1, servicioPrecio.seleccionarPrecios(CONTRATO_TEST).size());
@@ -81,8 +81,8 @@ public class ServicioPrecioTest extends ConfigurarTest{
 			fechaHasta.set(Calendar.YEAR, 2020);
 			fechaDesdeVieja.set(Calendar.YEAR, 1990);
 			fechaHastaVieja.set(Calendar.YEAR, 2008);
-			Precio precio = new Precio(5.5, new Date(), fechaHasta.getTime());
-			Precio precioViejo = new Precio(5.5, fechaDesdeVieja.getTime(), fechaHastaVieja.getTime());
+			Precio precio = new Precio(5.5, 6.5, new Date(), fechaHasta.getTime());
+			Precio precioViejo = new Precio(5.5, 6.5, fechaDesdeVieja.getTime(), fechaHastaVieja.getTime());
 			servicioPrecio.insertar(precio, CONTRATO_TEST);
 			servicioPrecio.insertar(precioViejo, CONTRATO_TEST);
 			
@@ -105,8 +105,8 @@ public class ServicioPrecioTest extends ConfigurarTest{
 			fechaHasta.set(Calendar.YEAR, 2020);
 			fechaDesdeVieja.set(Calendar.YEAR, 1990);
 			fechaHastaVieja.set(Calendar.YEAR, 2008);
-			Precio precio = new Precio(5.5, fechaDesde.getTime(), fechaHasta.getTime());
-			Precio precioViejo = new Precio(5.5, fechaDesdeVieja.getTime(), fechaHastaVieja.getTime());
+			Precio precio = new Precio(5.5, 6.5, fechaDesde.getTime(), fechaHasta.getTime());
+			Precio precioViejo = new Precio(5.5, 6.5, fechaDesdeVieja.getTime(), fechaHastaVieja.getTime());
 			servicioPrecio.insertar(precioViejo, CONTRATO_TEST);
 			thrown.expect(SQLException.class);
 			thrown.expectMessage("El precio ingresado se superpone con otro precio");

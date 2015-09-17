@@ -4,13 +4,13 @@ public class TipoHoraComputo {
 	
 	private TipoHora tipoHora;
 	
-	private int computo;
+	private double computo;
 
 	public TipoHoraComputo() {
 		super();
 	}
 
-	public TipoHoraComputo(TipoHora tipoHora, int computo) {
+	public TipoHoraComputo(TipoHora tipoHora, double computo) {
 		super();
 		this.tipoHora = tipoHora;
 		this.computo = computo;
@@ -24,11 +24,11 @@ public class TipoHoraComputo {
 		this.tipoHora = tipoHora;
 	}
 
-	public int getComputo() {
+	public double getComputo() {
 		return computo;
 	}
 
-	public void setComputo(int computo) {
+	public void setComputo(double computo) {
 		this.computo = computo;
 	}
 }

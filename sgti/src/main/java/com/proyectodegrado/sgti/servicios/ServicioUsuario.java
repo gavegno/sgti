@@ -2,6 +2,7 @@ package com.proyectodegrado.sgti.servicios;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -37,5 +38,7 @@ public interface ServicioUsuario {
 
 	public abstract void eliminarUsuario(Usuario dataUsuario)
 			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
+
+	String get_MD5_SecurePassword(String passwordToHash) throws NoSuchAlgorithmException;
 
 }

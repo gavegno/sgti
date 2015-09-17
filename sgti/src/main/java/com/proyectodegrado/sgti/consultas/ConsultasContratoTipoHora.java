@@ -14,12 +14,12 @@ public class ConsultasContratoTipoHora {
 	
 	private Conexion conexionBD;
 	
-	public void insertarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void insertarContratoTipoHora (String idContrato, int idTipoHora, double computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO contrato_tipohora(idcontrato, idtipohora, computos) VALUES (?,?,?)");
 		preparedStatement.setString(1, idContrato);
 		preparedStatement.setInt(2, idTipoHora);
-		preparedStatement.setInt(3, computos);
+		preparedStatement.setDouble(3, computos);
 		preparedStatement.executeUpdate();
 		conexionBD.cerrar(con);
 	}
@@ -33,10 +33,10 @@ public class ConsultasContratoTipoHora {
 		return resultSet;
 	}
 	
-	public void editarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void editarContratoTipoHora (String idContrato, int idTipoHora, double computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("UPDATE contrato_tipohora SET computos=? WHERE idcontrato=? AND idtipohora=?");
-		preparedStatement.setInt(1, computos);
+		preparedStatement.setDouble(1, computos);
 		preparedStatement.setString(2, idContrato);
 		preparedStatement.setInt(3, idTipoHora);
 		preparedStatement.executeUpdate();

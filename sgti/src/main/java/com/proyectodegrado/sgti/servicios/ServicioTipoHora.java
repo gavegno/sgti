@@ -18,4 +18,14 @@ public interface ServicioTipoHora {
 
 	public abstract List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
+	void editarTipoHora(int id, String tipo) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
+
+	void borrarTipoHora(int id) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
+
+	List<TipoHora> seleccionarTiposQueNoEsteUsandoElContrato(String idContrato)
+			throws FileNotFoundException, IOException, SQLException,
+			ClassNotFoundException, SgtiException;
+
 }

@@ -21,7 +21,14 @@ public class Configuracion {
 	private int frecuenciaComputosExtra;
 	private String tiempoRespuesta; 
 	private HorarioLaboral horarioLaboral;
+	private String idContrato;
 	
+	public String getIdContrato() {
+		return idContrato;
+	}
+	public void setIdContrato(String idContrato) {
+		this.idContrato = idContrato;
+	}
 	public int getId() {
 		return id;
 	}
@@ -115,8 +122,8 @@ public class Configuracion {
 	public HorarioLaboral getHorarioLaboral() {
 		return horarioLaboral;
 	}
-	public void setHorarioLaboral(HorarioLaboral idHorarioLaboral) {
-		this.horarioLaboral = idHorarioLaboral;
+	public void setHorarioLaboral(HorarioLaboral HorarioLaboral) {
+		this.horarioLaboral = HorarioLaboral;
 	}
 	
 	

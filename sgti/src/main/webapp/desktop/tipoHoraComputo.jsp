@@ -39,36 +39,52 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="container text-center">Gestión de Tipo de hora y cómputo</h2>
+            <h2 class="container text-center">Paso 3 de 5: Gestión de Tipo de hora</h2>
             <div class="form-group container">
-                <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/ingresarComputo" method="POST">
+                <div class="alert alert-info text-center">
+                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.id} <br>
                     
+                    <c:forEach items="${precios}" var="precio" >
+
+                        Precio: fecha desde: ${precio.fechaDesde} --- fecha hasta: ${precio.fechaHasta} --- valor de precio: ${precio.precio} --- valor precio extra: ${precio.precioExtra} <br>
+                    </c:forEach> 
+
+                    <c:forEach items="${tiposDeHoraAsignados}" var="tipoAsignado" >
+
+                        Tipo de hora: ${tipoAsignado.tipoHora.tipo} --- factor de cómputo: ${tipoAsignado.computo} <br>
+                    </c:forEach> 
+
+                </div>
+                <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/ingresarComputo" method="POST">
+                    <input type="hidden" class="form-control" name="idContrato" value="${idContrato}">
+
                      <div class="form-group container">
                         <label for="inputTipoHora" class="control-label">Tipo de hora:</label>
                         <select class="form-control" name="tipoHora" id="inputTipoHora">
                         	<c:forEach items="${tiposDeHora}" var="tipo" >
-                        		<option value="${tipo}">${tipo}</option>
+                        		<option value="${tipo.tipo}">${tipo.tipo}</option>
                         	</c:forEach>
                         </select>
                     </div>
         
                     <div class="form-group container">
                         <label for="inputComputos" class="control-label">Cómputos a consumir</label>
-                        <input  type="number" name="computos" class="form-control" placeholder="Cómputos" id="computos">
+                        <input  type="number" step="any" name="computos" class="form-control" placeholder="Cómputos" id="computos">
                     </div>
                 
                 <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Agregar </button>
-                   <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
-                </div>       
 
-				<input type="hidden" name="idContrato" value="${idContrato}"/>
+                </div>      
 
                 </form>
+
+
+
                 <form class="form-horizontal" action="/CounterWebApp/desktop/dias/ingresar" method="POST">
-                <input type="hidden" class="form-control" name="idContrato" id="inputHoraHasta" value="${idContrato}">
+                <input type="hidden" class="form-control" name="idContrato" value="${idContrato}">
                 <div class="form-group container">
-                    <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Siguiente </button>
+                    <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Pasar al paso 4 </button>
                 </div>
                 </form>
             </div>

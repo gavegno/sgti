@@ -62,8 +62,11 @@ public class ServicioActividadImpl implements ServicioActividad {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioActividad#borrar(com.proyectodegrado.sgti.modelo.Actividad, java.lang.String)
 	 */
 	@Override
-	public void borrar(Actividad actividad) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
-		actividadDao.borrarActividad(actividad);
+	public void borrar(Actividad actividad) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, SgtiException{
+		if (actividadDao.actividadAsignadaAHora(actividad.getId()).size() > 0)
+			throw new SgtiException("No se puede borrar: existen horas que usan esta actividad");
+		else	
+			actividadDao.borrarActividad(actividad);
 	}
 	
 	/* (non-Javadoc)

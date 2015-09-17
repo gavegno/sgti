@@ -48,7 +48,7 @@
                     
                     <div class="form-group container">
                         <label for="inputContrasena" class="control-label">Contraseña:</label>
-                        <input type="password" class="form-control" name="contrasena" id="inputContrasena" placeholder="Contraseña" required autofocus>        
+                        <input type="text" class="form-control" name="contrasena" id="inputContrasena" placeholder="Contraseña" required autofocus>        
                     </div>
                     
                     <div class="form-group container">
@@ -84,7 +84,7 @@
                         <label for="inputTipoHora" class="control-label">Tipo de hora:</label>
                         <select multiple class="form-control" name="tipoHora" id="inputTipoHora">
                         	<c:forEach items="${tipos}" var="tipo" >
-                        		<option value="${tipo}"><c:out value="${tipo}" /></option>
+                        		<option value="${tipo.tipo}"><c:out value="${tipo.tipo}" /></option>
                         	</c:forEach>
                         </select>
                     </div>

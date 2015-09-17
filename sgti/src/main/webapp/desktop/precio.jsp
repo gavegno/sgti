@@ -39,8 +39,13 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="container text-center">Gestión de Precios</h2>
+            <h2 class="container text-center">Paso 2 de 5: Gestión de Precios</h2>
+            
             <div class="form-group container">
+                <div class="alert alert-info text-center">
+                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.id}
+            </div>
+
                 <form class="form-horizontal container" action="/CounterWebApp/desktop/precio/ingresarPrecio" method="POST">
                     
                     <div class="form-group container">
@@ -54,13 +59,18 @@
                     </div>
 
                     <div class="form-group container">
-                        <label for="inputPrecio" class="control-label">Precio:</label>
+                        <label for="inputPrecio" class="control-label">Precio:</label><h6>(Si se trata de un contrato de precio fijo, indica ese precio)</h6>
                         <input type="number" step="any" name="precio" class="form-control" id="inputPrecio" placeholder="Precio" required autofocus>        
                     </div>
+
+                    <div class="form-group container">
+                        <label for="precio" class="control-label">Valor de precio de cómputo extra: </label><h6>(Si corresponde)</h6>
+                        <input type="number" step="any" id="precio" class="form-control" name="precioExtra" value="0">
+                    </div> 
                 
                 <div class="form-group container">
-                    <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Siguiente </button>
-                   <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
+                    <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Pasar al paso 3 </button>
+                   
                 </div>       
 
 				<input type="hidden" name="idContrato" value="${idContrato}"/>

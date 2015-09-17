@@ -19,4 +19,22 @@ public interface ServicioPrecio {
 	public abstract Precio seleccionarPrecioActual(String idContrato)
 			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
+	List<Precio> seleccionarPrecioActualTodos() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException;
+
+	List<Precio> seleccionarPreciosPorContrato(String idContrato)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
+	Precio verPrecioExacto(String idContrato, double precio, String fechaDesde,
+			String fechaHasta) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
+
+	void borrarPrecio(String idContrato, Precio precio)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
+	void editarPrecio(Precio precioNuevo, Precio precioViejo, String idContrato)
+			throws FileNotFoundException, IOException, SQLException,
+			ClassNotFoundException, SgtiException;
+
 }

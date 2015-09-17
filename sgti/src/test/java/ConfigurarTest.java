@@ -48,6 +48,8 @@ public class ConfigurarTest {
 	protected static final String MARTES = "MARTES";
 	protected static final int COMPUTOS = 3;   
 	protected static final String TIPO_TEST = "TIPO_TEST";
+	protected static final int TIPO_ID_TEST = 1;
+	protected static final int TIPO_ID_TEST2 = 2;
 	protected static final String TIEMPO_RESPUESTA_TEST = "TIEMPO_RESPUESTA_TEST";
 	protected static final String TIPO_CONTRATO_TEST = "TIPO_CONTRATO_TEST";
 	protected static final String RENOVACION_TEST = "RENOVACION_TEST";
@@ -108,7 +110,7 @@ public class ConfigurarTest {
 		horarioLaboralDao.borrarDiaDeHorarioLaboral(HORARIO_LABORAL_TEST, MARTES);
 		consultasPrecio.borrarPrecios();
 		consultasContratoTipoHora.borrarContratoTiposHora();
-		consultasTipoHora.borrarTipoHora(TIPO_TEST);
+		consultasTipoHora.borrarTipoHora(TIPO_ID_TEST);
 		consultasContrato.borrarContratos();
 		consultasCliente.borrarCliente(CLIENTE_TEST);
 		consultasUsuario.borrarUsuario(USUARIO_TEST);
@@ -238,7 +240,7 @@ public class ConfigurarTest {
 	private Precio crearPrecio(){
 		Calendar fechaHasta = Calendar.getInstance();
 		fechaHasta.set(Calendar.YEAR, 2020);
-		return new Precio(5.5, new Date(), fechaHasta.getTime());
+		return new Precio(5.5, 6.5, new Date(), fechaHasta.getTime());
 	}
 	
 	private TipoHoraComputo crearTipoHoraComputo() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Hora;
 import com.proyectodegrado.sgti.servicios.ServicioContrato;
 import com.proyectodegrado.sgti.servicios.ServicioHora;
@@ -19,8 +20,9 @@ public class FachadaHora {
 	private ServicioContrato servicioContrato;
 	
 	public void registrarHora(final String fechaDesde, final String fechaHasta, final String tipoHora, final String remoto, final String idUsuario, final String idContrato,
-			final String idActividad, final String descripcion) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException{
+			final String idActividad, final String descripcion, final String comentario) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException, SgtiException{
 		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+
 		Hora hora = new Hora();
 		hora.setFechaDesde(simpleFateFormat.parse(fechaDesde));
 		hora.setFechaHasta(simpleFateFormat.parse(fechaHasta));
@@ -32,15 +34,18 @@ public class FachadaHora {
 		hora.setIdActividad(idActividad);
 		hora.setNombreTipoHora(tipoHora);
 		hora.setDescripcion(descripcion);
+		hora.setComentario(comentario);
 		hora.setRemoto(convertirBoolean(remoto));
 		hora.setInformada(false);
 		hora.setFacturada(false);
 		hora.setValidada(false);
+		hora.setDuracion(diferenciaEnMinutos(fechaDesde, fechaHasta));
 		servicioHora.agregar(hora);
-	}
+		}
+
 	
 	public void editarHora(final String fechaDesde, final String fechaHasta, final String tipoHora, final String remoto, final String idContrato, final String idActividad,
-			final String descripcion, final String id, final String fechaInformar, final String fechaFacturar, final String fechaComputar) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException{
+			final String descripcion, final String comentario, final String id, final String fechaInformar, final String fechaFacturar, final String fechaComputar) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException{
 		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 		Hora hora = new Hora();
 		hora.setFechaDesde(simpleFateFormat.parse(fechaDesde));
@@ -52,7 +57,11 @@ public class FachadaHora {
 		hora.setIdActividad(idActividad);
 		hora.setNombreTipoHora(tipoHora);
 		hora.setDescripcion(descripcion);
+		hora.setComentario(comentario);
 		hora.setRemoto(convertirBoolean(remoto));
+		hora.setDuracion(diferenciaEnMinutos(fechaDesde, fechaHasta));
+		hora.setId(Integer.valueOf(id));
+		
 		servicioHora.editar(hora);
 	}
 	
@@ -60,11 +69,24 @@ public class FachadaHora {
 		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		Hora hora = new Hora();
 		hora.setId(id);
+		//Para pasar el valor nulo, se establece a mano como si fuese 01-01-1900, y desde la consultaHora, se setea si tiene que ser el valor NULL o no.
+		
+		if (fechaInformar.matches("nulo"))
+			hora.setFechaInformar(simpleFateFormat.parse("01-01-1900"));
+		else
+			hora.setFechaInformar(simpleFateFormat.parse(fechaInformar));
 		
 		
-		hora.setFechaInformar(simpleFateFormat.parse(fechaInformar));
-		hora.setFechaFacturar(simpleFateFormat.parse(fechaFacturar));
-		hora.setFechaComputar(simpleFateFormat.parse(fechaComputar));
+		if (fechaFacturar.matches("nulo"))
+			hora.setFechaFacturar(simpleFateFormat.parse("01-01-1900"));
+		else
+			hora.setFechaFacturar(simpleFateFormat.parse(fechaFacturar));
+		
+		if (fechaComputar.matches("nulo"))
+			hora.setFechaComputar(simpleFateFormat.parse("01-01-1900"));
+		else
+			hora.setFechaComputar(simpleFateFormat.parse(fechaComputar));
+		
 		servicioHora.editarDetalle(hora);
 	}
 	
@@ -76,6 +98,10 @@ public class FachadaHora {
 		return servicioHora.seleccionarHora(id);
 	}
 	
+	public void cambiarValidacionHora(int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		servicioHora.cambiarValidacionHora(id);
+	}
+	
 	private boolean convertirBoolean(String booleanString){
 		if("true".equalsIgnoreCase(booleanString)){
 			return true;
@@ -84,6 +110,15 @@ public class FachadaHora {
 		}
 	}
 
+	public int diferenciaEnMinutos (String fechaDesde, String fechaHasta) throws ParseException
+	{
+		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		Date fechaDesdeDate = simpleFateFormat.parse(fechaDesde);
+		Date fechaHastaDate = simpleFateFormat.parse(fechaHasta);
+		
+		return (int) ((fechaHastaDate.getTime()/60000) -  (fechaDesdeDate.getTime()/60000));
+	}
+	
 	public ServicioHora getServicioHora() {
 		return servicioHora;
 	}

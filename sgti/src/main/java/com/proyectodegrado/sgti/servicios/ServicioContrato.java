@@ -35,4 +35,7 @@ public interface ServicioContrato {
 	Date proximaFechaFacturacion(String id) throws FileNotFoundException,
 			ClassNotFoundException, IOException, SQLException;
 
+	Contrato verContrato(String id) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
+
 }

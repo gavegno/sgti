@@ -49,6 +49,25 @@ public class ServicioTipoHoraImpl implements ServicioTipoHora {
 	public List<TipoHora> seleccionarTipos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return tipoHoraDao.seleccionarTipos();
 	}
+	
+	@Override
+	public List<TipoHora> seleccionarTiposQueNoEsteUsandoElContrato(String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
+		List<TipoHora> lista = tipoHoraDao.verTiposHoraQueContratoNoTengaEnUso(idContrato);
+		if (lista.size() > 0)
+			return lista;
+		else
+			throw new SgtiException("Ya no existen más tipos de hora para asignar a este contrato");
+	}
+	
+	@Override
+	public void editarTipoHora (int id, String tipo) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		tipoHoraDao.editarTipoHora(id, tipo);
+	}
+	
+	@Override
+	public void borrarTipoHora (int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		tipoHoraDao.borrarTipoHora(id);
+	}
 
 	public TipoHoraDAO getTipoHoraDao() {
 		return tipoHoraDao;

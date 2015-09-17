@@ -54,7 +54,7 @@ public class ConsultasActividadTest extends ConfigurarTest{
 			Calendar fechaActividad = Calendar.getInstance();
 			fechaActividad.set(Calendar.MONTH, 12);
 			fechaActividad.set(Calendar.DAY_OF_MONTH, 31);
-			Actividad actividad = new Actividad(ACTIVIDAD_TEST, TIPO_ACTIVIDAD_TEST, CONTRATO_TEST, USUARIO_TEST, fechaCreacion,fechaActividad.getTime(),3);
+			Actividad actividad = new Actividad(ACTIVIDAD_TEST, TIPO_ACTIVIDAD_TEST, CONTRATO_TEST, USUARIO_TEST, fechaCreacion,fechaActividad.getTime(),3," ");
 			actividadDao.insertarActividad(actividad);
 			
 			assertEquals(1, actividadDao.verActividades().size());
@@ -75,7 +75,7 @@ public class ConsultasActividadTest extends ConfigurarTest{
 			Calendar fechaActividad = Calendar.getInstance();
 			fechaActividad.set(Calendar.MONTH, 12);
 			fechaActividad.set(Calendar.DAY_OF_MONTH, 31);
-			Actividad actividad = new Actividad(ACTIVIDAD_TEST, TIPO_ACTIVIDAD_TEST, CONTRATO_TEST, USUARIO_TEST, fechaCreacion,fechaCreacion,3);
+			Actividad actividad = new Actividad(ACTIVIDAD_TEST, TIPO_ACTIVIDAD_TEST, CONTRATO_TEST, USUARIO_TEST, fechaCreacion,fechaCreacion,3," ");
 			actividadDao.insertarActividad(actividad);
 			
 			assertEquals(1, actividadDao.verActividades().size());

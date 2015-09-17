@@ -37,8 +37,8 @@ public class ServicioTipoHoraTest extends ConfigurarTest{
 	@After
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
-			consultasTipoHora.borrarTipoHora(TIPO_TEST);
-			consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+			consultasTipoHora.borrarTipoHora(TIPO_ID_TEST);
+			consultasTipoHora.borrarTipoHora(TIPO_ID_TEST2);
 		}
 	}
 	

@@ -139,6 +139,12 @@ public class ServicioContratoImpl implements ServicioContrato {
 	public List<Contrato> verContratosPorContraparte (String idContraparte) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return contratoDao.verContratosPorContraparte(idContraparte);
 	}
+	
+	@Override
+	public Contrato verContrato (String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		return contratoDao.verContrato(id);
+	}
 
 	public ContratoDAO getContratoDao() {
 		return contratoDao;

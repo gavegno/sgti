@@ -78,15 +78,17 @@
             </select>
         </td>
         <td><input class="form-control" size="16" type="text" name="contrato" value="${actividad.idContrato}" disabled></td>
+        <td><textarea class="form-control" name="descripcion" rows="2" >${actividad.descripcion}</textarea></td>
         
         <input class="form-control" size="16" type="hidden" id="id" name="id" value="${actividad.id}" >
         <input class="form-control" size="16" type="hidden" name="tipo" value="${actividad.tipo}" >
         <input class="form-control" size="16" type="hidden" name="contrato" value="${actividad.idContrato}" >
-        <td class="vert-align"><button class="btn " id="boton" type="submit"> <span class="glyphicon "></span>Editar</button> </td>
+
+        <td class="vert-align"><button class="btn btn-success" type="submit"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Guardar </button></td>
       </form>
       <form class="form-control" action="/CounterWebApp/desktop/actividad/eliminarActividad" method="POST">
        	<input class="form-control" size="16" type="hidden" id="id" name="id" value="${actividad.id}" >
-      	<td class="vert-align"><button class="btn " id="boton" type="submit"> <span class="glyphicon "></span>Eliminar</button> </td>
+      	<td class="vert-align"><button class="btn btn-danger" type="submit"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar </button></td>
       </form>
       </tr>
      </c:forEach>

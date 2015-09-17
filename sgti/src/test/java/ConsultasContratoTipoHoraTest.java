@@ -46,7 +46,7 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 	public void borrarDatos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		if(isHabilitarTest()){
 			consultasContratoTipoHora.borrarContratoTiposHora();
-			consultasTipoHora.borrarTipoHora(TIPO_TEST);
+			consultasTipoHora.borrarTipoHora(TIPO_ID_TEST);
 			borrarRelacionadoConContrato();
 		}
 	}

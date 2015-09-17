@@ -53,14 +53,19 @@ public class ActividadController {
 	}
 	
 	@RequestMapping(value="/ingresarActividad", method = RequestMethod.POST)
-	public String insertarActividad(Model model, @RequestParam("id") final String id, @RequestParam("tipo") final String tipo, 
-			@RequestParam(required=false, value="periodo") final Integer periodo, @RequestParam("fecha") final String fecha, @RequestParam("usuario") final String usuario,
-			@RequestParam("contrato") final String contrato){
+	public String insertarActividad(Model model, 
+			@RequestParam("id") final String id, 
+			@RequestParam("tipo") final String tipo, 
+			@RequestParam(required=false, value="periodo") final Integer periodo, 
+			@RequestParam("fecha") final String fecha, 
+			@RequestParam("usuario") final String usuario,
+			@RequestParam("contrato") final String contrato,
+			@RequestParam("descripcion") final String descripcion){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
 		String mensaje = "La actividad fue ingresada correctamente";
 		try {
-			fachadaActividad.ingresarActividad(id, tipo, periodo, fecha, usuario, contrato);
+			fachadaActividad.ingresarActividad(id, tipo, periodo, fecha, usuario, contrato, descripcion);
 			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
@@ -79,14 +84,19 @@ public class ActividadController {
 	}
 	
 	@RequestMapping(value="/editarActividad", method = RequestMethod.POST)
-	public String editarActividad(Model model, @RequestParam("id") final String id, @RequestParam("tipo") final String tipo, 
-			@RequestParam("periodo") final int periodo, @RequestParam("fecha") final String fecha, @RequestParam("usuario") final String usuario,
-			@RequestParam("contrato") final String contrato){
+	public String editarActividad(Model model, 
+			@RequestParam("id") final String id, 
+			@RequestParam("tipo") final String tipo, 
+			@RequestParam("periodo") final int periodo, 
+			@RequestParam("fecha") final String fecha, 
+			@RequestParam("usuario") final String usuario,
+			@RequestParam("contrato") final String contrato,
+			@RequestParam("descripcion") final String descripcion){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
 		String mensaje = "La actividad fue editada correctamente";
 		try {
-			fachadaActividad.editarActividad(id, tipo, periodo, fecha, usuario, contrato);
+			fachadaActividad.editarActividad(id, tipo, periodo, fecha, usuario, contrato, descripcion);
 			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
@@ -110,6 +120,11 @@ public class ActividadController {
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
 			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
+			return cargarTablaActividades(model);
+		}catch (SgtiException e) {
+			e.printStackTrace();
+			mensaje = e.getMessage();
 			model.addAttribute("errorMessage", mensaje);
 			return cargarTablaActividades(model);
 		}finally{

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaCliente;
+import com.proyectodegrado.sgti.fachada.FachadaConfiguracion;
 import com.proyectodegrado.sgti.fachada.FachadaContrato;
+import com.proyectodegrado.sgti.fachada.FachadaPrecio;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
@@ -24,10 +26,10 @@ public class ContratoController {
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 
 	private FachadaContrato fachadaContrato;
-	
 	private FachadaCliente fachadaCliente;
-	
 	private FachadaUsuario fachadaUsuario;
+	private FachadaConfiguracion fachadaConfiguracion;
+	private FachadaPrecio fachadaPrecio;
 	
 	@RequestMapping(value="/ingresar", method = RequestMethod.GET)
 	public String cargarPagina(Model model){
@@ -55,6 +57,7 @@ public class ContratoController {
 		try {
 			fachadaContrato.ingresarContrato(id, idContraparte, nombreCliente);
 			model.addAttribute("message", mensaje);
+			model.addAttribute("contrato", fachadaContrato.verContrato(id));
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
 			mensaje = MENSAJE_ERROR;
@@ -72,9 +75,9 @@ public class ContratoController {
 		return "desktop/precio";
 	}
 	
-	//Carga la tabla de contratos, donde se permitirá editarlos.
-		@RequestMapping(value = "/tabla", method = RequestMethod.GET)
-		public String cargarTablaContratosPorContraparte(Model model, HttpServletRequest request)//, @RequestParam("id") final String idContraparte)
+	//Carga la tabla de contratos para las Contrapartes.
+		@RequestMapping(value = "/tablaContraparte", method = RequestMethod.GET)
+		public String cargarTablaContratosPorContraparte(Model model, HttpServletRequest request)
 		{	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
 			String idUsuario = (String) request.getSession().getAttribute("usuario");
@@ -90,5 +93,39 @@ public class ContratoController {
 			}
 			return "desktop/tablaContratosCliente";
 		}
+		
+		//Carga la tabla de contratos para las Contrapartes.
+			@RequestMapping(value = "/tablaSocio", method = RequestMethod.GET)
+			public String cargarTablaContratosSocio(Model model, HttpServletRequest request)
+			{	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+				fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
+				fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");
+				fachadaPrecio = (FachadaPrecio) context.getBean("fachadaPrecio");
+				fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+				String idUsuario = (String) request.getSession().getAttribute("usuario");
+				
+				try {
+					//Para comprobar por más seguridad, por si ingresan al link directamente.
+					if (fachadaUsuario.usuarioEsSocio(idUsuario))
+					{
+						model.addAttribute("contratos", fachadaContrato.seleccionarContratos());
+						model.addAttribute("configuraciones", fachadaConfiguracion.seleccionarConfiguracionActualTodos());
+						model.addAttribute("precios", fachadaPrecio.seleccionarPrecioActualTodos());
+					}
+					else
+					
+						return "/desktop/login2";
+					
+				} catch (IOException | SQLException | ClassNotFoundException e) {
+					e.printStackTrace();
+					model.addAttribute("errorMessage", MENSAJE_ERROR);
+					return "desktop/tablaContratosSocio";
+				}finally{
+					context.close();
+				}
+				return "desktop/tablaContratosSocio";
+			}
+			
+			
 	
 }

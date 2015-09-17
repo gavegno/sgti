@@ -15,7 +15,12 @@ public class ActividadDAO {
 	private ConsultasActividad consultasActividad;
 	
 	public void insertarActividad(Actividad actividad) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
-		consultasActividad.insertarActividad(actividad.getId(), actividad.getTipo(), new java.sql.Date(actividad.getFechaCreacion().getTime()), new java.sql.Date(actividad.getFechaActividad().getTime()), actividad.getIdUsuario(), actividad.getIdContrato(), actividad.getPeriodo());
+		consultasActividad.insertarActividad(actividad.getId(), 
+				actividad.getTipo(), 
+				new java.sql.Date(actividad.getFechaCreacion().getTime()), 
+				new java.sql.Date(actividad.getFechaActividad().getTime()), 
+				actividad.getIdUsuario(), actividad.getIdContrato(), 
+				actividad.getPeriodo(), actividad.getDescripcion());
 	}
 	
 	public Actividad verActividad(String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
@@ -29,8 +34,21 @@ public class ActividadDAO {
 			actividad.setPeriodo(resultSet.getInt("periodo"));
 			actividad.setIdContrato(resultSet.getString("contrato"));
 			actividad.setIdUsuario(resultSet.getString("usuario"));
+			actividad.setDescripcion(resultSet.getString("descripcion"));
 		}
 		return actividad;		
+	}
+	
+	public List<Actividad> actividadAsignadaAHora (String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		ResultSet resultSet = consultasActividad.actividadAsignadaAHora(id);
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		while(resultSet.next()){
+			Actividad actividad = new Actividad();
+			actividad.setId(resultSet.getString("id"));
+			actividades.add(actividad);
+		}
+		return actividades;
 	}
 	
 	public List<Actividad> verActividades() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
@@ -45,6 +63,7 @@ public class ActividadDAO {
 			actividad.setPeriodo(resultSet.getInt("periodo"));
 			actividad.setIdContrato(resultSet.getString("contrato"));
 			actividad.setIdUsuario(resultSet.getString("usuario"));
+			actividad.setDescripcion(resultSet.getString("descripcion"));
 			actividades.add(actividad);
 		}
 		return actividades;
@@ -62,6 +81,7 @@ public class ActividadDAO {
 			actividad.setPeriodo(resultSet.getInt("periodo"));
 			actividad.setIdContrato(resultSet.getString("contrato"));
 			actividad.setIdUsuario(resultSet.getString("usuario"));
+			actividad.setDescripcion(resultSet.getString("descripcion"));
 			actividades.add(actividad);
 		}
 		return actividades;
@@ -79,6 +99,7 @@ public class ActividadDAO {
 			actividad.setPeriodo(resultSet.getInt("periodo"));
 			actividad.setIdContrato(resultSet.getString("contrato"));
 			actividad.setIdUsuario(resultSet.getString("usuario"));
+			actividad.setDescripcion(resultSet.getString("descripcion"));
 			actividades.add(actividad);
 		}
 		return actividades;
@@ -89,7 +110,10 @@ public class ActividadDAO {
 	}
 	
 	public void editarActividad(Actividad actividad) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
-		consultasActividad.editarActividad(actividad.getId(), new java.sql.Date(actividad.getFechaActividad().getTime()), actividad.getIdUsuario(), actividad.getPeriodo());
+		consultasActividad.editarActividad(actividad.getId(), 
+				new java.sql.Date(actividad.getFechaActividad().getTime()), 
+				actividad.getIdUsuario(), actividad.getPeriodo(),
+				actividad.getDescripcion());
 	}
 
 	public ConsultasActividad getConsultasActividad() {

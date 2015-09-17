@@ -69,6 +69,22 @@ public class HorarioLaboralDAO {
 		consultasHorarioLaboral.borrarDiaDeHorarioLaboral(idHorarioLaboral, nombreDia);
 		
 	}
+	
+	public void borrarHorarioLaboral(String idHorarioLaboral) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException
+	{
+		consultasHorarioLaboral.borrarHorarioLaboral(idHorarioLaboral);
+	}
+	
+	public boolean horarioLaboralEnUso(String idHorarioLaboral) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		ResultSet resultSet = consultasHorarioLaboral.horarioLaboralEnUso(idHorarioLaboral); 
+		
+		resultSet.next();
+		if (resultSet.getInt(1) > 0)
+			return true;
+		else
+			return false;
+		
+	}
 
 	public ConsultasHorarioLaboral getConsultasHorarioLaboral() {
 		return consultasHorarioLaboral;

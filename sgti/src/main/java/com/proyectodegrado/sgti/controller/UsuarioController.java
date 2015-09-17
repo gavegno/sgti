@@ -1,9 +1,12 @@
 package com.proyectodegrado.sgti.controller;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
+import com.proyectodegrado.sgti.modelo.Usuario;
 
 @Controller
 @RequestMapping("/desktop/tecnicos")
@@ -44,6 +48,9 @@ public class UsuarioController {
 			mensaje = e.getMessage();
 			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model);
+		} catch (NoSuchAlgorithmException e) {
+			model.addAttribute("errorMessage", "Error al obtener Hash de contraseña");
+			return cargarPagina(model);	
 		}finally{
 			context.close();
 		}
@@ -55,6 +62,7 @@ public class UsuarioController {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
 		try {
+			
 			model.addAttribute("tipos", fachadaTipoHora.verTiposDeHora());
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
@@ -123,6 +131,73 @@ public class UsuarioController {
 			}
 			return cargarTablaUsuarios(model);
 		}
+		
+		
+		//Carga la página de editar usuario, con el seleccionado en la tabla.
+				@RequestMapping(value="/cargarCambiarContrasena", method = RequestMethod.GET)
+				public String cargarCambiarContrasena(Model model, HttpServletRequest request){
+					
+					return "desktop/cambiarContrasena";
+				}
+		
+		
+		
+		//Acción de cambiar la contraseña.
+				@RequestMapping(value="/cambiarContrasena", method = RequestMethod.POST)
+				public String cambiarContrasena(Model model, HttpServletRequest request, 
+						@RequestParam("passwordActual") final String passwordActual,
+						@RequestParam("passwordNueva1") final String passwordNueva1,
+						@RequestParam("passwordNueva2") final String passwordNueva2){
+					
+					ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+					fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+					String idUsuario = (String) request.getSession().getAttribute("usuario");
+					String mensaje = "Contraseña cambiada con éxito";
+					String mensajeError = "";
+					
+
+					try {
+						//Obtengo los datos del usuario para luego comprar la contraseña actual.
+						Usuario usuario = fachadaUsuario.seleccionarUsuario(idUsuario);
+						
+						String contrasenaHashActual = fachadaUsuario.get_MD5_SecurePassword(passwordActual);
+						
+						if(usuario.getContrasena() != null && usuario.getContrasena().toLowerCase().equals(contrasenaHashActual.toLowerCase())){
+							//True si la clave actual es correcta.
+							//Ahora chequeo que las dos claves nuevas coincidan:
+							
+							if (passwordNueva1 != null && passwordNueva1.equals(passwordNueva2))
+							{
+								//True si ambas claves son idénticas y no son vacías.
+								String contrasenaHashNueva = fachadaUsuario.get_MD5_SecurePassword(passwordNueva1);
+								fachadaUsuario.cambiarContrasena(idUsuario, contrasenaHashNueva);
+								model.addAttribute("message", mensaje);
+							}
+							else
+								mensajeError = "Las contraseñas nuevas no coinciden";
+						}
+						else
+						{
+							mensajeError = "La clave actual no es correcta";
+							
+						}
+					} catch (ClassNotFoundException | IOException | SQLException | NoSuchAlgorithmException e) {
+						e.printStackTrace();
+						model.addAttribute("errorMessage", MENSAJE_ERROR);
+						return cargarCambiarContrasena(model, request);
+					}finally{
+						if (mensajeError.length() != 0)
+							model.addAttribute("errorMessage", mensajeError);
+						context.close();
+					}
+					return cargarCambiarContrasena(model, request);
+				}
+				
+				//Se llamará en el caso de que intente cambiar la clave y la actual no es correcta.
+				public String logout(Model model, HttpServletRequest request){
+					request.getSession().invalidate();
+					return "/desktop/login2";
+				}
 		
 	public FachadaUsuario getFachadaUsuario() {
 		return fachadaUsuario;

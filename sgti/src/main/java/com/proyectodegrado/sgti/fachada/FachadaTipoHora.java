@@ -3,7 +3,6 @@ package com.proyectodegrado.sgti.fachada;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
@@ -24,18 +23,38 @@ public class FachadaTipoHora {
 		servicioTipoHora.agregar(tipoHora);
 	}
 	
-	public void insertarContratoTipoHora(String idContrato, String nombreTipoHora, int computo) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+	public void insertarContratoTipoHora(String idContrato, String nombreTipoHora, double computo) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		TipoHora tipoHora = servicioTipoHora.seleccionarPorTipo(nombreTipoHora);
 		TipoHoraComputo tipoHoraComputo = new TipoHoraComputo(tipoHora, computo);
 		servicioContratoTipoHora.insertar(idContrato, tipoHoraComputo);
 	}
 	
-	public List<String> verTiposDeHora() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
-		List<String> nombreTipos = new ArrayList<String>();
-		for(TipoHora tipoHora : servicioTipoHora.seleccionarTipos()){
-			nombreTipos.add(tipoHora.getTipo());
-		}
-		return nombreTipos;
+	public void editarTipoHora (int id, String tipo) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		servicioTipoHora.editarTipoHora(id, tipo);
+	}
+	
+	public void editarComputosDeTipoHora (String idContrato, int idTipoHora, double computo) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		TipoHora tipoHora = servicioTipoHora.seleccionarPorId(idTipoHora);
+		TipoHoraComputo tipoHoraComputo = new TipoHoraComputo(tipoHora, computo);
+		servicioContratoTipoHora.editarContratoTipoHora(idContrato, tipoHoraComputo);
+		
+	}
+	
+	public List<TipoHoraComputo> verTiposDeHoraPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioContratoTipoHora.verContratoTipoHora(idContrato);
+	}
+	
+	public void borrarTipoHora (int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		servicioTipoHora.borrarTipoHora(id);
+	}
+	
+	public List<TipoHora> verTiposDeHora() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioTipoHora.seleccionarTipos();
+	}
+	
+	public List<TipoHora> verTiposDeHoraQueNoTengaEnUsoContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, SgtiException{
+		return servicioTipoHora.seleccionarTiposQueNoEsteUsandoElContrato(idContrato);
 	}
 
 	public ServicioTipoHora getServicioTipoHora() {

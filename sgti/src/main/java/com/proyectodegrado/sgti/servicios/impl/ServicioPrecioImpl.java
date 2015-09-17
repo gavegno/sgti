@@ -3,6 +3,7 @@ package com.proyectodegrado.sgti.servicios.impl;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import com.proyectodegrado.sgti.daos.PrecioDAO;
@@ -19,12 +20,34 @@ public class ServicioPrecioImpl implements ServicioPrecio {
 	 */
 	@Override
 	public void insertar(Precio precio, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
-		if(esPosibleInsertar(precio,idContrato)){
-			precioDao.insertarPrecio(precio.getPrecio(), precio.getFechaDesde(), precio.getFechaHasta(), idContrato);
-		}else{
-			throw new SgtiException("El precio ingresado se superpone con otro precio");
+		if (precioInicioMenorAFin(precio))
+		{
+			if(esPosibleInsertar(precio, idContrato)){
+				precioDao.insertarPrecio(precio.getPrecio(), precio.getPrecioExtra(), precio.getFechaDesde(), precio.getFechaHasta(), idContrato);
+			}else
+				throw new SgtiException("El precio ingresado se superpone con otro precio");
 		}
+		else
+			throw new SgtiException("La fecha de inicio debe ser menor a la fecha de fin");
 	}
+	
+	@Override
+	public void editarPrecio(Precio precioNuevo, Precio precioViejo, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
+		if (precioInicioMenorAFin(precioNuevo))
+		{
+			if (esPosibleEditar(precioNuevo, precioViejo, idContrato))
+			{
+				borrarPrecio(idContrato, precioViejo);
+				insertar(precioNuevo, idContrato);
+			}
+			else
+				throw new SgtiException("El precio que quiere guardar se superpone con otro precio");
+		}
+		else
+			throw new SgtiException("La fecha de inicio debe ser menor a la fecha de fin");
+	}
+	
+	
 	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioPrecio#verPrecios(java.lang.String)
@@ -42,8 +65,57 @@ public class ServicioPrecioImpl implements ServicioPrecio {
 		return precioDao.verPrecioActual(idContrato);
 	}
 	
+	@Override
+	public List<Precio> seleccionarPrecioActualTodos() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return precioDao.verPrecioActualTodos();
+	}
+	
+	@Override
+	public List<Precio> seleccionarPreciosPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return precioDao.verPrecios(idContrato);
+	}
+	
+	@Override
+	public Precio verPrecioExacto (String idContrato, double precio, String fechaDesde, String fechaHasta) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		return precioDao.verPrecioExacto(idContrato, precio, fechaDesde, fechaHasta);
+	}
+	
+	@Override
+	public void borrarPrecio(String idContrato, Precio precio) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException 
+	{
+		precioDao.borrarPrecio(idContrato, precio.getPrecio(), precio.getFechaDesde(), precio.getFechaHasta());
+	}
+	
 	private boolean esPosibleInsertar(Precio precio, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		return precioDao.verPreciosPorFecha(idContrato, precio.getFechaDesde()).size() == 0 && precioDao.verPreciosPorFecha(idContrato, precio.getFechaHasta()).size() == 0;
+		boolean resultado = false;
+		List<Precio> precios = precioDao.saberSiPuedoInsertarNuevoPrecio(idContrato, precio.getPrecio(), precio.getFechaDesde(), precio.getFechaHasta());
+		if (precios.size() == 0)
+		{
+				resultado = true;
+		}
+		return resultado;
+	}
+	
+	private boolean esPosibleEditar(Precio precioNuevo, Precio precioViejo, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		boolean resultado = false;
+		List<Precio> precios = precioDao.saberSiPuedoEditarPrecio(idContrato, precioViejo.getPrecio(), precioViejo.getFechaDesde(), precioViejo.getFechaHasta(), precioNuevo.getFechaDesde(), precioNuevo.getFechaHasta());
+		if (precios.size() == 0)
+		{
+				resultado = true;
+		}
+		return resultado;
+	}
+	
+	private boolean precioInicioMenorAFin (Precio p)
+	{
+		return fechasInicioMenorAFin(p.getFechaDesde(), p.getFechaHasta());
+	}
+	
+	private boolean fechasInicioMenorAFin(Date fechaInicio, Date fechaFin)
+	{
+		return fechaInicio.before(fechaFin);
 	}
 
 	public PrecioDAO getPrecioDao() {

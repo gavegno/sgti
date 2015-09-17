@@ -32,7 +32,11 @@
 	          <ul class="dropdown-menu">
 	          	<c:if test="${tipoUsuario == 'SOCIO'}">
 	          		<li><a href="/CounterWebApp/desktop/tiposDeHora.jsp">Agregar tipo de hora</a></li>
-	          		<li><a href="/CounterWebApp/desktop/agregarHorarioLaboral.jsp">Agregar Horario Laboral</a></li>
+	          		<li><a href="/CounterWebApp/desktop/tiposDeHora/tabla">Ver tipos de hora</a></li>
+	          		<li role="separator" class="divider"></li>
+	          		<li><a href="/CounterWebApp/desktop/detalleDia.jsp">Agregar Horario laboral</a></li>
+					<li><a href="/CounterWebApp/desktop/dias/tabla">Ver horarios laborales</a></li>
+	          		<li role="separator" class="divider"></li>
 	          		<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
 	          	</c:if>
 	            <c:if test="${tipoUsuario == 'TECNICO'}">
@@ -70,11 +74,11 @@
 	          <ul class="dropdown-menu">
 	          <c:if test="${tipoUsuario == 'SOCIO'}">
 	            <li><a href="/CounterWebApp/desktop/contrato/ingresar">Crear contrato</a></li>
-	            <li><a href="#">Ver contratos</a></li>
+	            <li><a href="/CounterWebApp/desktop/contrato/tablaSocio">Ver contratos</a></li>
 	            <li><a href="#">Modificar contrato</a></li>
 	          </c:if>
 	          <c:if test="${tipoUsuario == 'CONTRAPARTE'}">
-	            <li><a href="/CounterWebApp/desktop/contrato/tabla">Ver mis contratos</a></li>
+	            <li><a href="/CounterWebApp/desktop/contrato/tablaContraparte">Ver mis contratos</a></li>
 	          </c:if>
 	          </ul>
 	        </li>
@@ -101,6 +105,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Ver mis datos</a></li>
+            <li><a href="/CounterWebApp/desktop/tecnicos/cargarCambiarContrasena">Cambiar mi contraseña</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/CounterWebApp/desktop/login/logout">Cerrar sesión</a></li>
           </ul>

@@ -16,21 +16,21 @@ public class FachadaActividad {
 	
 	private ServicioActividad servicioActividad;
 	
-	public void ingresarActividad(final String id, final String tipo, final int periodo, final String fecha, final String usuario, final String contrato) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException, SgtiException{
+	public void ingresarActividad(final String id, final String tipo, final int periodo, final String fecha, final String usuario, final String contrato, final String descripcion) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException, SgtiException{
 		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Actividad actividad = new Actividad(id,tipo,contrato,usuario,new Date(),simpleFateFormat.parse(fecha),periodo);
+		Actividad actividad = new Actividad(id,tipo,contrato,usuario,new Date(),simpleFateFormat.parse(fecha),periodo,descripcion);
 		servicioActividad.agregar(actividad);
 	}
 	
-	public void borrarActividad(final String id) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException{
+	public void borrarActividad(final String id) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException, SgtiException{
 		Actividad actividad = new Actividad();
 		actividad.setId(id);;
 		servicioActividad.borrar(actividad);
 	}
 	
-	public void editarActividad(final String id, final String tipo, final int periodo, final String fecha, final String usuario, final String contrato) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException{
+	public void editarActividad(final String id, final String tipo, final int periodo, final String fecha, final String usuario, final String contrato, final String descripcion) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException{
 		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Actividad actividad = new Actividad(id,tipo,contrato,usuario,new Date(),simpleFateFormat.parse(fecha),periodo);
+		Actividad actividad = new Actividad(id,tipo,contrato,usuario,new Date(),simpleFateFormat.parse(fecha),periodo,descripcion);
 		servicioActividad.editar(actividad);
 	}
 	

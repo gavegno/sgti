@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.proyectodegrado.sgti.daos.HoraDAO;
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Hora;
 import com.proyectodegrado.sgti.servicios.ServicioConfiguracion;
 import com.proyectodegrado.sgti.servicios.ServicioContrato;
@@ -25,8 +26,18 @@ public class ServicioHoraImpl implements ServicioHora {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioHora#agregar(com.proyectodegrado.sgti.modelo.Hora)
 	 */
 	@Override
-	public void agregar(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
-		horaDao.insertarHora(hora);
+	public void agregar(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, SgtiException{
+		Date fechaDesdeCheck = hora.getFechaDesde();
+		Date fechaHastaCheck = hora.getFechaHasta();
+		if (fechaHastaCheck.after(fechaDesdeCheck) == false){
+			throw new SgtiException("Error: la fecha desde no puede ser mayor a la fecha hasta. La hora no se registró.");
+		}
+			
+		else
+		{
+			horaDao.insertarHora(hora);
+		}
+		
 	}
 	
 	/* (non-Javadoc)
@@ -90,6 +101,11 @@ public class ServicioHoraImpl implements ServicioHora {
 		horaDao.editarHoraDetalle(hora);
 	}
 	
+	@Override
+	public void cambiarValidacionHora(int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		horaDao.cambiarValidacionHora(id);
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioHora#borrar(int)
 	 */
@@ -141,6 +157,7 @@ public class ServicioHoraImpl implements ServicioHora {
 		return fechas;
 		
 	}
+
 
 	public HoraDAO getHoraDao() {
 		return horaDao;

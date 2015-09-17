@@ -17,7 +17,7 @@ public class ContratoTipoHoraDAO {
 	
 	private TipoHoraDAO tipoHoraDao;
 	
-	public void insertarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void insertarContratoTipoHora (String idContrato, int idTipoHora, double computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasContratoTipoHora.insertarContratoTipoHora(idContrato, idTipoHora, computos);
 	}
 	
@@ -28,13 +28,13 @@ public class ContratoTipoHoraDAO {
 			TipoHora tipoHora = tipoHoraDao.seleccionarPorId(resultSet.getInt("idtipohora"));
 			TipoHoraComputo tipoHoraComputo = new TipoHoraComputo();
 			tipoHoraComputo.setTipoHora(tipoHora);
-			tipoHoraComputo.setComputo(resultSet.getInt("computos"));
+			tipoHoraComputo.setComputo(resultSet.getDouble("computos"));
 			tiposHoraComputo.add(tipoHoraComputo);
 		}
 		return tiposHoraComputo;
 	}
 	
-	public void editarContratoTipoHora (String idContrato, int idTipoHora, int computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void editarContratoTipoHora (String idContrato, int idTipoHora, double computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasContratoTipoHora.editarContratoTipoHora(idContrato, idTipoHora, computos);
 	}
 

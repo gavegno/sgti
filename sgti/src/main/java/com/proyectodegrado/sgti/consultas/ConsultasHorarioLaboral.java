@@ -61,9 +61,22 @@ public class ConsultasHorarioLaboral {
 		preparedStatement.executeUpdate();
 		conexionBD.cerrar(con);
 	}
-
-	public Conexion getConexionBD() {
-		return conexionBD;
+	
+	public void borrarHorarioLaboral (String idHorarioLaboral) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM horario AS h WHERE h.id =?");
+		preparedStatement.setString(1, idHorarioLaboral);
+		preparedStatement.executeUpdate();
+		conexionBD.cerrar(con);
+	}
+	
+	public ResultSet horarioLaboralEnUso(String idHorarioLaboral) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT count(*) FROM configuracion AS c WHERE c.id_horariolaboral=?");
+		preparedStatement.setString(1, idHorarioLaboral);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
 	}
 
 	public void setConexionBD(Conexion conexionBD) {

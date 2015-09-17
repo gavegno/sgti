@@ -34,6 +34,6 @@ public interface ServicioActividad {
 			IOException;
 
 	void borrar(Actividad actividad) throws FileNotFoundException,
-			ClassNotFoundException, SQLException, IOException;
+			ClassNotFoundException, SQLException, IOException, SgtiException;
 
 }

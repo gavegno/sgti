@@ -24,10 +24,50 @@ public class HoraDAO {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm ");
 		String horaDesde = simpleDateFormat.format(hora.getFechaDesde());
 		String horaHasta = simpleDateFormat.format(hora.getFechaHasta());
-		consultasHora.insertarHora(new java.sql.Date(hora.getFechaDesde().getTime()), new java.sql.Date(hora.getFechaHasta().getTime()), horaDesde, horaHasta, hora.isRemoto(), 
-				hora.getIdUsuario(), hora.getIdContrato(), hora.getIdActividad(), new java.sql.Date(hora.getFechaInformar().getTime()), 
-				new java.sql.Date(hora.getFechaFacturar().getTime()), new java.sql.Date(hora.getFechaComputar().getTime()), 
-				tipoHoraDao.seleccionarPorTipo(hora.getNombreTipoHora()).getId(), hora.getDescripcion(), hora.isValidada(), hora.isInformada(), hora.isFacturada());
+		consultasHora.insertarHora(
+				new java.sql.Date(hora.getFechaDesde().getTime()), 
+				new java.sql.Date(hora.getFechaHasta().getTime()), 
+				horaDesde, 
+				horaHasta, 
+				hora.isRemoto(), 
+				hora.getIdUsuario(), 
+				hora.getIdContrato(), 
+				hora.getIdActividad(), 
+				new java.sql.Date(hora.getFechaInformar().getTime()), 
+				new java.sql.Date(hora.getFechaFacturar().getTime()), 
+				new java.sql.Date(hora.getFechaComputar().getTime()), 
+				tipoHoraDao.seleccionarPorTipo(hora.getNombreTipoHora()).getId(), 
+				hora.getDescripcion(),
+				hora.getComentario(),
+				hora.isValidada(), 
+				hora.isInformada(), 
+				hora.isFacturada(), 
+				hora.getDuracion());
+	}
+	
+	public void editarHora(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm ");
+		String horaDesde = simpleDateFormat.format(hora.getFechaDesde());
+		String horaHasta = simpleDateFormat.format(hora.getFechaHasta());
+		
+		consultasHora.editarHora(
+				hora.getId(), 
+				new java.sql.Date(hora.getFechaDesde().getTime()), 
+				new java.sql.Date(hora.getFechaHasta().getTime()), 
+				horaDesde, 
+				horaHasta, 
+				hora.isRemoto(), 
+				hora.getIdActividad(), 
+				new java.sql.Date(hora.getFechaInformar().getTime()), 
+				new java.sql.Date(hora.getFechaFacturar().getTime()), 
+				new java.sql.Date(hora.getFechaComputar().getTime()), 
+				tipoHoraDao.seleccionarPorTipo(hora.getNombreTipoHora()).getId(), 
+				hora.getDescripcion(), 
+				hora.getComentario(),
+				hora.isValidada(), 
+				hora.isInformada(), 
+				hora.isFacturada(), 
+				hora.getDuracion());
 	}
 	
 	public List<Hora> verHorasRegistradas() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
@@ -51,8 +91,10 @@ public class HoraDAO {
 			hora.setIdActividad(resultSet.getString("actividad"));
 			hora.setNombreTipoHora(tipoHoraDao.seleccionarPorId(resultSet.getInt("tipohora")).getTipo());
 			hora.setDescripcion(resultSet.getString("descripcion"));
+			hora.setComentario(resultSet.getString("comentario"));
 			hora.setInformada(resultSet.getBoolean("informada"));
 			hora.setFacturada(resultSet.getBoolean("facturada"));
+			hora.setDuracion(resultSet.getInt("duracion"));
 			horas.add(hora);
 		}
 		return horas;
@@ -89,8 +131,10 @@ public class HoraDAO {
 			hora.setIdActividad(resultSet.getString("actividad"));
 			hora.setNombreTipoHora(tipoHoraDao.seleccionarPorId(resultSet.getInt("tipohora")).getTipo());
 			hora.setDescripcion(resultSet.getString("descripcion"));
+			hora.setComentario(resultSet.getString("comentario"));
 			hora.setInformada(resultSet.getBoolean("informada"));
 			hora.setFacturada(resultSet.getBoolean("facturada"));
+			hora.setDuracion(resultSet.getInt("duracion"));
 		}
 		return hora;
 	}
@@ -115,8 +159,10 @@ public class HoraDAO {
 			hora.setIdActividad(resultSet.getString("actividad"));
 			hora.setNombreTipoHora(tipoHoraDao.seleccionarPorId(resultSet.getInt("tipohora")).getTipo());
 			hora.setDescripcion(resultSet.getString("descripcion"));
+			hora.setComentario(resultSet.getString("comentario"));
 			hora.setInformada(resultSet.getBoolean("informada"));
 			hora.setFacturada(resultSet.getBoolean("facturada"));
+			hora.setDuracion(resultSet.getInt("duracion"));
 			horas.add(hora);
 		}
 		return horas;
@@ -142,8 +188,10 @@ public class HoraDAO {
 			hora.setIdActividad(resultSet.getString("actividad"));
 			hora.setNombreTipoHora(tipoHoraDao.seleccionarPorId(resultSet.getInt("tipohora")).getTipo());
 			hora.setDescripcion(resultSet.getString("descripcion"));
+			hora.setComentario(resultSet.getString("comentario"));
 			hora.setInformada(resultSet.getBoolean("informada"));
 			hora.setFacturada(resultSet.getBoolean("facturada"));
+			hora.setDuracion(resultSet.getInt("duracion"));
 			horas.add(hora);
 		}
 		return horas;
@@ -169,8 +217,10 @@ public class HoraDAO {
 			hora.setIdActividad(resultSet.getString("actividad"));
 			hora.setNombreTipoHora(tipoHoraDao.seleccionarPorId(resultSet.getInt("tipohora")).getTipo());
 			hora.setDescripcion(resultSet.getString("descripcion"));
+			hora.setComentario(resultSet.getString("comentario"));
 			hora.setInformada(resultSet.getBoolean("informada"));
 			hora.setFacturada(resultSet.getBoolean("facturada"));
+			hora.setDuracion(resultSet.getInt("duracion"));
 			horas.add(hora);
 		}
 		return horas;
@@ -196,21 +246,13 @@ public class HoraDAO {
 			hora.setIdActividad(resultSet.getString("actividad"));
 			hora.setNombreTipoHora(tipoHoraDao.seleccionarPorId(resultSet.getInt("tipohora")).getTipo());
 			hora.setDescripcion(resultSet.getString("descripcion"));
+			hora.setComentario(resultSet.getString("comentario"));
 			hora.setInformada(resultSet.getBoolean("informada"));
 			hora.setFacturada(resultSet.getBoolean("facturada"));
+			hora.setDuracion(resultSet.getInt("duracion"));
 			horas.add(hora);
 		}
 		return horas;
-	}
-	
-	public void editarHora(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
-		String horaDesde = simpleDateFormat.format(hora.getFechaDesde());
-		String horaHasta = simpleDateFormat.format(hora.getFechaHasta());
-		consultasHora.editarHora(hora.getId(), new java.sql.Date(hora.getFechaDesde().getTime()), new java.sql.Date(hora.getFechaHasta().getTime()), horaDesde, horaHasta, hora.isRemoto(), 
-				hora.getIdActividad(), new java.sql.Date(hora.getFechaInformar().getTime()), 
-				new java.sql.Date(hora.getFechaFacturar().getTime()), new java.sql.Date(hora.getFechaComputar().getTime()), 
-				tipoHoraDao.seleccionarPorTipo(hora.getNombreTipoHora()).getId(), hora.getDescripcion(), hora.isValidada(), hora.isInformada(), hora.isFacturada());
 	}
 	
 	public void editarHoraDetalle(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
@@ -219,8 +261,12 @@ public class HoraDAO {
 				new java.sql.Date(hora.getFechaInformar().getTime()), 
 				new java.sql.Date(hora.getFechaFacturar().getTime()), 
 				new java.sql.Date(hora.getFechaComputar().getTime()));
-	}	
+	}
 	
+	public void cambiarValidacionHora(int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		consultasHora.cambiarValidacionHora(id);
+	}
+	 
 	
 	public void borrar(int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		consultasHora.borrarHora(id);

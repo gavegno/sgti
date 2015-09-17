@@ -81,9 +81,14 @@
                         </select>    
                     </div>
 
+                    <div class="form-group container">
+                        <label for="inputDescripcion" class="control-label">Ingrese la descripción:</label>
+                        <td><textarea id="inputDescripcion" class="form-control" name="descripcion" rows="2" ></textarea></td>
+                    </div>
+
                 <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
-                    <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
+
                 </div>       
                 </form>
             </div>

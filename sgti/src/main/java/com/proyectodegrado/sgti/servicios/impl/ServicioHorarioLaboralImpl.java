@@ -63,6 +63,17 @@ public class ServicioHorarioLaboralImpl implements ServicioHorarioLaboral {
 	public void borrarDiaDeHorarioLaboral(String idHorarioLaboral, Dia dia) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		horarioLaboralDao.borrarDiaDeHorarioLaboral(idHorarioLaboral, dia.getNombre());
 	}
+	
+	@Override
+	public void borrarHorarioLaboral(String idHorarioLaboral) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		horarioLaboralDao.borrarHorarioLaboral(idHorarioLaboral);
+	}
+	
+	@Override
+	public boolean horarioLaboralEnUso(String idHorarioLaboral) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		return horarioLaboralDao.horarioLaboralEnUso(idHorarioLaboral);
+	}
 
 	public HorarioLaboralDAO getHorarioLaboralDao() {
 		return horarioLaboralDao;

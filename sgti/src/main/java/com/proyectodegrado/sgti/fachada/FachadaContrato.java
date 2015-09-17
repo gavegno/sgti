@@ -38,6 +38,11 @@ public class FachadaContrato {
 		return servicioContrato.verContratosPorContraparte(idContraparte);
 	}
 	
+	public Contrato verContrato(String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		return servicioContrato.verContrato(id);
+	}
+	
 	public List<Contrato> seleccionarContratos() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		return servicioContrato.seleccionarContratos();
 	}

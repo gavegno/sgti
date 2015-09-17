@@ -15,9 +15,9 @@ public class ConsultasActividad {
 	
 	private Conexion conexionBD;
 	
-	public void insertarActividad(String id, String tipo, Date fechaCreacion, Date fechaActividad, String idUsuario, String idContrato, int periodo) throws SQLException, FileNotFoundException, ClassNotFoundException, IOException{
+	public void insertarActividad(String id, String tipo, Date fechaCreacion, Date fechaActividad, String idUsuario, String idContrato, int periodo, String descripcion) throws SQLException, FileNotFoundException, ClassNotFoundException, IOException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO actividad(id,tipo,fechacreacion,fechaactividad,usuario,contrato,periodo) VALUES (?,?,?,?,?,?,?)");
+		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO actividad(id,tipo,fechacreacion,fechaactividad,usuario,contrato,periodo,descripcion) VALUES (?,?,?,?,?,?,?,?)");
 		preparedStatement.setString(1, id);
 		preparedStatement.setString(2,tipo);
 		preparedStatement.setDate(3,fechaCreacion);
@@ -25,6 +25,7 @@ public class ConsultasActividad {
 		preparedStatement.setString(5,idUsuario);
 		preparedStatement.setString(6,idContrato);
 		preparedStatement.setInt(7,periodo);
+		preparedStatement.setString(8,descripcion);
 		preparedStatement.executeUpdate();
 		conexionBD.cerrar(connection);
 	}
@@ -64,13 +65,24 @@ public class ConsultasActividad {
 		return resultSet;
 	}
 	
-	public void editarActividad(String id, Date fechaActividad, String idUsuario, int periodo) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+	public ResultSet actividadAsignadaAHora(String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE actividad AS a SET fechaactividad=?, usuario=?, periodo=? WHERE a.id=?");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.actividad=?");
+		preparedStatement.setString(1, id);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public void editarActividad(String id, Date fechaActividad, String idUsuario, int periodo, String descripcion) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE actividad AS a SET fechaactividad=?, usuario=?, periodo=?, descripcion=? WHERE a.id=?");
 		preparedStatement.setDate(1,fechaActividad);
 		preparedStatement.setString(2,idUsuario);
 		preparedStatement.setInt(3,periodo);
-		preparedStatement.setString(4,id);
+		preparedStatement.setString(4,descripcion);
+		preparedStatement.setString(5,id);
+		
 		preparedStatement.executeUpdate();
 		conexionBD.cerrar(connection);
 		

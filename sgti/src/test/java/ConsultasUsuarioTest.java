@@ -62,8 +62,8 @@ public class ConsultasUsuarioTest extends ConfigurarTest{
 			borrarTiposHoraUsuario();
 			consultasUsuario.borrarUsuario(ID_USUARIO11);
 			consultasUsuario.borrarUsuario(ID_USUARIO10);
-			consultasTipoHora.borrarTipoHora(TIPO_TEST);
-			consultasTipoHora.borrarTipoHora(TIPO_TEST2);
+			consultasTipoHora.borrarTipoHora(TIPO_ID_TEST);
+			consultasTipoHora.borrarTipoHora(TIPO_ID_TEST2);
 		}
 		
 	}

@@ -15,17 +15,28 @@ public class Hora {
 	private String idActividad;
 	private String nombreTipoHora;
 	private String descripcion;
+	private String comentario;
 	private boolean remoto;
 	private boolean informada;
 	private boolean facturada;
 	private boolean validada;
+	private int duracion;
+
 	
+	public int getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
+	}
+
 	public Hora() {
 		super();
 	}
 
 	public Hora(int id, Date fechaDesde, Date fechaHasta, Date fechaInformar, Date fechaFcturar, Date fechaComputar, String idContrato, String idUsuario, String idActividad,
-			String nombreTipoHora, String descripcion, boolean remoto, boolean informada, boolean facturada, boolean validada) {
+			String nombreTipoHora, String descripcion, String comentario, boolean remoto, boolean informada, boolean facturada, boolean validada, int duracion) {
 		super();
 		this.id = id;
 		this.fechaDesde = fechaDesde;
@@ -38,10 +49,21 @@ public class Hora {
 		this.idActividad = idActividad;
 		this.nombreTipoHora = nombreTipoHora;
 		this.descripcion = descripcion;
+		this.comentario = comentario;
 		this.remoto = remoto;
 		this.informada = informada;
 		this.facturada = facturada;
 		this.validada = validada;
+		this.duracion = duracion;
+		
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
 	public int getId() {

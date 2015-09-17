@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaActividad;
 import com.proyectodegrado.sgti.fachada.FachadaContrato;
 import com.proyectodegrado.sgti.fachada.FachadaHora;
@@ -61,19 +62,32 @@ public class HoraController {
 	@RequestMapping(value="/ingresarHora", method = RequestMethod.POST)
 	public String insertarHora(Model model, HttpServletRequest request, @RequestParam("fechadesde") final String fechaDesde, @RequestParam("fechahasta") final String fechaHasta, 
 			@RequestParam("tipohora") final String tipoHora, @RequestParam("remoto") final String remoto, @RequestParam("contrato") final String idContrato,
-			@RequestParam(required=false, value="actividad") final String idActividad, @RequestParam("descripcion") final String descripcion){
+			@RequestParam(required=false, value="actividad") String idActividad, @RequestParam("descripcion") final String descripcion, @RequestParam("comentario") final String comentario){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
 		String mensaje = "La Hora fue ingresada correctamente";
 		try {
 			String idUsuario = (String) request.getSession().getAttribute("usuario");
-			fachadaHora.registrarHora(fechaDesde, fechaHasta, tipoHora, remoto, idUsuario, idContrato, idActividad, descripcion);
+			
+			if (idActividad.matches("nulo"))
+				idActividad = null;
+			
+			fachadaHora.registrarHora(fechaDesde, fechaHasta, tipoHora, remoto, idUsuario, idContrato, idActividad, descripcion, comentario);
+			int duracion = fachadaHora.diferenciaEnMinutos(fechaDesde, fechaHasta);
+			mensaje = mensaje + ", duración: " + duracion + " minutos";
 			model.addAttribute("message", mensaje);
+			
 		} catch (ClassNotFoundException | SQLException | IOException | ParseException e) {
 			e.printStackTrace();
 			mensaje = e.getMessage();
-			model.addAttribute("errorMessage", mensaje);
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			cargarPagina(model, request);
+		}
+		catch (SgtiException e) {
+			e.printStackTrace();
+			mensaje = e.getMessage();
+			model.addAttribute("errorMessage", mensaje);
+			return cargarPagina(model, request);
 		}finally{
 			context.close();
 		}
@@ -83,14 +97,20 @@ public class HoraController {
 	@RequestMapping(value="/editarHora", method = RequestMethod.POST)
 	public String editarHora(Model model, HttpServletRequest request, @RequestParam("fechadesde") final String fechaDesde, @RequestParam("fechahasta") final String fechaHasta, 
 			@RequestParam("tipohora") final String tipoHora, @RequestParam("remoto") final String remoto, @RequestParam("contrato") final String idContrato,
-			@RequestParam("actividad") final String idActividad, @RequestParam("descripcion") final String descripcion, @RequestParam("id") final String id, 
-			@RequestParam("fechainformar") final String fechaInformar, @RequestParam("fechafacturar") final String fechaFacturar, 
+			@RequestParam("actividad") String idActividad, @RequestParam("descripcion") final String descripcion, @RequestParam("comentario") final String comentario, 
+			@RequestParam("id") final String id, @RequestParam("fechainformar") final String fechaInformar, @RequestParam("fechafacturar") final String fechaFacturar, 
 			@RequestParam("fechacomputar") final String fechaComputar){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
-		String mensaje = "La Hora fue editada correctamente";
+		String mensaje = "La hora fue editada correctamente";
 		try {
-			fachadaHora.editarHora(fechaDesde, fechaHasta, tipoHora, remoto, idContrato, idActividad, descripcion, id, fechaInformar, fechaFacturar, fechaComputar);
+
+			if (idActividad.matches("nulo"))
+				idActividad = null;
+			
+			fachadaHora.editarHora(fechaDesde, fechaHasta, tipoHora, remoto, idContrato, idActividad, descripcion, comentario, id, fechaInformar, fechaFacturar, fechaComputar);
+			int duracion = fachadaHora.diferenciaEnMinutos(fechaDesde, fechaHasta);
+			mensaje = mensaje + ", duración: " + duracion + " minutos";
 			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | SQLException | IOException | ParseException e) {
 			e.printStackTrace();
@@ -107,7 +127,6 @@ public class HoraController {
 	public String detalleHora(Model model, HttpServletRequest request, @RequestParam("id") final int idHora){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
-		String mensaje = " ";
 		
 		try {
 			
@@ -121,10 +140,9 @@ public class HoraController {
 		} catch (ClassNotFoundException | SQLException | IOException
 				| ParseException e) {
 			e.printStackTrace();
-			mensaje = "Ha ocurrido un error";
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return "desktop/editarHora";
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return "desktop/editarHora";
@@ -138,8 +156,7 @@ public class HoraController {
 			@RequestParam("fechaComputar") final String fechaComputar){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
-		String mensaje = " ";
-		
+		String mensaje = "Cambios guardados con éxito";
 		try {
 			
 			fachadaHora.editarHoraDetalle(idHora, fechaInformar, fechaFacturar, fechaComputar);
@@ -148,13 +165,32 @@ public class HoraController {
 		} catch (ClassNotFoundException | SQLException | IOException
 				| ParseException e) {
 			e.printStackTrace();
-			mensaje = "Ha ocurrido un error";
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return cargarPagina(model, request);
 		}finally{
 			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarPagina(model, request);
+	}
+	
+	@RequestMapping(value="/validarHora", method = RequestMethod.POST)
+	public String validarHora(Model model, HttpServletRequest request, @RequestParam("id") final int id){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
+		String mensaje = "Validación cambiada correctamente";
+		try {
+			fachadaHora.cambiarValidacionHora(id);
+			model.addAttribute("message", mensaje);
+		} catch (ClassNotFoundException | SQLException | IOException | ParseException e) {
+			e.printStackTrace();
+			mensaje = MENSAJE_ERROR;
+			model.addAttribute("errorMessage", mensaje);
+			detalleHora(model, request, id);
+		}finally{
+			context.close();
+		}
+		return detalleHora(model, request, id);
 	}
 	
 	@RequestMapping(value="/copiarHora", method = RequestMethod.POST)

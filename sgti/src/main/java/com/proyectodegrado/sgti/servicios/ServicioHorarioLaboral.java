@@ -30,4 +30,12 @@ public interface ServicioHorarioLaboral {
 			throws FileNotFoundException, IOException, SQLException,
 			ClassNotFoundException;
 
+	void borrarHorarioLaboral(String idHorarioLaboral)
+			throws FileNotFoundException, IOException, SQLException,
+			ClassNotFoundException;
+
+	boolean horarioLaboralEnUso(String idHorarioLaboral)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
 }

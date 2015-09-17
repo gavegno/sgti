@@ -7,12 +7,13 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Hora;
 
 public interface ServicioHora {
 
 	public abstract void agregar(Hora hora) throws FileNotFoundException,
-			ClassNotFoundException, SQLException, IOException;
+			ClassNotFoundException, SQLException, IOException, SgtiException;
 
 	public abstract List<Hora> seleccionarHorasRegistradas()
 			throws FileNotFoundException, ClassNotFoundException, IOException,
@@ -53,6 +54,9 @@ public interface ServicioHora {
 
 	void editarDetalle(Hora hora) throws FileNotFoundException,
 			ClassNotFoundException, SQLException, IOException;
+
+	void cambiarValidacionHora(int id) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
 
 
 }

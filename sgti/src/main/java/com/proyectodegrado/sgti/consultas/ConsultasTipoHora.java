@@ -48,10 +48,28 @@ public class ConsultasTipoHora {
 		return resultSet;
 	}
 	
-	public void borrarTipoHora (String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public ResultSet verTiposHoraQueContratoNoTengaEnUso (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
-		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM tipohora AS t WHERE t.tipo =?");
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM tipohora AS t where t.id NOT IN (SELECT idtipohora FROM contrato_tipohora AS c WHERE c.idContrato = ?)");
+		preparedStatement.setString(1, idContrato);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
+	public void borrarTipoHora (int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM tipohora AS t WHERE t.id =?");
+		preparedStatement.setInt(1, id);
+		preparedStatement.executeUpdate();
+		conexionBD.cerrar(con);
+	}
+	
+	public void editarTipoHora(int id, String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("UPDATE tipohora AS t SET tipo=? WHERE t.id=?");
 		preparedStatement.setString(1, tipo);
+		preparedStatement.setInt(2, id);
 		preparedStatement.executeUpdate();
 		conexionBD.cerrar(con);
 	}

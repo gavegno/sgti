@@ -50,7 +50,7 @@ public class ConsultasPrecioTest extends ConfigurarTest{
 			Calendar fechaHasta = Calendar.getInstance();
 			fechaHasta.setTime(new Date());
 			fechaHasta.set(Calendar.YEAR, 2020);
-			precioDao.insertarPrecio(5.0, new Date(), fechaHasta.getTime(), CONTRATO_TEST);
+			precioDao.insertarPrecio(5.0, 6.0, new Date(), fechaHasta.getTime(), CONTRATO_TEST);
 			
 			assertEquals(1, precioDao.verPrecios(CONTRATO_TEST).size());
 			assertTrue(5.0 == precioDao.verPrecioActual(CONTRATO_TEST).getPrecio());
