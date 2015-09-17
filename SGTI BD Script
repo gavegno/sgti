@@ -337,7 +337,9 @@ CREATE TABLE hora
   descripcion character varying,
   informada boolean,
   facturada boolean,
-  CONSTRAINT "hora_primaryKey" PRIMARY KEY (id ),
+  duracion integer,
+  comentario character varying,
+  CONSTRAINT "hora_primaryKey" PRIMARY KEY (id),
   CONSTRAINT "contrato_hora_foreignKey" FOREIGN KEY (contrato)
       REFERENCES contrato (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -350,4 +352,3 @@ WITH (
 );
 ALTER TABLE hora
   OWNER TO root;
-
