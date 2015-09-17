@@ -34,6 +34,11 @@ public class ContratoTipoHoraDAO {
 		return tiposHoraComputo;
 	}
 	
+	public void borrarContratoTiposHora (String idContrato, int idTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		consultasContratoTipoHora.borrarContratoTiposHora(idContrato, idTipoHora);
+	}
+	
 	public void editarContratoTipoHora (String idContrato, int idTipoHora, double computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasContratoTipoHora.editarContratoTipoHora(idContrato, idTipoHora, computos);
 	}

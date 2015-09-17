@@ -41,6 +41,11 @@ public class FachadaTipoHora {
 		
 	}
 	
+	public void borrarContratoTiposHora (String idContrato, int idTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		servicioContratoTipoHora.borrarContratoTiposHora(idContrato, idTipoHora);
+	}
+	
 	public List<TipoHoraComputo> verTiposDeHoraPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		return servicioContratoTipoHora.verContratoTipoHora(idContrato);
 	}

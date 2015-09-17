@@ -46,7 +46,7 @@ public class ConfiguracionController {
 			@RequestParam(required=false, value="periodoValidez") final Integer periodoValidez, 
 			@RequestParam(required=false, value="acumulacion") final String acumulacion, 
 			@RequestParam(required=false, value="periodoAcumulacion") final Integer periodoAcumulacion, 
-			@RequestParam("frecuenciaInforme") final Integer frecuenciaInforme, 
+			@RequestParam(required=false, value="frecuenciaInforme") final Integer frecuenciaInforme, 
 			@RequestParam(required=false, value="frecuenciaFacturacion") final Integer frecuenciaFacturacion, 
 			@RequestParam(required=false, value="respuesta") final String tiempoRespuesta, 
 			@RequestParam("horarioLaboral") final String horarioLaboral, 
@@ -170,13 +170,21 @@ public class ConfiguracionController {
 	@RequestMapping(value="/editarConfigOk", method = RequestMethod.POST)
 	public String editarConfigOk(Model model, 
 			HttpServletRequest request, @RequestParam("idConfiguracion") final int idConfiguracion,
-			@RequestParam("fechaInicio") final String fechaDesde, @RequestParam("fechaFin") final String fechaHasta, 
-			@RequestParam("periodoRenovacion") final Integer periodoRenovacion, @RequestParam("renovacion") final String tipoRenovacion, 
-			@RequestParam("tipoContrato") final String tipoContrato, @RequestParam("computosPaquete") final Integer computos, 
-			@RequestParam("unidadValidez") final String unidadValidez, @RequestParam("periodoValidez") final Integer periodoValidez, 
-			@RequestParam("acumulacion") final String acumulacion, @RequestParam(required=false, value="periodoAcumulacion") final Integer periodoAcumulacion, 
-			@RequestParam("frecuenciaInforme") final Integer frecuenciaInforme, @RequestParam("frecuenciaFacturacion") final Integer frecuenciaFacturacion, @RequestParam("tiempoRespuesta") final String tiempoRespuesta, 
-			@RequestParam("horarioLaboral") final String horarioLaboral, @RequestParam("idContrato") final String idContrato){
+			@RequestParam("fechaInicio") final String fechaDesde, 
+			@RequestParam("fechaFin") final String fechaHasta, 
+			@RequestParam(required=false, value="periodoRenovacion") final Integer periodoRenovacion, 
+			@RequestParam("renovacion") final String tipoRenovacion, 
+			@RequestParam("tipoContrato") final String tipoContrato, 
+			@RequestParam(required=false, value="computosPaquete") final Integer computos, 
+			@RequestParam(required=false, value="unidadValidez") final String unidadValidez, 
+			@RequestParam(required=false, value="periodoValidez") final Integer periodoValidez, 
+			@RequestParam(required=false, value="acumulacion") final String acumulacion, 
+			@RequestParam(required=false, value="periodoAcumulacion") final Integer periodoAcumulacion, 
+			@RequestParam(required=false, value="frecuenciaInforme") final Integer frecuenciaInforme, 
+			@RequestParam(required=false, value="frecuenciaFacturacion") final Integer frecuenciaFacturacion, 
+			@RequestParam(required=false, value="tiempoRespuesta") final String tiempoRespuesta, 
+			@RequestParam("horarioLaboral") final String horarioLaboral, 
+			@RequestParam("idContrato") final String idContrato){
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");
@@ -247,14 +255,22 @@ public class ConfiguracionController {
 	}
 	
 	@RequestMapping(value="/copiarConfigOk", method = RequestMethod.POST)
-	public String copiarConfigOk(Model model, HttpServletRequest request, @RequestParam("fechaDesde") final String fechaDesde, @RequestParam("fechaHasta") final String fechaHasta, 
-			@RequestParam("periodoRenovacion") final Integer periodoRenovacion, @RequestParam("tipoRenovacion") final String tipoRenovacion, 
-			@RequestParam("tipoContrato") final String tipoContrato, @RequestParam("computos") final Integer computos, 
-			@RequestParam("unidadValidez") final String unidadValidez, @RequestParam("periodoValidez") final Integer periodoValidez, 
-			@RequestParam("acumulacion") final String acumulacion, @RequestParam(required=false, value="periodoAcumulacion") final Integer periodoAcumulacion, 
-			@RequestParam("frecuenciaInforme") final Integer frecuenciaInforme, @RequestParam("frecuenciaFacturacion") final Integer frecuenciaFacturacion, 
-			@RequestParam("respuesta") final String tiempoRespuesta, 
-			@RequestParam("horarioLaboral") final String horarioLaboral, @RequestParam("idContrato") final String idContrato){
+	public String copiarConfigOk(Model model, HttpServletRequest request, 
+			@RequestParam("fechaDesde") final String fechaDesde, 
+			@RequestParam("fechaHasta") final String fechaHasta, 
+			@RequestParam(required=false, value="periodoRenovacion") final Integer periodoRenovacion, 
+			@RequestParam("tipoRenovacion") final String tipoRenovacion, 
+			@RequestParam("tipoContrato") final String tipoContrato, 
+			@RequestParam(required=false, value="computos") final Integer computos, 
+			@RequestParam(required=false, value="unidadValidez") final String unidadValidez, 
+			@RequestParam(required=false, value="periodoValidez") final Integer periodoValidez, 
+			@RequestParam(required=false, value="acumulacion") final String acumulacion, 
+			@RequestParam(required=false, value="periodoAcumulacion") final Integer periodoAcumulacion, 
+			@RequestParam(required=false, value="frecuenciaInforme") final Integer frecuenciaInforme, 
+			@RequestParam(required=false, value="frecuenciaFacturacion") final Integer frecuenciaFacturacion, 
+			@RequestParam(required=false, value="respuesta") final String tiempoRespuesta,
+			@RequestParam("horarioLaboral") final String horarioLaboral, 
+			@RequestParam("idContrato") final String idContrato){
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");
@@ -348,14 +364,22 @@ public class ConfiguracionController {
 	
 	@RequestMapping(value="/agregarConfigOk", method = RequestMethod.POST)
 	public String agregarConfigOk(Model model, HttpServletRequest request,
-			@RequestParam("fechaDesde") final String fechaDesde, @RequestParam("fechaHasta") final String fechaHasta, 
-			@RequestParam("periodoRenovacion") final Integer periodoRenovacion, @RequestParam("tipoRenovacion") final String tipoRenovacion, 
-			@RequestParam("tipoContrato") final String tipoContrato, @RequestParam("computos") final Integer computos, 
-			@RequestParam("unidadValidez") final String unidadValidez, @RequestParam("periodoValidez") final Integer periodoValidez, 
-			@RequestParam("acumulacion") final String acumulacion, @RequestParam(required=false, value="periodoAcumulacion") final Integer periodoAcumulacion, 
-			@RequestParam("frecuenciaInforme") final Integer frecuenciaInforme, @RequestParam("frecuenciaFacturacion") final Integer frecuenciaFacturacion, 
-			@RequestParam("respuesta") final String tiempoRespuesta, 
-			@RequestParam("horarioLaboral") final String horarioLaboral, @RequestParam("idContrato") final String idContrato){
+			
+			@RequestParam("fechaDesde") final String fechaDesde, 
+			@RequestParam("fechaHasta") final String fechaHasta, 
+			@RequestParam(required=false, value="periodoRenovacion") final Integer periodoRenovacion, 
+			@RequestParam("tipoRenovacion") final String tipoRenovacion, 
+			@RequestParam("tipoContrato") final String tipoContrato, 
+			@RequestParam(required=false, value="computos") final Integer computos, 
+			@RequestParam(required=false, value="unidadValidez") final String unidadValidez, 
+			@RequestParam(required=false, value="periodoValidez") final Integer periodoValidez, 
+			@RequestParam(required=false, value="acumulacion") final String acumulacion, 
+			@RequestParam(required=false, value="periodoAcumulacion") final Integer periodoAcumulacion, 
+			@RequestParam(required=false, value="frecuenciaInforme") final Integer frecuenciaInforme, 
+			@RequestParam(required=false, value="frecuenciaFacturacion") final Integer frecuenciaFacturacion, 
+			@RequestParam(required=false, value="respuesta") final String tiempoRespuesta,
+			@RequestParam("horarioLaboral") final String horarioLaboral, 
+			@RequestParam("idContrato") final String idContrato){
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");

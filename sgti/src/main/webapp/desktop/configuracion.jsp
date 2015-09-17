@@ -87,7 +87,7 @@
                     
                     <div class="form-group container">
                         <label for="inputPeriodoRenovacion" class="control-label">Periodo de renovación (meses): </label>
-                        <input type="number" class="form-control" name="periodoRenovacion" id="inputPeriodoRenovacion" placeholder="Periodo de renovación" required value="0">
+                           <input type="number" class="form-control" name="periodoRenovacion" id="inputPeriodoRenovacion" placeholder="Periodo de renovación" required value="0">
                     </div> 
                     <div class="form-group container">
                         <label for="inputComputos" class="control-label">Cantidad de cómputos:</label>

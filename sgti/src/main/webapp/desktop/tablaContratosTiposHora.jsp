@@ -72,7 +72,7 @@
                                     <td class="vert-align"><button class="btn btn-success" type="submit"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Guardar </button></td>
                                 </form>
 
-                                <form action="/CounterWebApp/desktop/precio/copiarPrecio" method="POST">
+                                <form action="/CounterWebApp/desktop/tiposDeHora/borrarContratoTipoHora" method="POST">
                                     <input type="text" name="id" value="${id}" hidden></input>
                                     <input type="text" name="tipoId" value="${tipo.tipoHora.id}" hidden></input>
 

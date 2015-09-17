@@ -20,11 +20,11 @@ public class FachadaConfiguracion {
 	private ServicioHorarioLaboral servicioHorarioLaboral;
 	
 	public void insertarConfiguracion(final String fechaDesde, final String fechaHasta, 
-			final int periodoRenovacion, final String tipoRenovacion, 
-			final String tipoContrato, final int computos, 
-			final String unidadValidez, final int periodoValidez, 
-			final boolean acumulacion, final int periodoAcumulacion, 
-			final int frecuenciaInforme, final int frecuenciaFacturacion, 
+			final Integer periodoRenovacion, final String tipoRenovacion, 
+			final String tipoContrato, final Integer computos, 
+			final String unidadValidez, final Integer periodoValidez, 
+			final boolean acumulacion, final Integer periodoAcumulacion, 
+			final Integer frecuenciaInforme, final Integer frecuenciaFacturacion, 
 			int frecuenciaComputosExtra, final String tiempoRespuesta, 
 			final String horarioLaboral, final String idContrato) 
 					throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException, SgtiException{
@@ -33,18 +33,25 @@ public class FachadaConfiguracion {
 		configuracion.setFechaInicio(simpleFateFormat.parse(fechaDesde));
 		configuracion.setFechaFin(simpleFateFormat.parse(fechaHasta));
 		configuracion.setRenovacion(tipoRenovacion);
-		configuracion.setPeriodoRenovacion(periodoRenovacion);
+		
+		if (periodoRenovacion == null) configuracion.setPeriodoRenovacion(0); else configuracion.setPeriodoRenovacion(periodoRenovacion);
 		configuracion.setTipoContrato(tipoContrato);
-		configuracion.setComputosPaquete(computos);
-		if(unidadValidez.equalsIgnoreCase("DIA")){
-			configuracion.setPeriodoValidezDia(periodoValidez);
-		}else{
-			configuracion.setPeriodoValidezMes(periodoValidez);
+		if (computos == null) configuracion.setComputosPaquete(0); else configuracion.setComputosPaquete(computos);
+		
+		if (unidadValidez != null){
+			if(unidadValidez.equalsIgnoreCase("DIA"))
+				configuracion.setPeriodoValidezDia(periodoValidez);
+			else
+				configuracion.setPeriodoValidezMes(periodoValidez);
 		}
 		configuracion.setAcumulacion(acumulacion);
-		configuracion.setPeriodoAcumulacion(periodoAcumulacion);
-		configuracion.setFrecuenciaInforme(frecuenciaInforme);
-		configuracion.setFrecuenciaFacturacion(frecuenciaFacturacion);
+		
+		if (periodoAcumulacion == null) configuracion.setPeriodoAcumulacion(0); else configuracion.setPeriodoAcumulacion(periodoAcumulacion);
+		
+		if (frecuenciaInforme == null) configuracion.setFrecuenciaInforme(0); else configuracion.setFrecuenciaInforme(frecuenciaInforme);
+		
+		if (frecuenciaFacturacion == null) configuracion.setFrecuenciaFacturacion(0); else configuracion.setFrecuenciaFacturacion(frecuenciaFacturacion);
+		
 		configuracion.setFrecuenciaComputosExtra(frecuenciaComputosExtra);
 		configuracion.setTiempoRespuesta(tiempoRespuesta);
 		configuracion.setHorarioLaboral(servicioHorarioLaboral.seleccionarHorarioLaboral(horarioLaboral));
@@ -54,12 +61,12 @@ public class FachadaConfiguracion {
 	
 	public void editarConfiguracion(final int idConfiguracion, 
 			final String fechaDesde, final String fechaHasta, 
-			final int periodoRenovacion, final String tipoRenovacion, 
-			final String tipoContrato, final int computos, 
-			final String unidadValidez, final int periodoValidez, 
-			final boolean acumulacion, final int periodoAcumulacion, 
-			final int frecuenciaInforme, final int frecuenciaFacturacion, 
-			final int frecuenciaComputosExtra, final String tiempoRespuesta, 
+			final Integer periodoRenovacion, final String tipoRenovacion, 
+			final String tipoContrato, final Integer computos, 
+			final String unidadValidez, final Integer periodoValidez, 
+			final boolean acumulacion, final Integer periodoAcumulacion, 
+			final Integer frecuenciaInforme, final Integer frecuenciaFacturacion, 
+			final Integer frecuenciaComputosExtra, final String tiempoRespuesta, 
 			final String horarioLaboral, final String idContrato) 
 					throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException, SgtiException{
 		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -68,18 +75,27 @@ public class FachadaConfiguracion {
 		configuracion.setFechaInicio(simpleFateFormat.parse(fechaDesde));
 		configuracion.setFechaFin(simpleFateFormat.parse(fechaHasta));
 		configuracion.setRenovacion(tipoRenovacion);
-		configuracion.setPeriodoRenovacion(periodoRenovacion);
+		
+		if (periodoRenovacion == null) configuracion.setPeriodoRenovacion(0); else configuracion.setPeriodoRenovacion(periodoRenovacion);
+		
 		configuracion.setTipoContrato(tipoContrato);
-		configuracion.setComputosPaquete(computos);
-		if(unidadValidez.equalsIgnoreCase("DIA")){
-			configuracion.setPeriodoValidezDia(periodoValidez);
-		}else{
-			configuracion.setPeriodoValidezMes(periodoValidez);
+		
+		if (computos == null) configuracion.setComputosPaquete(0); else configuracion.setComputosPaquete(computos);
+		
+		if (unidadValidez != null){
+			if(unidadValidez.equalsIgnoreCase("DIA"))
+				configuracion.setPeriodoValidezDia(periodoValidez);
+			else
+				configuracion.setPeriodoValidezMes(periodoValidez);
 		}
 		configuracion.setAcumulacion(acumulacion);
-		configuracion.setPeriodoAcumulacion(periodoAcumulacion);
-		configuracion.setFrecuenciaInforme(frecuenciaInforme);
-		configuracion.setFrecuenciaFacturacion(frecuenciaFacturacion);
+		
+		if (periodoAcumulacion == null) configuracion.setPeriodoAcumulacion(0); else configuracion.setPeriodoAcumulacion(periodoAcumulacion);
+		
+		if (frecuenciaInforme == null) configuracion.setFrecuenciaInforme(0); else configuracion.setFrecuenciaInforme(frecuenciaInforme);
+
+		if (frecuenciaFacturacion == null) configuracion.setFrecuenciaFacturacion(0); else configuracion.setFrecuenciaFacturacion(frecuenciaFacturacion);
+		
 		configuracion.setFrecuenciaComputosExtra(frecuenciaComputosExtra);
 		configuracion.setTiempoRespuesta(tiempoRespuesta);
 		configuracion.setHorarioLaboral(servicioHorarioLaboral.seleccionarHorarioLaboral(horarioLaboral));

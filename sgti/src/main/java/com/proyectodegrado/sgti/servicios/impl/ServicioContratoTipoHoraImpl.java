@@ -21,6 +21,12 @@ public class ServicioContratoTipoHoraImpl implements ServicioContratoTipoHora {
 		contratoTipoHoraDao.insertarContratoTipoHora(idContrato, tipoHoraComputo.getTipoHora().getId(), tipoHoraComputo.getComputo());
 	}
 	
+	@Override
+	public void borrarContratoTiposHora (String idContrato, int idTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		contratoTipoHoraDao.borrarContratoTiposHora(idContrato, idTipoHora);
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContratoTipoHora#verContratoTipoHora(java.lang.String)
 	 */

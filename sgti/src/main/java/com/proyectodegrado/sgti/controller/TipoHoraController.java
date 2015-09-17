@@ -154,6 +154,31 @@ public class TipoHoraController {
 		return listarTiposDeHora(model, request);
 	}
 	
+	//borrarContratoTipoHora
+	@RequestMapping(value = "/borrarContratoTipoHora", method = RequestMethod.POST)
+	public String borrarContratoTipoHora(Model model, HttpServletRequest request, 
+			@RequestParam("id") final String idContrato,
+			@RequestParam("tipoId") final int idTipoHora){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
+		String mensaje = "El tipo de hora se ha eliminado correctamente de este contrato";
+		try {
+			fachadaTipoHora.borrarContratoTiposHora(idContrato, idTipoHora);
+			model.addAttribute("message", mensaje);
+		}catch (IOException | SQLException | ClassNotFoundException e) {
+			String mensajeError = e.getMessage();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			
+			if (mensajeError.contains("foreign"))
+				model.addAttribute("errorMessage", MENSAJE_ERROR+ ": el tipo de hora está en uso");
+			
+			return cargarTablaTiposHoraDesdeContrato(model, request, idContrato);
+		}finally{
+			context.close();
+		}
+		return cargarTablaTiposHoraDesdeContrato(model, request, idContrato);
+	}
+	
 	@RequestMapping(value="/tablaHorasContrato", method = RequestMethod.POST)
 	public String cargarTablaTiposHoraDesdeContrato(Model model, 
 			HttpServletRequest request, 

@@ -20,4 +20,8 @@ public interface ServicioContratoTipoHora {
 			TipoHoraComputo tipoHoraComputo) throws FileNotFoundException,
 			IOException, SQLException, ClassNotFoundException;
 
+	void borrarContratoTiposHora(String idContrato, int idTipoHora)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
 }

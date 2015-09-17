@@ -49,6 +49,15 @@ public class ConsultasContratoTipoHora {
 		statement.executeUpdate("DELETE FROM contrato_tipohora");
 		conexionBD.cerrar(con);
 	}
+	
+	public void borrarContratoTiposHora (String idContrato, int tipoHoraId) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM contrato_tipohora AS c WHERE c.idcontrato=? AND c.idtipohora=?");
+		preparedStatement.setString(1, idContrato);
+		preparedStatement.setInt(2, tipoHoraId);
+		preparedStatement.executeUpdate();
+		conexionBD.cerrar(con);
+	}
 
 	public Conexion getConexionBD() {
 		return conexionBD;
