@@ -12,6 +12,11 @@
 
 </head>
 <body>
+	<c:if test="${not empty errorMessage}">
+		<div class="alert alert-danger">
+			${errorMessage}
+		</div>
+	</c:if>
     <header>
         <div class="container">
         

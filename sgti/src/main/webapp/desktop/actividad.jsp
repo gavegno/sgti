@@ -67,7 +67,7 @@
                         <select class="form-control" id="inputUsuario" name="usuario">
 							<option value="">--Sin asignar--</option>
                             <c:forEach items="${usuarios}" var="usuario" >
-                        		<option value="${usuario.id}"><c:out value="${usuario.nombre}" /></option>
+                        		<option value="${usuario.id}"><c:out value="${usuario.nombre}"/></option>
                         	</c:forEach>
                         </select>    
                     </div>

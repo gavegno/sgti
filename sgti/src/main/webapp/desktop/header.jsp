@@ -52,7 +52,7 @@
 	          <ul class="dropdown-menu">
 	            <li><a href="/CounterWebApp/desktop/tecnicos/ingresar">Agregar usuario</a></li>
 	            <li><a href="/CounterWebApp/desktop/tecnicos/tabla">Ver y modificar usuario</a></li>
-	            <li><a href="#">Eliminar usuario</a></li>
+	           <!--  <li><a href="#">Eliminar usuario</a></li> -->
 	          </ul>
 	        </li>
         </c:if>
@@ -63,7 +63,7 @@
 	          <ul class="dropdown-menu">
 	            <li><a href="/CounterWebApp/desktop/clientes.jsp">Agregar cliente</a></li>
 	            <li><a href="/CounterWebApp/desktop/cliente/tabla">Ver y modificar cliente</a></li>
-	            <li><a href="#">Eliminar cliente</a></li>
+	            <!-- <li><a href="#">Eliminar cliente</a></li> -->
 	          </ul>
 	        </li>
 		</c:if>
@@ -101,8 +101,26 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
+	      	<c:choose>
+	      		<c:when test="${notificaciones > 0}">
+	      			<li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size: large; color: red;">${notificaciones} <span class="glyphicon glyphicon-bell"></span></a>
+			          <ul class="dropdown-menu">
+			          	<c:forEach items="${despliegeNotificaciones}" var="notificacion">
+			          		<li><a href="${notificacion.url}">Tienes ${notificacion.cantidad} ${notificacion.mensaje}</a></li>
+			          		<li role="separator" class="divider"></li>
+			          	</c:forEach>
+			          </ul>
+			        </li>
+	      		</c:when>
+	      		<c:otherwise>
+	      			<li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><span class="glyphicon glyphicon-bell"></span></a>
+			        </li>
+	      		</c:otherwise>
+	      	</c:choose>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size: large;"> <span class="glyphicon glyphicon-user"></span> </a>
           <ul class="dropdown-menu">
             <li><a href="#">Ver mis datos</a></li>
             <li><a href="/CounterWebApp/desktop/tecnicos/cargarCambiarContrasena">Cambiar mi contraseña</a></li>

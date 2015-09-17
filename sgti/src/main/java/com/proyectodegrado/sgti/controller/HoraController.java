@@ -127,18 +127,13 @@ public class HoraController {
 	public String detalleHora(Model model, HttpServletRequest request, @RequestParam("id") final int idHora){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
-		
 		try {
-			
 			Hora hora = fachadaHora.seleccionarHora(idHora);
-			
 			model.addAttribute("hora", fachadaHora.seleccionarHora(idHora));
 			model.addAttribute("fechasInforme",fachadaHora.proximas3FechasInforme(hora.getIdContrato()));
 			model.addAttribute("fechasFacturacion",fachadaHora.proximas3FechasFacturacion(hora.getIdContrato()));
 			model.addAttribute("fechasComputacion",fachadaHora.proximas3FechasFacturacion(hora.getIdContrato()));
-			
-		} catch (ClassNotFoundException | SQLException | IOException
-				| ParseException e) {
+		} catch (ClassNotFoundException | SQLException | IOException | ParseException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return "desktop/editarHora";
@@ -158,17 +153,13 @@ public class HoraController {
 		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
 		String mensaje = "Cambios guardados con éxito";
 		try {
-			
 			fachadaHora.editarHoraDetalle(idHora, fechaInformar, fechaFacturar, fechaComputar);
-			
-			
-		} catch (ClassNotFoundException | SQLException | IOException
-				| ParseException e) {
+			model.addAttribute("message", mensaje);
+		} catch (ClassNotFoundException | SQLException | IOException | ParseException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return cargarPagina(model, request);
 		}finally{
-			model.addAttribute("message", mensaje);
 			context.close();
 		}
 		return cargarPagina(model, request);

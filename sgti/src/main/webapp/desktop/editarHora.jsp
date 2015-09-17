@@ -22,10 +22,11 @@
         ${errorMessage}
     </div>
 </c:if>
+<br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">GestiÃ³n de Hora</h2>
+            <h2 class="text-center">Gestión de Hora</h2>
             <div>
                 <form class="form-horizontal" action="/CounterWebApp/desktop/hora/detalleHoraOk" method="POST">
                     
@@ -162,7 +163,5 @@
         </div>
     </div>
 </div>
-    <script type="text/javascript" src="<c:url value="/resources/js/jquery.js" />"></script>
-    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"> </script>
 </body>
 </html>

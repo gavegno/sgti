@@ -68,10 +68,10 @@
                             <c:forEach items="${usuarios}" var="usuario" >
                             	<c:choose>
         							<c:when test="${actividad.idUsuario == usuario.id}">
-                        				<option selected="selected" value="${usuario.id}"><c:out value="${usuario.nombre}" /></option>
+                        				<option selected="selected" value="${usuario.id}"><c:out value="${usuario.nombre} ${usuario.apellido}" /></option>
                         			</c:when>
         							<c:otherwise>
-        								<option value="${usuario.id}"><c:out value="${usuario.nombre}" /></option>
+        								<option value="${usuario.id}"><c:out value="${usuario.nombre} ${usuario.apellido}" /></option>
         							</c:otherwise>
         					</c:choose>
                         	</c:forEach>

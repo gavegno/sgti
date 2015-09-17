@@ -76,7 +76,6 @@ public class FachadaHora {
 		else
 			hora.setFechaInformar(simpleFateFormat.parse(fechaInformar));
 		
-		
 		if (fechaFacturar.matches("nulo"))
 			hora.setFechaFacturar(simpleFateFormat.parse("01-01-1900"));
 		else

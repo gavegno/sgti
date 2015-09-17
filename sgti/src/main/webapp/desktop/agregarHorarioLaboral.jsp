@@ -85,7 +85,7 @@
                 </div>       
                 </form>
                
-                <form class="form-horizontal container" action="/CounterWebApp/desktop/paginaPrincipal.jsp" method="POST">
+                <form class="form-group container" action="/CounterWebApp/desktop/paginaPrincipal.jsp" method="POST">
                 <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Finalizar </button>
                 </div>

@@ -100,10 +100,7 @@
                 </td>
                 <td>
                 	<select class="form-control" name="actividad">
-                            
-                                <option selected="selected" value="nulo"><c:out value="No especificado" /></option>
-                            
-
+                            <option selected="selected" value="nulo"><c:out value="No especificado" /></option>
                         	<c:forEach items="${actividades}" var="actividad" >
                         	<c:choose>
 
@@ -163,9 +160,7 @@
         <td><input disabled="disabled" class="form-control" type="text" name="contrato" value="${horasRegistrada.idContrato}" ></td>
         <td>
         	<select class="form-control" name="actividad">
-                
                 <option selected="selected" value="nulo"><c:out value="No especificado" /></option>
-
                 <c:forEach items="${actividades}" var="actividad" >
                 	<c:choose>
 
@@ -176,10 +171,8 @@
                 		<c:otherwise>
                 			<option value="${actividad.id}"><c:out value="${actividad.id}" /></option>
                 		</c:otherwise>
-
                 	</c:choose>
             	</c:forEach>
-
             </select>
         </td>
         <td><textarea class="form-control" name="descripcion" rows="2" >${horasRegistrada.descripcion}</textarea></td>
@@ -191,10 +184,12 @@
         <input class="form-control" type="hidden" name="fechacomputar" value="${horasRegistrada.fechaComputar}" >
         <td class="vert-align"><button id="addRow" class="btn btn-primary" onclick="document.getElementById('filaNueva').hidden = false" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar</button></td>
         </form>
-        <form class="form-horizontal" action="/CounterWebApp/desktop/hora/detalleHora" method="POST">
-            <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >
-        <td class="vert-align"><button id="plus" class="btn btn-primary glyphicon glyphicon-plus" onclick="document.getElementById('filaNueva').hidden = false" ></td>
-         </form>
+        <c:if test="${tipoUsuario == 'SOCIO'}">
+	        <form class="form-horizontal" action="/CounterWebApp/desktop/hora/detalleHora" method="POST">
+	            <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >
+	        <td class="vert-align"><button id="plus" class="btn btn-primary glyphicon glyphicon-plus" onclick="document.getElementById('filaNueva').hidden = false" ></td>
+	         </form>
+        </c:if>
         <form class="form-horizontal" action="/CounterWebApp/desktop/hora/copiarHora" method="POST">
         <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >
         <td class="vert-align"><button id="addRow" class="btn btn-primary" onclick="document.getElementById('filaNueva').hidden = false" ><span class="glyphicon glyphicon-copy" aria-hidden="true"></span> Copiar</button></td>

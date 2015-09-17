@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.util.CollectionUtils;
+
 import com.proyectodegrado.sgti.daos.PrecioDAO;
 import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Precio;
@@ -85,6 +87,18 @@ public class ServicioPrecioImpl implements ServicioPrecio {
 	public void borrarPrecio(String idContrato, Precio precio) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException 
 	{
 		precioDao.borrarPrecio(idContrato, precio.getPrecio(), precio.getFechaDesde(), precio.getFechaHasta());
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioPrecio#tienePrecioPostVencer(java.util.Date, java.lang.String)
+	 */
+	@Override
+	public boolean tienePrecioPostVencer(Date fecha, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		List<Precio> precios = precioDao.verPreciosPorFecha(idContrato, fecha);
+		if(CollectionUtils.isEmpty(precios)){
+			return false;
+		}
+		return true;
 	}
 	
 	private boolean esPosibleInsertar(Precio precio, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{

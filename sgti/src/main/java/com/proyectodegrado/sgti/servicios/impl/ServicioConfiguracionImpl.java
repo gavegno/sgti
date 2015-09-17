@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-
+import org.springframework.util.CollectionUtils;
 import com.proyectodegrado.sgti.daos.ConfiguracionDAO;
 import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Configuracion;
@@ -115,6 +115,18 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 		
 		return condicion;
 	}*/
+
+/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioConfiguracion#tieneConfiguracionPorVencer(java.util.Date, java.lang.String)
+	 */
+	@Override
+	public boolean tieneConfiguracionPostVencer(Date fecha, String idContrato) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
+		List<Configuracion> configuraciones = configuracionDao.verConfiguracionPorFecha(fecha, idContrato);
+		if(CollectionUtils.isEmpty(configuraciones)){
+			return false;
+		}
+		return true;
+	}
 	
 	private boolean esPosibleInsertar(Configuracion configuracion, String idContrato) throws FileNotFoundException, SQLException, IOException, ClassNotFoundException{
 		return (configuracionDao.saberSiEsPosibleInsertarNuevaConfig(configuracion.getFechaInicio(), configuracion.getFechaFin(), idContrato).size() == 0);
@@ -150,10 +162,6 @@ public class ServicioConfiguracionImpl implements ServicioConfiguracion {
 		return configuracionDao.verHorarioLaboralDeConfiguracion(id);
 	}
 	
-	
-	
-	
-
 	public ConfiguracionDAO getConfiguracionDao() {
 		return configuracionDao;
 	}

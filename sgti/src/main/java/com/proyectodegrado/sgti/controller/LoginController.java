@@ -1,5 +1,6 @@
 package com.proyectodegrado.sgti.controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import com.proyectodegrado.sgti.fachada.FachadaActividad;
 import com.proyectodegrado.sgti.fachada.FachadaContrato;
 import com.proyectodegrado.sgti.fachada.FachadaHora;
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
+import com.proyectodegrado.sgti.fachada.FachadaNotificacion;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 import com.proyectodegrado.sgti.modelo.Usuario;
 
@@ -36,6 +38,8 @@ public class LoginController {
 	
 	private FachadaContrato fachadaContrato;
 	
+	private FachadaNotificacion fachadaNotificacion;
+	
 	@RequestMapping(value = "/loguearse", method = RequestMethod.POST)
 	public String login(Model model, HttpServletRequest request, @RequestParam("idUsuario") final String idUsuario, @RequestParam("passwordUsuario") final String contrasena){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -47,13 +51,14 @@ public class LoginController {
 			if(usuario.getContrasena() != null && usuario.getContrasena().toLowerCase().equals(contrasenaHash.toLowerCase())){
 				request.getSession().setAttribute("usuario", idUsuario);
 				request.getSession().setAttribute("tipoUsuario", usuario.getTipo());
+				notificar(model, request, context);
 			}else{
-				model.addAttribute("message", "El usuario o contraseña no es correcto");
+				model.addAttribute("errorMessage", "El usuario o contraseña no es correcto");
 				return "/desktop/login2";
 			}
-		} catch (ClassNotFoundException | IOException | SQLException | NoSuchAlgorithmException e) {
+		} catch (ClassNotFoundException | IOException | SQLException | ParseException | NoSuchAlgorithmException e) {
 			e.printStackTrace();
-			model.addAttribute("message", "Ocurrió un error al tratar de loguear el usuario");
+			model.addAttribute("errorMessage", "Ocurrió un error al tratar de loguear el usuario");
 			return "/desktop/login2";
 		}finally{
 			context.close();
@@ -84,8 +89,15 @@ public class LoginController {
 		return "desktop/tablaHoras";
 	}
 	
-	
-	
+	private void notificar(Model model, HttpServletRequest request, ClassPathXmlApplicationContext context) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException {
+		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+		int dias = 7;
+		String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		model.addAttribute("notificaciones", fachadaNotificacion.notificar(tipoUsuario, idUsuario, dias).size());
+		model.addAttribute("despliegeNotificaciones", fachadaNotificacion.notificar(tipoUsuario, idUsuario, dias));
+	}
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model, HttpServletRequest request){
 		request.getSession().invalidate();

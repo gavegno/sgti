@@ -3,6 +3,7 @@ package com.proyectodegrado.sgti.servicios;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
@@ -36,5 +37,9 @@ public interface ServicioPrecio {
 	void editarPrecio(Precio precioNuevo, Precio precioViejo, String idContrato)
 			throws FileNotFoundException, IOException, SQLException,
 			ClassNotFoundException, SgtiException;
+
+	boolean tienePrecioPostVencer(Date fecha, String idContrato)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
 
 }

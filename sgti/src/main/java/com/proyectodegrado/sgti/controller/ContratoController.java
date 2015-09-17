@@ -2,6 +2,7 @@ package com.proyectodegrado.sgti.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,12 +18,13 @@ import com.proyectodegrado.sgti.fachada.FachadaCliente;
 import com.proyectodegrado.sgti.fachada.FachadaConfiguracion;
 import com.proyectodegrado.sgti.fachada.FachadaContrato;
 import com.proyectodegrado.sgti.fachada.FachadaPrecio;
+import com.proyectodegrado.sgti.fachada.FachadaNotificacion;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
 @RequestMapping("/desktop/contrato")
 public class ContratoController {
-	
+
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 
 	private FachadaContrato fachadaContrato;
@@ -30,6 +32,7 @@ public class ContratoController {
 	private FachadaUsuario fachadaUsuario;
 	private FachadaConfiguracion fachadaConfiguracion;
 	private FachadaPrecio fachadaPrecio;
+	private FachadaNotificacion fachadaNotificacion;
 	
 	@RequestMapping(value="/ingresar", method = RequestMethod.GET)
 	public String cargarPagina(Model model){
@@ -43,14 +46,15 @@ public class ContratoController {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			return "desktop/contrato";
-		}finally{
+		} finally {
 			context.close();
 		}
 		return "desktop/contrato";
 	}
-	
-	@RequestMapping(value="/ingresarContrato", method = RequestMethod.POST)
-	public String cargarPagina(Model model, @RequestParam("id") final String id, @RequestParam("cliente") final String nombreCliente, @RequestParam("contraparte") final String idContraparte){
+
+	@RequestMapping(value = "/ingresarContrato", method = RequestMethod.POST)
+	public String cargarPagina(Model model, @RequestParam("id") final String id, @RequestParam("cliente") final String nombreCliente,
+			@RequestParam("contraparte") final String idContraparte) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
 		String mensaje = "El contrato fue ingresado correctamente";
@@ -68,7 +72,7 @@ public class ContratoController {
 			mensaje = e.getMessage();
 			model.addAttribute("errorMessage", mensaje);
 			return cargarPagina(model);
-		}finally{
+		} finally {
 			model.addAttribute("idContrato", id);
 			context.close();
 		}
@@ -93,7 +97,78 @@ public class ContratoController {
 			}
 			return "desktop/tablaContratosCliente";
 		}
-		
+
+	@RequestMapping(value = "/configuracionVencer/redireccionarNotificacion", method = RequestMethod.GET)
+	public String redireccionarNotificacionConfiruacionesVencer(Model model,
+			HttpServletRequest request) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+		try {
+			model.addAttribute("contratos", fachadaNotificacion.contratosConConfiguracionesAVencer(7));
+
+		} catch (IOException | SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return "desktop/tablaContratosCliente";
+		} finally {
+			context.close();
+		}
+		return "desktop/tablaContratosCliente";
+	}
+
+	@RequestMapping(value = "/precioVencer/redireccionarNotificacion", method = RequestMethod.GET)
+	public String redireccionarNotificacionPreciosVencer(Model model,
+			HttpServletRequest request) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+		try {
+			model.addAttribute("contratos", fachadaNotificacion.contratosConPreciosAVencer(7));
+
+		} catch (IOException | SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return "desktop/tablaContratosCliente";
+		} finally {
+			context.close();
+		}
+		return "desktop/tablaContratosCliente";
+	}
+
+	@RequestMapping(value = "/horasInformar/redireccionarNotificacion", method = RequestMethod.GET)
+	public String redireccionarNotificacionHorasInformar(Model model, HttpServletRequest request) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+		try {
+			model.addAttribute("contratos",	fachadaNotificacion.contratosConHorasAInformar(7));
+
+		} catch (IOException | SQLException | ClassNotFoundException
+				| ParseException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return "desktop/tablaContratosCliente";
+		} finally {
+			context.close();
+		}
+		return "desktop/tablaContratosCliente";
+	}
+
+	@RequestMapping(value = "/horasFacturar/redireccionarNotificacion", method = RequestMethod.GET)
+	public String redireccionarNotificacionHorasFacturar(Model model, HttpServletRequest request) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+		try {
+			model.addAttribute("contratos", fachadaNotificacion.contratosConHorasAFacturar(7));
+
+		} catch (IOException | SQLException | ClassNotFoundException
+				| ParseException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return "desktop/tablaContratosCliente";
+		} finally {
+			context.close();
+		}
+		return "desktop/tablaContratosCliente";
+	}
 		//Carga la tabla de contratos para las Contrapartes.
 			@RequestMapping(value = "/tablaSocio", method = RequestMethod.GET)
 			public String cargarTablaContratosSocio(Model model, HttpServletRequest request)
@@ -126,6 +201,4 @@ public class ContratoController {
 				return "desktop/tablaContratosSocio";
 			}
 			
-			
-	
 }

@@ -70,7 +70,6 @@
                         <label for="inputFechaHasta" class="control-label">Fin de vigencia</label>
                         <input  type="date" class="form-control" placeholder="Fecha Hasta"  name="fechaHasta" id="FechaHasta">
                     </div>
-
                     <div class="form-group container">
                         <label for="inputTipoContrato" class="control-label">Tipo de contrato:</label>
                         <select class="form-control" name="tipoContrato" id="tipoContrato" required onChange="document.getElementById('inputPeriodoRenovacion').disabled = document.getElementById('computos').disabled = document.getElementById('inputPeriodoValidez').disabled = document.getElementById('inputUnidadValidez').disabled = document.getElementById('inputAcumulacion').disabled = document.getElementById('inputPeriodoAcumulacion').disabled = document.getElementById('inputFrecuenciaFacturacion').disabled = (this.value=='Precio fijo')">
@@ -78,7 +77,6 @@
                             <option selected="selected" value="Paquete de cómputos"><c:out value="Paquete de cómputos" /></option>    
                         </select>    
                     </div>
-
                     <div class="form-group container">
                         <label for="inputTipoRenovacion" class="control-label">Tipo de renovación:</label>
                         <select class="form-control" name="tipoRenovacion" id="inputTipoRenovacion" required>
@@ -91,7 +89,6 @@
                         <label for="inputPeriodoRenovacion" class="control-label">Periodo de renovación (meses): </label>
                         <input type="number" class="form-control" name="periodoRenovacion" id="inputPeriodoRenovacion" placeholder="Periodo de renovación" required value="0">
                     </div> 
-                    
                     <div class="form-group container">
                         <label for="inputComputos" class="control-label">Cantidad de cómputos:</label>
                         <input type="number" class="form-control" name="computos" id="computos" placeholder="Cantidad" required value="0">
@@ -158,7 +155,6 @@
 
                 <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Finalizar </button>
-                   
                 </div>       
 
                 </form>

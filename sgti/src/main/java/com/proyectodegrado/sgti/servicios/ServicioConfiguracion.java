@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Date;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Configuracion;
@@ -36,5 +37,9 @@ public interface ServicioConfiguracion {
 
 	void borrarConfiguracion(int id) throws FileNotFoundException,
 			ClassNotFoundException, IOException, SQLException;
+
+	boolean tieneConfiguracionPostVencer(Date fecha, String idContrato)
+			throws FileNotFoundException, ClassNotFoundException, SQLException,
+			IOException;
 
 }

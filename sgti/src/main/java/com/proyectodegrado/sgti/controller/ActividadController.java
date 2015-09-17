@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaActividad;
 import com.proyectodegrado.sgti.fachada.FachadaContrato;
+import com.proyectodegrado.sgti.fachada.FachadaNotificacion;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 import com.proyectodegrado.sgti.modelo.Usuario;
 
@@ -31,6 +32,8 @@ public class ActividadController {
 	private FachadaContrato fachadaContrato;
 	
 	private FachadaActividad fachadaActividad;
+	
+	private FachadaNotificacion fachadaNotificacion;
 	
 	@RequestMapping(value="/ingresar", method = RequestMethod.GET)
 	public String cargarPagina(Model model){
@@ -50,6 +53,25 @@ public class ActividadController {
 			context.close();
 		}
 		return "desktop/actividad";
+	}
+	
+	@RequestMapping(value="/redireccionarNotificacion", method = RequestMethod.GET)
+	public String redireccionarNotificacion(HttpServletRequest request, Model model){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+		try {
+			int dias = 0;
+			String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
+			String idUsuario = (String) request.getSession().getAttribute("usuario");
+			model.addAttribute("actividades", fachadaNotificacion.actividadesARealizar(tipoUsuario, idUsuario, dias));
+		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return "/desktop/tablaActividad";
+		}finally{
+			context.close();
+		}
+		return "/desktop/tablaActividadUsuario";
 	}
 	
 	@RequestMapping(value="/ingresarActividad", method = RequestMethod.POST)

@@ -163,6 +163,14 @@
 			<property name="servicioContrato" ref="servicioContrato"/>
 		</bean>
 		
+		<bean id="servicioNotificacion" class="com.proyectodegrado.sgti.servicios.impl.ServicioNotificacionImpl">
+			<property name="servicioContrato" ref="servicioContrato"/>
+			<property name="servicioPrecio" ref="servicioPrecio"/>
+			<property name="servicioConfiguracion" ref="servicioConfiguracion"/>
+			<property name="servicioHora" ref="servicioHora"/>
+			<property name="servicioActividad" ref="servicioActividad"/>
+		</bean>
+		
 		<!-- Fachadas -->
 		
 		<bean id="fachadaTipoHora" class="com.proyectodegrado.sgti.fachada.FachadaTipoHora">
@@ -208,6 +216,10 @@
 		<bean id="fachadaHora" class="com.proyectodegrado.sgti.fachada.FachadaHora">
 			<property name="servicioHora" ref="servicioHora"/>
 			<property name="servicioContrato" ref="servicioContrato"/>
+		</bean>
+		
+		<bean id="fachadaNotificacion" class="com.proyectodegrado.sgti.fachada.FachadaNotificacion">
+			<property name="servicioNotificacion" ref="servicioNotificacion"/>
 		</bean>
 		
 </beans>
