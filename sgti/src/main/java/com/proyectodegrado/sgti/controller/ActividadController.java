@@ -23,7 +23,7 @@ import com.proyectodegrado.sgti.modelo.Usuario;
 
 @Controller
 @RequestMapping("/desktop/actividad")
-public class ActividadController {
+public class ActividadController extends AbstractController{
 	
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 

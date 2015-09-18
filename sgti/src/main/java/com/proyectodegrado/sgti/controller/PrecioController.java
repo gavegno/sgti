@@ -21,7 +21,7 @@ import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
 @RequestMapping("desktop/precio")
-public class PrecioController {
+public class PrecioController extends AbstractController{
 	
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 	

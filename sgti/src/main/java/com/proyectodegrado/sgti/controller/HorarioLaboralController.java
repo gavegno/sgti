@@ -20,13 +20,18 @@ import com.proyectodegrado.sgti.modelo.HorarioLaboral;
 
 @Controller
 @RequestMapping("/desktop/dias")
-public class HorarioLaboralController {
+public class HorarioLaboralController extends AbstractController{
 	
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 	private FachadaHorarioLaboral fachadaHorarioLaboral;
 	private FachadaPrecio fachadaPrecio;
 	private FachadaTipoHora fachadaTipoHora;
 	private FachadaContrato fachadaContrato;
+	
+	@RequestMapping(value="/principal", method = RequestMethod.GET)
+	public String irAPaginaPrincipal(){
+		return "desktop/detalleDia";
+	}
 	
 	@RequestMapping(value="/ingresardia", method = RequestMethod.POST)
 	public String ingresarDiaHorarioLaboral(Model model, @RequestParam("idHorarioLaboral") final String id, @RequestParam("nombreDia") final String nombreDia, 

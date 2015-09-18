@@ -15,10 +15,15 @@ import com.proyectodegrado.sgti.fachada.FachadaCliente;
 
 @Controller
 @RequestMapping("/desktop/cliente")
-public class ClienteController {
+public class ClienteController extends AbstractController{
 	
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 	private FachadaCliente fachadaCliente;
+	
+	@RequestMapping(value="/principal", method = RequestMethod.GET)
+	public String irAPaginaPrincipal(){
+		return "desktop/clientes";
+	}
 	
 	//ingreso de un nuevo cliente.
 	@RequestMapping(value = "/ingresar", method = RequestMethod.POST)

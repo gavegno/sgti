@@ -20,7 +20,7 @@ import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
 @RequestMapping("/desktop/tiposDeHora")
-public class TipoHoraController {
+public class TipoHoraController extends AbstractController{
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 	
 	private FachadaPrecio fachadaPrecio;

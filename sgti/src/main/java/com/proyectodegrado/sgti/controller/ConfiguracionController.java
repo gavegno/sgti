@@ -23,7 +23,7 @@ import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
 @RequestMapping("desktop/configuracion")
-public class ConfiguracionController {
+public class ConfiguracionController extends AbstractController{
 	
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 

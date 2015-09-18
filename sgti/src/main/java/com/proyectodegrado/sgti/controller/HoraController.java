@@ -23,7 +23,7 @@ import com.proyectodegrado.sgti.modelo.Hora;
 
 @Controller
 @RequestMapping("/desktop/hora")
-public class HoraController {
+public class HoraController extends AbstractController{
 	
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 
@@ -34,6 +34,11 @@ public class HoraController {
 	private FachadaActividad fachadaActividad;
 	
 	private FachadaContrato fachadaContrato;
+	
+	@RequestMapping(value="/principal", method = RequestMethod.GET)
+	public String irAPaginaPrincipal(){
+		return "desktop/tiposDeHora";
+	}
 	
 	@RequestMapping(value="/ingresar", method = RequestMethod.GET)
 	public String cargarPagina(Model model, HttpServletRequest request){

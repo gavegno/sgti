@@ -23,7 +23,7 @@ import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 
 @Controller
 @RequestMapping("/desktop/contrato")
-public class ContratoController {
+public class ContratoController extends AbstractController{
 
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 

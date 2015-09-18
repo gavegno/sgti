@@ -31,10 +31,10 @@
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Horas <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	          	<c:if test="${tipoUsuario == 'SOCIO'}">
-	          		<li><a href="/CounterWebApp/desktop/tiposDeHora.jsp">Agregar tipo de hora</a></li>
+	          		<li><a href="/CounterWebApp/desktop/hora/principal">Agregar tipo de hora</a></li>
 	          		<li><a href="/CounterWebApp/desktop/tiposDeHora/tabla">Ver tipos de hora</a></li>
 	          		<li role="separator" class="divider"></li>
-	          		<li><a href="/CounterWebApp/desktop/detalleDia.jsp">Agregar Horario laboral</a></li>
+	          		<li><a href="/CounterWebApp/desktop/dias/principal">Agregar Horario laboral</a></li>
 					<li><a href="/CounterWebApp/desktop/dias/tabla">Ver horarios laborales</a></li>
 	          		<li role="separator" class="divider"></li>
 	          		<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
@@ -61,7 +61,7 @@
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="/CounterWebApp/desktop/clientes.jsp">Agregar cliente</a></li>
+	            <li><a href="/CounterWebApp/desktop/cliente/principal">Agregar cliente</a></li>
 	            <li><a href="/CounterWebApp/desktop/cliente/tabla">Ver y modificar cliente</a></li>
 	            <!-- <li><a href="#">Eliminar cliente</a></li> -->
 	          </ul>
