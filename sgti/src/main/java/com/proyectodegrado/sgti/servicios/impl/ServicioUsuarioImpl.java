@@ -42,6 +42,11 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		usuarioDao.agregarTipoHoraUsuario(tipoHoraids, usuario.getId());
 	}
 	
+	@Override
+	public void agregarTipoHoraUsuarioSimple(Usuario usuario, Integer idTipoHora) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		usuarioDao.agregarTipoHoraUsuarioSimple(idTipoHora, usuario.getId());
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#verTiposHoraPorUsuario(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */
@@ -95,7 +100,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 */
 	@Override
 	public void eliminarUsuario(Usuario usuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		usuarioDao.cambiarActivo(usuario.getId(), false);
+		usuarioDao.cambiarActivo(usuario.getId());
 	}
 	
 	@Override

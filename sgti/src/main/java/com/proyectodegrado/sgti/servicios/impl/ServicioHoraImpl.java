@@ -29,6 +29,8 @@ public class ServicioHoraImpl implements ServicioHora {
 	public void agregar(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, SgtiException{
 		Date fechaDesdeCheck = hora.getFechaDesde();
 		Date fechaHastaCheck = hora.getFechaHasta();
+		System.out.println("Fecha desde: " + fechaDesdeCheck.toString());
+		System.out.println("Fecha hasta: " + fechaHastaCheck.toString());
 		if (fechaHastaCheck.after(fechaDesdeCheck) == false){
 			throw new SgtiException("Error: la fecha desde no puede ser mayor a la fecha hasta. La hora no se registró.");
 		}
@@ -72,6 +74,17 @@ public class ServicioHoraImpl implements ServicioHora {
 		return horaDao.verHorasRegistradasPorContrato(idContrato);
 	}
 	
+	
+	@Override
+	public List<Hora> seleccionarHorasRegistradasPorContratoDesdeFecha(String idContrato, Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return horaDao.verHorasRegistradasPorContratoDesdeFecha(idContrato, fechaDesde);
+	}
+	
+	@Override
+	public List<Hora> seleccionarHorasRegistradasPorContratoValidadas(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return horaDao.verHorasRegistradasPorContratoValidadas(idContrato);
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioHora#seleccionarHorasRegistradasNoFacturadas(java.lang.String)
 	 */
@@ -83,6 +96,26 @@ public class ServicioHoraImpl implements ServicioHora {
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioHora#seleccionarHorasRegistradasNoInformadas(java.lang.String)
 	 */
+	@Override
+	public List<Hora> seleccionarHorasHorasConFechaDesde(Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return horaDao.verHorasConFechaDesde(fechaDesde);
+	}
+	
+	@Override
+	public List<Hora> seleccionarHorasFechaUsuario(Date fechaDesde, String usuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return horaDao.verHorasFechaUsuario(fechaDesde, usuario);
+	}
+	
+	@Override
+	public List<Hora> seleccionarHorasFechaUsuarioValidacion(Date fechaDesde, String usuario, boolean validacion) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return horaDao.verHorasFechaUsuarioValidacion(fechaDesde, usuario, validacion);
+	}
+	
+	@Override
+	public List<Hora> seleccionarHorasPorValidacion(boolean validada) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return horaDao.verHorasPorValidacion(validada);
+	}
+	
 	@Override
 	public List<Hora> seleccionarHorasRegistradasNoInformadas(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
 		return horaDao.verHorasRegistradasNoInformadas(idContrato);

@@ -38,7 +38,7 @@
             <h2 class="container text-center">Agregar nuevo Tipo de hora y Cómputo para Contrato</h2>
             <div class="form-group container">
                 <div class="alert alert-info text-center">
-                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.id}
+                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.nombre} ${contrato.contraparte.apellido}
                 </div>
 
                 <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/agregarContratoTipoHoraOk" method="POST">

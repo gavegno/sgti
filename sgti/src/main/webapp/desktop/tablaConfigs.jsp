@@ -40,7 +40,7 @@
             <h2 class="text-center">Configuraciones de contrato</h2>
             <div>
                 <div class="alert alert-info text-center">
-                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.id}
+                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.nombre} ${contrato.contraparte.apellido}
                 </div>
 
                     <div class="table-responsive">

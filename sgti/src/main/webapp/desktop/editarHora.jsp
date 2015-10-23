@@ -136,29 +136,51 @@
                         <label for="validada" class="control-label">Validada?</label>
                         <c:choose> 
                             <c:when test="${hora.validada}">
-                                <input type="checkbox" class="checkbox" checked="checked" name="validada" disabled="disabled"></input>
+                                <input type="checkbox" class="checkbox" checked="checked" name="validada" disabled="disabled" title="Esta propiedad se cambia desde la tabla de horas" </input>
                             </c:when>
                             <c:otherwise>
-                                <input type="checkbox" class="checkbox" name="validada" disabled="disabled"></input>
+                                <input type="checkbox" class="checkbox" name="validada" disabled="disabled" title="Esta propiedad se cambia desde la tabla de horas"></input>
                             </c:otherwise>
                         </c:choose> 
                     </div>
                        
-                <div class="form-group">
-                    <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
-                    <button class="btn btn-default" type="button"> Cancelar </button>
-                </div>       
-
-                </form>
-
-                <form class="form-horizontal" action="/CounterWebApp/desktop/hora/validarHora" method="POST">
-                    <input type="text" name="id" value="${hora.id}" hidden></input>
-                    <button class="btn btn-info" id="botonValidar" type="submit"> <span class="glyphicon glyphicon-ok"></span> Cambiar validación </button>
-                    <h6>Al cambiar estado de validación no es necesario Confirmar</h6>
-                </form>
-
                 
-            <br>
+                <div class="container form-group">
+                    <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
+                    </form>
+
+                    <form class="form-horizontal" action="/CounterWebApp/desktop/hora/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
+                        <input type="text" name="id" value="${hora.id}" hidden></input>          
+                                  
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar </button>
+
+
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Eliminar la hora</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    �Realmente desea eliminar la hora?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+                                    <button type="submit" class="btn btn-danger"> Confirmar </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                    </form>
+
+                    <form class="form-horizontal" action="/CounterWebApp/desktop/hora/ingresar" method="GET" accept-charset="UTF-8" style="display:inline">                    
+                        
+                        <button class="btn btn-default" type="submit"> <span class="glyphicon glyphicon-menu-left"></span> Cancelar </button>
+                    </form>
+                </div>
+                       
+            <br><br>
             </div>
         </div>
     </div>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
+import com.proyectodegrado.sgti.fachada.FachadaContratoTecnicos;
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 import com.proyectodegrado.sgti.fachada.FachadaUsuario;
 import com.proyectodegrado.sgti.modelo.Usuario;
@@ -27,7 +28,7 @@ public class UsuarioController extends AbstractController{
 	private static final String MENSAJE_ERROR = "Ha ocurrido un error";
 
 	private FachadaUsuario fachadaUsuario;
-	
+	private FachadaContratoTecnicos fachadaContratoTecnicos;
 	private FachadaTipoHora fachadaTipoHora;
 	
 	@RequestMapping(value = "/ingresarUsuario", method = RequestMethod.POST)
@@ -96,8 +97,11 @@ public class UsuarioController extends AbstractController{
 				@RequestParam("id") final String id){
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+			fachadaContratoTecnicos = (FachadaContratoTecnicos) context.getBean("fachadaContratoTecnicos");
+			
 			try {			
 				model.addAttribute("usuario", fachadaUsuario.seleccionarUsuario(id));
+				model.addAttribute("contratosAsignados", fachadaContratoTecnicos.listarContratosPorTecnicoTodos(id));
 			} catch (ClassNotFoundException | IOException | SQLException e) {
 				e.printStackTrace();
 				model.addAttribute("errorMessage", MENSAJE_ERROR);
@@ -106,6 +110,26 @@ public class UsuarioController extends AbstractController{
 				context.close();
 			}
 			return "desktop/editarTecnicos";
+		}
+		
+		@RequestMapping(value = "/borrar", method = RequestMethod.POST)
+		public String borrarLogicoUsuario(Model model, 
+				@RequestParam("id") final String id){
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+			fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+			String mensaje = "El usuario se eliminó correctamente";
+			try {			
+				fachadaUsuario.eliminacionLogicaUsuario(id);
+				model.addAttribute("message", mensaje);
+			} catch (ClassNotFoundException | IOException | SQLException e) {
+				e.printStackTrace();
+				mensaje = e.getMessage();
+				model.addAttribute("errorMessage", mensaje);
+				return cargarTablaUsuarios(model);
+			}finally{
+				context.close();
+			}
+			return cargarTablaUsuarios(model);
 		}
 		
 		@RequestMapping(value = "/editarUsuarioOk", method = RequestMethod.POST)

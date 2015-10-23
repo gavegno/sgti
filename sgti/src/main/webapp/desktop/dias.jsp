@@ -40,10 +40,10 @@
 <br><br>
 <div class="container">
     <div class="row">
-            <h2 class="text-center">Paso 4 de 5: Gestión de horario laboral</h2>
+            <h2 class="text-center">Paso 4 de 6: Gestión de horario laboral</h2>
             <h6 class="text-center">(Si desea utilizar un horario ya existente, siga al siguiente paso)</h6>
             <div class="alert alert-info text-center">
-                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.id} <br>
+                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.nombre} ${contrato.contraparte.apellido} <br>
                     
                     <c:forEach items="${precios}" var="precio" >
 
@@ -136,8 +136,9 @@
 
                 </form>
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/configuracion/ingresar" method="POST">
+                <form class="form-horizontal" action="/CounterWebApp/desktop/contrato/tecnicosEnContratoDesdeFlow" method="POST">
                     <input type="hidden" class="form-control" name="idContrato" value="${idContrato}">
+
                     <div class="form-group container">
                         <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Omitir y pasar al paso 5 </button>
                     </div>

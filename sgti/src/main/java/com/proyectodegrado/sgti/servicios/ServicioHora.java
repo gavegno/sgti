@@ -58,5 +58,29 @@ public interface ServicioHora {
 	void cambiarValidacionHora(int id) throws FileNotFoundException,
 			ClassNotFoundException, IOException, SQLException;
 
+	List<Hora> seleccionarHorasHorasConFechaDesde(Date fechaDesde)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException, ParseException;
+
+	List<Hora> seleccionarHorasPorValidacion(boolean validada)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException, ParseException;
+
+	List<Hora> seleccionarHorasFechaUsuario(Date fechaDesde, String usuario)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException, ParseException;
+
+	List<Hora> seleccionarHorasFechaUsuarioValidacion(Date fechaDesde,
+			String usuario, boolean validacion) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException, ParseException;
+
+	List<Hora> seleccionarHorasRegistradasPorContratoValidadas(String idContrato)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException, ParseException;
+
+	List<Hora> seleccionarHorasRegistradasPorContratoDesdeFecha(
+			String idContrato, Date fechaDesde) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException, ParseException;
+
 
 }

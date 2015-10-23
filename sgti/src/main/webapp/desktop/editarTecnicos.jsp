@@ -34,7 +34,7 @@
                 <form class="form-vertical" action="/CounterWebApp/desktop/tecnicos/editarUsuarioOk" method="POST">
                 	<div class="container form-group ">
                         <label for="inputId" class="control-label">Id:</label>
-                        <input type="text" class="container form-group" name="id" value="${usuario.id}" disabled="disabled"> </input> 
+                        <input type="text" class="form-control" name="id" value="${usuario.id}" disabled="disabled"> </input> 
                         <input type="hidden" name="id" value="${usuario.id}" hidden> </input>        
                     </div>
                     <div class="container form-group ">
@@ -53,10 +53,52 @@
                         <label for="inputTelefono" class="control-label">Teléfono:</label>
                         <input type="text" class="form-control" name="telefono" value="${usuario.telefono}"></input>        
                     </div>
+
+                    <c:if test="${usuario.tipo eq 'TECNICO'}">
+                        <div class="container form-group ">
+                            <label for="inputContratos" class="control-label">Contratos que el técnico tiene asignado:</label>
+                            <c:forEach items="${contratosAsignados}" var="contratoAsignado" >
+                                <h5>   ${contratoAsignado.id} - ${contratoAsignado.cliente.nombre} - ${contratoAsignado.contraparte.nombre} ${contratoAsignado.contraparte.apellido}</h5>      
+                            </c:forEach>
+                        </div>
+                    </c:if>
+
                 <div class="container form-group">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
-                    <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
 
+                </form>
+
+
+                <form action="/CounterWebApp/desktop/tecnicos/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
+                    <input type="hidden" name="id" value="${usuario.id}" hidden> </input>        
+
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar </button>
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Eliminar el usuario</h4>
+                          </div>
+                          <div class="modal-body">
+                            ¿Realmente desea eliminar al usuario del sistema?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+                            <button type="submit" class="btn btn-danger"> Confirmar </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+
+                <form class="form-horizontal" action="/CounterWebApp/desktop/tecnicos/tabla" method="GET">
+                    <div class="form-group container">
+                        <br>
+                        <button class="btn btn-default" id="boton" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Volver </button>
+                        <br><br>
+                    </div>       
                 </form>
             </div>
         </div>

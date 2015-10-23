@@ -35,14 +35,15 @@
 <div class="container">
     <div class="row">
             <h2 class="text-center">Tipos de hora</h2>
-           <table id="mt" class="table table-hover">
+            <input class="form-control" id="system-search" name="q" placeholder="Buscar..." required>
+           <table id="mt" class="table table-list-search">
     <thead>
       <tr>
         <th>Id</th>
         <th>Tipo de hora</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="searchable">
 
         <c:forEach items="${tipos}" var="tipohora" >
         <tr>
@@ -52,12 +53,13 @@
                     <input type="text" name="id" value="${tipohora.id}" hidden></input>
                     <td><input class="vert-align form-control" size="6" name="id" value="${tipohora.id}" disabled="disabled"></td>
                     <td><input class="vert-align form-control" name="tipo" value="${tipohora.tipo}"></td>
-                    <td class="vert-align"><button class="btn btn-success" id="boton" type="submit"> Editar </button></td>
+                    <td hidden="hidden">${tipohora.tipo}</td>
+                    <td class="vert-align"><button class="btn btn-success" type="submit"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar </button></td>
                 </form>
 
                 <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/borrar" method="POST">
                     <input type="text" name="id" value="${tipohora.id}" hidden></input>
-                    <td class="vert-align"><button class="btn btn-danger" id="boton" type="submit"> Borrar </button></td>
+                    <td class="vert-align"><button class="btn btn-danger" type="submit"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar </button></td>
                 </form>
 
         </tr>
@@ -73,4 +75,5 @@
             </div>
         </div>
 </div>
+<script src="<c:url value="/resources/js/busqueda-tablas.js"/>"></script>
 </body>

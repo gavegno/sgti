@@ -28,7 +28,7 @@
     <div class="row">
             <h2 class="text-center">Contratos</h2>
             <div>
-                <form class="form-horizontal">
+                
                     
                     <div class="form-group">
                         <table class="table table-hover">
@@ -44,16 +44,20 @@
                             <tbody>
 
                             <c:forEach items="${contratos}" var="contrato" >
-                                <form action="/CounterWebApp/desktop/tecnicos/editar" method="POST">
-                                <tr >
+                                <tr>
+                                    
+
                                     <td><input class="vert-align form-control" name="id" value="${contrato.id}" disabled="disabled"></td>
                                     <td><input class="vert-align form-control" name="cliente" value="${contrato.cliente.nombre}" disabled="disabled"></td>
                                     <td><input class="vert-align form-control" name="contraparte" value="${contrato.contraparte.id}" disabled="disabled"></td>
-                                    <!--
-                                    <td class="vert-align"><button class="btn btn-info" id="boton" type="submit"> Ver </button></td>
-                                -->
+                                   
+                                    <form action="/CounterWebApp/desktop/hora/tablaHorasContraparte" method="POST">
+
+                                        <input type="text" name="id" value="${contrato.id}" hidden></input>
+                                        <td class="vert-align"><button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Ver horas </button></td>
+                                    </form>
+
                                 </tr>
-                                </form>
                             </c:forEach>
                         
                            </tbody>
@@ -62,7 +66,7 @@
 
 
 
-                </form>
+                
             </div>
         </div>
 </div>

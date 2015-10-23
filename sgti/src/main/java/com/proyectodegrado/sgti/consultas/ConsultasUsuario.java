@@ -52,6 +52,14 @@ public class ConsultasUsuario {
 	public ResultSet verUsuarios() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM usuario AS u WHERE u.activo=true");
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public ResultSet verUsuariosTodos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection connection = conexionBD.conectar();
+		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery("SELECT * FROM usuario");
 		conexionBD.cerrar(connection);
 		return resultSet;
@@ -59,7 +67,7 @@ public class ConsultasUsuario {
 	
 	public ResultSet verUsuarioPorIdContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.id=? AND u.contrasena=?");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.id=? AND u.contrasena=? AND u.activo=true");
 		preparedStatement.setString(1, id);
 		preparedStatement.setString(2, contrasena);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -69,7 +77,7 @@ public class ConsultasUsuario {
 	
 	public ResultSet verUsuarioPorId(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.id=?");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.id=? AND u.activo=true");
 		preparedStatement.setString(1, id);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(connection);
@@ -78,7 +86,7 @@ public class ConsultasUsuario {
 	
 	public ResultSet verUsuariosPorTipo(String tipo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.tipo=?");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.tipo=? AND u.activo=true");
 		preparedStatement.setString(1, tipo);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(connection);
@@ -106,11 +114,11 @@ public class ConsultasUsuario {
 		conexionBD.cerrar(connection);
 	}
 	
-	public void cambiarActivo(String id, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+	public void cambiarActivo(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario AS u SET activo=? WHERE u.id=?");
-		preparedStatement.setBoolean(1, activo);
-		preparedStatement.setString(2, id);
+		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario AS u SET activo = not activo WHERE u.id=?");
+		//preparedStatement.setBoolean(1, activo);
+		preparedStatement.setString(1, id);
 		preparedStatement.executeUpdate();
 		conexionBD.cerrar(connection);
 	}

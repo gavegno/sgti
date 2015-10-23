@@ -65,12 +65,43 @@ public class TipoHoraDAO {
 		return tiposHora;
 	}
 	
+	public List<TipoHora> verTiposHoraQueTecnicoNoTengaAsignados (String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		List<TipoHora> tiposHora= new ArrayList<TipoHora>();
+		ResultSet resultSet = consultasTipoHora.verTiposHoraQueTecnicoNoTengaAsignado(idUsuario);
+		while(resultSet.next()){
+			TipoHora dataTipoHora = new TipoHora();
+			dataTipoHora.setId(resultSet.getInt("id"));
+			dataTipoHora.setTipo(resultSet.getString("tipo"));
+			tiposHora.add(dataTipoHora);
+		}
+		return tiposHora;
+	}
+	
+	public List<TipoHora> verTiposHoraDeTecnico (String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		List<TipoHora> tiposHora= new ArrayList<TipoHora>();
+		ResultSet resultSet = consultasTipoHora.verTiposHoraAsignadosATecnico(idUsuario);
+		while(resultSet.next()){
+			TipoHora dataTipoHora = new TipoHora();
+			dataTipoHora.setId(resultSet.getInt("id"));
+			dataTipoHora.setTipo(resultSet.getString("tipo"));
+			tiposHora.add(dataTipoHora);
+		}
+		return tiposHora;
+	}
+	
 	public void editarTipoHora (int id, String tipo) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		consultasTipoHora.editarTipoHora(id, tipo);
 	}
 	
 	public void borrarTipoHora (int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		consultasTipoHora.borrarTipoHora(id);
+	}
+	
+	
+	public void sacarTipoHoraATecnico (String idUsuario, int idTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		consultasTipoHora.sacarTipoHoraATecnico(idUsuario, idTipoHora);
 	}
 
 	public ConsultasTipoHora getConsultasTipoHora() {

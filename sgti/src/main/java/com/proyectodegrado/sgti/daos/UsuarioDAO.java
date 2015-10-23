@@ -28,6 +28,10 @@ public class UsuarioDAO {
 		}
 	}
 	
+	public void agregarTipoHoraUsuarioSimple(Integer idTipoHora, String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {
+		consultasUsuario.insetarTipoHoraEnUsuario(idTipoHora, id);
+	}
+	
 	public List<TipoHora> verTiposHoraPorUsuario(String idUsuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		List<TipoHora> tiposHora = new ArrayList<TipoHora>();
 		ResultSet resultSet = consultasUsuario.verTiposHoraPorUsuario(idUsuario);
@@ -116,8 +120,8 @@ public class UsuarioDAO {
 		consultasUsuario.cambiarContrasena(id, contrasena);
 	}
 	
-	public void cambiarActivo(String id, boolean activo) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		consultasUsuario.cambiarActivo(id, activo);
+	public void cambiarActivo(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		consultasUsuario.cambiarActivo(id);
 	}
 	
 	public String verContrasenaUsuario(String id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
@@ -143,5 +147,7 @@ public class UsuarioDAO {
 	public void setConsultasTipoHora(ConsultasTipoHora consultasTipoHora) {
 		this.consultasTipoHora = consultasTipoHora;
 	}
+
+	
 	
 }

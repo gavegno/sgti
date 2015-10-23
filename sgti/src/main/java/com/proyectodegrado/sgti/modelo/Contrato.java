@@ -13,6 +13,8 @@ public class Contrato {
 	
 	private List<TipoHoraComputo> tipoHoraComputo;
 	
+	private List<Usuario> tecnicos;
+
 	private Cliente cliente;
 	
 	private Usuario contraparte;
@@ -93,5 +95,13 @@ public class Contrato {
 
 	public void setUltimaFechaComputacion(Date ultimaFechaComputacion) {
 		this.ultimaFechaComputacion = ultimaFechaComputacion;
+	}
+	
+	public List<Usuario> getTecnicos() {
+		return tecnicos;
+	}
+
+	public void setTecnicos(List<Usuario> tecnicos) {
+		this.tecnicos = tecnicos;
 	}
 }

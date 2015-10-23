@@ -48,6 +48,25 @@ public class ConsultasTipoHora {
 		return resultSet;
 	}
 	
+	public ResultSet verTiposHoraAsignadosATecnico(String idTecnico) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM tipohora AS t where t.id IN (SELECT id_tipohora FROM usuario_tipohora WHERE id_usuario=?)");
+		preparedStatement.setString(1, idTecnico);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+		
+	}
+	
+	public ResultSet verTiposHoraQueTecnicoNoTengaAsignado(String idTecnico) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM tipohora AS t where t.id NOT IN (SELECT id_tipohora FROM usuario_tipohora WHERE id_usuario=?)");
+		preparedStatement.setString(1, idTecnico);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
 	public ResultSet verTiposHoraQueContratoNoTengaEnUso (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM tipohora AS t where t.id NOT IN (SELECT idtipohora FROM contrato_tipohora AS c WHERE c.idContrato = ?)");
@@ -55,6 +74,15 @@ public class ConsultasTipoHora {
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(con);
 		return resultSet;
+	}
+	
+	public void sacarTipoHoraATecnico (String idUsuario, int idTipoHora) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM usuario_tipohora AS t WHERE t.id_usuario=? AND t.id_tipohora=?");
+		preparedStatement.setString(1, idUsuario);
+		preparedStatement.setInt(2, idTipoHora);
+		preparedStatement.executeUpdate();
+		conexionBD.cerrar(con);
 	}
 	
 	public void borrarTipoHora (int id) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{

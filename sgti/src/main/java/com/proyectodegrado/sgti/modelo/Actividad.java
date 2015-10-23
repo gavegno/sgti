@@ -12,7 +12,16 @@ public class Actividad {
 	private Date fechaActividad;
 	private int periodo;
 	private String descripcion;
+	private String estado;
 	
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -25,7 +34,7 @@ public class Actividad {
 		super();
 	}
 
-	public Actividad(String id, String tipo, String idContrato, String idUsuario, Date fechaCreacion, Date fechaActividad, int periodo, String descripcion) {
+	public Actividad(String id, String tipo, String idContrato, String idUsuario, Date fechaCreacion, Date fechaActividad, int periodo, String descripcion, String estado) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -35,6 +44,7 @@ public class Actividad {
 		this.fechaActividad = fechaActividad;
 		this.periodo = periodo;
 		this.descripcion = descripcion;
+		this.estado = estado;
 	}
 
 	public String getId() {

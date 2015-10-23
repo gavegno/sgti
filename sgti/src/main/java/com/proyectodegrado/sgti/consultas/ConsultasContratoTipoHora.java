@@ -32,6 +32,27 @@ public class ConsultasContratoTipoHora {
 		conexionBD.cerrar(con);
 		return resultSet;
 	}
+	//
+	
+	public ResultSet verContratoTiposHoraParaGestionarHoras() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("select c.idcontrato, c.idtipohora, t.tipo from contrato_tipohora AS c "
+				+ "INNER JOIN tipohora AS t ON c.idtipohora = t.id order by idcontrato");
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
+	
+	public ResultSet verContratoTiposHoraParaGestionarHorasPorTecnico(String idUsuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT c.idcontrato, c.idtipohora, t.tipo, ut.id_usuario FROM "
+				+ "contrato_tipohora AS c INNER JOIN tipohora AS t ON c.idtipohora = t.id "
+				+ "INNER JOIN usuario_tipohora AS ut ON ut.id_tipohora = c.idtipohora WHERE ut.id_usuario=?");
+		preparedStatement.setString(1, idUsuario);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
 	
 	public void editarContratoTipoHora (String idContrato, int idTipoHora, double computos) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();

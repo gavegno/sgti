@@ -49,9 +49,16 @@
                 
                 <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
-                    <!-- <button class="btn btn-default" type="button"> Cancelar </button> -->
                 </div>       
 
+                </form>
+
+                <form class="form-horizontal" action="/CounterWebApp/desktop/cliente/tabla" method="GET">
+                    <div class="form-group container">
+                        <br>
+                        <button class="btn btn-default" id="boton" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Volver </button>
+                        <br><br>
+                    </div>       
                 </form>
             </div>
         </div>

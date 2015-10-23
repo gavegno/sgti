@@ -15,9 +15,6 @@ public interface ServicioUsuario {
 	public abstract void agregar(Usuario dataUsuario)
 			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException;
 	
-	public void agregarTipoHoraUsuario(Usuario usuario) 
-			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
-	
 	public List<TipoHora> verTiposHoraPorUsuario(Usuario usuario) 
 			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 	
@@ -40,5 +37,12 @@ public interface ServicioUsuario {
 			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException;
 
 	String get_MD5_SecurePassword(String passwordToHash) throws NoSuchAlgorithmException;
+
+	void agregarTipoHoraUsuario(Usuario usuario) throws FileNotFoundException,
+			IOException, SQLException, ClassNotFoundException;
+
+	void agregarTipoHoraUsuarioSimple(Usuario usuario, Integer idTipoHora)
+			throws FileNotFoundException, IOException, SQLException,
+			ClassNotFoundException;
 
 }

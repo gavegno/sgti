@@ -115,23 +115,37 @@
                 <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechadesde" value="${formattedfechaDesde}" title="${formattedfechaDesde}"></td>
                 <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechahasta" value="${formattedfechaHasta}" title="${formattedfechaHasta}"></td>
                 <td>
-                    <select class="form-control" id="contrato" name="contrato" onChange="document.getElementById('tipohora').disabled = false" required="required">
-                        <option value="">S/D</option>
-                            <c:forEach items="${contratos}" var="contratoItem">
-                                <option value="${contratoItem.id}"><c:out value="${contratoItem.id}" /></option>
+                    <select class="form-control" id="inputContrato" name="contrato">
+                            <c:forEach items="${contratos}" var="contrato" >
+                                <c:choose>
+                                    <c:when test="${contrato.id eq horaCopiada.idContrato}">
+                                        <option selected="selected" value="${contrato.id}"><c:out value="${contrato.id}" /></option>
+                                        
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${contrato.id}"><c:out value="${contrato.id}" /></option>
+
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
                     </select>
                 </td>
 
                 <td>
-                    <select class="form-control" name="tipohora" id="tipohora" disabled="disabled" required="required">
-                        <option value="">S/D</option>
-                        <c:forEach items="${todosTiposHora}" var="cadaTipoHora" >
-                            <option label="${cadaTipoHora.tipo}" value="${cadaTipoHora.tipo}" custom="${cadaTipoHora.idContrato}">  </option>
-                        </c:forEach>
-                    </select>
+                	<select class="form-control" name="tipohora" id="inputTipoHora">
+                        	<c:forEach items="${tipoHoras}" var="tipo" >
+                        		<c:choose>
+                        			<c:when test="${horaCopiada.nombreTipoHora eq tipo}">
+                        				<option selected="selected" value="${tipo.tipo}"><c:out value="${tipo.tipo}" /></option>
+                                        
+                        			</c:when>
+                        			<c:otherwise>
+                        				<option value="${tipo.tipo}"><c:out value="${tipo.tipo}" /></option>
+                        			</c:otherwise>
+                        		</c:choose>
+                        	</c:forEach>
+                   </select>
                 </td>
-                
                 <td>
                 	<select class="form-control" name="remoto">
         			<c:choose>
@@ -165,10 +179,9 @@
                 </td>
                 <td><textarea class="form-control" rows="2" name="descripcion" placeholder="Descripción">${horaCopiada.descripcion}</textarea></td>
                 <td><textarea class="form-control" rows="2" name="comentario" placeholder="Comentario">${horaCopiada.comentario}</textarea></td>
-
-                <td class="vert-align">
-                    <td class="vert-align"><button id="addRow" type="submit" class="btn btn-success" title="Guardar nueva hora"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></a></td>
+                <td class="vert-align"><button id="addRow" class="btn btn-success" title="Guardar nueva hora"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></a></td>
               </tr>
+
         </form>
     </tbody>
     <tbody class="searchable">
@@ -192,7 +205,7 @@
         <td><input disabled="disabled" class="form-control" type="text" name="contrato" value="${horasRegistrada.idContrato}" title="Usuario: ${horasRegistrada.idUsuario}"></td>
         
         <c:choose>
-            <c:when test="${tipoUsuario == 'TECNICO'}">
+            <c:when test="${horasRegistrada.validada}">
                 <td>
                 	<input type="text" class="form-control" name="tipohora" id="idtipohora" value="${horasRegistrada.nombreTipoHora}" disabled="disabled" title="${horasRegistrada.nombreTipoHora}">
                 </td>
@@ -363,34 +376,18 @@
     </tbody>
   </table>
 
-
-
-        
-
-
 </div>
     <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datetimepicker.js" />"></script> 
     <script type="text/javascript">
         $(".form_datetime2").datetimepicker({format: 'dd-mm-yyyy hh:ii',
     todayBtn: true,
     startDate: "2015-08-10 10:00",
-    minuteStep: 5,
+    minuteStep: 15,
     autoclose: true,
     todayHighlight: true,
     language: 'es'
 });
     </script> 
     <script src="<c:url value="/resources/js/busqueda-tablas.js"/>"></script>
-    <script>
-            $("#contrato").change(function() { 
-        if($(this).data('options') == undefined){
-            /*Taking an array of all options-2 and kind of embedding it on the contrato*/
-            $(this).data('options',$('#tipohora option').clone());
-            } 
-        var id = $(this).val();
-        var options = $(this).data('options').filter('[custom=' + id + ']');
-        $('#tipohora').html(options);
-        });
-    </script>
 </body>
 </html>

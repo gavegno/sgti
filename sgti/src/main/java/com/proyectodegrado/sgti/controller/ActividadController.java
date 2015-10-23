@@ -3,6 +3,9 @@ package com.proyectodegrado.sgti.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +81,7 @@ public class ActividadController extends AbstractController{
 	public String insertarActividad(Model model, 
 			@RequestParam("id") final String id, 
 			@RequestParam("tipo") final String tipo, 
-			@RequestParam(required=false, value="periodo") final Integer periodo, 
+			@RequestParam(required=false, value="periodo") Integer periodo, 
 			@RequestParam("fecha") final String fecha, 
 			@RequestParam("usuario") final String usuario,
 			@RequestParam("contrato") final String contrato,
@@ -86,8 +89,12 @@ public class ActividadController extends AbstractController{
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
 		String mensaje = "La actividad fue ingresada correctamente";
+		
+		if (periodo == null)
+			periodo = 0;
+		
 		try {
-			fachadaActividad.ingresarActividad(id, tipo, periodo, fecha, usuario, contrato, descripcion);
+			fachadaActividad.ingresarActividad(id, tipo, periodo, fecha, usuario, contrato, descripcion, "PENDIENTE");
 			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
@@ -106,36 +113,44 @@ public class ActividadController extends AbstractController{
 	}
 	
 	@RequestMapping(value="/editarActividad", method = RequestMethod.POST)
-	public String editarActividad(Model model, 
+	public String editarActividad(Model model, HttpServletRequest request,
 			@RequestParam("id") final String id, 
 			@RequestParam("tipo") final String tipo, 
-			@RequestParam("periodo") final int periodo, 
+			@RequestParam(required=false, value="periodo") Integer periodo, 
 			@RequestParam("fecha") final String fecha, 
 			@RequestParam("usuario") final String usuario,
 			@RequestParam("contrato") final String contrato,
-			@RequestParam("descripcion") final String descripcion){
+			@RequestParam("descripcion") final String descripcion,
+			@RequestParam("fechaDesde") final String fechaFiltrar){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
 		String mensaje = "La actividad fue editada correctamente";
+		
+		if (!(periodo >= 0))
+			periodo = 0;
+			
 		try {
-			fachadaActividad.editarActividad(id, tipo, periodo, fecha, usuario, contrato, descripcion);
+			fachadaActividad.editarActividad(id, tipo, periodo, fecha, usuario, contrato, descripcion, "PENDIENTE");
 			model.addAttribute("message", mensaje);
 		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			e.printStackTrace();
 			mensaje = MENSAJE_ERROR;
 			model.addAttribute("errorMessage", mensaje);
-			return cargarTablaActividades(model);
+			return cargarTablaActividadesFiltradaFechaDesde(model, request, fechaFiltrar);
 		}finally{
 			context.close();
 		}
-		return cargarTablaActividades(model);
+		return cargarTablaActividadesFiltradaFechaDesde(model, request, fechaFiltrar);
 	}
 	
 	@RequestMapping(value="/eliminarActividad", method = RequestMethod.POST)
-	public String eliminarActividad(Model model, @RequestParam("id") final String id){
+	public String eliminarActividad(Model model, HttpServletRequest request, 
+			@RequestParam("id") final String id,
+			@RequestParam("fechaDesde") final String fechaFiltrar){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
 		String mensaje = "La actividad fue eliminada correctamente";
+		
 		try {
 			fachadaActividad.borrarActividad(id);
 			model.addAttribute("message", mensaje);
@@ -148,11 +163,11 @@ public class ActividadController extends AbstractController{
 			e.printStackTrace();
 			mensaje = e.getMessage();
 			model.addAttribute("errorMessage", mensaje);
-			return cargarTablaActividades(model);
+			return cargarTablaActividadesFiltradaFechaDesde(model, request, fechaFiltrar);
 		}finally{
 			context.close();
 		}
-		return cargarTablaActividades(model);
+		return cargarTablaActividadesFiltradaFechaDesde(model, request, fechaFiltrar);
 	}
 	
 	@RequestMapping(value="/ver", method = RequestMethod.GET)
@@ -160,11 +175,20 @@ public class ActividadController extends AbstractController{
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
 		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DAY_OF_YEAR, -45);
+		
+		Date fechaDesde = cal.getTime();
+		
 		try {
 			List<Usuario> usuarios = fachadaUsuario.seleccionarUsuariosSocio();
 			usuarios.addAll(fachadaUsuario.seleccionarUsuariosTecnico());
-			model.addAttribute("actividades", fachadaActividad.seleccionarActividades());
 			model.addAttribute("usuarios", usuarios);
+			
+			model.addAttribute("fechaDesde", fechaDesde);
+			model.addAttribute("actividades", fachadaActividad.seleccionarActividadesConFechaDesde(fechaDesde));
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
@@ -175,21 +199,186 @@ public class ActividadController extends AbstractController{
 		return "/desktop/tablaActividad";
 	}
 	
+	@RequestMapping(value="/tablaFiltrada", method = RequestMethod.POST)
+	public String cargarTablaActividadesFiltradaFechaDesde(Model model, HttpServletRequest request,
+			@RequestParam("fechaDesde") final String fechaFiltrar){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		Date fechaDesde = null;
+		
+		
+		try {
+			try{
+			SimpleDateFormat simpleFateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			fechaDesde = simpleFateFormat.parse(fechaFiltrar);
+			}
+			catch (ParseException e) {
+				Calendar cal = Calendar.getInstance();
+				cal.set(2010, 01, 01);
+				
+				fechaDesde = cal.getTime();
+			}
+			
+			
+			
+			List<Usuario> usuarios = fachadaUsuario.seleccionarUsuariosSocio();
+			usuarios.addAll(fachadaUsuario.seleccionarUsuariosTecnico());
+			model.addAttribute("usuarios", usuarios);
+			
+			model.addAttribute("fechaDesde", fechaDesde);
+			model.addAttribute("actividades", fachadaActividad.seleccionarActividadesConFechaDesde(fechaDesde));
+		} catch (ClassNotFoundException | IOException | SQLException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return cargarPagina(model);
+		} finally{
+			context.close();
+		}
+		return "/desktop/tablaActividad";
+	}
+	
+	@RequestMapping(value="/tablaFiltradaTecnico", method = RequestMethod.POST)
+	public String cargarTablaActividadesFiltradaFechaDesdeTecnico(Model model, HttpServletRequest request,
+			@RequestParam("fechaDesde") final String fechaFiltrar){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		Date fechaDesde = null;
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		
+		try {
+			
+			try{
+			SimpleDateFormat simpleFateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			fechaDesde = simpleFateFormat.parse(fechaFiltrar);
+			}
+			catch (ParseException e) {
+				Calendar cal = Calendar.getInstance();
+				cal.set(2010, 01, 01);
+				
+				fechaDesde = cal.getTime();
+			}
+			
+			
+			
+			List<Usuario> usuarios = fachadaUsuario.seleccionarUsuariosSocio();
+			usuarios.addAll(fachadaUsuario.seleccionarUsuariosTecnico());
+			model.addAttribute("usuarios", usuarios);
+			
+			model.addAttribute("fechaDesde", fechaDesde);
+			model.addAttribute("actividades", fachadaActividad.verActividadesDeTecnicoYSusContratos(idUsuario, fechaDesde));
+		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return cargarPagina(model);
+		}  finally{
+			context.close();
+		}
+		return "/desktop/tablaActividadUsuario";
+	}
+	
 	@RequestMapping(value="/verPorUsuario", method = RequestMethod.GET)
 	public String cargarTablaActividadesPorUsuaraio(Model model, HttpServletRequest request){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DAY_OF_YEAR, -45);
+		
+		Date fechaDesde = cal.getTime();
+		
+		
 		try {
 			String idUsuario = (String) request.getSession().getAttribute("usuario");
-			model.addAttribute("actividades", fachadaActividad.seleccionarActividadesPorUsuario(idUsuario));
+			model.addAttribute("actividades", fachadaActividad.verActividadesDeTecnicoYSusContratos(idUsuario, fechaDesde));
+			model.addAttribute("fechaDesde", fechaDesde);
+			
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
-			return "/desktop/tablaActividad";
+			return "/desktop/tablaActividadUsuario";
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}finally{
 			context.close();
 		}
 		return "/desktop/tablaActividadUsuario";
+	}
+	
+	
+	@RequestMapping(value="/autoasignarTecnico", method = RequestMethod.POST)
+	public String autoasignarActividad(Model model, HttpServletRequest request,
+			@RequestParam("id") final String id,
+			@RequestParam("fechaDesde") final String fechaFiltrar){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		String mensaje = "Actividad autoasignada correctamente";
+		
+		
+		try {
+			
+			fachadaActividad.asignarActividad(id, idUsuario);
+			model.addAttribute("message", mensaje);
+			model.addAttribute("fechaDesde", fechaFiltrar);
+			
+		} catch (ClassNotFoundException | IOException | SQLException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return cargarTablaActividadesFiltradaFechaDesdeTecnico(model, request, fechaFiltrar);
+		}finally{
+			context.close();
+		}
+		return cargarTablaActividadesFiltradaFechaDesdeTecnico(model, request, fechaFiltrar);
+	}
+	
+	@RequestMapping(value="/cambiarEstado", method = RequestMethod.POST)
+	public String cambiarEstadoActividad(Model model, HttpServletRequest request,
+			@RequestParam("id") final String id,
+			@RequestParam("fechaDesde") final String fechaFiltrar){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		String mensaje = "Estado de actividad cambiado correctamente";
+		
+		boolean esSocio = false;
+		
+		try {
+			esSocio = fachadaUsuario.usuarioEsSocio(idUsuario);
+			
+			
+			fachadaActividad.cambiarEstadoActividad(id);
+			
+			model.addAttribute("message", mensaje);
+			model.addAttribute("fechaDesde", fechaFiltrar);
+		} catch (ClassNotFoundException | IOException | SQLException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			
+			if (esSocio)
+				return cargarTablaActividadesFiltradaFechaDesde(model, request, fechaFiltrar);
+			else
+				return cargarTablaActividadesFiltradaFechaDesdeTecnico(model, request, fechaFiltrar);
+			
+		} catch (SgtiException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+			if (esSocio)
+				return cargarTablaActividadesFiltradaFechaDesde(model, request, fechaFiltrar);
+			else
+				return cargarTablaActividadesFiltradaFechaDesdeTecnico(model, request, fechaFiltrar);
+			
+		}finally{
+			context.close();
+		}
+		if (esSocio)
+			return cargarTablaActividadesFiltradaFechaDesde(model, request, fechaFiltrar);
+		else
+			return cargarTablaActividadesFiltradaFechaDesdeTecnico(model, request, fechaFiltrar);
 	}
 
 }

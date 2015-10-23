@@ -8,6 +8,7 @@
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/styles.css" />" rel="stylesheet">
 
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -18,13 +19,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/CounterWebApp/desktop/paginaPrincipal.jsp">SGTI - Itapúa</a>
+      <a class="navbar-brand" href="/CounterWebApp/desktop/ppal/inicio">SGTI - Itapúa</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Ejemplo <span class="sr-only">(current)</span></a></li>
+       
         
         <c:if test="${tipoUsuario == 'SOCIO' || tipoUsuario == 'TECNICO'}">
 	         <li class="dropdown">
@@ -75,7 +76,6 @@
 	          <c:if test="${tipoUsuario == 'SOCIO'}">
 	            <li><a href="/CounterWebApp/desktop/contrato/ingresar">Crear contrato</a></li>
 	            <li><a href="/CounterWebApp/desktop/contrato/tablaSocio">Ver contratos</a></li>
-	            <li><a href="#">Modificar contrato</a></li>
 	          </c:if>
 	          <c:if test="${tipoUsuario == 'CONTRAPARTE'}">
 	            <li><a href="/CounterWebApp/desktop/contrato/tablaContraparte">Ver mis contratos</a></li>
@@ -90,7 +90,6 @@
 	          <c:if test="${tipoUsuario == 'SOCIO'}">
 	            <li><a href="/CounterWebApp/desktop/actividad/ingresar">Crear actividad</a></li>
 	            <li><a href="/CounterWebApp/desktop/actividad/ver">Ver actividades</a></li>
-	            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver Mis Actividades</a></li>
 	          </c:if>
 	          <c:if test="${tipoUsuario == 'TECNICO'}">
 	            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver Mis Actividades</a></li>
@@ -101,6 +100,7 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
+      
 	      	<c:choose>
 	      		<c:when test="${notificaciones > 0}">
 	      			<li class="dropdown">

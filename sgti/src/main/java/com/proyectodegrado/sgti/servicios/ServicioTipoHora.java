@@ -28,4 +28,16 @@ public interface ServicioTipoHora {
 			throws FileNotFoundException, IOException, SQLException,
 			ClassNotFoundException, SgtiException;
 
+	List<TipoHora> seleccionarTiposQueNoTengaElTecnico(String idUsuario)
+			throws FileNotFoundException, IOException, SQLException,
+			ClassNotFoundException, SgtiException;
+
+	List<TipoHora> seleccionarTiposAsignadosAlTecnico(String idUsuario)
+			throws FileNotFoundException, IOException, SQLException,
+			ClassNotFoundException, SgtiException;
+
+	void sacarTipoHoraATecnico(String idUsuario, int idTipoHora)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
 }

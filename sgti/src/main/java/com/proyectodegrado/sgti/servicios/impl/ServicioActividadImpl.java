@@ -3,6 +3,7 @@ package com.proyectodegrado.sgti.servicios.impl;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import com.proyectodegrado.sgti.daos.ActividadDAO;
@@ -26,12 +27,29 @@ public class ServicioActividadImpl implements ServicioActividad {
 		}
 	}
 	
+	@Override
+	public void asignarActividad(String id, String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		actividadDao.asignarActividad(id, idUsuario);
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioActividad#seleccionarActividades()
 	 */
 	@Override
 	public List<Actividad> seleccionarActividades() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		return actividadDao.verActividades();
+	}
+	
+	
+	@Override
+	public List<Actividad> verActividadesDeTecnicoYSusContratos(String idUsuario, Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return actividadDao.verActividadesDeTecnicoYSusContratos(idUsuario, fechaDesde);
+	}
+	
+	@Override
+	public List<Actividad> seleccionarActividadesConFechaDesde(Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return actividadDao.verActividadesConFechaDesde(fechaDesde);
 	}
 	
 	/* (non-Javadoc)
@@ -75,6 +93,15 @@ public class ServicioActividadImpl implements ServicioActividad {
 	@Override
 	public void editar(Actividad actividad) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
 		actividadDao.editarActividad(actividad);
+	}
+	
+	@Override
+	public void cambiarEstadoActividad (Actividad actividad) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, SgtiException
+	{
+		if (actividadDao.actividadAsignadaAHora(actividad.getId()).size() > 0)
+			actividadDao.cambiarEstadoActividad(actividad);
+		else
+			throw new SgtiException("La actividad no fue usada en ninguna hora, no puede marcarse como Realizada");
 	}
 
 	public ActividadDAO getActividadDao() {

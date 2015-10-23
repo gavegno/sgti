@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.proyectodegrado.sgti.daos.ContratoTipoHoraDAO;
+import com.proyectodegrado.sgti.modelo.ContratoTipoHora;
 import com.proyectodegrado.sgti.modelo.TipoHoraComputo;
 import com.proyectodegrado.sgti.servicios.ServicioContratoTipoHora;
 
@@ -33,6 +34,16 @@ public class ServicioContratoTipoHoraImpl implements ServicioContratoTipoHora {
 	@Override
 	public List<TipoHoraComputo> verContratoTipoHora (String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		return contratoTipoHoraDao.verContratoTipoHora(idContrato);
+	}
+	
+	@Override
+	public List<ContratoTipoHora> verContratoTiposHoraParaGestionarHoras() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return contratoTipoHoraDao.verContratoTiposHoraParaGestionarHoras();
+	}
+	
+	@Override
+	public List<ContratoTipoHora> verContratoTiposHoraParaGestionarHorasPorTecnico(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return contratoTipoHoraDao.verContratoTiposHoraParaGestionarHorasPorTecnico(idUsuario);
 	}
 	
 	/* (non-Javadoc)

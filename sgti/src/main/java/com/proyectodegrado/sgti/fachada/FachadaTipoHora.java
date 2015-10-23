@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
+import com.proyectodegrado.sgti.modelo.ContratoTipoHora;
 import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.modelo.TipoHoraComputo;
 import com.proyectodegrado.sgti.servicios.ServicioContratoTipoHora;
@@ -60,6 +61,30 @@ public class FachadaTipoHora {
 	
 	public List<TipoHora> verTiposDeHoraQueNoTengaEnUsoContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, SgtiException{
 		return servicioTipoHora.seleccionarTiposQueNoEsteUsandoElContrato(idContrato);
+	}
+	
+	public List<TipoHora> seleccionarTiposQueNoTengaElTecnico(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, SgtiException{
+		return servicioTipoHora.seleccionarTiposQueNoTengaElTecnico(idUsuario);
+	}
+	
+	public List<TipoHora> seleccionarTiposAsignadosAlTecnico(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, SgtiException{
+		return servicioTipoHora.seleccionarTiposAsignadosAlTecnico(idUsuario);
+	}
+	
+	public List<ContratoTipoHora> verContratoTiposHoraParaGestionarHoras() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		return servicioContratoTipoHora.verContratoTiposHoraParaGestionarHoras();
+	}
+	
+	public List<ContratoTipoHora> verContratoTiposHoraParaGestionarHorasPorTecnico(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		return servicioContratoTipoHora.verContratoTiposHoraParaGestionarHorasPorTecnico(idUsuario);
+	}
+	
+	
+	public void sacarTipoHoraATecnico (String idUsuario, int idTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		servicioTipoHora.sacarTipoHoraATecnico(idUsuario, idTipoHora);
 	}
 
 	public ServicioTipoHora getServicioTipoHora() {

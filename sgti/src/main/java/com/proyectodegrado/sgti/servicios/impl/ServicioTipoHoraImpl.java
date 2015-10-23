@@ -60,6 +60,23 @@ public class ServicioTipoHoraImpl implements ServicioTipoHora {
 	}
 	
 	@Override
+	public List<TipoHora> seleccionarTiposQueNoTengaElTecnico(String idUsuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
+		List<TipoHora> lista = tipoHoraDao.verTiposHoraQueTecnicoNoTengaAsignados(idUsuario);
+		return lista;
+	}
+	
+	@Override
+	public List<TipoHora> seleccionarTiposAsignadosAlTecnico(String idUsuario) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, SgtiException{
+		List<TipoHora> lista = tipoHoraDao.verTiposHoraDeTecnico(idUsuario);
+		return lista;
+	}
+	
+	@Override
+	public void sacarTipoHoraATecnico (String idUsuario, int idTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		tipoHoraDao.sacarTipoHoraATecnico(idUsuario, idTipoHora);
+	}
+	
+	@Override
 	public void editarTipoHora (int id, String tipo) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		tipoHoraDao.editarTipoHora(id, tipo);
 	}

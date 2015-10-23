@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyectodegrado.sgti.fachada.FachadaActividad;
 import com.proyectodegrado.sgti.fachada.FachadaContrato;
+import com.proyectodegrado.sgti.fachada.FachadaContratoTecnicos;
 import com.proyectodegrado.sgti.fachada.FachadaHora;
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
 import com.proyectodegrado.sgti.fachada.FachadaNotificacion;
@@ -37,6 +41,7 @@ public class LoginController {
 	private FachadaActividad fachadaActividad;
 	
 	private FachadaContrato fachadaContrato;
+	private FachadaContratoTecnicos fachadaContratoTecnicos;
 	
 	private FachadaNotificacion fachadaNotificacion;
 	
@@ -44,6 +49,8 @@ public class LoginController {
 	public String login(Model model, HttpServletRequest request, @RequestParam("idUsuario") final String idUsuario, @RequestParam("passwordUsuario") final String contrasena){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		boolean esContraparte = false;
+		
 		try {
 			Usuario usuario = fachadaUsuario.seleccionarUsuario(idUsuario);
 			String contrasenaHash = fachadaUsuario.get_MD5_SecurePassword(contrasena);
@@ -51,19 +58,26 @@ public class LoginController {
 			if(usuario.getContrasena() != null && usuario.getContrasena().toLowerCase().equals(contrasenaHash.toLowerCase())){
 				request.getSession().setAttribute("usuario", idUsuario);
 				request.getSession().setAttribute("tipoUsuario", usuario.getTipo());
-				notificar(model, request, context);
+//				notificar(model, request, context);
+				
+				if (usuario.getTipo().equalsIgnoreCase("contraparte"))
+					esContraparte = true;
 			}else{
 				model.addAttribute("errorMessage", "El usuario o contraseña no es correcto");
 				return "/desktop/login2";
 			}
-		} catch (ClassNotFoundException | IOException | SQLException | ParseException | NoSuchAlgorithmException e) {
+		} catch (ClassNotFoundException | IOException | SQLException | /*ParseException |*/ NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", "Ocurrió un error al tratar de loguear el usuario");
 			return "/desktop/login2";
 		}finally{
 			context.close();
 		}
-		return cargarPagina(model, request);
+		
+		if (!esContraparte)
+			return cargarPagina(model, request);
+		else
+			return cargarTablaContratosPorContraparte(model, request);
 	}
 	
 	public String cargarPagina(Model model, HttpServletRequest request){
@@ -72,21 +86,99 @@ public class LoginController {
 		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
 		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
+		fachadaContratoTecnicos = (FachadaContratoTecnicos) context.getBean("fachadaContratoTecnicos");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
 		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DAY_OF_YEAR, -60);
+		
+		Date fechaDesdeFiltro = cal.getTime();
+		
+		boolean esTecnico = false;
+		
+		
 		try {
+			if (!fachadaUsuario.usuarioEsSocio(idUsuario)){
+				esTecnico = true;
+			}
+			
 			model.addAttribute("tipoHoras", fachadaTipoHora.verTiposDeHora());
-			model.addAttribute("actividades", fachadaActividad.seleccionarActividades());
-			model.addAttribute("contratos", fachadaContrato.seleccionarContratosVigentes());
-			model.addAttribute("horasRegistradas", fachadaHora.seleccionarHorasPorUsuario(idUsuario));
+			
+			if (esTecnico){
+				model.addAttribute("contratos", fachadaContratoTecnicos.listarContratosPorTecnicoTodos(idUsuario));
+				model.addAttribute("horasRegistradas", fachadaHora.seleccionarHorasPorUsuario(idUsuario));
+				model.addAttribute("actividades", fachadaActividad.seleccionarActividadesPorUsuario(idUsuario));
+				model.addAttribute("filtroUsuario", idUsuario);
+				model.addAttribute("todosTiposHora", fachadaTipoHora.verContratoTiposHoraParaGestionarHorasPorTecnico(idUsuario));
+			}
+			else{
+				model.addAttribute("contratos", fachadaContrato.seleccionarContratosVigentes());
+				model.addAttribute("horasRegistradas", fachadaHora.seleccionarHorasConFechaDesde(fechaDesdeFiltro));
+				model.addAttribute("actividades", fachadaActividad.seleccionarActividades());
+				model.addAttribute("todosTiposHora", fachadaTipoHora.verContratoTiposHoraParaGestionarHoras());
+				
+			}
+			
+			
+			model.addAttribute("fechaDesdeFiltro", fechaDesdeFiltro);
+			model.addAttribute("filtroValidada", "Todas");
+			
+			
 		} catch (ClassNotFoundException | IOException | SQLException
 				| ParseException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
-			return "desktop/tablaHoras";
+			
+			//if (!esTecnico)
+				return "desktop/tablaHoras";
+			//else
+				//return "desktop/tablaHorasTecnicos";
 		}finally{
 			context.close();
 		}
-		return "desktop/tablaHoras";
+		
+		//if (!esTecnico)
+			return "desktop/tablaHoras";
+		//else
+			//return "desktop/tablaHorasTecnicos";
+	}
+	
+	public String cargarTablaContratosPorContraparte(Model model, HttpServletRequest request)
+	{	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		try {
+			model.addAttribute("contratos", fachadaContrato.verContratosPorContraparte(idUsuario));
+			
+		} catch (IOException | SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return "desktop/tablaContratosCliente";
+		}finally{
+			context.close();
+		}
+		return "desktop/tablaContratosCliente";
+	}
+	
+	@RequestMapping(value = "/inicio", method = RequestMethod.GET)
+	private String principal (Model model, HttpServletRequest request)
+	{
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//String idUsuario = (String) request.getSession().getAttribute("usuario");
+		
+		ServletContext servletContext = request.getSession().getServletContext();
+		String relativeWebPath = "resources/img/logo.png";
+		String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
+		
+		model.addAttribute("rutaImagen", "http://www.itapua.com.uy/images/logo.png");
+		
+		
+		context.close();
+		
+		return "desktop/paginaPrincipal";
+		
 	}
 	
 	private void notificar(Model model, HttpServletRequest request, ClassPathXmlApplicationContext context) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException {

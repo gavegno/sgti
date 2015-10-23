@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.proyectodegrado.sgti.modelo.ContratoTipoHora;
 import com.proyectodegrado.sgti.modelo.TipoHoraComputo;
 
 public interface ServicioContratoTipoHora {
@@ -23,5 +24,13 @@ public interface ServicioContratoTipoHora {
 	void borrarContratoTiposHora(String idContrato, int idTipoHora)
 			throws FileNotFoundException, ClassNotFoundException, IOException,
 			SQLException;
+
+	List<ContratoTipoHora> verContratoTiposHoraParaGestionarHoras()
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
+	List<ContratoTipoHora> verContratoTiposHoraParaGestionarHorasPorTecnico(
+			String idUsuario) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
 
 }

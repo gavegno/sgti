@@ -21,7 +21,7 @@ public class FachadaHora {
 	
 	public void registrarHora(final String fechaDesde, final String fechaHasta, final String tipoHora, final String remoto, final String idUsuario, final String idContrato,
 			final String idActividad, final String descripcion, final String comentario) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException, SgtiException{
-		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
 		Hora hora = new Hora();
 		hora.setFechaDesde(simpleFateFormat.parse(fechaDesde));
@@ -46,7 +46,7 @@ public class FachadaHora {
 	
 	public void editarHora(final String fechaDesde, final String fechaHasta, final String tipoHora, final String remoto, final String idContrato, final String idActividad,
 			final String descripcion, final String comentario, final String id, final String fechaInformar, final String fechaFacturar, final String fechaComputar) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException{
-		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		Hora hora = new Hora();
 		hora.setFechaDesde(simpleFateFormat.parse(fechaDesde));
 		hora.setFechaHasta(simpleFateFormat.parse(fechaHasta));
@@ -93,6 +93,34 @@ public class FachadaHora {
 		return servicioHora.seleccionarHorasRegistradasPorUsuario(idUsuario);
 	}
 	
+	public List<Hora> seleccionarHorasPorContratoValidadas(final String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return servicioHora.seleccionarHorasRegistradasPorContratoValidadas(idContrato);
+	}
+	
+	public List<Hora> seleccionarHorasRegistradasPorContratoDesdeFecha(String idContrato, Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return servicioHora.seleccionarHorasRegistradasPorContratoDesdeFecha(idContrato, fechaDesde);
+	}
+	
+	public List<Hora> seleccionarHorasConFechaDesde(final Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return servicioHora.seleccionarHorasHorasConFechaDesde(fechaDesde);
+	}
+	
+	public List<Hora> seleccionarHorasPorValidacion(final boolean validada) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return servicioHora.seleccionarHorasPorValidacion(validada);
+	}
+	
+	public List<Hora> seleccionarHorasFiltradas(final Date fechaDesde, final String usuario, final String validada) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		if (validada.equalsIgnoreCase("todas"))
+			return servicioHora.seleccionarHorasFechaUsuario(fechaDesde, usuario);
+		else
+		{
+			if (validada.equalsIgnoreCase("validadas"))
+				return servicioHora.seleccionarHorasFechaUsuarioValidacion(fechaDesde, usuario, true);
+			else
+				return servicioHora.seleccionarHorasFechaUsuarioValidacion(fechaDesde, usuario, false);
+		}
+	}
+	
 	public Hora seleccionarHora(final int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
 		return servicioHora.seleccionarHora(id);
 	}
@@ -111,11 +139,16 @@ public class FachadaHora {
 
 	public int diferenciaEnMinutos (String fechaDesde, String fechaHasta) throws ParseException
 	{
-		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		SimpleDateFormat simpleFateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		Date fechaDesdeDate = simpleFateFormat.parse(fechaDesde);
 		Date fechaHastaDate = simpleFateFormat.parse(fechaHasta);
 		
 		return (int) ((fechaHastaDate.getTime()/60000) -  (fechaDesdeDate.getTime()/60000));
+	}
+	
+	public void borrar(int idHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		servicioHora.borrar(idHora);
 	}
 	
 	public ServicioHora getServicioHora() {

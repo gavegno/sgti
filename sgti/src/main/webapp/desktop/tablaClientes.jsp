@@ -38,7 +38,8 @@
             <h2 class="text-center container">Clientes</h2>
             <div>
                     <div class="form-group container">
-                        <table class="table table-hover">
+                        <input class="form-control" id="system-search" name="q" placeholder="Buscar..." required>
+                        <table class="table table-hover table-list-search">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -46,15 +47,20 @@
                                     <th>Teléfono</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="searchable">
                             <c:forEach items="${clientes}" var="cliente" >
                             <tr>
                                 <form class="form-control" action="/CounterWebApp/desktop/cliente/editar" method="POST">
                                 
                                     <td><input class="form-control" type="text" name="nombre" value="${cliente.nombre}" disabled="disabled"></td>
+                                    <td hidden="hidden">${cliente.nombre}</td>
                                     <td><input class="form-control" type="text" name="direccion" value="${cliente.direccion}" disabled="disabled"></td>
+                                    <td hidden="hidden">${cliente.direccion}</td>
                                     <td><input class="form-control" type="text" name="telefono" value="${cliente.telefono}" disabled="disabled"></td>
-                                    <td class="vert-align"><button class="btn btn-info" id="boton" type="submit"> Editar </button></td>
+                                    <td hidden="hidden">${cliente.telefono}</td>
+                                    
+                                    <td class="vert-align"><button class="btn btn-success" type="submit" title="Editar cliente"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></td>
+
                                 <input class="vert-align" name="nombre" type="hidden" value="${cliente.nombre}">
                                 </form>
                             </tr>
@@ -66,4 +72,6 @@
         </div>
     </div>
 </div>
+
+<script src="<c:url value="/resources/js/busqueda-tablas.js"/>"></script>
 </body>

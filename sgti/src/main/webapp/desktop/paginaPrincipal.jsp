@@ -35,12 +35,15 @@
 </c:if>
 
 	<div class="container text-center">
-
-
 		
-		
+		<br><br>
+		<figure>
+		<img src="${rutaImagen}">
+		</figure>
 	</div>
 
 
 
 </body>
+	
+</html>

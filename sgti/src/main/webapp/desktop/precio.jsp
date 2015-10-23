@@ -39,11 +39,11 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="container text-center">Paso 2 de 5: Gestión de Precios</h2>
+            <h2 class="container text-center">Paso 2 de 6: Gestión de Precios</h2>
             
             <div class="form-group container">
                 <div class="alert alert-info text-center">
-                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.id}
+                    Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.nombre} ${contrato.contraparte.apellido}
             </div>
 
                 <form class="form-horizontal container" action="/CounterWebApp/desktop/precio/ingresarPrecio" method="POST">

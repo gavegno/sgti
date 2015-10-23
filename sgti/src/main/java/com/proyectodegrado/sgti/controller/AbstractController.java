@@ -18,6 +18,7 @@ public class AbstractController {
 	
 	private FachadaNotificacion fachadaNotificacion;
 	
+	/*
 	@ModelAttribute("notificaciones")
 	public int notificaciones()
 	{
@@ -59,5 +60,5 @@ public class AbstractController {
 		}
 		return new ArrayList<DataNotificacion>();
 	}
-
+*/
 }

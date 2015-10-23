@@ -40,7 +40,8 @@
                
                     
                     <div class="form-group">
-                        <table class="table table-hover">
+                        <input class="form-control" id="system-search" name="q" placeholder="Buscar..." required>
+                        <table class="table table-hover table-list-search">
 
                             <thead>
                                 <tr>
@@ -54,7 +55,7 @@
                                 </tr>
                             </thead>
                             
-                            <tbody>
+                            <tbody class="searchable">
 
                             <c:forEach items="${contratos}" var="contrato" >
                                 <form action="/CounterWebApp/desktop/configuracion/tablaConfiguraciones" method="POST">
@@ -62,10 +63,11 @@
                                     <input type="text" name="id" value="${contrato.id}" hidden></input>
                                     
                                     <td><input class="vert-align form-control" name="id" value="${contrato.id}" disabled="disabled"></td>
+                                    <td hidden="hidden">${contrato.id}</td>
                                     <td><input class="vert-align form-control" name="cliente" value="${contrato.cliente.nombre}" disabled="disabled"></td>
+                                    <td hidden="hidden">${contrato.cliente.nombre}</td>
                                     <td><input class="vert-align form-control" name="contraparte" value="${contrato.contraparte.id}" disabled="disabled"></td>
-
-                                    
+                                    <td hidden="hidden">${contrato.contraparte.id}</td>
 
 
                                     <c:set var="encontreConfiguracion" value="false" />
@@ -73,8 +75,10 @@
                                         <c:if test="${configuracion.idContrato  == contrato.id}">
                                             <c:set var="encontreConfiguracion" value="true" />
                                             <td><input class="vert-align form-control" id="tipo" name="tipoContrato" value="${configuracion.tipoContrato}" disabled="disabled"></td>
+                                            <td hidden="hidden">${configuracion.tipoContrato}</td>
                                             <fmt:formatDate value="${configuracion.fechaFin}" var="formattedfechaConfigFin" type="date" pattern="dd-MM-yyyy" />
                                             <td><input class="vert-align form-control" id="finConfig" name="configFin" value="${formattedfechaConfigFin}" disabled="disabled"></td>
+                                            <td hidden="hidden">${formattedfechaConfigFin}</td>
                                         </c:if>
                                     </c:forEach>
 
@@ -93,8 +97,10 @@
                                         <c:if test="${precio.idContrato  == contrato.id}">
                                             <c:set var="encontrePrecio" value="true" />
                                             <td><input class="vert-align form-control" name="Precio" value="${precio.precio}" disabled="disabled"></td>
+                                            <td hidden="hidden">${precio.precio}</td>
                                             <fmt:formatDate value="${precio.fechaHasta}" var="formattedfechaPrecioFin" type="date" pattern="dd-MM-yyyy" />
                                             <td><input class="vert-align form-control" name="PrecioFin" value="${formattedfechaPrecioFin}" disabled="disabled"></td>
+                                            <td hidden="hidden">${formattedfechaPrecioFin}</td>
                                         </c:if>
                                     </c:forEach>
 
@@ -103,19 +109,25 @@
                                         <td><input class="vert-align form-control" name="PrecioFin" value="" disabled="disabled"></td>
                                     </c:if>
                                 
-                                    <td class="vert-align"><button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Config </button></td>
+                                    <td class="vert-align"><button class="btn btn-primary" type="submit" title="Configuraciones"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></button></td>
                                 </form>
 
                                 <form action="/CounterWebApp/desktop/precio/tablaPrecios" method="POST">
                                     <input type="text" name="id" value="${contrato.id}" hidden></input>
                                     
-                                    <td class="vert-align"><button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Precios </button></td>
+                                    <td class="vert-align"><button class="btn btn-primary" type="submit" title="Precios"> <span class="glyphicon glyphicon-usd" aria-hidden="true"></span></button></td>
                                 </form>
 
                                 <form action="/CounterWebApp/desktop/tiposDeHora/tablaHorasContrato" method="POST">
                                     <input type="text" name="id" value="${contrato.id}" hidden></input>
                                     
-                                    <td class="vert-align"><button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Tipos hora </button></td>
+                                    <td class="vert-align"><button class="btn btn-primary" type="submit" title="Tipos de hora"> <span class="glyphicon glyphicon-time" aria-hidden="true"></span></button></td>
+                                </form>
+
+                                <form action="/CounterWebApp/desktop/contrato/tecnicosEnContrato" method="POST">
+                                    <input type="text" name="id" value="${contrato.id}" hidden></input>
+                                    
+                                    <td class="vert-align"><button class="btn btn-primary" type="submit" title="Técnicos asignados"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span></button></td>
                                 </form>
 
                                     
@@ -132,4 +144,5 @@
             </div>
         </div>
 </div>
+<script src="<c:url value="/resources/js/busqueda-tablas.js"/>"></script>
 </body>

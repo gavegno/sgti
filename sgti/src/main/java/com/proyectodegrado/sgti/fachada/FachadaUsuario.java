@@ -68,6 +68,20 @@ public class FachadaUsuario {
 		
 	}
 	
+	public void agregarTipoHoraUsuario(String id, Integer idTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		Usuario usuario = new Usuario();
+		usuario.setId(id);
+		servicioUsuario.agregarTipoHoraUsuarioSimple(usuario, idTipoHora);
+	}
+	
+	public void eliminacionLogicaUsuario (String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		Usuario usuario = new Usuario();
+		usuario.setId(id);
+		servicioUsuario.eliminarUsuario(usuario);
+	}
+	
 	public boolean usuarioEsSocio (String id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
 	{
 		Usuario usuario = servicioUsuario.selecionarUsuario(id);

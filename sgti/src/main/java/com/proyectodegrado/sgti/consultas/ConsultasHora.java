@@ -99,10 +99,69 @@ public class ConsultasHora {
 		return resultSet;
 	}
 	
+	public ResultSet verHorasPorValidacion(boolean validada) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.validada=? ORDER BY h.fechadesde DESC");
+		preparedStatement.setBoolean(1, validada);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public ResultSet verHorasConFechaDesde(Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.fechadesde >= ? ORDER BY h.fechadesde DESC");
+		preparedStatement.setDate(1, fechaDesde);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public ResultSet verHorasFechaUsuario(Date fechaDesde, String usuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.fechadesde >= ? AND h.usuario LIKE ? ORDER BY h.fechadesde DESC");
+		preparedStatement.setDate(1, fechaDesde);
+		preparedStatement.setString(2, usuario+"%");
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public ResultSet verHorasFechaUsuarioValidacion(Date fechaDesde, String usuario, boolean validada) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.fechadesde >= ? AND h.usuario LIKE ? AND h.validada = ? ORDER BY h.fechadesde DESC");
+		preparedStatement.setDate(1, fechaDesde);
+		preparedStatement.setString(2, usuario+"%");
+		preparedStatement.setBoolean(3, validada);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
 	public ResultSet verHorasRegistradasPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.contrato=?");
 		preparedStatement.setString(1, idContrato);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public ResultSet verHorasRegistradasPorContratoDesdeFecha(String idContrato, Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.contrato=? AND h.fechadesde >= ? ORDER BY h.fechadesde DESC");
+		preparedStatement.setString(1, idContrato);
+		preparedStatement.setDate(2, fechaDesde);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public ResultSet verHorasRegistradasPorContratoValidadas(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.contrato=? AND h.validada=?");
+		preparedStatement.setString(1, idContrato);
+		preparedStatement.setBoolean(2, true);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(connection);
 		return resultSet;

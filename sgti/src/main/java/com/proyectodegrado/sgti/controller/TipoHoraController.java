@@ -322,8 +322,114 @@ public class TipoHoraController extends AbstractController{
 		return cargarTablaTiposHoraDesdeContrato(model, request, idContrato);
 	}
 	
+	@RequestMapping(value="/tecnicoTipoHoras", method = RequestMethod.POST)
+	public String cargarTablaTiposHoraDesdeTecnico(Model model, 
+			HttpServletRequest request, 
+			@RequestParam("id") final String idTecnico){
+		
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
+		
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		
+		try {
+			//Para comprobar por más seguridad, por si ingresan al link directamente.
+			if (fachadaUsuario.usuarioEsSocio(idUsuario))
+			{
+				model.addAttribute("tiposHoraTecnico", fachadaTipoHora.seleccionarTiposAsignadosAlTecnico(idTecnico));
+				model.addAttribute("id", idTecnico);
+				model.addAttribute("tecnico", fachadaUsuario.seleccionarUsuario(idTecnico));
+				model.addAttribute("tipoHorasCandidatos", fachadaTipoHora.seleccionarTiposQueNoTengaElTecnico(idTecnico));
+			}
+			else
+				return "/desktop/login2";
+		} catch (ClassNotFoundException | IOException | SQLException | SgtiException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return "desktop/tablaTecnicosTiposHora";
+		}finally{
+			context.close();
+		}
+		return "desktop/tablaTecnicosTiposHora";
+	}
 	
+
+	@RequestMapping(value="/asignarTipoHoraTecnico", method = RequestMethod.POST)
+	public String asignarTipoHoraTecnico(Model model, 
+			HttpServletRequest request, 
+			@RequestParam("id") final String idTecnico,
+			@RequestParam("tipoHoraAgregar") final Integer tipoHoraAgregar){
+		
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
+		
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		String mensaje = "El tipo de hora se ha asignado al técnico";
+		
+		try {
+			//Para comprobar por más seguridad, por si ingresan al link directamente.
+			if (fachadaUsuario.usuarioEsSocio(idUsuario))
+			{
+				fachadaUsuario.agregarTipoHoraUsuario(idTecnico, tipoHoraAgregar);
+				model.addAttribute("tiposHoraTecnico", fachadaTipoHora.seleccionarTiposAsignadosAlTecnico(idTecnico));
+				model.addAttribute("id", idTecnico);
+				model.addAttribute("tecnico", fachadaUsuario.seleccionarUsuario(idTecnico));
+				model.addAttribute("tipoHorasCandidatos", fachadaTipoHora.seleccionarTiposQueNoTengaElTecnico(idTecnico));
+				model.addAttribute("message", mensaje);
+			}
+			else
+				return "/desktop/login2";
+		} catch (ClassNotFoundException | IOException | SQLException | SgtiException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return "desktop/tablaTecnicosTiposHora";
+		}finally{
+			context.close();
+		}
+		return "desktop/tablaTecnicosTiposHora";
+	}
 	
+
+	@RequestMapping(value="/borrarTipoHoraTecnico", method = RequestMethod.POST)
+	public String borrarTipoHoraTecnico(Model model, 
+			HttpServletRequest request, 
+			@RequestParam("id") final String idTecnico,
+			@RequestParam("tipoId") final Integer tipoId){
+		
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
+		
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		String mensaje = "El tipo de hora se ha asignado al técnico";
+		
+		try {
+			//Para comprobar por más seguridad, por si ingresan al link directamente.
+			if (fachadaUsuario.usuarioEsSocio(idUsuario))
+			{
+				fachadaTipoHora.sacarTipoHoraATecnico(idTecnico, tipoId);
+				model.addAttribute("tiposHoraTecnico", fachadaTipoHora.seleccionarTiposAsignadosAlTecnico(idTecnico));
+				model.addAttribute("id", idTecnico);
+				model.addAttribute("tecnico", fachadaUsuario.seleccionarUsuario(idTecnico));
+				model.addAttribute("tipoHorasCandidatos", fachadaTipoHora.seleccionarTiposQueNoTengaElTecnico(idTecnico));
+				model.addAttribute("message", mensaje);
+			}
+			else
+				return "/desktop/login2";
+		} catch (ClassNotFoundException | IOException | SQLException | SgtiException e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", MENSAJE_ERROR);
+			return "desktop/tablaTecnicosTiposHora";
+		}finally{
+			context.close();
+		}
+		return "desktop/tablaTecnicosTiposHora";
+	}
 	
 	
 	

@@ -3,6 +3,7 @@ package com.proyectodegrado.sgti.servicios;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
@@ -35,5 +36,21 @@ public interface ServicioActividad {
 
 	void borrar(Actividad actividad) throws FileNotFoundException,
 			ClassNotFoundException, SQLException, IOException, SgtiException;
+
+	List<Actividad> seleccionarActividadesConFechaDesde(Date fechaDesde)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
+	void asignarActividad(String id, String idUsuario)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
+	List<Actividad> verActividadesDeTecnicoYSusContratos(String idUsuario,
+			Date fechaDesde) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
+
+	void cambiarEstadoActividad(Actividad actividad)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException, SgtiException;
 
 }
