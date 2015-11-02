@@ -169,7 +169,7 @@ public class ConsultasHora {
 	
 	public ResultSet verHorasRegistradasNoFacturadas(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.contrato=? AND h.facturada='false'");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.contrato=? AND h.facturada='false' AND h.validada='true' ORDER BY h.fechadesde ASC");
 		preparedStatement.setString(1, idContrato);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(connection);
@@ -178,7 +178,7 @@ public class ConsultasHora {
 	
 	public ResultSet verHorasRegistradasNoInformadas(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.contrato=? AND h.informada='false'");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM hora AS h WHERE h.contrato=? AND h.informada='false' AND h.validada='true' ORDER BY h.fechadesde ASC");
 		preparedStatement.setString(1, idContrato);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(connection);

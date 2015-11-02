@@ -120,6 +120,14 @@ public class ServicioContratoImpl implements ServicioContrato {
 		calendar.add(Calendar.MONTH, frecuenciaFacturacion);
 		return calendar.getTime();
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioContrato#editar(com.proyectodegrado.sgti.modelo.Contrato)
+	 */
+	@Override
+	public void editar(Contrato contrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		contratoDao.editarContrato(contrato.getId(), new java.sql.Date(contrato.getUltimaFechaInforme().getTime()), new java.sql.Date(contrato.getUltimaFechaFacturacion().getTime()), new java.sql.Date(contrato.getUltimaFechaComputacion().getTime()));
+	}
 
 	private Cliente prepararCliente(Contrato contrato)
 			throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {

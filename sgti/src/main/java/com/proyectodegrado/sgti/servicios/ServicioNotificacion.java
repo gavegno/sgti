@@ -27,15 +27,7 @@ public interface ServicioNotificacion {
 			throws FileNotFoundException, ClassNotFoundException, IOException,
 			SQLException, ParseException;
 
-	List<Contrato> verContratosConHorasAFacturar(int dias)
-			throws FileNotFoundException, ClassNotFoundException, IOException,
-			SQLException, ParseException;
-
 	List<Hora> horasAInformar(String idContrato, int dias)
-			throws FileNotFoundException, ClassNotFoundException, IOException,
-			SQLException, ParseException;
-
-	List<Hora> horasAFacturar(String idContrato, int dias)
 			throws FileNotFoundException, ClassNotFoundException, IOException,
 			SQLException, ParseException;
 

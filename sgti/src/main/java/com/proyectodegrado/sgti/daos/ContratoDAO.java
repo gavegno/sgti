@@ -2,6 +2,7 @@ package com.proyectodegrado.sgti.daos;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -76,6 +77,10 @@ public class ContratoDAO {
 			contrato.setUltimaFechaComputacion(resultSet.getDate("ultimafechaComputacion"));
 		}
 		return contrato;
+	}
+	
+	public void editarContrato (String id, Date ultimafechaInforme, Date ultimaFechaFacturacion, Date ultimaFechaComputacion) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		consultasContrato.editar(id, ultimafechaInforme, ultimaFechaFacturacion, ultimaFechaComputacion);
 	}
 	
 	public List<Contrato> verContratosPorContraparte (String idContraparte) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{

@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.proyectodegrado.sgti.daos.PrecioDAO;
 import com.proyectodegrado.sgti.exceptions.SgtiException;
+import com.proyectodegrado.sgti.modelo.Hora;
 import com.proyectodegrado.sgti.modelo.Precio;
 import com.proyectodegrado.sgti.servicios.ServicioPrecio;
 
@@ -101,12 +102,23 @@ public class ServicioPrecioImpl implements ServicioPrecio {
 		return true;
 	}
 	
+	@Override
+	public Precio verPrecioDeHora(Hora hora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		List<Precio> precios = seleccionarPreciosPorContrato(hora.getIdContrato());
+		for(Precio precio : precios){
+			if(precio.getFechaDesde().before(hora.getFechaDesde()) && precio.getFechaHasta().after(hora.getFechaDesde())){
+				return precio;
+			}
+		}
+		return new Precio();
+	}
+	
 	private boolean esPosibleInsertar(Precio precio, String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		boolean resultado = false;
 		List<Precio> precios = precioDao.saberSiPuedoInsertarNuevoPrecio(idContrato, precio.getPrecio(), precio.getFechaDesde(), precio.getFechaHasta());
 		if (precios.size() == 0)
 		{
-				resultado = true;
+			resultado = true;
 		}
 		return resultado;
 	}

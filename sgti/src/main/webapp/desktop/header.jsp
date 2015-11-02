@@ -76,6 +76,7 @@
 	          <c:if test="${tipoUsuario == 'SOCIO'}">
 	            <li><a href="/CounterWebApp/desktop/contrato/ingresar">Crear contrato</a></li>
 	            <li><a href="/CounterWebApp/desktop/contrato/tablaSocio">Ver contratos</a></li>
+	            <li><a href="/CounterWebApp/desktop/contrato/tablaSocioInformarFacturar">Informar Horas</a></li>
 	          </c:if>
 	          <c:if test="${tipoUsuario == 'CONTRAPARTE'}">
 	            <li><a href="/CounterWebApp/desktop/contrato/tablaContraparte">Ver mis contratos</a></li>

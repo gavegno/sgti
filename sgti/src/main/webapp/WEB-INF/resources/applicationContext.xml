@@ -42,10 +42,6 @@
 			<property name="conexionBD" ref="conexionBD"/>
 		</bean>
 		
-		<bean id="consultasContratoUsuario" class="com.proyectodegrado.sgti.consultas.ConsultasContratoUsuario">
-			<property name="conexionBD" ref="conexionBD"/>
-		</bean>
-		
 		<bean id="consultasContrato" class="com.proyectodegrado.sgti.consultas.ConsultasContrato">
 			<property name="conexionBD" ref="conexionBD"/>
 		</bean>
@@ -55,10 +51,6 @@
 		</bean>
 		
 		<bean id="consultasHora" class="com.proyectodegrado.sgti.consultas.ConsultasHora">
-			<property name="conexionBD" ref="conexionBD"/>
-		</bean>
-		
-		<bean id="consultasComputoAcumulado" class="com.proyectodegrado.sgti.consultas.ConsultasComputoAcumulado">
 			<property name="conexionBD" ref="conexionBD"/>
 		</bean>
 		
@@ -103,17 +95,6 @@
 			<property name="usuarioDao" ref="usuarioDao"/>
 		</bean>
 		
-		<bean id="contratoTecnicosDao" class="com.proyectodegrado.sgti.daos.ContratoTecnicosDAO">
-			<property name="consultasContratoUsuario" ref="consultasContratoUsuario"/>
-			<property name="configuracionDao" ref="configuracionDao"/>
-			<property name="horarioLaboralDao" ref="horarioLaboralDao"/>
-			<property name="precioDao" ref="precioDao"/>
-			<property name="contratoTipoHoraDao" ref="contratoTipoHoraDao"/>
-			<property name="clienteDao" ref="clienteDao"/>
-			<property name="usuarioDao" ref="usuarioDao"/>
-			<property name="contratoDao" ref="contratoDao"/>
-		</bean>
-		
 		<bean id="actividadDao" class="com.proyectodegrado.sgti.daos.ActividadDAO">
 			<property name="consultasActividad" ref="consultasActividad"/>
 		</bean>
@@ -121,10 +102,6 @@
 		<bean id="horaDao" class="com.proyectodegrado.sgti.daos.HoraDAO">
 			<property name="consultasHora" ref="consultasHora"/>
 			<property name="tipoHoraDao" ref="tipoHoraDao"/>
-		</bean>
-		
-		<bean id="computosAcumuladosDao" class="com.proyectodegrado.sgti.daos.ComputosAcumuladosDAO">
-			<property name="consultasComputoAcumulado" ref="consultasComputoAcumulado"/>
 		</bean>
 		
 		<!-- Beans de servicios -->
@@ -166,11 +143,6 @@
 			<property name="contratoTipoHoraDao" ref="contratoTipoHoraDao"/>
 		</bean>
 		
-		<bean id="servicioContratoTecnicos" class="com.proyectodegrado.sgti.servicios.impl.ServicioContratoTecnicosImpl">
-			<property name="contratoTecnicosDao" ref="contratoTecnicosDao"/>
-			<property name="servicioConfiguracion" ref="servicioConfiguracion"/>
-		</bean>
-		
 		<bean id="servicioContrato" class="com.proyectodegrado.sgti.servicios.impl.ServicioContratoImpl">
 			<property name="contratoDao" ref="contratoDao"/>
 			<property name="servicioConfiguracion" ref="servicioConfiguracion"/>
@@ -199,21 +171,6 @@
 			<property name="servicioActividad" ref="servicioActividad"/>
 		</bean>
 		
-		<bean id="servicioComputosAcumulados" class="com.proyectodegrado.sgti.servicios.impl.ServicioComputosAcumuladosImpl">
-			<property name="computosAcumuladosDao" ref="computosAcumuladosDao"/>
-		</bean>
-		
-		<bean id="servicioInforme" class="com.proyectodegrado.sgti.servicios.impl.ServicioInformeImpl">
-			<property name="servicioContrato" ref="servicioContrato"/>
-			<property name="servicioConfiguracion" ref="servicioConfiguracion"/>
-			<property name="servicioHora" ref="servicioHora"/>
-			<property name="servicioUsuario" ref="servicioUsuario"/>
-			<property name="servicioTipoHora" ref="servicioTipoHora"/>
-			<property name="servicioContratoTipoHora" ref="servicioContratoTipoHora"/>
-			<property name="servicioPrecio" ref="servicioPrecio"/>
-			<property name="servicioComputosAcumulados" ref="servicioComputosAcumulados"/>
-		</bean>
-		
 		<!-- Fachadas -->
 		
 		<bean id="fachadaTipoHora" class="com.proyectodegrado.sgti.fachada.FachadaTipoHora">
@@ -237,10 +194,6 @@
 			<property name="servicioUsuario" ref="servicioUsuario"/>
 			<property name="servicioContrato" ref="servicioContrato"/>
 			<property name="servicioCliente" ref="servicioCliente"/>
-		</bean>
-		
-		<bean id="fachadaContratoTecnicos" class="com.proyectodegrado.sgti.fachada.FachadaContratoTecnicos">
-			<property name="servicioContratoTecnicos" ref="servicioContratoTecnicos"/>
 		</bean>
 		
 		<bean id="fachadaPrecio" class="com.proyectodegrado.sgti.fachada.FachadaPrecio">
@@ -267,10 +220,6 @@
 		
 		<bean id="fachadaNotificacion" class="com.proyectodegrado.sgti.fachada.FachadaNotificacion">
 			<property name="servicioNotificacion" ref="servicioNotificacion"/>
-		</bean>
-		
-		<bean id="fachadaInforme" class="com.proyectodegrado.sgti.fachada.FachadaInforme">
-			<property name="servicioInforme" ref="servicioInforme"/>
 		</bean>
 		
 </beans>

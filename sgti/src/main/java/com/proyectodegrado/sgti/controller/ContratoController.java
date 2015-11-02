@@ -107,17 +107,31 @@ public class ContratoController extends AbstractController{
 			HttpServletRequest request) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
+		fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");
+		fachadaPrecio = (FachadaPrecio) context.getBean("fachadaPrecio");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
 		try {
-			model.addAttribute("contratos", fachadaNotificacion.contratosConConfiguracionesAVencer(7));
-
+			//Para comprobar por más seguridad, por si ingresan al link directamente.
+			if (fachadaUsuario.usuarioEsSocio(idUsuario))
+			{
+				model.addAttribute("contratos", fachadaNotificacion.contratosConConfiguracionesAVencer(7));
+				model.addAttribute("configuraciones", fachadaConfiguracion.seleccionarConfiguracionActualTodos());
+				model.addAttribute("precios", fachadaPrecio.seleccionarPrecioActualTodos());
+			}
+			else
+			
+				return "/desktop/login2";
+			
 		} catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
-			return "desktop/tablaContratosCliente";
-		} finally {
+			return "desktop/tablaContratosSocio";
+		}finally{
 			context.close();
 		}
-		return "desktop/tablaContratosCliente";
+		return "desktop/tablaContratosSocio";
 	}
 
 	@RequestMapping(value = "/precioVencer/redireccionarNotificacion", method = RequestMethod.GET)
@@ -125,55 +139,96 @@ public class ContratoController extends AbstractController{
 			HttpServletRequest request) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
+		fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");
+		fachadaPrecio = (FachadaPrecio) context.getBean("fachadaPrecio");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
 		try {
-			model.addAttribute("contratos", fachadaNotificacion.contratosConPreciosAVencer(7));
-
+			//Para comprobar por más seguridad, por si ingresan al link directamente.
+			if (fachadaUsuario.usuarioEsSocio(idUsuario))
+			{
+				model.addAttribute("contratos", fachadaNotificacion.contratosConPreciosAVencer(7));
+				model.addAttribute("configuraciones", fachadaConfiguracion.seleccionarConfiguracionActualTodos());
+				model.addAttribute("precios", fachadaPrecio.seleccionarPrecioActualTodos());
+			}
+			else
+			
+				return "/desktop/login2";
+			
 		} catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
-			return "desktop/tablaContratosCliente";
-		} finally {
+			return "desktop/tablaContratosSocio";
+		}finally{
 			context.close();
 		}
-		return "desktop/tablaContratosCliente";
+		return "desktop/tablaContratosSocio";
 	}
 
 	@RequestMapping(value = "/horasInformar/redireccionarNotificacion", method = RequestMethod.GET)
 	public String redireccionarNotificacionHorasInformar(Model model, HttpServletRequest request) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
+		fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");
+		fachadaPrecio = (FachadaPrecio) context.getBean("fachadaPrecio");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
 		try {
-			model.addAttribute("contratos",	fachadaNotificacion.contratosConHorasAInformar(7));
-
-		} catch (IOException | SQLException | ClassNotFoundException
-				| ParseException e) {
+			//Para comprobar por más seguridad, por si ingresan al link directamente.
+			if (fachadaUsuario.usuarioEsSocio(idUsuario))
+			{
+				model.addAttribute("contratos", fachadaNotificacion.contratosConHorasAInformar(0));
+				model.addAttribute("configuraciones", fachadaConfiguracion.seleccionarConfiguracionActualTodos());
+				model.addAttribute("precios", fachadaPrecio.seleccionarPrecioActualTodos());
+			}
+			else
+			
+				return "/desktop/login2";
+			
+		} catch (IOException | SQLException | ClassNotFoundException | ParseException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
-			return "desktop/tablaContratosCliente";
-		} finally {
+			return "desktop/tablaContratosSocio";
+		}finally{
 			context.close();
 		}
-		return "desktop/tablaContratosCliente";
+		return "desktop/tablaContratosInformarFacturar";
 	}
 
-	@RequestMapping(value = "/horasFacturar/redireccionarNotificacion", method = RequestMethod.GET)
-	public String redireccionarNotificacionHorasFacturar(Model model, HttpServletRequest request) {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		fachadaNotificacion = (FachadaNotificacion) context.getBean("fachadaNotificacion");
+	@RequestMapping(value = "/tablaSocioInformarFacturar", method = RequestMethod.GET)
+	public String cargarTablaContratosInformarFacturar(Model model, HttpServletRequest request)
+	{	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
+		fachadaConfiguracion = (FachadaConfiguracion) context.getBean("fachadaConfiguracion");
+		fachadaPrecio = (FachadaPrecio) context.getBean("fachadaPrecio");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		String idUsuario = (String) request.getSession().getAttribute("usuario");
+		
 		try {
-			model.addAttribute("contratos", fachadaNotificacion.contratosConHorasAFacturar(7));
-
-		} catch (IOException | SQLException | ClassNotFoundException
-				| ParseException e) {
+			//Para comprobar por más seguridad, por si ingresan al link directamente.
+			if (fachadaUsuario.usuarioEsSocio(idUsuario))
+			{
+				model.addAttribute("contratos", fachadaContrato.seleccionarContratos());
+				model.addAttribute("configuraciones", fachadaConfiguracion.seleccionarConfiguracionActualTodos());
+				model.addAttribute("precios", fachadaPrecio.seleccionarPrecioActualTodos());
+			}
+			else
+			
+				return "/desktop/login2";
+			
+		} catch (IOException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
-			return "desktop/tablaContratosCliente";
-		} finally {
+			return "desktop/tablaContratosInformarFacturar";
+		}finally{
 			context.close();
 		}
-		return "desktop/tablaContratosCliente";
+		return "desktop/tablaContratosInformarFacturar";
 	}
-//Carga la tabla de contratos para las Contrapartes.
+	
+	//Carga la tabla de contratos para las Contrapartes.
 	@RequestMapping(value = "/tablaSocio", method = RequestMethod.GET)
 	public String cargarTablaContratosSocio(Model model, HttpServletRequest request)
 	{	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");

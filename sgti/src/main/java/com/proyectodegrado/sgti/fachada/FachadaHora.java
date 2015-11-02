@@ -129,6 +129,10 @@ public class FachadaHora {
 		servicioHora.cambiarValidacionHora(id);
 	}
 	
+	public List<Hora> seleccionarHorasInformar(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
+		return servicioHora.seleccionarHorasRegistradasNoInformadas(idContrato);
+	}
+	
 	private boolean convertirBoolean(String booleanString){
 		if("true".equalsIgnoreCase(booleanString)){
 			return true;

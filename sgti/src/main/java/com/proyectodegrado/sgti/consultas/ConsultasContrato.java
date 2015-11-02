@@ -3,6 +3,7 @@ package com.proyectodegrado.sgti.consultas;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,6 +58,18 @@ public class ConsultasContrato {
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(con);
 		return resultSet;
+	}
+	
+	public void editar (String id, Date ultimafechaInforme, Date ultimaFechaFacturacion, Date ultimaFechaComputacion) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("UPDATE contrato AS c set ultimafechainforme=?, ultimafechafacturacion=?, ultimafechacomputacion=?"
+				+ "WHERE c.id=?");
+		preparedStatement.setDate(1, ultimafechaInforme);
+		preparedStatement.setDate(2, ultimaFechaFacturacion);
+		preparedStatement.setDate(3, ultimaFechaComputacion);
+		preparedStatement.setString(4, id);
+		preparedStatement.executeUpdate();
+		conexionBD.cerrar(con);
 	}
 	
 	public void borrarContratos() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{

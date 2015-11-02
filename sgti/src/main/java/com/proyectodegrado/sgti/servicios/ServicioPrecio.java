@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
+import com.proyectodegrado.sgti.modelo.Hora;
 import com.proyectodegrado.sgti.modelo.Precio;
 
 public interface ServicioPrecio {
@@ -41,5 +42,8 @@ public interface ServicioPrecio {
 	boolean tienePrecioPostVencer(Date fecha, String idContrato)
 			throws FileNotFoundException, ClassNotFoundException, IOException,
 			SQLException;
+
+	Precio verPrecioDeHora(Hora hora) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
 
 }

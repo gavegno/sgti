@@ -35,10 +35,6 @@ public class FachadaNotificacion {
 		return servicioNotificacion.verContratosConHorasAInformar(dias);
 	}
 	
-	public List<Contrato> contratosConHorasAFacturar(int dias) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
-		return servicioNotificacion.verContratosConHorasAFacturar(dias);
-	}
-	
 	public ServicioNotificacion getServicioNotificacion() {
 		return servicioNotificacion;
 	}

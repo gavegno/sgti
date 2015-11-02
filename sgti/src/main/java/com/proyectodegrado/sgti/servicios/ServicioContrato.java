@@ -38,4 +38,7 @@ public interface ServicioContrato {
 	Contrato verContrato(String id) throws FileNotFoundException,
 			ClassNotFoundException, IOException, SQLException;
 
+	void editar(Contrato contrato) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
+
 }

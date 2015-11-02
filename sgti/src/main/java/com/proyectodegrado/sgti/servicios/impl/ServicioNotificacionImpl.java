@@ -50,7 +50,6 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 				int cantConfVencer = verConfiguracionesAVencer(dias).size();
 				int cantPreciosVencer = verPreciosAVencer(dias).size();
 				int cantContratosConHorasInformar = verContratosConHorasAInformar(dias).size();
-				int cantContratosHorasFacturar = verContratosConHorasAFacturar(dias).size();
 				int cantidadActividadesRealizar = verActividadesARealizar(idUsuario, 0).size();
 				
 				if(cantConfVencer > 0){
@@ -61,12 +60,8 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 					DataNotificacion notificacion = new DataNotificacion("Precio(s) a vencer", cantPreciosVencer, "/CounterWebApp/desktop/contrato/precioVencer/redireccionarNotificacion");
 					notificaciones.add(notificacion);
 				}
-				if(cantContratosConHorasInformar > 0){
+				if((cantContratosConHorasInformar) > 0){
 					DataNotificacion notificacion = new DataNotificacion("Contrato(s) con horas a informar", cantContratosConHorasInformar, "/CounterWebApp/desktop/contrato/horasInformar/redireccionarNotificacion");
-					notificaciones.add(notificacion);
-				}
-				if(cantContratosHorasFacturar > 0){
-					DataNotificacion notificacion = new DataNotificacion("Contrato(s) con horas a facturar", cantContratosHorasFacturar, "/CounterWebApp/desktop/contrato/horasFacturar/redireccionarNotificacion");
 					notificaciones.add(notificacion);
 				}
 				if(cantidadActividadesRealizar > 0){
@@ -98,9 +93,6 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 			cantidad++;
 		}
 		if(!CollectionUtils.isEmpty(verContratosConHorasAInformar(dias))){
-			cantidad++;
-		}
-		if(!CollectionUtils.isEmpty(verContratosConHorasAFacturar(dias))){
 			cantidad++;
 		}
 		if(!CollectionUtils.isEmpty(verActividadesARealizar(idUsuario, dias))){
@@ -212,20 +204,6 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioNotificacion#cantidadDeContratosConHorasAFacturar(int)
-	 */
-	@Override
-	public List<Contrato> verContratosConHorasAFacturar(int dias) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
-		List<Contrato> contratos = new ArrayList<Contrato>();
-		for(Contrato contrato : servicioContrato.seleccionarContratosVigentes()){
-			if(!CollectionUtils.isEmpty(horasAFacturar(contrato.getId(), dias))){
-				contratos.add(contrato);
-			}
-		}
-		return contratos;
-	}
-	
-	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioNotificacion#horasAInformar(java.lang.String, int)
 	 */
 	@Override
@@ -242,25 +220,6 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 			}
 		}
 		return horasAInformar;
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioNotificacion#horasAFacturar(java.lang.String, int)
-	 */
-	@Override
-	public List<Hora> horasAFacturar(String idContrato, int dias) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException{
-		List<Hora> horasAFacturar = new ArrayList<Hora>();
-		for(Hora hora : servicioHora.seleccionarHorasRegistradasNoFacturadas(idContrato)){
-			if(hora.getFechaFacturar() != null){
-				Calendar fechaVencimiento = Calendar.getInstance();
-				fechaVencimiento.setTime(hora.getFechaFacturar());
-				fechaVencimiento.add(Calendar.DATE, -dias);
-				if(fechaVencimiento.getTime().before(new Date())){
-					horasAFacturar.add(hora);
-				}
-			}
-		}
-		return horasAFacturar;
 	}
 	
 	/* (non-Javadoc)
