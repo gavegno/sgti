@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>SGTI</title>
@@ -62,17 +62,26 @@
 
                     <div class="form-group container">
                         <label for="inputTipoContrato" class="control-label">Tipo de contrato:</label>
-                        <select class="form-control" name="tipoContrato" required onfocus="document.getElementById('inputPeriodoRenovacion').disabled = document.getElementById('computos').disabled = document.getElementById('inputPeriodoValidez').disabled = document.getElementById('inputUnidadValidez').disabled = document.getElementById('inputAcumulacion').disabled = document.getElementById('inputPeriodoAcumulacion').disabled = document.getElementById('inputFrecuenciaFacturacion').disabled = (this.value=='Precio fijo')" onchange="document.getElementById('inputPeriodoRenovacion').disabled = document.getElementById('computos').disabled = document.getElementById('inputPeriodoValidez').disabled = document.getElementById('inputUnidadValidez').disabled = document.getElementById('inputAcumulacion').disabled = document.getElementById('inputPeriodoAcumulacion').disabled = document.getElementById('inputFrecuenciaFacturacion').disabled = (this.value=='Precio fijo')">
+                        <select class="form-control" name="tipoContrato" required onfocus="document.getElementById('inputPeriodoRenovacion').disabled = document.getElementById('computos').disabled = document.getElementById('inputPeriodoValidez').disabled = document.getElementById('inputUnidadValidez').disabled = document.getElementById('inputAcumulacion').disabled = document.getElementById('inputPeriodoAcumulacion').disabled = document.getElementById('inputFrecuenciaFacturacion').disabled = (this.value=='PRECIO FIJO')" onchange="document.getElementById('inputPeriodoRenovacion').disabled = document.getElementById('computos').disabled = document.getElementById('inputPeriodoValidez').disabled = document.getElementById('inputUnidadValidez').disabled = document.getElementById('inputAcumulacion').disabled = document.getElementById('inputPeriodoAcumulacion').disabled = document.getElementById('inputFrecuenciaFacturacion').disabled = (this.value=='PRECIO FIJO')">
                             <c:choose>
 
-                                <c:when test="${config.tipoContrato eq 'Precio fijo'}">
-                                    <option selected="selected" value="${config.tipoContrato}"><c:out value="${config.tipoContrato}" /></option>
-                                    <option value="Paquete de cómputos"><c:out value="Paquete de cómputos" /></option>
+                                <c:when test="${config.tipoContrato eq 'PRECIO FIJO'}">
+                                    <option selected="selected" value="${config.tipoContrato}" ><c:out value="${config.tipoContrato}" /></option>
+                                    <option value="PAQUETE DE COMPUTOS"><c:out value="PAQUETE DE COMPUTOS" /></option>
+                                    <option value="HORAS LIBRES"><c:out value="HORAS LIBRES" /></option>
+                                    
+                                </c:when>
+
+                                <c:when test="${config.tipoContrato eq 'HORAS LIBRES'}">
+                                    <option selected="selected" value="${config.tipoContrato}" ><c:out value="${config.tipoContrato}" /></option>
+                                    <option value="PAQUETE DE COMPUTOS"><c:out value="PAQUETE DE COMPUTOS" /></option>
+                                    <option value="PRECIO FIJO"><c:out value="PRECIO FIJO" /></option>
                                 </c:when>
 
                                 <c:otherwise>
                                     <option selected="selected" value="${config.tipoContrato}"><c:out value="${config.tipoContrato}" /></option>
-                                    <option value="Precio fijo"><c:out value="Precio fijo" /></option>
+                                    <option value="PRECIO FIJO"><c:out value="PRECIO FIJO" /></option>
+                                    <option value="HORAS LIBRES"><c:out value="HORAS LIBRES" /></option>
                                 </c:otherwise>
                             </c:choose>
                         </select>    

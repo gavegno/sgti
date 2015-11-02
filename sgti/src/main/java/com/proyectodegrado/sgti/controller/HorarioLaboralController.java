@@ -38,7 +38,7 @@ public class HorarioLaboralController extends AbstractController{
 			@RequestParam("horaDesde") final String horaDesde, @RequestParam("horaHasta") final String horaHasta, @RequestParam("idContrato") final String idContrato){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHorarioLaboral = (FachadaHorarioLaboral) context.getBean("fachadaHorarioLaboral");
-		String mensaje = "El día se ha asignago correctamente al horario laboral";
+		String mensaje = "El día se ha asignado correctamente al horario laboral";
 		try {
 			fachadaHorarioLaboral.insertarDiaHorarioLaboral(id, nombreDia, horaDesde, horaHasta);
 			model.addAttribute("message", mensaje);
@@ -60,7 +60,7 @@ public class HorarioLaboralController extends AbstractController{
 			@RequestParam("horaDesde") final String horaDesde, @RequestParam("horaHasta") final String horaHasta){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHorarioLaboral = (FachadaHorarioLaboral) context.getBean("fachadaHorarioLaboral");
-		String mensaje = "El día se ha asignago correctamente al horario laboral";
+		String mensaje = "El día se ha asignado correctamente al horario laboral";
 		try {
 			fachadaHorarioLaboral.insertarDiaHorarioLaboral(id, nombreDia, horaDesde, horaHasta);
 			model.addAttribute("message", mensaje);

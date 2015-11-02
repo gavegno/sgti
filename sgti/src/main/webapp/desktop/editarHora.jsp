@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>SGTI</title>
@@ -26,7 +26,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="text-center">Gestión de Hora</h2>
+            <h2 class="text-center">Gestión de hora</h2>
             <div>
                 <form class="form-horizontal" action="/CounterWebApp/desktop/hora/detalleHoraOk" method="POST">
                     
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="fechainformar" class="control-label">Fecha Informar: actual:
+                        <label for="fechainformar" class="control-label">Fecha informar: actual:
                             <c:choose>
                             <c:when test="${empty hora.fechaInformar}">
                                 No especificado 
@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="fechafacturar" class="control-label">Fecha Facturar: actual:
+                        <label for="fechafacturar" class="control-label">Fecha facturar: actual:
                             <c:choose>
                             <c:when test="${empty hora.fechaFacturar}">
                                 No especificado 
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="fechacomputar" class="control-label">Fecha Computar: actual:
+                        <label for="fechacomputar" class="control-label">Fecha computar: actual:
                         <c:choose>
                             <c:when test="${empty hora.fechaComputar}">
                                 No especificado 

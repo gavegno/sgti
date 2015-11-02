@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>SGTI</title>
@@ -35,7 +35,7 @@
 	          		<li><a href="/CounterWebApp/desktop/hora/principal">Agregar tipo de hora</a></li>
 	          		<li><a href="/CounterWebApp/desktop/tiposDeHora/tabla">Ver tipos de hora</a></li>
 	          		<li role="separator" class="divider"></li>
-	          		<li><a href="/CounterWebApp/desktop/dias/principal">Agregar Horario laboral</a></li>
+	          		<li><a href="/CounterWebApp/desktop/dias/principal">Agregar horario laboral</a></li>
 					<li><a href="/CounterWebApp/desktop/dias/tabla">Ver horarios laborales</a></li>
 	          		<li role="separator" class="divider"></li>
 	          		<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
@@ -93,7 +93,7 @@
 	            <li><a href="/CounterWebApp/desktop/actividad/ver">Ver actividades</a></li>
 	          </c:if>
 	          <c:if test="${tipoUsuario == 'TECNICO'}">
-	            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver Mis Actividades</a></li>
+	            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver mis actividades</a></li>
 	          </c:if>
 	          </ul>
 	        </li>

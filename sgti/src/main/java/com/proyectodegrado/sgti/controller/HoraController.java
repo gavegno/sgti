@@ -60,7 +60,7 @@ public class HoraController extends AbstractController{
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		cal.add(Calendar.DAY_OF_YEAR, -60);
+		cal.add(Calendar.DAY_OF_YEAR, -45);
 		
 		Date fechaDesdeFiltro = cal.getTime();
 		
@@ -127,7 +127,7 @@ public class HoraController extends AbstractController{
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		cal.add(Calendar.DAY_OF_YEAR, -60);
+		cal.add(Calendar.DAY_OF_YEAR, -45);
 		
 		Date fechaDesdeFiltro = cal.getTime();
 		
@@ -270,7 +270,7 @@ public class HoraController extends AbstractController{
 			@RequestParam(required=false, value="actividad") String idActividad, @RequestParam("descripcion") final String descripcion, @RequestParam("comentario") final String comentario){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
-		String mensaje = "La Hora fue ingresada correctamente";
+		String mensaje = "La hora fue ingresada correctamente";
 		//required=false, value=
 		try {
 			String idUsuario = (String) request.getSession().getAttribute("usuario");
@@ -499,8 +499,6 @@ public class HoraController extends AbstractController{
 		fachadaHora = (FachadaHora) context.getBean("fachadaHora");
 		
 		String mensaje = "La hora ha sido eliminada correctamente";
-		
-		System.out.println("Tipo de hora obtenido desde la página: " + idHora);
 		
 			model.addAttribute("message", mensaje);
 		

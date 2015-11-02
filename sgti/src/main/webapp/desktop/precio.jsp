@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>SGTI</title>
@@ -19,7 +19,7 @@
 <body>
     <header>
         <div class="container">
-            <h1 class="text-center">Sistema de Gestión de Técnicos e Incidentes</h1>
+            <h1 class="text-center">Sistema de gestión de técnicos e incidentes</h1>
         </div>
     </header>
 
@@ -39,7 +39,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="container text-center">Paso 2 de 6: Gestión de Precios</h2>
+            <h2 class="container text-center">Paso 2 de 6: Gestión de precios</h2>
             
             <div class="form-group container">
                 <div class="alert alert-info text-center">
@@ -49,12 +49,12 @@
                 <form class="form-horizontal container" action="/CounterWebApp/desktop/precio/ingresarPrecio" method="POST">
                     
                     <div class="form-group container">
-                        <label for="inputFechaDesde" class="control-label">Fecha Desde</label>
+                        <label for="inputFechaDesde" class="control-label">Fecha desde</label>
                         <input  type="date" name="fechaDesde" class="form-control" placeholder="Fecha Desde"  id="FechaDesde" required>
                     </div>
         
                     <div class="form-group container">
-                        <label for="inputFechaHasta" class="control-label">Fecha Hasta</label>
+                        <label for="inputFechaHasta" class="control-label">Fecha hasta</label>
                         <input  type="date" name="fechaHasta" class="form-control" placeholder="Fecha Hasta"  id="FechaHasta">
                     </div>
 
