@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">SGTI</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Limpiar preferencias</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="usuario">Usuario</string>
+    <string name="clave">Contraseña</string>
+    <string name="titulo">Iniciar sesión</string>
+    <string name="botonRegistro">Registrar este dispositivo</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_registro">RegistroActivity</string>
 </resources>

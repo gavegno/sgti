@@ -88,6 +88,14 @@ public class FachadaUsuario {
 		return (usuario.getTipo().equalsIgnoreCase("SOCIO"));		
 	}
 	
+	public void asignarIMEI (String id, String imei) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		Usuario usuario = servicioUsuario.selecionarUsuario(id);
+		usuario.setImei(imei);
+		
+		servicioUsuario.asignarImeiUsuario(usuario);
+	}
+	
 	
 	
 	public String get_MD5_SecurePassword(String passwordToHash) throws NoSuchAlgorithmException{

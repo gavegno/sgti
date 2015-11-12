@@ -105,6 +105,15 @@ public class ConsultasUsuario {
 		conexionBD.cerrar(connection);
 	}
 	
+	public void asignarImeiUsuario(String id, String imei) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario AS u SET imei=? WHERE u.id=?");
+		preparedStatement.setString(1,imei);
+		preparedStatement.setString(2,id);
+		preparedStatement.executeUpdate();
+		conexionBD.cerrar(connection);
+	}
+	
 	public void cambiarContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario AS u SET contrasena=? WHERE u.id=?");

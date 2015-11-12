@@ -87,6 +87,12 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		usuarioDao.editarUsuario(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getTelefono());
 	}
 	
+	@Override
+	public void asignarImeiUsuario(Usuario usuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		usuarioDao.asignarImeiUsuario(usuario.getId(), usuario.getImei());
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioUsuario#cambiarContrasena(com.proyectodegrado.sgti.Data.DataUsuario)
 	 */

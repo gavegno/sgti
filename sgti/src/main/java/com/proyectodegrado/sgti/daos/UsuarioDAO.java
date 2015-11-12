@@ -58,6 +58,7 @@ public class UsuarioDAO {
 			usuario.setTelefono(resultSet.getString("telefono"));
 			usuario.setTipo(resultSet.getString("tipo"));
 			usuario.setActivo(resultSet.getBoolean("activo"));
+			usuario.setImei(resultSet.getString("imei"));
 		}
 		return usuario;
 	}
@@ -74,6 +75,7 @@ public class UsuarioDAO {
 			usuario.setTipo(resultSet.getString("tipo"));
 			usuario.setActivo(resultSet.getBoolean("activo"));
 			usuario.setContrasena(resultSet.getString("contrasena"));
+			usuario.setImei(resultSet.getString("imei"));
 		}
 		return usuario;
 	}
@@ -90,6 +92,7 @@ public class UsuarioDAO {
 			usuario.setTelefono(resultSet.getString("telefono"));
 			usuario.setTipo(resultSet.getString("tipo"));
 			usuario.setActivo(resultSet.getBoolean("activo"));
+			usuario.setImei(resultSet.getString("imei"));
 			usuarios.add(usuario);
 		}
 		return usuarios;
@@ -107,6 +110,7 @@ public class UsuarioDAO {
 			dataUsuario.setTelefono(resultSet.getString("telefono"));
 			dataUsuario.setTipo(resultSet.getString("tipo"));
 			dataUsuario.setActivo(resultSet.getBoolean("activo"));
+			dataUsuario.setImei(resultSet.getString("imei"));
 			usuarios.add(dataUsuario);
 		}
 		return usuarios;
@@ -114,6 +118,11 @@ public class UsuarioDAO {
 	
 	public void editarUsuario(String id, String nombre, String apellido, String email, String telefono) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		consultasUsuario.editarUsuario(id, nombre, apellido, email, telefono);
+	}
+	
+	public void asignarImeiUsuario(String id, String imei) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		consultasUsuario.asignarImeiUsuario(id, imei);
 	}
 	
 	public void cambiarContrasena(String id, String contrasena) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{

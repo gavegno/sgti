@@ -12,6 +12,7 @@ CREATE TABLE usuario
   telefono character varying,
   tipo character varying,
   activo boolean,
+  imei character varying,
   CONSTRAINT usuario_id_primarikey PRIMARY KEY (id)
 )
 WITH (
@@ -19,6 +20,7 @@ WITH (
 );
 ALTER TABLE usuario
   OWNER TO root;
+
 
 -- Table: tipohora
 

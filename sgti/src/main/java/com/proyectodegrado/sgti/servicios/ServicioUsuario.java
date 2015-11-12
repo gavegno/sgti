@@ -45,4 +45,7 @@ public interface ServicioUsuario {
 			throws FileNotFoundException, IOException, SQLException,
 			ClassNotFoundException;
 
+	void asignarImeiUsuario(Usuario usuario) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
+
 }
