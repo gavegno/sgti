@@ -16,4 +16,7 @@ public interface UsuarioServicio {
 
     @POST("/desktop/movil/authorized")
     void getAutorizacion(@Body Usuario usuario, Callback<Boolean> callback);
+
+    @POST("/desktop/movil/desasociar")
+    void desasociarCelular(@Body Usuario usuario, Callback<Boolean> callback);
 }

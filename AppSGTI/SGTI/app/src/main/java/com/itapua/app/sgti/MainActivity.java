@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.itapua.app.sgti.interfaces.ClienteServicio;
 import com.itapua.app.sgti.interfaces.UsuarioServicio;
 import com.itapua.app.sgti.modelo.Usuario;
 
@@ -23,6 +22,7 @@ import retrofit.client.Response;
 
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, RegistroActivity.class);
             startActivity(intent);
+            this.finish();
 
         }
         //Si el usuario ya se registró en la aplicación:
@@ -56,55 +57,6 @@ public class MainActivity extends AppCompatActivity {
             textoWs = (TextView) findViewById(R.id.textViewWS);
             textoWsExtra = (TextView) findViewById(R.id.textViewWSExtra);
 
-            //RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://192.168.0.203:8080/CounterWebApp").build();
-
-            //ClienteServicio servicio = restAdapter.create(ClienteServicio.class);
-            //TelephonyManager mngr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            //textoWs.setText(mngr.getDeviceId().toString());
-
-            /*
-            servicio.getCliente(new Callback<Cliente>() {
-                @Override
-                public void success(Cliente cliente, Response response) {
-                    textoWs.setText(cliente.toString());
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    textoWs.setText(error.getMessage());
-                }
-            });
-            if (retorno.getId() == u.getId())
-                        textoWs.setText("Logueo correcto");
-                }
-                 textoWs.setText(error.getMessage() + " Usuario incorrecto");
-
-
-            UsuarioServicio usuarioServicio = restAdapter.create(UsuarioServicio.class);
-            Usuario u = new Usuario();
-            u.setId("atorreg");
-            u.setContrasena("1234");
-
-            usuarioServicio.getAutorizacion(u, new Callback<Boolean>() {
-                @Override
-                public void success(Boolean aBoolean, Response response) {
-                    textoWs.setText(aBoolean.toString());
-                    if (aBoolean == true)
-                        textoWsExtra.setText("Dio true");
-                    else
-                        textoWsExtra.setText("Dio false");
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    textoWsExtra.setText(error.getMessage());
-                }
-            });
-
-
-
-
-*/
         }
 
 
@@ -128,11 +80,47 @@ public class MainActivity extends AppCompatActivity {
 
         //Limpiar preferencias.
         if (id == R.id.action_settings) {
+
             SharedPreferences archivo = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = archivo.edit();
-            editor.putString("usuario","");
-            editor.commit();
-            Toast.makeText(this, "Se limpiaron las preferencias", Toast.LENGTH_SHORT).show();
+            String url = archivo.getString("url", "");
+            String nombreUsuario = archivo.getString("usuario", "");
+            TelephonyManager mngr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
+
+            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
+
+            UsuarioServicio usuarioServicio = restAdapter.create(UsuarioServicio.class);
+            Usuario usuarioParaEnviar = new Usuario();
+            usuarioParaEnviar.setImei(mngr.getDeviceId().toString());
+            usuarioParaEnviar.setId(nombreUsuario);
+
+            usuarioServicio.desasociarCelular(usuarioParaEnviar, new Callback<Boolean>() {
+                @Override
+                public void success(Boolean aBoolean, Response response) {
+                    if (aBoolean == true) {
+
+                        SharedPreferences archivo = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = archivo.edit();
+                        editor.putString("usuario", "");
+                        editor.commit();
+
+                        Toast.makeText(getApplicationContext(), "Este dispositivo ha sido desasociado del sistema SGTI", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "ERROR: No se ha podido desasociar este dispositivo", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(getApplicationContext(), "ERROR: No se ha podido desasociar este dispositivo", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
+
+
         }
 
         return super.onOptionsItemSelected(item);

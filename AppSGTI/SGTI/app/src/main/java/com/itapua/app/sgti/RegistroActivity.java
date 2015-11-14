@@ -21,6 +21,7 @@ import retrofit.client.Response;
 
 public class RegistroActivity extends Activity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,27 +30,40 @@ public class RegistroActivity extends Activity {
         final Button buttonRegistro = (Button) findViewById(R.id.button);
         final EditText textoUsuario = (EditText) findViewById(R.id.editText);
         final EditText textoClave = (EditText) findViewById(R.id.editText2);
+        final EditText textoUrl = (EditText) findViewById(R.id.editTextUrl);
 
-        final RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://192.168.0.203:8080/CounterWebApp").build();
+        SharedPreferences archivo = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+
+        String url = archivo.getString("url", "http://192.168.0.203:8080/CounterWebApp");
+        textoUrl.setText(url);
 
         buttonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+
+
+
                 if (v.getId() == buttonRegistro.getId()) {
+
                     final String usuario = textoUsuario.getText().toString();
                     String clave = textoClave.getText().toString();
+
+                    RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(textoUrl.getText().toString()).build();
 
                     UsuarioServicio usuarioServicio = restAdapter.create(UsuarioServicio.class);
                     Usuario usuarioParaEnviar = new Usuario();
 
-                    if (usuario.trim().isEmpty() || clave.trim().isEmpty())
+                    if (usuario.trim().isEmpty() || clave.trim().isEmpty() || textoUrl.getText().toString().trim().isEmpty())
                         Toast.makeText(v.getContext(), "Usuario o clave no pueden ser vacíos", Toast.LENGTH_SHORT).show();
+
                     else {
                         TelephonyManager mngr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
                         usuarioParaEnviar.setId(usuario);
                         usuarioParaEnviar.setContrasena(clave);
                         usuarioParaEnviar.setImei(mngr.getDeviceId().toString());
+
+                        Toast.makeText(v.getContext(), "Cargando...", Toast.LENGTH_SHORT).show();
 
                         usuarioServicio.getAutorizacion(usuarioParaEnviar, new Callback<Boolean>() {
                                     SharedPreferences archivo = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
@@ -62,15 +76,18 @@ public class RegistroActivity extends Activity {
 
                                             //Registro en el archivo el dato de id de usuario.
                                             editor.putString("usuario", usuario);
+                                            editor.putString("url", textoUrl.getText().toString());
                                             editor.commit();
+
                                             Toast.makeText(v.getContext(), "¡ Bienvenido al sistema !", Toast.LENGTH_SHORT).show();
 
                                             Intent intent = new Intent(v.getContext(), MainActivity.class);
                                             startActivity(intent);
-
+                                            finish();
 
                                         } else {
                                             Toast.makeText(v.getContext(), "Usuario y/o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
+
                                             //Por las dudas, limpio los datos del archivo.
                                             editor.putString("usuario", "");
                                             editor.commit();
@@ -80,36 +97,20 @@ public class RegistroActivity extends Activity {
 
                                     @Override
                                     public void failure(RetrofitError error) {
-                                        Toast.makeText(v.getContext(), "Ha ocurrido un error", Toast.LENGTH_SHORT).show();
+                                        if (error.getMessage().contains("Network is unreachable"))
+                                            Toast.makeText(v.getContext(), "ERROR: Compruebe su conexión a internet", Toast.LENGTH_LONG).show();
+                                        else {
+                                            if ((error.getMessage().contains("404")) || (error.getMessage().contains("failed to connect")))
+                                                Toast.makeText(v.getContext(), "ERROR: Compruebe el link de acceso al servidor", Toast.LENGTH_LONG).show();
+                                            else
+                                                Toast.makeText(v.getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                                        }
 
                                     }
                                 }
 
                         );
                     }
-
-
-
-/*
-
-                    if (usuario.equalsIgnoreCase("1") && clave.equalsIgnoreCase("1")) {
-                        //Sería el caso que el WS da autorización
-
-
-                        editor.putString("usuario", usuario);
-                        editor.commit();
-
-                        Toast.makeText(v.getContext(), "Credenciales autenticadas", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(v.getContext(), MainActivity.class);
-                        startActivity(intent);
-                    }
-                        else {
-                        Toast.makeText(v.getContext(), "Usuario y/o contraseña incorrecta", Toast.LENGTH_SHORT).show();
-                        editor.putString("usuario", "");
-                        editor.commit();
-                    }
-                }*/
-                    //Llamar al webservice que controla la identificación y autenticación.
                 }
             }
         });

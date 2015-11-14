@@ -53,7 +53,6 @@ public class RestMovilController {
 			}
 			else
 			{
-				//return salida;
 				return false;
 			}
 		
@@ -86,6 +85,40 @@ public class RestMovilController {
 		u.setNombre("peteco");
 		return u;
 	}
+	
+	@RequestMapping(value= "/desasociar", method=RequestMethod.POST, headers="Accept=application/json", consumes={"application/json"})
+	@ResponseBody
+	public boolean desasociarCelular(@RequestBody Usuario usuario){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
+		System.out.println("Usuario obtenido: " + usuario.getId());
+		System.out.println("IMEI obtenido: " + usuario.getImei());
+		
+		try {
+			Usuario usuarioObtenido = fachadaUsuario.seleccionarUsuario(usuario.getId());
+			if (usuarioObtenido.getImei().equalsIgnoreCase(usuario.getImei())){
+			
+				fachadaUsuario.asignarIMEI(usuarioObtenido.getId(), "");
+				return true;
+			}
+			
+			else
+			{
+				return false;
+			}
+		
+		}
+		
+		catch(ClassNotFoundException | IOException | SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			context.close();
+		}
+	}
+	
+	
 	
 
 }
