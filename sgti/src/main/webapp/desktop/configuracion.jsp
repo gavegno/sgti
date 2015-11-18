@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>SGTI</title>
@@ -41,7 +41,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-md-8">
-            <h2 class="container text-center">Paso 6 de 6: Gestión de Configuración</h2>
+            <h2 class="container text-center">Paso 6 de 6: Gestión de configuración</h2>
             <div class="form-group container">
                 <div class="alert alert-info text-center">
                     Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.nombre} ${contrato.contraparte.apellido} <br>
@@ -72,9 +72,10 @@
                     </div>
                     <div class="form-group container">
                         <label for="inputTipoContrato" class="control-label">Tipo de contrato:</label>
-                        <select class="form-control" name="tipoContrato" id="tipoContrato" required onChange="document.getElementById('inputPeriodoRenovacion').disabled = document.getElementById('computos').disabled = document.getElementById('inputPeriodoValidez').disabled = document.getElementById('inputUnidadValidez').disabled = document.getElementById('inputAcumulacion').disabled = document.getElementById('inputPeriodoAcumulacion').disabled = document.getElementById('inputFrecuenciaFacturacion').disabled = (this.value=='Precio fijo')">
-                            <option value="Precio fijo"><c:out value="Precio fijo" /></option>
-                            <option selected="selected" value="Paquete de cómputos"><c:out value="Paquete de cómputos" /></option>    
+                        <select class="form-control" name="tipoContrato" id="tipoContrato" required onChange="document.getElementById('inputPeriodoRenovacion').disabled = document.getElementById('computos').disabled = document.getElementById('inputPeriodoValidez').disabled = document.getElementById('inputUnidadValidez').disabled = document.getElementById('inputAcumulacion').disabled = document.getElementById('inputPeriodoAcumulacion').disabled = document.getElementById('inputFrecuenciaFacturacion').disabled = (this.value=='PRECIO FIJO')">
+                            <option value="PRECIO FIJO"><c:out value="PRECIO FIJO" /></option>
+                            <option value="HORAS LIBRES"><c:out value="HORAS LIBRES" /></option>
+                            <option selected="selected" value="PAQUETE DE COMPUTOS"><c:out value="PAQUETE DE COMPUTOS" /></option>    
                         </select>    
                     </div>
                     <div class="form-group container">
@@ -131,7 +132,7 @@
                     <input type="hidden" class="form-control" name="frecuenciaExtra" id="inputFrecuenciaExtras" placeholder="Cantidad" value="0">
 
                  <div class="form-group container">
-                        <label for="inputHorarioLaboral" class="control-label">HorarioLaboral:</label>
+                        <label for="inputHorarioLaboral" class="control-label">Horario laboral:</label>
                         <select class="form-control" name="horarioLaboral" id="inputHorarioLaboral" required>
                             <c:forEach items="${horariosLaborales}" var="horarioLaboral" >
                                 <c:choose>

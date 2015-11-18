@@ -13,6 +13,7 @@ public class Usuario {
 	private String tipo;
 	private boolean activo;
 	private List<TipoHora> usuarioTipoHora;
+	private String imei;
 	
 	public Usuario(String id, String nombre, String apellido, String contrasena, String email, String telefono, String tipo, boolean activo, List<TipoHora> usuarioTipoHora) {
 		super();
@@ -38,6 +39,15 @@ public class Usuario {
 		this.tipo = null;
 		this.activo = false;
 		this.usuarioTipoHora = null;
+		this.imei = null;
+	}
+
+	public String getImei() {
+		return imei;
+	}
+
+	public void setImei(String imei) {
+		this.imei = imei;
 	}
 
 	public String getId() {

@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>SGTI</title>
@@ -76,8 +76,9 @@
                     <div class="form-group container">
                         <label for="inputTipoContrato" class="control-label">Tipo de contrato:</label>
                         <select class="form-control" name="tipoContrato" required>
-                            <option value="Precio fijo"><c:out value="Precio fijo"/></option>
-                            <option value="Paquete de cómputos"><c:out value="Paquete de cómputos" /></option>
+                            <option value="PRECIO FIJO"><c:out value="PRECIO FIJO"/></option>
+                            <option value="HORAS LIBRES"><c:out value="HORAS LIBRES"/></option>
+                            <option value="PAQUETE DE COMPUTOS"><c:out value="PAQUETE DE COMPUTOS" /></option>
                         </select>    
                     </div>
 
@@ -124,7 +125,7 @@
 
 
                     <div class="form-group container">
-                        <label for="inputHorarioLaboral" class="control-label">HorarioLaboral:</label>
+                        <label for="inputHorarioLaboral" class="control-label">Horario laboral:</label>
                         <select class="form-control" name="horarioLaboral" id="inputHorarioLaboral" required>
                             <c:forEach items="${horariosLaborales}" var="horarioLaboral" >
                                 <option value="${horarioLaboral.id}"><c:out value="${horarioLaboral.id}" /></option>

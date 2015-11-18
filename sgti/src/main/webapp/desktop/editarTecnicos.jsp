@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>SGTI</title>
@@ -29,7 +29,7 @@
 <div class="container">
     <div class="row">
         <div class="container col-sm-6 col-md-6 ">
-            <h2 class="container text-center">Gestión de Usuarios</h2>
+            <h2 class="container text-center">Gestión de usuarios</h2>
             <div class="form-group container">
                 <form class="form-vertical" action="/CounterWebApp/desktop/tecnicos/editarUsuarioOk" method="POST">
                 	<div class="container form-group ">

@@ -1,9 +1,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <style type="text/css">
+        input, tbody, select,textarea{
+           font-size: 12px !important;
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
     <title>SGTI</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
@@ -42,7 +48,7 @@
         <div class="row">
 
           <div class="col-lg-4">
-            <input class="form-control" id="system-search" name="q" placeholder="Contrato, descripción...">
+            <input class="form-control" id="system-search" name="q" placeholder="Contrato, descripciÃ³n...">
           </div>
         
           <div class="col-lg-3">
@@ -67,8 +73,7 @@
         <th>Inicio</th>
         <th>Fin</th>
         <th>Tipo_de_hora</th>
-        <th>¿Remota?</th>
-        <th>Descripción</th>
+        <th>DescripciÃ³n</th>
       </tr>
     </thead>
     <tbody class="searchable">
@@ -78,28 +83,25 @@
 
       	<fmt:formatDate value="${horasRegistrada.fechaDesde}" var="formattedfechaDesde" type="date" pattern="dd-MM-yyyy hh:mm" />
       	<fmt:formatDate value="${horasRegistrada.fechaHasta}" var="formattedfechaHasta" type="date" pattern="dd-MM-yyyy hh:mm" />
-        <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechadesde" value="${formattedfechaDesde}" title="${formattedfechaDesde}" disabled="disabled"></td>
-        <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechahasta" value="${formattedfechaHasta}" title="${formattedfechaHasta}" disabled="disabled"></td>
-        <td>
+        <td class="col-md-2"><input required="required" size="24" type="text" class="form-control text-center form_datetime2" name="fechadesde" value="${formattedfechaDesde}" title="${formattedfechaDesde}" disabled="disabled"></td>
+        <td class="col-md-2"><input required="required" size="24" type="text" class="form-control text-center form_datetime2" name="fechahasta" value="${formattedfechaHasta}" title="${formattedfechaHasta}" disabled="disabled"></td>
+        <td class="col-md-1">
         	<input type="text" class="form-control" name="tipohora" id="idtipohora" value="${horasRegistrada.nombreTipoHora}" disabled="disabled" title="${horasRegistrada.nombreTipoHora}">
         </td>
-
-        
-        	<c:choose>
-                <c:when test="${horasRegistrada.remoto}">
-                    <td><input type="text" class="form-control" name="remoto" id="idremoto" value="Si" disabled="disabled"></td>
-                </c:when>
-                <c:otherwise>
-                    <td><input type="text" class="form-control" name="remoto" id="idremoto" value="No" disabled="disabled"></td>
-                </c:otherwise>
-            </c:choose>
-    
 
         <input disabled="disabled" class="form-control" type="hidden" name="contrato" value="${horasRegistrada.idContrato}" >
         <td hidden="hidden">${horasRegistrada.idContrato}</td>
 
-        
-        <td><textarea class="form-control" name="descripcion" rows="3" disabled="disabled">${horasRegistrada.descripcion}</textarea></td>
+        <td class="col-md-6"><textarea class="form-control" name="descripcion" rows="3" disabled="disabled">${horasRegistrada.descripcion}</textarea></td>
+
+        <c:choose>
+            <c:when test="${horasRegistrada.informada}">
+                <td class="vert-align"><button id="plus" class="btn btn-success glyphicon glyphicon-ok" title="Esta hora ya ha sido informada"></td>
+            </c:when>                    
+            <c:otherwise>
+                <td class="vert-align"><button id="plus" class="btn btn-primary glyphicon glyphicon-time" title="Esta hora aÃºn no ha sido informada"></td>
+            </c:otherwise>
+        </c:choose>
 
         <input class="form-control" type="hidden" name="contrato" value="${horasRegistrada.idContrato}" ></td>
         <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >

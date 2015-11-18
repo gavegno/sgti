@@ -1,8 +1,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <style type="text/css">
+        input, tbody, select,textarea{
+           font-size: 12px !important;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>SGTI</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -43,7 +48,6 @@
           <div class="col-lg-4">
             <input class="form-control" id="system-search" name="q" placeholder="Contrato, descripción, comentario...">
           </div>
-
           <div class="col-lg-2">
             <select class="form-control" name="filtroValidada" id="inputTipoHora">
                 <c:if test="${filtroValidada == 'Todas'}">
@@ -112,8 +116,8 @@
              <tr id="filaNueva" >
              	<fmt:formatDate value="${horaCopiada.fechaDesde}" var="formattedfechaDesde" type="date" pattern="dd-MM-yyyy hh:mm" />
       			<fmt:formatDate value="${horaCopiada.fechaHasta}" var="formattedfechaHasta" type="date" pattern="dd-MM-yyyy hh:mm" />
-                <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechadesde" value="${formattedfechaDesde}" title="${formattedfechaDesde}"></td>
-                <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechahasta" value="${formattedfechaHasta}" title="${formattedfechaHasta}"></td>
+                <td class="col-md-2"><input required="required" type="text" class="form-control text-center form_datetime2" name="fechadesde" value="${formattedfechaDesde}" title="${formattedfechaDesde}"></td>
+                <td class="col-md-2"><input required="required" type="text" class="form-control text-center form_datetime2" name="fechahasta" value="${formattedfechaHasta}" title="${formattedfechaHasta}"></td>
                 <td>
                     <select class="form-control" id="contrato" name="contrato" onChange="document.getElementById('tipohora').disabled = false" required="required">
                         <option value="">S/D</option>
@@ -180,12 +184,12 @@
         
         <c:choose>
             <c:when test="${horasRegistrada.validada}">
-                <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechadesde" value="${formattedfechaDesde}" title="${formattedfechaDesde}" disabled="disabled"></td>
-                <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechahasta" value="${formattedfechaHasta}" title="${formattedfechaHasta}" disabled="disabled"></td>
+                <td class="col-md-2"><input required="required" type="text" class="form-control text-center form_datetime2" name="fechadesde" value="${formattedfechaDesde}" title="${formattedfechaDesde}" disabled="disabled"></td>
+                <td class="col-md-2"><input required="required" type="text" class="form-control text-center form_datetime2" name="fechahasta" value="${formattedfechaHasta}" title="${formattedfechaHasta}" disabled="disabled"></td>
             </c:when>                    
             <c:otherwise>
-                <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechadesde" title="${formattedfechaDesde}" value="${formattedfechaDesde}"></td>
-                <td><input required="required" size="24" type="text" class="form-control form_datetime2" name="fechahasta" title="${formattedfechaHasta}" value="${formattedfechaHasta}"></td>
+                <td class="col-md-2"><input required="required" type="text" class="form-control text-center form_datetime2" name="fechadesde" title="${formattedfechaDesde}" value="${formattedfechaDesde}"></td>
+                <td class="col-md-2"><input required="required" type="text" class="form-control text-center form_datetime2" name="fechahasta" title="${formattedfechaHasta}" value="${formattedfechaHasta}"></td>
             </c:otherwise>
         </c:choose>
 
