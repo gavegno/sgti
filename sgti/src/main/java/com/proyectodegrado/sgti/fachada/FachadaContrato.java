@@ -3,7 +3,10 @@ package com.proyectodegrado.sgti.fachada;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.modelo.Cliente;
@@ -49,6 +52,15 @@ public class FachadaContrato {
 	
 	public List<Contrato> seleccionarContratosVigentes() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		return servicioContrato.seleccionarContratosVigentes();
+	}
+	
+	public Map<String, String> verProximaFechaInforme() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Map<String, String> contratosFechaInforme = new HashMap<String, String>();
+		for(Contrato contrato : servicioContrato.seleccionarContratosVigentes()){
+			contratosFechaInforme.put(contrato.getId(), dateFormat.format(servicioContrato.proximaFechaInforme(contrato.getId())));
+		}
+		return contratosFechaInforme;
 	}
 	
 	public ServicioContrato getServicioContrato() {

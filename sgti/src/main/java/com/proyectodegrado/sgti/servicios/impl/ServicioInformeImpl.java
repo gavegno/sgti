@@ -55,6 +55,7 @@ public class ServicioInformeImpl implements ServicioInforme {
 	private static final String HORAS = "<@horas>";
 	private static final String TABLA_INFORME = "<@tablaInforme>";
 	private static final String SALTO_LINEA = "\r\n";
+	private static final String DOBLE_SALTO_LINEA = "\r\n\r\n";
 	
 	private ServicioContrato servicioContrato;
 
@@ -71,6 +72,73 @@ public class ServicioInformeImpl implements ServicioInforme {
 	private ServicioPrecio servicioPrecio;
 	
 	private ServicioComputosAcumulados servicioComputosAcumulados;
+	
+	@Override
+	public HWPFDocument informarHorasPorTecnico(HttpServletRequest request, String fecha, String idUsuario) throws IOException, ClassNotFoundException, SQLException, ParseException{
+		File doc = new File(request.getServletContext().getRealPath("/"), PLANTILLA_INFORME);
+		FileInputStream fileInputStream = new FileInputStream(doc);
+		BufferedInputStream buffInputStream = new BufferedInputStream(fileInputStream);
+		HWPFDocument word = new HWPFDocument(new POIFSFileSystem(buffInputStream));
+		SimpleDateFormat formatoFechaCaratula = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formatoFechaHora = new SimpleDateFormat("EEEE dd/MM/yyyy", new Locale("es"));
+		Usuario tecnico = servicioUsuario.selecionarUsuario(idUsuario);
+		Range range = word.getRange();
+		range.replaceText(PROYECTO, "");
+		range.replaceText(CLIENTE, "");
+		range.replaceText(FECHA, formatoFechaCaratula.format(new Date()));
+		range.replaceText(FECHA_NOMBRE, "");
+		range.replaceText(SOCIO, tecnico.getApellido() + " " + tecnico.getApellido());
+		range.replaceText(TABLA_INFORME, "");
+		
+		SimpleDateFormat formatoFecha = new SimpleDateFormat("MMMM");
+		List<Hora> horas = servicioHora.seleccionarHorasRegistradasPorUsuario(idUsuario);
+		Map<String, List<Hora>> horasPorContrato = new HashMap<String, List<Hora>>();
+		agregarContratos(fecha, formatoFecha, horas, horasPorContrato);
+		mapearHorasConContratos(fecha, idUsuario, formatoFecha,	horasPorContrato);
+		String textoHoras = "";
+		textoHoras = generarStringDeHoras(formatoFechaHora, horasPorContrato, textoHoras);
+		range.replaceText(HORAS, textoHoras);
+		return word;
+	}
+
+	private String generarStringDeHoras(SimpleDateFormat formatoFechaHora,
+			Map<String, List<Hora>> horasPorContrato, String textoHoras) {
+		for(Map.Entry<String, List<Hora>> entry: horasPorContrato.entrySet()){
+			textoHoras += "Contrato: " + entry.getKey() + DOBLE_SALTO_LINEA;
+			for(Hora hora : entry.getValue()){
+				textoHoras += formatoFechaHora.format(hora.getFechaDesde()) + "-" + hora.getDuracion() / 60 + ":" + hora.getDuracion() % 60 + "-" + hora.getNombreTipoHora();
+				textoHoras += SALTO_LINEA + hora.getDescripcion() + DOBLE_SALTO_LINEA;
+			}
+		}
+		return textoHoras;
+	}
+
+	private void mapearHorasConContratos(String fecha, String idUsuario,
+			SimpleDateFormat formatoFecha,
+			Map<String, List<Hora>> horasPorContrato)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException, ParseException {
+		for(Map.Entry<String, List<Hora>> entry: horasPorContrato.entrySet()){
+			List<Hora> horasPorUsuario = new ArrayList<Hora>();
+			for(Hora hora : servicioHora.seleccionarHorasRegistradasPorUsuario(idUsuario)){
+				if(formatoFecha.format(hora.getFechaDesde()).equalsIgnoreCase(fecha)){
+					horasPorUsuario.add(hora);
+				}
+			}
+			horasPorContrato.put(entry.getKey(), horasPorUsuario);
+		}
+	}
+
+	private void agregarContratos(String fecha, SimpleDateFormat formatoFecha,
+			List<Hora> horas, Map<String, List<Hora>> horasPorContrato) {
+		for(Hora hora : horas){
+			if(formatoFecha.format(hora.getFechaDesde()).equalsIgnoreCase(fecha)){
+				if(!horasPorContrato.containsKey(hora.getIdContrato())){
+					horasPorContrato.put(hora.getIdContrato(), null);
+				}
+			}
+		}
+	}
 	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioInforme#informarHoras(javax.servlet.http.HttpServletRequest, java.lang.String)
@@ -288,16 +356,18 @@ public class ServicioInformeImpl implements ServicioInforme {
 		Map<String, Informe> tablaCantidadPorTipoHora = new HashMap<String, Informe>();
 		List<Hora> horas = verHorasEnElInforme(idContrato);
 		double computosUsados = 0.0;
-		Date fechaAcumulacion = horas.get(0).getFechaFacturar();
-		for (Hora hora : horas) {
-			if(formatoFecha.format(hora.getFechaFacturar()).equalsIgnoreCase(formatoFecha.format(servicioContrato.proximaFechaFacturacion(idContrato)))){
-				generarTabla(hora, tablaCantidadPorTipoHora, computosAcumulados);
+		if(!CollectionUtils.isEmpty(horas)){
+			Date fechaAcumulacion = horas.get(0).getFechaFacturar();
+			for (Hora hora : horas) {
+				if(formatoFecha.format(hora.getFechaFacturar()).equalsIgnoreCase(formatoFecha.format(servicioContrato.proximaFechaFacturacion(idContrato)))){
+					generarTabla(hora, tablaCantidadPorTipoHora, computosAcumulados);
+				}
 			}
+			for(Map.Entry<String, Informe> entry: tablaCantidadPorTipoHora.entrySet()){
+				computosUsados += entry.getValue().getComputosConsumidos();
+			}
+			acumularComputo(idContrato, computosAcumulados, computos, fechaAcumulacion, computosUsados);
 		}
-		for(Map.Entry<String, Informe> entry: tablaCantidadPorTipoHora.entrySet()){
-			computosUsados += entry.getValue().getComputosConsumidos();
-		}
-		acumularComputo(idContrato, computosAcumulados, computos, fechaAcumulacion, computosUsados);
 	}
 
 	private void acumularComputo(final String idContrato, double computosAcumulados, int computos, Date fechaAcumulacion,

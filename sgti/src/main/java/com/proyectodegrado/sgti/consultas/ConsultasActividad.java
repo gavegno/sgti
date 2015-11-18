@@ -102,7 +102,7 @@ public class ConsultasActividad {
 	
 	public void editarActividad(String id, Date fechaActividad, String idUsuario, int periodo, String descripcion) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE actividad AS a SET a.fechaactividad=?, a.usuario=?, a.periodo=?, a.descripcion=? WHERE a.id=?");
+		PreparedStatement preparedStatement = connection.prepareStatement("UPDATE actividad AS a SET fechaactividad=?, usuario=?, periodo=?, descripcion=? WHERE a.id=?");
 		preparedStatement.setDate(1,fechaActividad);
 		preparedStatement.setString(2,idUsuario);
 		preparedStatement.setInt(3,periodo);

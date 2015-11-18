@@ -23,6 +23,11 @@ public class FachadaInforme {
 		return servicioInforme.informarHoras(request, idContrato);
 	}
 	
+	public HWPFDocument informarHorasTecnico(Model model, HttpServletRequest request, final String idUsuario, String fecha) throws IOException, ClassNotFoundException, SQLException, ParseException {
+
+		return servicioInforme.informarHorasPorTecnico(request, fecha, idUsuario);
+	}
+	
 	public void validarInforme(String idContrato) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException{
 		servicioInforme.validarInforme(idContrato);
 	}

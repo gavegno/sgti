@@ -53,7 +53,7 @@
 	          <ul class="dropdown-menu">
 	            <li><a href="/CounterWebApp/desktop/tecnicos/ingresar">Agregar usuario</a></li>
 	            <li><a href="/CounterWebApp/desktop/tecnicos/tabla">Ver y modificar usuario</a></li>
-	           <!--  <li><a href="#">Eliminar usuario</a></li> -->
+	            <li><a href="/CounterWebApp/desktop/informe/tecnicos">Informe de horas</a></li>
 	          </ul>
 	        </li>
         </c:if>
@@ -64,7 +64,6 @@
 	          <ul class="dropdown-menu">
 	            <li><a href="/CounterWebApp/desktop/cliente/principal">Agregar cliente</a></li>
 	            <li><a href="/CounterWebApp/desktop/cliente/tabla">Ver y modificar cliente</a></li>
-	            <!-- <li><a href="#">Eliminar cliente</a></li> -->
 	          </ul>
 	        </li>
 		</c:if>

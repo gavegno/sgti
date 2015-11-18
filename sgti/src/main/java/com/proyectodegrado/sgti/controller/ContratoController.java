@@ -213,6 +213,7 @@ public class ContratoController extends AbstractController{
 				model.addAttribute("contratos", fachadaContrato.seleccionarContratos());
 				model.addAttribute("configuraciones", fachadaConfiguracion.seleccionarConfiguracionActualTodos());
 				model.addAttribute("precios", fachadaPrecio.seleccionarPrecioActualTodos());
+				model.addAttribute("contratosFechaInforme", fachadaContrato.verProximaFechaInforme());
 			}
 			else
 			

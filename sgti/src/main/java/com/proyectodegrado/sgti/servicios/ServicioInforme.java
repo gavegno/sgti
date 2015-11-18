@@ -18,4 +18,8 @@ public interface ServicioInforme {
 	void validarInforme(String idContrato) throws FileNotFoundException,
 			ClassNotFoundException, SQLException, IOException, ParseException;
 
+	HWPFDocument informarHorasPorTecnico(HttpServletRequest request,
+			String fecha, String idUsuario) throws IOException,
+			ClassNotFoundException, SQLException, ParseException;
+
 }

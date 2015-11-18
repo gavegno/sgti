@@ -1,25 +1,36 @@
 package com.proyectodegrado.sgti.conexionbd;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
+
+import org.springframework.beans.factory.annotation.Value;
 
 public class Conexion {
 	
+	@Value("${conexionBD.connectString}")
+	private String urlConexion;
+	
+	@Value("${conexionBD.connectStringJUnit}")
+	private String urlConexionJUnit;
+	
+	@Value("${conexionBD.username}")
+	private String user;
+	
+	@Value("${conexionBD.password}")
+	private String password;
+	
+	@Value("${habilitarTest}")
+	private String usarJunit;
+	
 	public Connection conectar() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
-		//Properties localProperties = new Properties();
 		Connection conn = null;
-			//localProperties.load(new FileInputStream("src/main/resources/local.properties"));
-			String connectString = "jdbc:postgresql://localhost:5432/sgti";//localProperties.getProperty("conexionBD.connectString");
+			String connectString = urlConexion;
 			if(usarJunit()){
-				connectString = "jdbc:postgresql://localhost:5432/junit_sgti";
+				connectString = urlConexionJUnit;
 			}
-			String user = "root";//localProperties.getProperty("conexionBD.username");
-			String password = "admin";//localProperties.getProperty("conexionBD.password");
 			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(connectString, user, password);
 			return conn;
@@ -36,14 +47,8 @@ public class Conexion {
 	}
 	
 	private boolean usarJunit() {
-		Properties localProperties = new Properties();
 		boolean testHabilitado = false;
-		/*try {
-			localProperties.load(new FileInputStream("src/main/resources/local.properties"));
-			testHabilitado = Boolean.valueOf(localProperties.getProperty("habilitarTest"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
+		testHabilitado = Boolean.valueOf(usarJunit);
 		return testHabilitado;
 	}
 }

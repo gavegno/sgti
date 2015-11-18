@@ -10,6 +10,8 @@
 		
 		<context:component-scan base-package="com.proyectodegrado.sgti" />
 		
+		<context:property-placeholder location="classpath:local.properties" />
+		
 		<!-- Bean de conexion a la base de datos -->
 		<bean id="conexionBD" class="com.proyectodegrado.sgti.conexionbd.Conexion"/>
 		
@@ -183,6 +185,11 @@
 		
 		<bean id="servicioActividad" class="com.proyectodegrado.sgti.servicios.impl.ServicioActividadImpl">
 			<property name="actividadDao" ref="actividadDao"/>
+			<property name="servicioUsuario" ref="servicioUsuario"/>
+			<property name="servicioEnvioMail" ref="servicioEnvioMail"/>
+		</bean>
+		
+		<bean id="servicioEnvioMail" class="com.proyectodegrado.sgti.servicios.impl.ServicioEnvioMailImpl">
 		</bean>
 		
 		<bean id="servicioHora" class="com.proyectodegrado.sgti.servicios.impl.ServicioHoraImpl">

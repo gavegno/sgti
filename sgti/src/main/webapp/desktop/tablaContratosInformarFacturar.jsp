@@ -100,11 +100,32 @@
                                 
                                     <td class="vert-align"><button class="btn btn-primary" type="submit">Generar Informe</button></td>
                                 </form>
-                                <form action="/CounterWebApp/desktop/informe/validarInforme" method="POST">
-                                	<input type="text" name="id" value="${contrato.id}" hidden></input>
-                                	<td class="vert-align"><button class="btn btn-primary" type="submit">Validar Informe</button></td>
-                                </form>
-                                </tr>
+                                
+		                     	<form action="/CounterWebApp/desktop/informe/validarInforme" method="POST" accept-charset="UTF-8" style="display:inline">
+		
+		                           <input type="text" name="id" value="${contrato.id}" hidden></input>
+		                           <td class="vert-align"><button type="button" class="btn" data-toggle="modal" data-target="#myModal"><span class="glyphicon" aria-hidden="true"></span> Validar Informe </button></td>
+		
+		                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		                              <div class="modal-dialog" role="document">
+		                                <div class="modal-content">
+		                                  <div class="modal-header">
+		                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		                                    <h4 class="modal-title" id="myModalLabel">Validar Informe</h4>
+		                                  </div>
+		                                  <div class="modal-body">
+		                                    <p>¿Realmente desea validar el informe?
+		                                    No se podrán volver a informar las horas con fecha de informe ${contratosFechaInforme[contrato.id]}</p>
+		                                  </div>
+		                                  <div class="modal-footer">
+		                                    <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+		                                    <button type="submit" class="btn btn-danger"> Confirmar </button>
+		                                  </div>
+		                                </div>
+		                              </div>
+		                            </div>
+		                        </form>
+                             </tr>
                             </c:forEach>
                         
                            </tbody>
