@@ -236,6 +236,26 @@ public class ConsultasHora {
 		preparedStatement.executeUpdate();
 		conexionBD.cerrar(con);
 	}
+	
+	public ResultSet esPosibleInsertarHora (Date desde, Date hasta, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM hora AS h "+
+				"WHERE h.contrato =? AND "+
+				"(? BETWEEN h.fechadesde AND h.fechahasta) OR "+
+				"(? BETWEEN h.fechadesde AND h.fechahasta) OR "+
+				"((h.fechadesde > ?) AND h.fechahasta < ?)");
+		
+		preparedStatement.setString(1, idContrato);
+		preparedStatement.setDate(2, desde);
+		preparedStatement.setDate(3, hasta);
+		preparedStatement.setDate(4, desde);
+		preparedStatement.setDate(5, hasta);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		conexionBD.cerrar(con);
+		return resultSet;
+	}
 
 	public Conexion getConexionBD() {
 		return conexionBD;

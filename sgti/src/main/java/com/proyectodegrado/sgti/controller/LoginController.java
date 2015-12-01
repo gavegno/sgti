@@ -92,7 +92,7 @@ public class LoginController {
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		cal.add(Calendar.DAY_OF_YEAR, -60);
+		cal.add(Calendar.DAY_OF_YEAR, -45);
 		
 		Date fechaDesdeFiltro = cal.getTime();
 		
@@ -109,14 +109,14 @@ public class LoginController {
 			if (esTecnico){
 				model.addAttribute("contratos", fachadaContratoTecnicos.listarContratosPorTecnicoTodos(idUsuario));
 				model.addAttribute("horasRegistradas", fachadaHora.seleccionarHorasPorUsuario(idUsuario));
-				model.addAttribute("actividades", fachadaActividad.seleccionarActividadesPorUsuario(idUsuario));
+				model.addAttribute("actividades", fachadaActividad.verActividadesPendientesPorUsuario(idUsuario));
 				model.addAttribute("filtroUsuario", idUsuario);
 				model.addAttribute("todosTiposHora", fachadaTipoHora.verContratoTiposHoraParaGestionarHorasPorTecnico(idUsuario));
 			}
 			else{
 				model.addAttribute("contratos", fachadaContrato.seleccionarContratosVigentes());
 				model.addAttribute("horasRegistradas", fachadaHora.seleccionarHorasConFechaDesde(fechaDesdeFiltro));
-				model.addAttribute("actividades", fachadaActividad.seleccionarActividades());
+				model.addAttribute("actividades", fachadaActividad.seleccionarActividadesPendientes());
 				model.addAttribute("todosTiposHora", fachadaTipoHora.verContratoTiposHoraParaGestionarHoras());
 				
 			}

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".CargahoraAcitivy">
+
+    <item android:id="@+id/mnuGuardarHora" android:title="@string/action_guardarHora"
+        android:orderInCategory="100" app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_save"/>
+
+    <item android:id="@+id/mnuCancelarHora" android:title="@string/action_cancelarHora"
+        app:showAsAction="ifRoom" android:icon="@android:drawable/ic_menu_close_clear_cancel"/>
+</menu>

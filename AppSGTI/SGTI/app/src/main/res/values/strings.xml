@@ -2,6 +2,8 @@
     <string name="app_name">SGTI</string>
     <string name="action_settings">Desvincular dispositivo</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="action_guardarHora">Guardar</string>
+    <string name="action_cancelarHora">Cancelar</string>
 
     <!-- Strings related to login -->
     <string name="usuario">Usuario</string>
@@ -17,4 +19,17 @@
         completions."
     </string>
     <string name="title_activity_registro">RegistroActivity</string>
+    <string name="titulo_cargaHoras">Carga de horas</string>
+    <string name="Desde">Desde</string>
+    <string name="Hasta">Hasta</string>
+    <string name="Contrato">Contrato</string>
+    <string name="TipoHora">Tipo de hora</string>
+    <string name="Actividad">Actividad</string>
+    <string name="Descripcion">Descripción</string>
+    <string name="Comentario">Comentario</string>
+
+    <string name="Seleccionar">Seleccionar</string>
+    <string name="SeleccionarContrato">Seleccione el contrato</string>
+    <string name="HoraDefecto">--:--</string>
+    <string name="MenuPrincipal">Menú principal</string>
 </resources>

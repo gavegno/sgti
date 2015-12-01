@@ -13,7 +13,7 @@ import com.proyectodegrado.sgti.modelo.Hora;
 public interface ServicioHora {
 
 	public abstract void agregar(Hora hora) throws FileNotFoundException,
-			ClassNotFoundException, SQLException, IOException, SgtiException;
+			ClassNotFoundException, SQLException, IOException, SgtiException, ParseException;
 
 	public abstract List<Hora> seleccionarHorasRegistradas()
 			throws FileNotFoundException, ClassNotFoundException, IOException,

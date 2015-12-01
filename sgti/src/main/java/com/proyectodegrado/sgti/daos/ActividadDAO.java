@@ -92,6 +92,45 @@ public class ActividadDAO {
 		return actividades;
 	}
 	
+	public List<Actividad> verActividadesPendientes() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		ResultSet resultSet = consultasActividad.verActividadesPendientes();
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		while(resultSet.next()){
+			Actividad actividad = new Actividad();
+			actividad.setId(resultSet.getString("id"));
+			actividad.setTipo(resultSet.getString("tipo"));
+			actividad.setFechaCreacion(resultSet.getDate("fechacreacion"));
+			actividad.setFechaActividad(resultSet.getDate("fechaactividad"));
+			actividad.setPeriodo(resultSet.getInt("periodo"));
+			actividad.setIdContrato(resultSet.getString("contrato"));
+			actividad.setIdUsuario(resultSet.getString("usuario"));
+			actividad.setDescripcion(resultSet.getString("descripcion"));
+			actividad.setEstado(resultSet.getString("estado"));
+			actividades.add(actividad);
+		}
+		return actividades;
+	}
+	
+	
+	public List<Actividad> verActividadesPendientesPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		ResultSet resultSet = consultasActividad.verActividadesPendientesPorContrato(idContrato);
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		while(resultSet.next()){
+			Actividad actividad = new Actividad();
+			actividad.setId(resultSet.getString("id"));
+			actividad.setTipo(resultSet.getString("tipo"));
+			actividad.setFechaCreacion(resultSet.getDate("fechacreacion"));
+			actividad.setFechaActividad(resultSet.getDate("fechaactividad"));
+			actividad.setPeriodo(resultSet.getInt("periodo"));
+			actividad.setIdContrato(resultSet.getString("contrato"));
+			actividad.setIdUsuario(resultSet.getString("usuario"));
+			actividad.setDescripcion(resultSet.getString("descripcion"));
+			actividad.setEstado(resultSet.getString("estado"));
+			actividades.add(actividad);
+		}
+		return actividades;
+	}
+	
 	public List<Actividad> verActividadesConFechaDesde(Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		ResultSet resultSet = consultasActividad.verActividadesConFechaDesde(new java.sql.Date(fechaDesde.getTime()));
 		List<Actividad> actividades = new ArrayList<Actividad>();
@@ -113,6 +152,45 @@ public class ActividadDAO {
 	
 	public List<Actividad> verActividadesPorUsuario(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		ResultSet resultSet = consultasActividad.verActividadesPorUsuario(idUsuario);
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		while(resultSet.next()){
+			Actividad actividad = new Actividad();
+			actividad.setId(resultSet.getString("id"));
+			actividad.setTipo(resultSet.getString("tipo"));
+			actividad.setFechaCreacion(resultSet.getDate("fechacreacion"));
+			actividad.setFechaActividad(resultSet.getDate("fechaactividad"));
+			actividad.setPeriodo(resultSet.getInt("periodo"));
+			actividad.setIdContrato(resultSet.getString("contrato"));
+			actividad.setIdUsuario(resultSet.getString("usuario"));
+			actividad.setDescripcion(resultSet.getString("descripcion"));
+			actividad.setEstado(resultSet.getString("estado"));
+			actividades.add(actividad);
+		}
+		return actividades;
+	}
+	
+	
+	public List<Actividad> verActividadesPendientesPorUsuarioYContrato(String idUsuario, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		ResultSet resultSet = consultasActividad.verActividadesPendientesPorUsuarioYContrato(idUsuario, idContrato);
+		List<Actividad> actividades = new ArrayList<Actividad>();
+		while(resultSet.next()){
+			Actividad actividad = new Actividad();
+			actividad.setId(resultSet.getString("id"));
+			actividad.setTipo(resultSet.getString("tipo"));
+			actividad.setFechaCreacion(resultSet.getDate("fechacreacion"));
+			actividad.setFechaActividad(resultSet.getDate("fechaactividad"));
+			actividad.setPeriodo(resultSet.getInt("periodo"));
+			actividad.setIdContrato(resultSet.getString("contrato"));
+			actividad.setIdUsuario(resultSet.getString("usuario"));
+			actividad.setDescripcion(resultSet.getString("descripcion"));
+			actividad.setEstado(resultSet.getString("estado"));
+			actividades.add(actividad);
+		}
+		return actividades;
+	}
+	
+	public List<Actividad> verActividadesPendientesPorUsuario(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		ResultSet resultSet = consultasActividad.verActividadesPendientesPorUsuario(idUsuario);
 		List<Actividad> actividades = new ArrayList<Actividad>();
 		while(resultSet.next()){
 			Actividad actividad = new Actividad();

@@ -7,10 +7,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import com.proyectodegrado.sgti.daos.HoraDAO;
 import com.proyectodegrado.sgti.exceptions.SgtiException;
+import com.proyectodegrado.sgti.modelo.Configuracion;
 import com.proyectodegrado.sgti.modelo.Hora;
 import com.proyectodegrado.sgti.servicios.ServicioConfiguracion;
 import com.proyectodegrado.sgti.servicios.ServicioContrato;
@@ -26,7 +28,7 @@ public class ServicioHoraImpl implements ServicioHora {
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioHora#agregar(com.proyectodegrado.sgti.modelo.Hora)
 	 */
 	@Override
-	public void agregar(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, SgtiException{
+	public void agregar(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, SgtiException, ParseException{
 		Date fechaDesdeCheck = hora.getFechaDesde();
 		Date fechaHastaCheck = hora.getFechaHasta();
 		System.out.println("Fecha desde: " + fechaDesdeCheck.toString());
@@ -37,7 +39,12 @@ public class ServicioHoraImpl implements ServicioHora {
 			
 		else
 		{
-			horaDao.insertarHora(hora);
+			if (esPosibleInsertarHora(hora, hora.getIdContrato()))
+			{
+				horaDao.insertarHora(hora);
+			}
+			else
+				throw new SgtiException("Error: conflicto con otra hora ya ingresada para el contrato.");
 		}
 		
 	}
@@ -139,6 +146,33 @@ public class ServicioHoraImpl implements ServicioHora {
 		horaDao.cambiarValidacionHora(id);
 	}
 	
+	private boolean esPosibleInsertarHora(Hora h, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException
+	{
+		boolean permitir = true;
+		
+		List<Hora> lista = horaDao.esPosibleInsertarHora(h.getFechaDesde(), h.getFechaHasta(), idContrato);
+		Iterator<Hora> it = lista.iterator();
+		
+		while (it.hasNext() && ((permitir) == true))
+		{
+			Hora aux = (Hora) it.next();
+			permitir = !(    
+							((h.getFechaDesde().compareTo(aux.getFechaDesde()) >= 0) &&
+							(h.getFechaDesde().compareTo(aux.getFechaHasta()) < 0)) 
+							||
+							((h.getFechaHasta().compareTo(aux.getFechaDesde()) > 0) &&
+							(h.getFechaHasta().compareTo(aux.getFechaHasta()) <= 0))
+							||
+							((h.getFechaDesde().compareTo(aux.getFechaDesde()) <= 0) &&
+							(h.getFechaHasta().compareTo(aux.getFechaHasta()) >= 0))
+						);
+			
+			
+		}
+		
+		return permitir;
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.proyectodegrado.sgti.servicios.impl.ServicioHora#borrar(int)
 	 */
@@ -190,6 +224,7 @@ public class ServicioHoraImpl implements ServicioHora {
 		return fechas;
 		
 	}
+	
 
 
 	public HoraDAO getHoraDao() {

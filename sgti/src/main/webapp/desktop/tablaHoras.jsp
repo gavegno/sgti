@@ -114,8 +114,8 @@
             <input type="hidden" class="form-control form_datetime" name="fechaDesdeFiltro" value="${formattedfechaDesde}" />
             
              <tr id="filaNueva" >
-             	<fmt:formatDate value="${horaCopiada.fechaDesde}" var="formattedfechaDesde" type="date" pattern="dd-MM-yyyy hh:mm" />
-      			<fmt:formatDate value="${horaCopiada.fechaHasta}" var="formattedfechaHasta" type="date" pattern="dd-MM-yyyy hh:mm" />
+             	<fmt:formatDate value="${horaCopiada.fechaDesde}" var="formattedfechaDesde" type="date" pattern="dd-MM-yyyy HH:mm" />
+      			<fmt:formatDate value="${horaCopiada.fechaHasta}" var="formattedfechaHasta" type="date" pattern="dd-MM-yyyy HH:mm" />
                 <td class="col-md-2"><input required="required" type="text" class="form-control text-center form_datetime2" name="fechadesde" value="${formattedfechaDesde}" title="${formattedfechaDesde}"></td>
                 <td class="col-md-2"><input required="required" type="text" class="form-control text-center form_datetime2" name="fechahasta" value="${formattedfechaHasta}" title="${formattedfechaHasta}"></td>
                 <td>
@@ -179,8 +179,8 @@
     <c:forEach items="${horasRegistradas}" var="horasRegistrada" >
       <tr>
       <form class="form-horizontal" action="/CounterWebApp/desktop/hora/editarHora" method="POST">
-      	<fmt:formatDate value="${horasRegistrada.fechaDesde}" var="formattedfechaDesde" type="date" pattern="dd-MM-yyyy hh:mm" />
-      	<fmt:formatDate value="${horasRegistrada.fechaHasta}" var="formattedfechaHasta" type="date" pattern="dd-MM-yyyy hh:mm" />
+      	<fmt:formatDate value="${horasRegistrada.fechaDesde}" var="formattedfechaDesde" type="date" pattern="dd-MM-yyyy HH:mm" />
+      	<fmt:formatDate value="${horasRegistrada.fechaHasta}" var="formattedfechaHasta" type="date" pattern="dd-MM-yyyy HH:mm" />
         
         <c:choose>
             <c:when test="${horasRegistrada.validada}">
@@ -193,31 +193,13 @@
             </c:otherwise>
         </c:choose>
 
-        <td><input disabled="disabled" class="form-control" type="text" name="contrato" value="${horasRegistrada.idContrato}" title="Usuario: ${horasRegistrada.idUsuario}"></td>
+        <td class="col-md-1"><input disabled="disabled" class="form-control" type="text" name="contrato" value="${horasRegistrada.idContrato}" title="Usuario: ${horasRegistrada.idUsuario}"></td>
         
-        <c:choose>
-            <c:when test="${tipoUsuario == 'TECNICO'}">
-                <td>
-                	<input type="text" class="form-control" name="tipohora" id="idtipohora" value="${horasRegistrada.nombreTipoHora}" disabled="disabled" title="${horasRegistrada.nombreTipoHora}">
-                </td>
-            </c:when>                    
-            <c:otherwise>
-                <td>
-                    <select class="form-control" name="tipohora" id="inputTipoHora">
-                        <c:forEach items="${tipoHoras}" var="tipo" >
-                        <c:choose>
-                            <c:when test="${horasRegistrada.nombreTipoHora eq tipo.tipo}">
-                                <option selected="selected" value="${tipo.tipo}"><c:out value="${tipo.tipo}" /></option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${tipo.tipo}"><c:out value="${tipo.tipo}" /></option>
-                            </c:otherwise>
-                        </c:choose>
-                        </c:forEach>
-                    </select>
-                </td>
-            </c:otherwise>
-        </c:choose>
+        
+                
+        <td><input type="text" class="form-control" name="tipohora" id="idtipohora" value="${horasRegistrada.nombreTipoHora}" disabled="disabled" title="${horasRegistrada.nombreTipoHora}"></td>
+                
+            
 
         <c:choose>
             <c:when test="${horasRegistrada.validada}">
@@ -268,37 +250,33 @@
                 <td><textarea class="form-control" name="comentario" rows="2" disabled="disabled">${horasRegistrada.comentario}</textarea></td>
             </c:when>                    
             <c:otherwise>
-                <td>
-                    <select class="form-control" name="actividad">
-                        <option selected="selected" value="nulo"><c:out value="No especificado" /></option>
-                        <c:forEach items="${actividades}" var="actividad" >
-                            <c:choose>
+                <c:choose>
+                    <c:when test="${empty horasRegistrada.idActividad}">
+                        <td><input type="text" class="form-control" name="actividad" id="idactividad" value="No especificado" title="No especificado" disabled="disabled"></td>
+                    </c:when>
+                    <c:otherwise>
+                        <td><input type="text" class="form-control" name="actividad" id="idactividad" value="${horasRegistrada.idActividad}" disabled="disabled"></td>
+                    </c:otherwise>
+                </c:choose>
+                
+                <td><textarea class="form-control" name="descripcion" rows="2">${horasRegistrada.descripcion}</textarea></td>
+                <td><textarea class="form-control" name="comentario" rows="2">${horasRegistrada.comentario}</textarea></td>
 
-                                <c:when test="${horasRegistrada.idActividad eq actividad.id}">
-                                    <option selected="selected" value="${actividad.id}"><c:out value="${actividad.id}" /></option>
-                                </c:when>
-
-                                <c:otherwise>
-                                    <option value="${actividad.id}"><c:out value="${actividad.id}" /></option>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </select>
-                </td>
-                <td><textarea class="form-control" name="descripcion" rows="2" >${horasRegistrada.descripcion}</textarea></td>
-                <td><textarea class="form-control" name="comentario" rows="2" >${horasRegistrada.comentario}</textarea></td>
             </c:otherwise>
         </c:choose>
 
-        <input class="form-control" type="hidden" name="contrato" value="${horasRegistrada.idContrato}" ></td>
+        <input class="form-control" type="hidden" name="contrato" value="${horasRegistrada.idContrato}" >
+        <input class="form-control" type="hidden" name="tipohora" value="${horasRegistrada.nombreTipoHora}" >
         <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >
+        <input class="form-control" type="hidden" name="actividad" value="${horasRegistrada.idActividad}" title="No especificado">
+
         <input class="form-control" type="hidden" name="fechainformar" value="${horasRegistrada.fechaInformar}" >
         <input class="form-control" type="hidden" name="fechafacturar" value="${horasRegistrada.fechaFacturar}" >
         <input class="form-control" type="hidden" name="fechacomputar" value="${horasRegistrada.fechaComputar}" >
 
         <input type="hidden" name="filtroUsuario" value="${filtroUsuario}">
         <input type="hidden" name="filtroValidada" value="${filtroValidada}">
-        <input type="hidden" class="form-control form_datetime" name="fechaDesdeFiltro" value="${formattedfechaDesdeFiltro}" />
+        <input type="hidden" class="form-control form_datetime" name="fechaDesdeFiltro" value="${formattedfechaDesdeFiltro}">
 
         <c:choose>
             <c:when test="${horasRegistrada.validada}">

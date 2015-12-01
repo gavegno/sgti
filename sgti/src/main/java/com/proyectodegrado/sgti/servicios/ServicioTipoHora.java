@@ -40,4 +40,8 @@ public interface ServicioTipoHora {
 			throws FileNotFoundException, ClassNotFoundException, IOException,
 			SQLException;
 
+	List<TipoHora> verTiposHoraPorContrato(String idContrato)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
 }

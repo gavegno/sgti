@@ -78,14 +78,14 @@ public class HoraController extends AbstractController{
 			if (esTecnico){
 				model.addAttribute("contratos", fachadaContratoTecnicos.listarContratosPorTecnicoTodos(idUsuario));
 				model.addAttribute("horasRegistradas", fachadaHora.seleccionarHorasPorUsuario(idUsuario));
-				model.addAttribute("actividades", fachadaActividad.seleccionarActividadesPorUsuario(idUsuario));
+				model.addAttribute("actividades", fachadaActividad.verActividadesPendientesPorUsuario(idUsuario));
 				model.addAttribute("filtroUsuario", idUsuario);
 				model.addAttribute("todosTiposHora", fachadaTipoHora.verContratoTiposHoraParaGestionarHorasPorTecnico(idUsuario));
 			}
 			else{
 				model.addAttribute("contratos", fachadaContrato.seleccionarContratosVigentes());
 				model.addAttribute("horasRegistradas", fachadaHora.seleccionarHorasConFechaDesde(fechaDesdeFiltro));
-				model.addAttribute("actividades", fachadaActividad.seleccionarActividades());
+				model.addAttribute("actividades", fachadaActividad.seleccionarActividadesPendientes());
 				model.addAttribute("todosTiposHora", fachadaTipoHora.verContratoTiposHoraParaGestionarHoras());
 				
 			}
@@ -100,18 +100,12 @@ public class HoraController extends AbstractController{
 			e.printStackTrace();
 			model.addAttribute("errorMessage", MENSAJE_ERROR);
 			
-			//if (!esTecnico)
 				return "desktop/tablaHoras";
-			//else
-				//return "desktop/tablaHorasTecnicos";
 		}finally{
 			context.close();
 		}
 		
-		//if (!esTecnico)
 			return "desktop/tablaHoras";
-		//else
-			//return "desktop/tablaHorasTecnicos";
 	}
 	
 	@RequestMapping(value="/tablaHorasContraparte", method = RequestMethod.POST)
@@ -190,12 +184,12 @@ public class HoraController extends AbstractController{
 			
 			if (esTecnico){
 				model.addAttribute("contratos", fachadaContratoTecnicos.listarContratosPorTecnicoTodos(idUsuario));
-				model.addAttribute("actividades", fachadaActividad.seleccionarActividadesPorUsuario(idUsuario));
+				model.addAttribute("actividades", fachadaActividad.verActividadesPendientesPorUsuario(idUsuario));
 				model.addAttribute("todosTiposHora", fachadaTipoHora.verContratoTiposHoraParaGestionarHorasPorTecnico(idUsuario));
 			}
 			else{
 				model.addAttribute("contratos", fachadaContrato.seleccionarContratosVigentes());
-				model.addAttribute("actividades", fachadaActividad.seleccionarActividades());
+				model.addAttribute("actividades", fachadaActividad.seleccionarActividadesPendientes());
 				model.addAttribute("todosTiposHora", fachadaTipoHora.verContratoTiposHoraParaGestionarHoras());
 			}
 			

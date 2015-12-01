@@ -72,6 +72,13 @@ public class ServicioTipoHoraImpl implements ServicioTipoHora {
 	}
 	
 	@Override
+	public List<TipoHora> verTiposHoraPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		List<TipoHora> lista = tipoHoraDao.verTiposHoraPorContrato(idContrato);
+		return lista;
+	}
+	
+	@Override
 	public void sacarTipoHoraATecnico (String idUsuario, int idTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		tipoHoraDao.sacarTipoHoraATecnico(idUsuario, idTipoHora);
 	}

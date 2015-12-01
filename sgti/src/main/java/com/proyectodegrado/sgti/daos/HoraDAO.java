@@ -15,7 +15,7 @@ import com.proyectodegrado.sgti.modelo.Hora;
 
 public class HoraDAO {
 	
-	private static final String FORMATO_FECHA_COMPLETO = "dd/MM/yyyy hh:mm";
+	private static final String FORMATO_FECHA_COMPLETO = "dd/MM/yyyy HH:mm";
 	private static final String FORMATO_FECHA = "dd/MM/yyyy";
 	private ConsultasHora consultasHora;
 	private TipoHoraDAO tipoHoraDao;
@@ -432,6 +432,37 @@ public class HoraDAO {
 		return horas;
 	}
 	
+	public List<Hora> esPosibleInsertarHora(Date desde, Date hasta, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException
+	{
+		List<Hora> horas = new ArrayList<Hora>();
+		ResultSet resultSet = consultasHora.esPosibleInsertarHora(new java.sql.Date(desde.getTime()), 
+								new java.sql.Date(hasta.getTime()), idContrato);
+		while(resultSet.next()){
+			String stringFechaDesde = prepararFecha(resultSet.getDate("fechadesde"), FORMATO_FECHA);
+			String stringFechaHasta = prepararFecha(resultSet.getDate("fechahasta"), FORMATO_FECHA);
+			Hora hora = new Hora();
+			hora.setId(resultSet.getInt("id"));
+			hora.setFechaDesde(prepararFechaCompleta(FORMATO_FECHA_COMPLETO, resultSet.getString("horadesde"), stringFechaDesde));
+			hora.setFechaHasta(prepararFechaCompleta(FORMATO_FECHA_COMPLETO, resultSet.getString("horahasta"), stringFechaHasta));
+			hora.setRemoto(resultSet.getBoolean("remoto"));
+			hora.setIdUsuario(resultSet.getString("usuario"));
+			hora.setIdContrato(resultSet.getString("contrato"));
+			hora.setFechaInformar(resultSet.getDate("fechainformar"));
+			hora.setFechaFacturar(resultSet.getDate("fechafacturar"));
+			hora.setFechaComputar(resultSet.getDate("fechacomputar"));
+			hora.setValidada(resultSet.getBoolean("validada"));
+			hora.setIdActividad(resultSet.getString("actividad"));
+			hora.setNombreTipoHora(tipoHoraDao.seleccionarPorId(resultSet.getInt("tipohora")).getTipo());
+			hora.setDescripcion(resultSet.getString("descripcion"));
+			hora.setComentario(resultSet.getString("comentario"));
+			hora.setInformada(resultSet.getBoolean("informada"));
+			hora.setFacturada(resultSet.getBoolean("facturada"));
+			hora.setDuracion(resultSet.getInt("duracion"));
+			horas.add(hora);
+		}
+		return horas;
+	}
+	
 	public void editarHoraDetalle(Hora hora) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException{
 		consultasHora.editarHoraFechas(
 				hora.getId(), 
@@ -442,6 +473,11 @@ public class HoraDAO {
 	
 	public void cambiarValidacionHora(int id) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		consultasHora.cambiarValidacionHora(id);
+	}
+	
+	public void esPosibleInsertarHora(Hora h)
+	{
+		
 	}
 	 
 	

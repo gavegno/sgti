@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.proyectodegrado.sgti.daos.ContratoTipoHoraDAO;
 import com.proyectodegrado.sgti.modelo.ContratoTipoHora;
+import com.proyectodegrado.sgti.modelo.TipoHora;
 import com.proyectodegrado.sgti.modelo.TipoHoraComputo;
 import com.proyectodegrado.sgti.servicios.ServicioContratoTipoHora;
 
@@ -44,6 +45,12 @@ public class ServicioContratoTipoHoraImpl implements ServicioContratoTipoHora {
 	@Override
 	public List<ContratoTipoHora> verContratoTiposHoraParaGestionarHorasPorTecnico(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		return contratoTipoHoraDao.verContratoTiposHoraParaGestionarHorasPorTecnico(idUsuario);
+	}
+	
+	@Override
+	public List<TipoHora> verTiposHoraPorTecnicoYContrato(String idUsuario, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		return contratoTipoHoraDao.verTiposHoraPorTecnicoYContrato(idUsuario, idContrato);
 	}
 	
 	/* (non-Javadoc)

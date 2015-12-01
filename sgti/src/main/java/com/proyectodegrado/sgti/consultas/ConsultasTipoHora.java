@@ -58,6 +58,16 @@ public class ConsultasTipoHora {
 		
 	}
 	
+	public ResultSet verTiposHoraPorContrato(String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
+		Connection con = conexionBD.conectar();
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM tipohora AS t where t.id IN (SELECT idtipohora FROM contrato_tipohora AS c WHERE c.idContrato = ?)");
+		preparedStatement.setString(1, idContrato);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(con);
+		return resultSet;
+		
+	}
+	
 	public ResultSet verTiposHoraQueTecnicoNoTengaAsignado(String idTecnico) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection con = conexionBD.conectar();
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM tipohora AS t where t.id NOT IN (SELECT id_tipohora FROM usuario_tipohora WHERE id_usuario=?)");

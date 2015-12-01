@@ -48,6 +48,23 @@ public class ConsultasActividad {
 		return resultSet;
 	}
 	
+	public ResultSet verActividadesPendientes() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM actividad WHERE estado='PENDIENTE'");
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public ResultSet verActividadesPendientesPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM actividad WHERE estado='PENDIENTE' AND contrato=?");
+		preparedStatement.setString(1, idContrato);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
 	public ResultSet verActividadesConFechaDesde(Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM actividad AS a where a.fechaactividad >= ?  order by a.fechaactividad DESC");
@@ -60,6 +77,25 @@ public class ConsultasActividad {
 	public ResultSet verActividadesPorUsuario(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		Connection connection = conexionBD.conectar();
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM actividad AS a WHERE a.usuario=?  order by a.fechaactividad DESC");
+		preparedStatement.setString(1, idUsuario);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public ResultSet verActividadesPendientesPorUsuarioYContrato(String idUsuario, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM actividad AS a WHERE a.usuario=? AND a.contrato=? AND a.estado='PENDIENTE'  order by a.fechaactividad DESC");
+		preparedStatement.setString(1, idUsuario);
+		preparedStatement.setString(2, idContrato);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		conexionBD.cerrar(connection);
+		return resultSet;
+	}
+	
+	public ResultSet verActividadesPendientesPorUsuario(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		Connection connection = conexionBD.conectar();
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM actividad AS a WHERE a.usuario=? AND a.estado='PENDIENTE'  order by a.fechaactividad DESC");
 		preparedStatement.setString(1, idUsuario);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(connection);

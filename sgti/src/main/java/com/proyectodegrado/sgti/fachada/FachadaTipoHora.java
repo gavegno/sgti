@@ -71,6 +71,10 @@ public class FachadaTipoHora {
 		return servicioTipoHora.seleccionarTiposAsignadosAlTecnico(idUsuario);
 	}
 	
+	public List<TipoHora> verTiposHoraPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return servicioTipoHora.verTiposHoraPorContrato(idContrato);
+	}
+	
 	public List<ContratoTipoHora> verContratoTiposHoraParaGestionarHoras() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
 	{
 		return servicioContratoTipoHora.verContratoTiposHoraParaGestionarHoras();
@@ -81,6 +85,10 @@ public class FachadaTipoHora {
 		return servicioContratoTipoHora.verContratoTiposHoraParaGestionarHorasPorTecnico(idUsuario);
 	}
 	
+	public List<TipoHora> verTiposHoraPorTecnicoYContrato(String idUsuario, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		return servicioContratoTipoHora.verTiposHoraPorTecnicoYContrato(idUsuario, idContrato);
+	}
 	
 	public void sacarTipoHoraATecnico (String idUsuario, int idTipoHora) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
 	{

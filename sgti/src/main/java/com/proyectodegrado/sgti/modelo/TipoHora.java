@@ -17,6 +17,17 @@ public class TipoHora {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	public TipoHora(int id, String tipo) {
+		super();
+		this.id = id;
+		this.tipo = tipo;
+	}
+	public TipoHora() {
+		super();
+	}
+	
+	
+	
 	
 	
 }

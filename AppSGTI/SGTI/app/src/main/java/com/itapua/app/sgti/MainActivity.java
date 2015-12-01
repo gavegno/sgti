@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
-        final TextView textoWs;
-        final TextView textoWsExtra;
 
         //Obtengo el id de usuario almacenado en el archivo Shared Preferences.
         //**********************
@@ -52,13 +53,23 @@ public class MainActivity extends AppCompatActivity {
 
         }
         //Si el usuario ya se registró en la aplicación:
+        /*
         else
         {
-            textoWs = (TextView) findViewById(R.id.textViewWS);
-            textoWsExtra = (TextView) findViewById(R.id.textViewWSExtra);
+            Intent intent = new Intent(this, CargahoraActivity.class);
+            startActivity(intent);
 
         }
+        */
 
+        final ImageButton nuevaHora = (ImageButton) findViewById(R.id.imageButtonNuevaHora);
+        nuevaHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), SeleccionContratoActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

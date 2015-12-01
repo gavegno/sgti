@@ -54,6 +54,15 @@ public class ServicioActividadImpl implements ServicioActividad {
 		return actividadDao.verActividades();
 	}
 	
+	@Override
+	public List<Actividad> seleccionarActividadesPendientes() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return actividadDao.verActividadesPendientes();
+	}
+	
+	@Override
+	public List<Actividad> seleccionarActividadesPendientesPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return actividadDao.verActividadesPendientesPorContrato(idContrato);
+	}
 	
 	@Override
 	public List<Actividad> verActividadesDeTecnicoYSusContratos(String idUsuario, Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
@@ -71,6 +80,16 @@ public class ServicioActividadImpl implements ServicioActividad {
 	@Override
 	public List<Actividad> seleccionarActividadesPorUsuario(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		return actividadDao.verActividadesPorUsuario(idUsuario);
+	}
+	
+	@Override
+	public List<Actividad> verActividadesPendientesPorUsuarioYContrato(String idUsuario, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return actividadDao.verActividadesPendientesPorUsuarioYContrato(idUsuario, idContrato);
+	}
+	
+	@Override
+	public List<Actividad> verActividadesPendientesPorUsuario(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
+		return actividadDao.verActividadesPendientesPorUsuario(idUsuario);
 	}
 	
 	/* (non-Javadoc)

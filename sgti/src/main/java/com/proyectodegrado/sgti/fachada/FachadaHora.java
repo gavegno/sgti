@@ -42,6 +42,35 @@ public class FachadaHora {
 		hora.setDuracion(diferenciaEnMinutos(fechaDesde, fechaHasta));
 		servicioHora.agregar(hora);
 		}
+	
+	public void registrarHoraConDates(final Date fechaDesde, final Date fechaHasta, final String tipoHora, final String remoto, final String idUsuario, final String idContrato,
+			final String idActividad, final String descripcion, final String comentario) throws FileNotFoundException, ClassNotFoundException, SQLException, IOException, ParseException, SgtiException{
+
+		Hora hora = new Hora();
+		hora.setFechaDesde(fechaDesde);
+		hora.setFechaHasta(fechaHasta);
+		hora.setFechaInformar(servicioContrato.proximaFechaInforme(idContrato));
+		hora.setFechaFacturar(servicioContrato.proximaFechaFacturacion(idContrato));
+		hora.setFechaComputar(servicioContrato.proximaFechaFacturacion(idContrato));
+		hora.setIdContrato(idContrato);
+		hora.setIdUsuario(idUsuario);
+		hora.setIdActividad(idActividad);
+		hora.setNombreTipoHora(tipoHora);
+		hora.setDescripcion(descripcion);
+		hora.setComentario(comentario);
+		hora.setRemoto(convertirBoolean(remoto));
+		hora.setInformada(false);
+		hora.setFacturada(false);
+		hora.setValidada(false);
+		
+		long milisHasta = fechaHasta.getTime();
+		long milisDesde = fechaDesde.getTime();
+		
+		long diferenciaEnMinutos = (milisHasta - milisDesde) / (60 * 1000);
+		
+		hora.setDuracion((int) diferenciaEnMinutos);
+		servicioHora.agregar(hora);
+		}
 
 	
 	public void editarHora(final String fechaDesde, final String fechaHasta, final String tipoHora, final String remoto, final String idContrato, final String idActividad,

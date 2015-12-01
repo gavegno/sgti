@@ -53,4 +53,20 @@ public interface ServicioActividad {
 			throws FileNotFoundException, ClassNotFoundException, IOException,
 			SQLException, SgtiException;
 
+	List<Actividad> verActividadesPendientesPorUsuarioYContrato(
+			String idUsuario, String idContrato) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
+
+	List<Actividad> verActividadesPendientesPorUsuario(String idUsuario)
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
+	List<Actividad> seleccionarActividadesPendientes()
+			throws FileNotFoundException, ClassNotFoundException, IOException,
+			SQLException;
+
+	List<Actividad> seleccionarActividadesPendientesPorContrato(
+			String idContrato) throws FileNotFoundException,
+			ClassNotFoundException, IOException, SQLException;
+
 }

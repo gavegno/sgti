@@ -91,6 +91,20 @@ public class TipoHoraDAO {
 		return tiposHora;
 	}
 	
+	
+	public List<TipoHora> verTiposHoraPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException
+	{
+		List<TipoHora> tiposHora= new ArrayList<TipoHora>();
+		ResultSet resultSet = consultasTipoHora.verTiposHoraPorContrato(idContrato);
+		while(resultSet.next()){
+			TipoHora dataTipoHora = new TipoHora();
+			dataTipoHora.setId(resultSet.getInt("id"));
+			dataTipoHora.setTipo(resultSet.getString("tipo"));
+			tiposHora.add(dataTipoHora);
+		}
+		return tiposHora;
+	}
+	
 	public void editarTipoHora (int id, String tipo) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException{
 		consultasTipoHora.editarTipoHora(id, tipo);
 	}

@@ -60,6 +60,10 @@ public class FachadaActividad {
 		return servicioActividad.seleccionarActividades();
 	}
 	
+	public List<Actividad> seleccionarActividadesPendientes() throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {
+		return servicioActividad.seleccionarActividadesPendientes();
+	}
+	
 	public List<Actividad> verActividadesDeTecnicoYSusContratos(String idUsuario, Date fechaDesde) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException {
 	
 		
@@ -72,6 +76,18 @@ public class FachadaActividad {
 	
 	public List<Actividad> seleccionarActividadesPorUsuario(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {
 		return servicioActividad.seleccionarActividadesPorUsuario(idUsuario);
+	}
+	
+	public List<Actividad> verActividadesPendientesPorUsuarioYContrato(String idUsuario, String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {
+		return servicioActividad.verActividadesPendientesPorUsuarioYContrato(idUsuario, idContrato);
+	}
+	
+	public List<Actividad> verActividadesPendientesPorUsuario(String idUsuario) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {
+		return servicioActividad.verActividadesPendientesPorUsuario(idUsuario);
+	}
+	
+	public List<Actividad> verActividadesPendientesPorContrato(String idContrato) throws FileNotFoundException, ClassNotFoundException, IOException, SQLException {
+		return servicioActividad.seleccionarActividadesPendientesPorContrato(idContrato);
 	}
 
 	public ServicioActividad getServicioActividad() {
