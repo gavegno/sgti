@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.itapua.app.sgti.Constants.SgtiConstants;
 import com.itapua.app.sgti.interfaces.UsuarioServicio;
 import com.itapua.app.sgti.modelo.Usuario;
 
@@ -32,9 +33,9 @@ public class RegistroActivity extends Activity {
         final EditText textoClave = (EditText) findViewById(R.id.editText2);
         final EditText textoUrl = (EditText) findViewById(R.id.editTextUrl);
 
-        SharedPreferences archivo = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+        SharedPreferences archivo = getSharedPreferences(SgtiConstants.PREFERENCIAS, Context.MODE_PRIVATE);
 
-        String url = archivo.getString("url", "http://192.168.0.203:8080/CounterWebApp");
+        String url = archivo.getString(SgtiConstants.URL, "http://192.168.0.203:8080/CounterWebApp");
         textoUrl.setText(url);
 
         buttonRegistro.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,7 @@ public class RegistroActivity extends Activity {
                         Toast.makeText(v.getContext(), "Cargando...", Toast.LENGTH_SHORT).show();
 
                         usuarioServicio.getAutorizacion(usuarioParaEnviar, new Callback<Boolean>() {
-                                    SharedPreferences archivo = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+                                    SharedPreferences archivo = getSharedPreferences(SgtiConstants.PREFERENCIAS, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = archivo.edit();
 
                                     @Override
@@ -75,8 +76,8 @@ public class RegistroActivity extends Activity {
 
 
                                             //Registro en el archivo el dato de id de usuario.
-                                            editor.putString("usuario", usuario);
-                                            editor.putString("url", textoUrl.getText().toString());
+                                            editor.putString(SgtiConstants.USUARIO, usuario);
+                                            editor.putString(SgtiConstants.URL, textoUrl.getText().toString());
                                             editor.commit();
 
                                             Toast.makeText(v.getContext(), "¡ Bienvenido al sistema !", Toast.LENGTH_SHORT).show();
@@ -89,7 +90,7 @@ public class RegistroActivity extends Activity {
                                             Toast.makeText(v.getContext(), "Usuario y/o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
 
                                             //Por las dudas, limpio los datos del archivo.
-                                            editor.putString("usuario", "");
+                                            editor.putString(SgtiConstants.USUARIO, "");
                                             editor.commit();
                                         }
                                     }

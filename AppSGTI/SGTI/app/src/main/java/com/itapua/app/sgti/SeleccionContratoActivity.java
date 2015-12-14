@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.itapua.app.sgti.Constants.SgtiConstants;
 import com.itapua.app.sgti.interfaces.ContratoServicio;
 import com.itapua.app.sgti.modelo.Contrato;
 import com.itapua.app.sgti.modelo.Usuario;
@@ -39,9 +40,9 @@ public class SeleccionContratoActivity extends AppCompatActivity {
 
         final ListView listViewContratos = (ListView) findViewById(R.id.listViewContratos);
 
-        SharedPreferences archivo = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
-        String url = archivo.getString("url", "http://192.168.0.203:8080/CounterWebApp");
-        String idUsuario = archivo.getString("usuario","");
+        SharedPreferences archivo = getSharedPreferences(SgtiConstants.PREFERENCIAS, Context.MODE_PRIVATE);
+        String url = archivo.getString(SgtiConstants.URL, "http://192.168.230.160:9080/CounterWebApp");
+        String idUsuario = archivo.getString(SgtiConstants.USUARIO,"");
 
         TelephonyManager mngr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
@@ -99,9 +100,10 @@ public class SeleccionContratoActivity extends AppCompatActivity {
                 Contrato con = contratosObtenidos.get(position);
 
                 Intent intent = new Intent(SeleccionContratoActivity.this, CargahoraActivity.class);
-                intent.putExtra("contrato", con.getId());
-                intent.putExtra("cliente", con.getCliente().getId());
+                intent.putExtra(SgtiConstants.CONTRAO, con.getId());
+                intent.putExtra(SgtiConstants.CLIENTE, con.getCliente().getId());
                 startActivity(intent);
+                finish();
 
 
             }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.itapua.app.sgti.Constants.SgtiConstants;
 import com.itapua.app.sgti.interfaces.ActividadServicio;
 import com.itapua.app.sgti.interfaces.HoraYUsuarioServicio;
 import com.itapua.app.sgti.interfaces.TipoHoraServicio;
@@ -72,6 +73,8 @@ public class CargahoraActivity extends AppCompatActivity {
     Spinner spinnerActividad;
     TextView comentarios;
     TextView descripcion;
+    TextView horaEntrada;
+    TextView horaSalida;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,13 +91,17 @@ public class CargahoraActivity extends AppCompatActivity {
         int id = item.getItemId();
         Date fechaDesdeDate;
         Date fechaHastaDate;
+        SharedPreferences archivo = getSharedPreferences(SgtiConstants.PREFERENCIAS, Context.MODE_PRIVATE);
 
         switch (id)
         {
             case R.id.mnuCancelarHora:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                this.finish();
+                finish();
+                break;
+
+            case R.id.mnuListo:
+                removerPreferencias(archivo);
+                finish();
                 break;
 
             case R.id.mnuGuardarHora:
@@ -127,8 +134,26 @@ public class CargahoraActivity extends AppCompatActivity {
                     Date fechaActual = cal.getTime();
 
                     if ((fechaHastaDate.after(fechaDesdeDate)) && (fechaHastaDate != fechaDesdeDate) && (fechaHastaDate.before(fechaActual))) {
-                        chequeado = true;
-                        duracionAux = ((fechaHastaDate.getTime() / 60000) - (fechaDesdeDate.getTime() / 60000));
+                        if(archivo.contains(SgtiConstants.ENTRADA)){
+                            if(fechaDesdeDate.before(simpleFateFormat.parse(archivo.getString(SgtiConstants.ENTRADA, "")))){
+                                mensajeError = "La fecha de entrada no es válida";
+                            }else{
+                                if(archivo.contains(SgtiConstants.SALIDA)) {
+                                    if (fechaHastaDate.after(simpleFateFormat.parse(archivo.getString(SgtiConstants.SALIDA, "")))) {
+                                        mensajeError = "Las fecha de salida no es válida";
+                                    } else {
+                                        chequeado = true;
+                                        duracionAux = ((fechaHastaDate.getTime() / 60000) - (fechaDesdeDate.getTime() / 60000));
+                                    }
+                                }else{
+                                    chequeado = true;
+                                    duracionAux = ((fechaHastaDate.getTime() / 60000) - (fechaDesdeDate.getTime() / 60000));
+                                }
+                            }
+                        }else {
+                            chequeado = true;
+                            duracionAux = ((fechaHastaDate.getTime() / 60000) - (fechaDesdeDate.getTime() / 60000));
+                        }
                     }
                     else mensajeError = "Las fechas no son válidas";
 
@@ -161,11 +186,31 @@ public class CargahoraActivity extends AppCompatActivity {
                 }
                 else
                     Toast.makeText(contexto, mensajeError, Toast.LENGTH_LONG).show();
-
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void removerPreferencias(SharedPreferences archivo) {
+        SharedPreferences.Editor editor = archivo.edit();
+        if(archivo.contains(SgtiConstants.ENTRADA)){
+            editor.remove(SgtiConstants.ENTRADA);
+
+        }
+        if(archivo.contains(SgtiConstants.HORA_ENTRADA)){
+            editor.remove(SgtiConstants.HORA_ENTRADA);
+        }
+        if(archivo.contains(SgtiConstants.SALIDA)){
+            editor.remove(SgtiConstants.SALIDA);
+        }
+        if(archivo.contains(SgtiConstants.HORA_SALIDA)){
+            editor.remove(SgtiConstants.HORA_SALIDA);
+        }
+        if(archivo.contains(SgtiConstants.CLIENTE)){
+            editor.remove(SgtiConstants.CLIENTE);
+        }
+        editor.commit();
     }
 
 
@@ -254,9 +299,16 @@ public class CargahoraActivity extends AppCompatActivity {
                         break;
                     default:
                         Toast.makeText(contexto, "CONFIRMADA. Duración de la hora ingresada: " + integer.toString() + " minutos", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(act, MainActivity.class);
-                        startActivity(intent);
-                        act.finish();
+                        Intent intent = new Intent(CargahoraActivity.this, CargahoraActivity.class);
+                        Bundle extras = getIntent().getExtras();
+
+                        if (extras != null)
+                        {
+                            intent.putExtra(SgtiConstants.CONTRAO, extras.getString(SgtiConstants.CONTRAO));
+                            startActivity(intent);
+                            finish();
+                        }
+
                 }
 
             }
@@ -290,11 +342,23 @@ public class CargahoraActivity extends AppCompatActivity {
         comentarios = (TextView) findViewById(R.id.textComentario);
         descripcion = (TextView) findViewById(R.id.textDescripcion);
 
+        SharedPreferences archivo = getSharedPreferences(SgtiConstants.PREFERENCIAS, Context.MODE_PRIVATE);
+        horaEntrada = (TextView) findViewById(R.id.horaEntrada);
+        horaSalida = (TextView) findViewById(R.id.horaSalida);
 
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+        if(archivo.contains(SgtiConstants.HORA_ENTRADA)){
+            horaEntrada.setText("(Ent: " + archivo.getString(SgtiConstants.HORA_ENTRADA, "") + ")");
+        }else{
+            horaEntrada.setText("");
+        }
+        if(archivo.contains(SgtiConstants.HORA_SALIDA)){
+            horaSalida.setText("(Sal: " + archivo.getString(SgtiConstants.HORA_SALIDA , "") + ")");
+        }else{
+            horaSalida.setText("");
+        }
 
-
-        SharedPreferences archivo = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
-        url = archivo.getString("url", "http://192.168.0.203:8080/CounterWebApp");
+        url = archivo.getString("url", "http://192.168.230.160:9080/CounterWebApp");
         idUsuario = archivo.getString("usuario","");
 
         TelephonyManager mngr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);

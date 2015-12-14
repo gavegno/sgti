@@ -3,6 +3,7 @@
     <string name="action_settings">Desvincular dispositivo</string>
     <string name="title_activity_login">Sign in</string>
     <string name="action_guardarHora">Guardar</string>
+    <string name="action_listo">Listo</string>
     <string name="action_cancelarHora">Cancelar</string>
 
     <!-- Strings related to login -->
