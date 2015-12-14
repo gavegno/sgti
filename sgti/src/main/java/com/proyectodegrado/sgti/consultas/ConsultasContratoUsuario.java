@@ -34,7 +34,7 @@ public class ConsultasContratoUsuario {
 	
 	public ResultSet listarTecnicosCandidatosPorContrato(String idContrato) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException{
 		Connection connection = conexionBD.conectar();
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.tipo='TECNICO' AND u.id NOT IN (Select idusuario from contrato_tecnico AS c where c.idcontrato=?)");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM usuario AS u WHERE u.tipo!='CONTRAPARTE' AND u.id NOT IN (Select idusuario from contrato_tecnico AS c where c.idcontrato=?)");
 		preparedStatement.setString(1, idContrato);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		conexionBD.cerrar(connection);

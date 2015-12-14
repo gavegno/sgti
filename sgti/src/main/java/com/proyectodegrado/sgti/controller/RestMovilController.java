@@ -4,11 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proyectodegrado.sgti.exceptions.SgtiException;
 import com.proyectodegrado.sgti.fachada.FachadaActividad;
-import com.proyectodegrado.sgti.fachada.FachadaCliente;
-import com.proyectodegrado.sgti.fachada.FachadaContrato;
 import com.proyectodegrado.sgti.fachada.FachadaContratoTecnicos;
 import com.proyectodegrado.sgti.fachada.FachadaHora;
 import com.proyectodegrado.sgti.fachada.FachadaTipoHora;
@@ -39,17 +33,11 @@ import com.proyectodegrado.sgti.modelo.Usuario;
 @RequestMapping("/desktop/movil")
 public class RestMovilController {
 	
-	
-	//Clase de intercambio, recibida en el webservice de ingreso de hora.
-	
-	
 	private FachadaUsuario fachadaUsuario;
 	private FachadaContratoTecnicos fachadaContratoTecnicos;
-	private FachadaContrato fachadaContrato;
 	private FachadaTipoHora fachadaTipoHora;
 	private FachadaActividad fachadaActividad;
 	private FachadaHora fachadaHora;
-	private FachadaCliente fachadaCliente;
 	
 	@RequestMapping(value = "/usr", method = RequestMethod.GET, headers="Accept=application/json", produces = {"application/json"})
 	public @ResponseBody Usuario usuarioWService()
@@ -87,20 +75,6 @@ public class RestMovilController {
 		return cliente;
 	}
 	
-	/*
-	@RequestMapping(value= "/pruebaAuth", method = RequestMethod.POST, headers="Accept=application/json", produces={"application/json"}, consumes={"application/json"})
-	@ResponseBody
-	public String pruebaAuth(@RequestBody Cliente cliente){
-		
-			
-		if (cliente.getId() == 123)	
-				return "true";
-			else
-				return "false";
-		
-	}
-	*/
-	
 	@RequestMapping(value= "/authorized", method=RequestMethod.POST, headers="Accept=application/json", consumes={"application/json"})
 	@ResponseBody
 	public boolean logueo(@RequestBody Usuario usuario){
@@ -110,15 +84,11 @@ public class RestMovilController {
 		System.out.println("Contra obtenida: " + usuario.getContrasena());
 		
 		try {
-			
 			Usuario usuarioObtenido = fachadaUsuario.seleccionarUsuario(usuario.getId());
 			String contrasenaHash = fachadaUsuario.get_MD5_SecurePassword(usuario.getContrasena());
 			
-			if(usuarioObtenido.getContrasena() != null 
-					&& 
-					usuarioObtenido.getContrasena().toLowerCase().equals(contrasenaHash.toLowerCase()))
+			if(usuarioObtenido.getContrasena() != null && usuarioObtenido.getContrasena().toLowerCase().equals(contrasenaHash.toLowerCase()))
 			{
-				
 				fachadaUsuario.asignarIMEI(usuarioObtenido.getId(), usuario.getImei());
 				return true;
 			}
@@ -139,20 +109,16 @@ public class RestMovilController {
 	}
 	
 	@RequestMapping(value = "/contratosPorTecnico", method = RequestMethod.POST, headers="Accept=application/json", produces = {"application/json"}, consumes="application/json")
-	
 	public @ResponseBody List<Contrato> contratosPorTecnico(@RequestBody Usuario usuario)
 	{
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		fachadaContratoTecnicos = (FachadaContratoTecnicos) context.getBean("fachadaContratoTecnicos"); 
-		fachadaContrato = (FachadaContrato) context.getBean("fachadaContrato");
 		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
 			System.out.println("/contratosPorTecnico");
 			List<Contrato> lista = null;
 			String imei = usuario.getImei().trim();
 			System.out.println("Usuario: "+usuario.getId());
 			System.out.println("Imei: "+usuario.getImei());
-			
-		
 		
 		try {
 			if (imei.equalsIgnoreCase(fachadaUsuario.seleccionarUsuario(usuario.getId()).getImei().trim()))
@@ -189,16 +155,10 @@ public class RestMovilController {
 			
 				fachadaUsuario.asignarIMEI(usuarioObtenido.getId(), "");
 				return true;
-			}
-			
-			else
-			{
+			}else{
 				return false;
 			}
-		
-		}
-		
-		catch(ClassNotFoundException | IOException | SQLException e) {
+		}catch(ClassNotFoundException | IOException | SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -207,8 +167,7 @@ public class RestMovilController {
 		}
 	}
 	
-@RequestMapping(value = "/tiposHoraParaContrato", method = RequestMethod.POST, headers="Accept=application/json", produces = {"application/json"}, consumes="application/json")
-	
+	@RequestMapping(value = "/tiposHoraParaContrato", method = RequestMethod.POST, headers="Accept=application/json", produces = {"application/json"}, consumes="application/json")
 	public @ResponseBody List<TipoHora> tiposDeHoraPorContratoYTecnico(@RequestBody Usuario usuario)
 	{
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -216,13 +175,10 @@ public class RestMovilController {
 		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
 		fachadaTipoHora = (FachadaTipoHora) context.getBean("fachadaTipoHora");
 		
-		
-			System.out.println("/tiposHoraParaContrato");
-			List<TipoHora> lista = null;
-			String imei = usuario.getImei().trim();
-			
-			boolean esTecnico = false;
-		
+		System.out.println("/tiposHoraParaContrato");
+		List<TipoHora> lista = null;
+		String imei = usuario.getImei().trim();
+		boolean esTecnico = false;
 		
 		try {
 			if (imei.equalsIgnoreCase(fachadaUsuario.seleccionarUsuario(usuario.getId()).getImei().trim()))
@@ -241,9 +197,9 @@ public class RestMovilController {
 					lista = fachadaTipoHora.verTiposHoraPorContrato(usuario.getNombre());
 				}
 			}
-			else
+			else{
 				System.out.println("ERROR: Los imei difieren");
-				
+			}	
 			return lista;
 
 		} catch (ClassNotFoundException | IOException | SQLException e) {
@@ -263,14 +219,10 @@ public class RestMovilController {
 		fachadaUsuario = (FachadaUsuario) context.getBean("fachadaUsuario");
 		fachadaActividad = (FachadaActividad) context.getBean("fachadaActividad");
 		
-		
-			System.out.println("/actividadesPorContratoYTecnico");
-			List<Actividad> lista = null;
-			String imei = usuario.getImei().trim();
-			
-			boolean esTecnico = false;
-			
-		
+		System.out.println("/actividadesPorContratoYTecnico");
+		List<Actividad> lista = null;
+		String imei = usuario.getImei().trim();
+		boolean esTecnico = false;
 		
 		try {
 			if (imei.equalsIgnoreCase(fachadaUsuario.seleccionarUsuario(usuario.getId()).getImei().trim()))
@@ -287,9 +239,9 @@ public class RestMovilController {
 					lista = fachadaActividad.verActividadesPendientesPorContrato(usuario.getNombre());
 				}
 			}
-			else
+			else{
 				System.out.println("ERROR: Los imei difieren");
-				
+			}
 			return lista;
 	
 		} catch (ClassNotFoundException | IOException | SQLException e) {
@@ -302,7 +254,6 @@ public class RestMovilController {
 	}
 	
 	@RequestMapping(value = "/ingresoHora", method = RequestMethod.PUT, headers="Accept=application/json", consumes={"application/json"}, produces={"application/json"})
-	
 	public @ResponseBody Integer ingresoHoraMovil(@RequestBody HoraYUsuario horayusuario)
 	{
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml"); 
@@ -313,35 +264,31 @@ public class RestMovilController {
 		String imei = horayusuario.getImei().trim();
 		int duracion = 0;
 		
-		try {
+		try{
 			if (imei.equalsIgnoreCase(fachadaUsuario.seleccionarUsuario(horayusuario.getIdUsuario()).getImei().trim()))
 			{
-			
-				
-					fachadaHora.registrarHora(
-						horayusuario.getFechaDesde(), 
-						horayusuario.getFechaHasta(), 
-						horayusuario.getTipoHora(), 
-						"false", //remoto 
-						horayusuario.getIdUsuario(), 
-						horayusuario.getIdContrato(),
-						horayusuario.getActividad(), 
-						horayusuario.getDescripcion(), 
-						horayusuario.getComentario()
-						);
+				fachadaHora.registrarHora(
+					horayusuario.getFechaDesde(), 
+					horayusuario.getFechaHasta(), 
+					horayusuario.getTipoHora(), 
+					"false", //remoto 
+					horayusuario.getIdUsuario(), 
+					horayusuario.getIdContrato(),
+					horayusuario.getActividad(), 
+					horayusuario.getDescripcion(), 
+					horayusuario.getComentario()
+					);
 						
-					long diferenciaEnMinutos = fachadaHora.diferenciaEnMinutos(horayusuario.getFechaDesde(), horayusuario.getFechaHasta());
-					duracion = (int) diferenciaEnMinutos;
-			}
-			else
+				long diferenciaEnMinutos = fachadaHora.diferenciaEnMinutos(horayusuario.getFechaDesde(), horayusuario.getFechaHasta());
+				duracion = (int) diferenciaEnMinutos;
+			}else
 				System.out.println("ERROR: Los imei difieren");
 			
 			return duracion;
 	
-		} catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
+		}catch (ClassNotFoundException | IOException | SQLException | ParseException e) {
 			return duracion;
-		} catch (SgtiException e) {
-			
+		}catch (SgtiException e) {
 			duracion = -1;
 			e.getMessage();
 			return duracion;
@@ -353,15 +300,13 @@ public class RestMovilController {
 	
 	@RequestMapping(value = "/horayusr", method = RequestMethod.GET, headers="Accept=application/json", produces = {"application/json"})
 	public @ResponseBody HoraYUsuario usuarioWebService()
-	{	HoraYUsuario horaYUsuario = new HoraYUsuario();
-		
-		
-			
+	{	
+		HoraYUsuario horaYUsuario = new HoraYUsuario();
 		return horaYUsuario; 
 	}
 	
 	
-@RequestMapping(value = "/pruebaUsuario", method = RequestMethod.PUT, headers="Accept=application/json", consumes={"application/json"}, produces = {"application/json"})
+	@RequestMapping(value = "/pruebaUsuario", method = RequestMethod.PUT, headers="Accept=application/json", consumes={"application/json"}, produces = {"application/json"})
 	public @ResponseBody Integer ingresoPruebaUsuario(@RequestBody Usuario u)
 	{
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml"); 
@@ -369,15 +314,11 @@ public class RestMovilController {
 		
 		System.out.println("/ingresoClientePrueba");
 		
-		try {
-
-				fachadaUsuario.ingresarUsuario(u.getId(), u.getNombre(), u.getApellido(), u.getContrasena(), u.getEmail(), u.getTelefono(), u.getTipo(), new ArrayList<String>());
-
+		try{
+			fachadaUsuario.ingresarUsuario(u.getId(), u.getNombre(), u.getApellido(), u.getContrasena(), u.getEmail(), u.getTelefono(), u.getTipo(), new ArrayList<String>());
 			return 1;
 			
-		} catch (ClassNotFoundException | IOException | SQLException | NoSuchAlgorithmException
-				| SgtiException e) {
-
+		}catch (ClassNotFoundException | IOException | SQLException | NoSuchAlgorithmException | SgtiException e) {
 			e.printStackTrace();
 			return 0;
 		}
