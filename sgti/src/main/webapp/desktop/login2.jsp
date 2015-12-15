@@ -31,7 +31,7 @@
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Iniciar sesión</h1>
             <div class="account-wall">
-                <form class="form-signin" action="/CounterWebApp/desktop/login/loguearse" method="POST">
+                <form class="form-signin" action="/Sgti/desktop/login/loguearse" method="POST">
                     
                     <div class="form-group">
                         <label for="inputUsuario" class="control-label">Usuario:</label>

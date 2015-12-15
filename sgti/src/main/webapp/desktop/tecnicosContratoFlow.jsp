@@ -14,7 +14,7 @@
     	request.removeAttribute("usuario");
 		if(usuarioSesion==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -67,7 +67,7 @@
 
                                 <c:forEach items="${tecnicos}" var="tecnico" >
                                 <tr>
-                                    <form class="form-control" action="/CounterWebApp/desktop/contrato/sacarTecnicoDesdeFlow" method="POST">
+                                    <form class="form-control" action="/Sgti/desktop/contrato/sacarTecnicoDesdeFlow" method="POST">
                                         <input class="form-control" type="hidden" name="id" value="${idContrato}" />
                                         <input class="form-control" type="hidden" name="idUsuario" value="${tecnico.id}" />
                                         <td><input class="form-control" size="20" type="text" name="idUsuario" value="${tecnico.id}" disabled="disabled"></td>
@@ -86,7 +86,7 @@
 
 
                         <br>
-                        <form class="form-horizontal" action="/CounterWebApp/desktop/contrato/asignarTecnicoDesdeFlow" method="POST">
+                        <form class="form-horizontal" action="/Sgti/desktop/contrato/asignarTecnicoDesdeFlow" method="POST">
                             <input class="form-control" type="hidden" name="id" value="${idContrato}" />
 
                         <div class="row">
@@ -133,7 +133,7 @@
 
                         
                         <br><br>
-                        <form class="form-horizontal" action="/CounterWebApp/desktop/configuracion/ingresar" method="POST">
+                        <form class="form-horizontal" action="/Sgti/desktop/configuracion/ingresar" method="POST">
                             <input type="hidden" class="form-control" name="idContrato" value="${idContrato}">
                             <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Pasar al paso 6 </button>
                             <br><br>

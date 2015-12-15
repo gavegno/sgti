@@ -28,7 +28,7 @@
         <div class="col-sm-10 col-md-8">
             <h2 class="text-center">Gestión de hora</h2>
             <div>
-                <form class="form-horizontal" action="/CounterWebApp/desktop/hora/detalleHoraOk" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/hora/detalleHoraOk" method="POST">
                     
                     <input type="text" name="id" value="${hora.id}" hidden></input>
                     <input type="text" name="fechaDesde" value="${hora.fechaDesde}" hidden></input>
@@ -149,7 +149,7 @@
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Confirmar </button>
                     </form>
 
-                    <form class="form-horizontal" action="/CounterWebApp/desktop/hora/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
+                    <form class="form-horizontal" action="/Sgti/desktop/hora/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
                         <input type="text" name="id" value="${hora.id}" hidden></input>          
                                   
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar </button>
@@ -174,7 +174,7 @@
                             </div>
                     </form>
 
-                    <form class="form-horizontal" action="/CounterWebApp/desktop/hora/ingresar" method="GET" accept-charset="UTF-8" style="display:inline">                    
+                    <form class="form-horizontal" action="/Sgti/desktop/hora/ingresar" method="GET" accept-charset="UTF-8" style="display:inline">                    
                         
                         <button class="btn btn-default" type="submit"> <span class="glyphicon glyphicon-menu-left"></span> Cancelar </button>
                     </form>

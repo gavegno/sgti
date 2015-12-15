@@ -23,7 +23,7 @@
     	request.removeAttribute("usuario");
 		if(usuarioSesion==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -44,7 +44,7 @@
     <div class="container">
         <h2 class="text-center">Tabla de horas</h2>
 
-        <form action="/CounterWebApp/desktop/hora/tablaFiltradaContraparte" method="POST">
+        <form action="/Sgti/desktop/hora/tablaFiltradaContraparte" method="POST">
         <div class="row">
 
           <div class="col-lg-4">

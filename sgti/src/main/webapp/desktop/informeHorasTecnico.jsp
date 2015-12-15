@@ -14,7 +14,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -30,7 +30,7 @@
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Informar Horas Por Técnico</h1>
             <div class="account-wall">
-                <form class="form-signin" action="/CounterWebApp/desktop/informe/informarHorasTecnico" method="POST">
+                <form class="form-signin" action="/Sgti/desktop/informe/informarHorasTecnico" method="POST">
                     
                      <div class="form-group">
 	                    <label for="inputUsuario" class="control-label">Técnico:</label>

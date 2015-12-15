@@ -14,7 +14,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -57,7 +57,7 @@
                             <tbody>
 
                             <c:forEach items="${contratos}" var="contrato" >
-                                <form action="/CounterWebApp/desktop/informe/informarHoras" method="POST">
+                                <form action="/Sgti/desktop/informe/informarHoras" method="POST">
                                 <tr >
                                     <input type="text" name="id" value="${contrato.id}" hidden></input>
                                     
@@ -101,7 +101,7 @@
                                     <td class="vert-align"><button class="btn btn-primary" type="submit">Generar Informe</button></td>
                                 </form>
                                 
-		                     	<form action="/CounterWebApp/desktop/informe/validarInforme" method="POST" accept-charset="UTF-8" style="display:inline">
+		                     	<form action="/Sgti/desktop/informe/validarInforme" method="POST" accept-charset="UTF-8" style="display:inline">
 		
 		                           <input type="text" name="id" value="${contrato.id}" hidden></input>
 		                           <td class="vert-align"><button type="button" class="btn" data-toggle="modal" data-target="#myModal"><span class="glyphicon" aria-hidden="true"></span> Validar Informe </button></td>

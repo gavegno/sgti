@@ -12,7 +12,7 @@
     	request.removeAttribute("usuario");
 		if(usuario==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -58,7 +58,7 @@
 
                 </div>
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/configuracion/ingresarConfiguracion" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/configuracion/ingresarConfiguracion" method="POST">
 
                     <div class="form-group container">
                         <label for="inputFechaDesde" class="control-label">Inicio de vigencia</label>

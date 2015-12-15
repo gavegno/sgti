@@ -13,7 +13,7 @@
     	request.removeAttribute("usuario");
 		if(usuario==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -37,7 +37,7 @@
         <div class="col-sm-10 col-md-8">
             <h2 class="container text-center">Gestión de actividades</h2>
             <div class="form-group container">
-                <form class="form-horizontal" action="/CounterWebApp/desktop/actividad/ingresarActividad" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/actividad/ingresarActividad" method="POST">
 					
 					<div class="form-group container">
                         <label for="inputId" class="control-label">Identificador:</label>

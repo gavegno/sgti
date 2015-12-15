@@ -15,7 +15,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -59,7 +59,7 @@
                             <tbody>
                                 <c:forEach items="${configs}" var="configuracion" >
                                 
-                                <form action="/CounterWebApp/desktop/configuracion/editarConfig" method="POST">
+                                <form action="/Sgti/desktop/configuracion/editarConfig" method="POST">
 
                                     <tr>
                                 
@@ -80,7 +80,7 @@
                                     <td class="vert-align"><button class="btn btn-success" type="submit"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Ver/Editar </button></td>
                                 </form>
 
-                                <form action="/CounterWebApp/desktop/configuracion/copiarConfig" method="POST">
+                                <form action="/Sgti/desktop/configuracion/copiarConfig" method="POST">
                                     <input type="text" name="idContrato" value="${idContrato}" hidden></input>
                                     <input type="text" name="idConfiguracion" value="${configuracion.id}" hidden></input>
                                     <td class="vert-align"><button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-copy" aria-hidden="true"></span> Copiar </button></td>
@@ -92,13 +92,13 @@
                     
                     <br>
 
-                    <form class="form-horizontal" action="/CounterWebApp/desktop/configuracion/agregarConfig" method="POST">
+                    <form class="form-horizontal" action="/Sgti/desktop/configuracion/agregarConfig" method="POST">
                         <input type="text" name="idContrato" value="${idContrato}" hidden></input>
                         <button class="btn btn-primary" id="boton" type="submit"> <span class="glyphicon glyphicon-plus"></span> Agregar nueva </button>
                     </form>
                     
                     <br>
-                    <form class="form-horizontal" action="/CounterWebApp/desktop/contrato/tablaSocio" method="GET">
+                    <form class="form-horizontal" action="/Sgti/desktop/contrato/tablaSocio" method="GET">
                         <button class="btn btn-default" id="boton" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Volver </button>
                         <br><br>
                     </form>

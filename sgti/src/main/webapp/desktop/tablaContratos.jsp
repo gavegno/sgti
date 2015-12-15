@@ -13,7 +13,7 @@
     	request.removeAttribute("usuario");
 		if(usuario==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>

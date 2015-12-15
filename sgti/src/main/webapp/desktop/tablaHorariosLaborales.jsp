@@ -14,7 +14,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 
@@ -59,14 +59,14 @@
         <tr>
 
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/dias/cargarVer" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/dias/cargarVer" method="POST">
                     <input type="text" name="id" value="${horario.id}" hidden></input>
                     <td><input class="vert-align form-control" size="6" name="id" value="${horario.id}" disabled="disabled"></td>
                     <td hidden="hidden">${horario.id}</td>
                     <td class="vert-align"><button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver </button></td>
                 </form>
 
-               <form class="form-horizontal" action="/CounterWebApp/desktop/dias/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
+               <form class="form-horizontal" action="/Sgti/desktop/dias/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
                     <input type="text" name="id" value="${horario.id}" hidden></input>
 
 

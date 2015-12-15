@@ -35,7 +35,7 @@ public class RegistroActivity extends Activity {
 
         SharedPreferences archivo = getSharedPreferences(SgtiConstants.PREFERENCIAS, Context.MODE_PRIVATE);
 
-        String url = archivo.getString(SgtiConstants.URL, "http://192.168.0.203:8080/CounterWebApp");
+        String url = archivo.getString(SgtiConstants.URL, "http://192.168.0.203:8080/Sgti");
         textoUrl.setText(url);
 
         buttonRegistro.setOnClickListener(new View.OnClickListener() {

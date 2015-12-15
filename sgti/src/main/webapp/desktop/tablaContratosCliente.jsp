@@ -51,7 +51,7 @@
                                     <td><input class="vert-align form-control" name="cliente" value="${contrato.cliente.nombre}" disabled="disabled"></td>
                                     <td><input class="vert-align form-control" name="contraparte" value="${contrato.contraparte.id}" disabled="disabled"></td>
                                    
-                                    <form action="/CounterWebApp/desktop/hora/tablaHorasContraparte" method="POST">
+                                    <form action="/Sgti/desktop/hora/tablaHorasContraparte" method="POST">
 
                                         <input type="text" name="id" value="${contrato.id}" hidden></input>
                                         <td class="vert-align"><button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Ver horas </button></td>

@@ -15,7 +15,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -58,7 +58,7 @@
 
                                 <c:forEach items="${tiposHoraContrato}" var="tipo" >
                                 <tr>
-                                <form action="/CounterWebApp/desktop/tiposDeHora/editarContratoTipoHora" method="POST">
+                                <form action="/Sgti/desktop/tiposDeHora/editarContratoTipoHora" method="POST">
                                         
                                 
                                     <input type="text" name="id" value="${id}" hidden></input>
@@ -72,7 +72,7 @@
                                     <td class="vert-align"><button class="btn btn-success" type="submit"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Guardar </button></td>
                                 </form>
 
-                                <form action="/CounterWebApp/desktop/tiposDeHora/borrarContratoTipoHora" method="POST">
+                                <form action="/Sgti/desktop/tiposDeHora/borrarContratoTipoHora" method="POST">
                                     <input type="text" name="id" value="${id}" hidden></input>
                                     <input type="text" name="tipoId" value="${tipo.tipoHora.id}" hidden></input>
 
@@ -85,13 +85,13 @@
                     
                     <br>
 
-                    <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/agregarContratoTipoHora" method="POST">
+                    <form class="form-horizontal" action="/Sgti/desktop/tiposDeHora/agregarContratoTipoHora" method="POST">
                         <input type="text" name="id" value="${id}" hidden></input>
                         <button class="btn btn-primary" id="boton" type="submit"> <span class="glyphicon glyphicon-plus"></span> Agregar nuevo </button>
                     </form>
                     
                     <br>
-                    <form class="form-horizontal" action="/CounterWebApp/desktop/contrato/tablaSocio" method="GET">
+                    <form class="form-horizontal" action="/Sgti/desktop/contrato/tablaSocio" method="GET">
                         <button class="btn btn-default" id="boton" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Volver </button>
                         <br><br>
                     </form>

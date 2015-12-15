@@ -19,7 +19,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/CounterWebApp/desktop/ppal/inicio">SGTI - Itapúa</a>
+      <a class="navbar-brand" href="/Sgti/desktop/ppal/inicio">SGTI - Itapúa</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,16 +32,16 @@
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Horas <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	          	<c:if test="${tipoUsuario == 'SOCIO'}">
-	          		<li><a href="/CounterWebApp/desktop/hora/principal">Agregar tipo de hora</a></li>
-	          		<li><a href="/CounterWebApp/desktop/tiposDeHora/tabla">Ver tipos de hora</a></li>
+	          		<li><a href="/Sgti/desktop/hora/principal">Agregar tipo de hora</a></li>
+	          		<li><a href="/Sgti/desktop/tiposDeHora/tabla">Ver tipos de hora</a></li>
 	          		<li role="separator" class="divider"></li>
-	          		<li><a href="/CounterWebApp/desktop/dias/principal">Agregar horario laboral</a></li>
-					<li><a href="/CounterWebApp/desktop/dias/tabla">Ver horarios laborales</a></li>
+	          		<li><a href="/Sgti/desktop/dias/principal">Agregar horario laboral</a></li>
+					<li><a href="/Sgti/desktop/dias/tabla">Ver horarios laborales</a></li>
 	          		<li role="separator" class="divider"></li>
-	          		<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
+	          		<li><a href="/Sgti/desktop/hora/ingresar">Registrar hora</a></li>
 	          	</c:if>
 	            <c:if test="${tipoUsuario == 'TECNICO'}">
-	            	<li><a href="/CounterWebApp/desktop/hora/ingresar">Registrar hora</a></li>
+	            	<li><a href="/Sgti/desktop/hora/ingresar">Registrar hora</a></li>
 	            </c:if>
 	          </ul>
 	        </li>
@@ -51,9 +51,9 @@
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="/CounterWebApp/desktop/tecnicos/ingresar">Agregar usuario</a></li>
-	            <li><a href="/CounterWebApp/desktop/tecnicos/tabla">Ver y modificar usuario</a></li>
-	            <li><a href="/CounterWebApp/desktop/informe/tecnicos">Informe de horas</a></li>
+	            <li><a href="/Sgti/desktop/tecnicos/ingresar">Agregar usuario</a></li>
+	            <li><a href="/Sgti/desktop/tecnicos/tabla">Ver y modificar usuario</a></li>
+	            <li><a href="/Sgti/desktop/informe/tecnicos">Informe de horas</a></li>
 	          </ul>
 	        </li>
         </c:if>
@@ -62,8 +62,8 @@
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="/CounterWebApp/desktop/cliente/principal">Agregar cliente</a></li>
-	            <li><a href="/CounterWebApp/desktop/cliente/tabla">Ver y modificar cliente</a></li>
+	            <li><a href="/Sgti/desktop/cliente/principal">Agregar cliente</a></li>
+	            <li><a href="/Sgti/desktop/cliente/tabla">Ver y modificar cliente</a></li>
 	          </ul>
 	        </li>
 		</c:if>
@@ -73,12 +73,12 @@
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contratos <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	          <c:if test="${tipoUsuario == 'SOCIO'}">
-	            <li><a href="/CounterWebApp/desktop/contrato/ingresar">Crear contrato</a></li>
-	            <li><a href="/CounterWebApp/desktop/contrato/tablaSocio">Ver contratos</a></li>
-	            <li><a href="/CounterWebApp/desktop/contrato/tablaSocioInformarFacturar">Informar Horas</a></li>
+	            <li><a href="/Sgti/desktop/contrato/ingresar">Crear contrato</a></li>
+	            <li><a href="/Sgti/desktop/contrato/tablaSocio">Ver contratos</a></li>
+	            <li><a href="/Sgti/desktop/contrato/tablaSocioInformarFacturar">Informar Horas</a></li>
 	          </c:if>
 	          <c:if test="${tipoUsuario == 'CONTRAPARTE'}">
-	            <li><a href="/CounterWebApp/desktop/contrato/tablaContraparte">Ver mis contratos</a></li>
+	            <li><a href="/Sgti/desktop/contrato/tablaContraparte">Ver mis contratos</a></li>
 	          </c:if>
 	          </ul>
 	        </li>
@@ -88,11 +88,11 @@
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actividad <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	          <c:if test="${tipoUsuario == 'SOCIO'}">
-	            <li><a href="/CounterWebApp/desktop/actividad/ingresar">Crear actividad</a></li>
-	            <li><a href="/CounterWebApp/desktop/actividad/ver">Ver actividades</a></li>
+	            <li><a href="/Sgti/desktop/actividad/ingresar">Crear actividad</a></li>
+	            <li><a href="/Sgti/desktop/actividad/ver">Ver actividades</a></li>
 	          </c:if>
 	          <c:if test="${tipoUsuario == 'TECNICO'}">
-	            <li><a href="/CounterWebApp/desktop/actividad/verPorUsuario">Ver mis actividades</a></li>
+	            <li><a href="/Sgti/desktop/actividad/verPorUsuario">Ver mis actividades</a></li>
 	          </c:if>
 	          </ul>
 	        </li>
@@ -122,10 +122,9 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size: large;"> <span class="glyphicon glyphicon-user"></span> </a>
           <ul class="dropdown-menu">
-            <li><a href="#">Ver mis datos</a></li>
-            <li><a href="/CounterWebApp/desktop/tecnicos/cargarCambiarContrasena">Cambiar mi contraseña</a></li>
+            <li><a href="/Sgti/desktop/tecnicos/cargarCambiarContrasena">Cambiar mi contraseña</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/CounterWebApp/desktop/login/logout">Cerrar sesión</a></li>
+            <li><a href="/Sgti/desktop/login/logout">Cerrar sesión</a></li>
           </ul>
         </li>
       </ul>

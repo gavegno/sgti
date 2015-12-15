@@ -15,7 +15,7 @@
     	request.removeAttribute("usuario");
 		if(usuario==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -39,7 +39,7 @@
         <div class="col-sm-10 col-md-8">
             <h2 class="container text-center">Gestión de días</h2>
             <div class="form-group container">
-                <form class="form-horizontal" action="/CounterWebApp/desktop/dias/ingresarHorarioLaboral" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/dias/ingresarHorarioLaboral" method="POST">
                 
                 	<div class="form-group container">
                         <label for="inputId" class="control-label">Id:</label>
@@ -85,7 +85,7 @@
                 </div>       
                 </form>
                
-                <form class="form-group container" action="/CounterWebApp/desktop/paginaPrincipal.jsp" method="POST">
+                <form class="form-group container" action="/Sgti/desktop/paginaPrincipal.jsp" method="POST">
                 <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Finalizar </button>
                 </div>

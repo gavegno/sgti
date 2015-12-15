@@ -15,7 +15,7 @@
     	request.removeAttribute("usuario");
 		if(usuarioSesion==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
       
@@ -36,7 +36,7 @@
 
 <div class="container">
   <br>
-  <form action="/CounterWebApp/desktop/actividad/tablaFiltrada" method="POST">
+  <form action="/Sgti/desktop/actividad/tablaFiltrada" method="POST">
     <div class="row">
       <div class="col-lg-8">
         <input class="form-control" id="system-search" name="q" placeholder="Buscar...">
@@ -71,7 +71,7 @@
     <tbody class="searchable">
     <c:forEach items="${actividades}" var="actividad" >
       <tr>
-      <form class="form-control" action="/CounterWebApp/desktop/actividad/editarActividad" method="POST">
+      <form class="form-control" action="/Sgti/desktop/actividad/editarActividad" method="POST">
       	<td><input class="form-control" size="16" type="text" id="id" name="id" value="${actividad.id}" disabled></td>
         <td hidden="hidden">${actividad.id}</td>
         <td><input class="form-control" size="16" type="text" name="tipo" value="${actividad.tipo}" disabled></td>
@@ -119,14 +119,14 @@
         <td class="vert-align"><button class="btn btn-success" type="submit" title="Guardar cambios"> <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span></button></td>
       </form>
       
-      <form class="form-control" action="/CounterWebApp/desktop/actividad/eliminarActividad" method="POST">
+      <form class="form-control" action="/Sgti/desktop/actividad/eliminarActividad" method="POST">
        	<input class="form-control" size="16" type="hidden" id="id" name="id" value="${actividad.id}" >
         <input type="hidden" class="form-control form_datetime" name="fechaDesde" value="${formattedfechaDesde}" />
 
       	<td class="vert-align"><button class="btn btn-danger" type="submit" title="Borrar actividad"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
       </form>
 
-      <form class="form-control" action="/CounterWebApp/desktop/actividad/cambiarEstado" method="POST">
+      <form class="form-control" action="/Sgti/desktop/actividad/cambiarEstado" method="POST">
         <input class="form-control" size="16" type="hidden" id="id" name="id" value="${actividad.id}" >
         <input type="hidden" class="form-control form_datetime" name="fechaDesde" value="${formattedfechaDesde}" />
 

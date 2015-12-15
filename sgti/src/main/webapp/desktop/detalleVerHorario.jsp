@@ -15,7 +15,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -38,7 +38,7 @@
     <div class="row">
             <h2 class="text-center">Gestión de horario laboral</h2>
     
-                <form class="form-horizontal" action="/CounterWebApp/desktop/dias/tabla" method="GET">
+                <form class="form-horizontal" action="/Sgti/desktop/dias/tabla" method="GET">
                 
                     <div class="form-group container">
                         <label for="inputId" class="control-label">Id:</label>

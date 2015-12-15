@@ -14,7 +14,7 @@
     	request.removeAttribute("usuario");
 		if(usuarioSesion==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -58,7 +58,7 @@
 
                             <c:forEach items="${usuarios}" var="usuario" >
                             <tr>
-                                <form class="form-control" action="/CounterWebApp/desktop/tecnicos/editar" method="POST">
+                                <form class="form-control" action="/Sgti/desktop/tecnicos/editar" method="POST">
                                 
                                     <td><input class="form-control" size="20" type="text" name="id" value="${usuario.id}" disabled="disabled" value="${usuario.id}"></td>
                                     <td hidden="hidden">${usuario.id}</td>
@@ -78,7 +78,7 @@
                                 </form>
 
                                 <c:if test="${usuario.tipo == 'TECNICO'}">
-                                    <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/tecnicoTipoHoras" method="POST">
+                                    <form class="form-horizontal" action="/Sgti/desktop/tiposDeHora/tecnicoTipoHoras" method="POST">
                                         <input class="form-control" type="hidden" name="id" value="${usuario.id}" />
                                         <td class="vert-align"><button class="btn btn-primary glyphicon glyphicon-time" title="Gestionar tipos de hora del técnico"></td>
                                     </form>

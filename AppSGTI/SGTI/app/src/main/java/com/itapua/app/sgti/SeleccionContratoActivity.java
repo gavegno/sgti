@@ -41,7 +41,7 @@ public class SeleccionContratoActivity extends AppCompatActivity {
         final ListView listViewContratos = (ListView) findViewById(R.id.listViewContratos);
 
         SharedPreferences archivo = getSharedPreferences(SgtiConstants.PREFERENCIAS, Context.MODE_PRIVATE);
-        String url = archivo.getString(SgtiConstants.URL, "http://192.168.230.160:9080/CounterWebApp");
+        String url = archivo.getString(SgtiConstants.URL, "http://192.168.230.160:9080/Sgti");
         String idUsuario = archivo.getString(SgtiConstants.USUARIO,"");
 
         TelephonyManager mngr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);

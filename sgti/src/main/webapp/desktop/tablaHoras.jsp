@@ -22,7 +22,7 @@
     	request.removeAttribute("usuario");
 		if(usuarioSesion==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -43,7 +43,7 @@
     <div class="container">
         <h2 class="text-center">Tabla de horas</h2>
 
-        <form action="/CounterWebApp/desktop/hora/tablaFiltrada" method="POST">
+        <form action="/Sgti/desktop/hora/tablaFiltrada" method="POST">
         <div class="row">
           <div class="col-lg-4">
             <input class="form-control" id="system-search" name="q" placeholder="Contrato, descripción, comentario...">
@@ -108,7 +108,7 @@
       </tr>
     </thead>
     <tbody>
-        <form class="form-horizontal" action="/CounterWebApp/desktop/hora/ingresarHora" method="POST">
+        <form class="form-horizontal" action="/Sgti/desktop/hora/ingresarHora" method="POST">
             <input type="hidden" name="filtroUsuario" value="${filtroUsuario}">
             <input type="hidden" name="filtroValidada" value="${filtroValidada}">
             <input type="hidden" class="form-control form_datetime" name="fechaDesdeFiltro" value="${formattedfechaDesde}" />
@@ -178,7 +178,7 @@
     <tbody class="searchable">
     <c:forEach items="${horasRegistradas}" var="horasRegistrada" >
       <tr>
-      <form class="form-horizontal" action="/CounterWebApp/desktop/hora/editarHora" method="POST">
+      <form class="form-horizontal" action="/Sgti/desktop/hora/editarHora" method="POST">
       	<fmt:formatDate value="${horasRegistrada.fechaDesde}" var="formattedfechaDesde" type="date" pattern="dd-MM-yyyy HH:mm" />
       	<fmt:formatDate value="${horasRegistrada.fechaHasta}" var="formattedfechaHasta" type="date" pattern="dd-MM-yyyy HH:mm" />
         
@@ -289,7 +289,7 @@
 
         </form>
 
-        <form class="form-horizontal" action="/CounterWebApp/desktop/hora/copiarHora" method="POST">
+        <form class="form-horizontal" action="/Sgti/desktop/hora/copiarHora" method="POST">
             <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >
             <input type="hidden" name="filtroUsuario" value="${filtroUsuario}">
             <input type="hidden" name="filtroValidada" value="${filtroValidada}">
@@ -301,7 +301,7 @@
          </form>
 
         <c:if test="${tipoUsuario == 'SOCIO'}">
-	        <form class="form-horizontal" action="/CounterWebApp/desktop/hora/detalleHora" method="POST">
+	        <form class="form-horizontal" action="/Sgti/desktop/hora/detalleHora" method="POST">
 	            <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >
                 <input type="hidden" name="filtroUsuario" value="${filtroUsuario}">
                 <input type="hidden" name="filtroValidada" value="${filtroValidada}">
@@ -310,7 +310,7 @@
 	           <td class="vert-align"><button id="plus" class="btn btn-primary glyphicon glyphicon-plus" onclick="document.getElementById('filaNueva').hidden = false" title="Opciones avanzadas"></td>
 	         </form>
 
-            <form class="form-horizontal" action="/CounterWebApp/desktop/hora/validarHora" method="POST">
+            <form class="form-horizontal" action="/Sgti/desktop/hora/validarHora" method="POST">
                 <input type="hidden" class="form-control form_datetime" name="fechaDesdeFiltro" value="${formattedfechaDesdeFiltro}" />
                 <input type="hidden" name="filtroUsuario" value="${filtroUsuario}">
                 <input type="hidden" name="filtroValidada" value="${filtroValidada}">
@@ -328,7 +328,7 @@
         </c:if>
 
         <c:if test="${tipoUsuario == 'TECNICO'}">
-            <form class="form-horizontal" action="/CounterWebApp/desktop/hora/borrar" method="POST">
+            <form class="form-horizontal" action="/Sgti/desktop/hora/borrar" method="POST">
                 <input class="form-control" type="hidden" name="id" value="${horasRegistrada.id}" >
                 <input type="hidden" name="filtroUsuario" value="${filtroUsuario}">
                 <input type="hidden" name="filtroValidada" value="${filtroValidada}">

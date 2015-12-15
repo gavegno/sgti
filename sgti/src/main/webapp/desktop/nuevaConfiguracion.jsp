@@ -14,7 +14,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -44,7 +44,7 @@
                 </div>
 
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/configuracion/agregarConfigOk" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/configuracion/agregarConfigOk" method="POST">
                     
                     <input type="text" name="idContrato" value="${idContrato}" hidden></input>
                     
@@ -146,7 +146,7 @@
 
                 </form>
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/configuracion/tablaConfiguraciones" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/configuracion/tablaConfiguraciones" method="POST">
                     <input type="text" name="id" value="${idContrato}" hidden></input>
                     
                         <button class="btn btn-default" id="botonVolver" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Cancelar y volver </button>

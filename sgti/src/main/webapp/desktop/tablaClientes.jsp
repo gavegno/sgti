@@ -12,7 +12,7 @@
     	request.removeAttribute("usuario");
 		if(usuarioSesion==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -49,7 +49,7 @@
                             <tbody class="searchable">
                             <c:forEach items="${clientes}" var="cliente" >
                             <tr>
-                                <form class="form-control" action="/CounterWebApp/desktop/cliente/editar" method="POST">
+                                <form class="form-control" action="/Sgti/desktop/cliente/editar" method="POST">
                                 
                                     <td><input class="form-control" type="text" name="nombre" value="${cliente.nombre}" disabled="disabled"></td>
                                     <td hidden="hidden">${cliente.nombre}</td>

@@ -14,7 +14,7 @@
     	request.removeAttribute("usuario");
 		if(usuarioSesion==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
       
@@ -35,7 +35,7 @@
 
 <div class="container">
   <br>
-  <form action="/CounterWebApp/desktop/actividad/tablaFiltradaTecnico" method="POST">
+  <form action="/Sgti/desktop/actividad/tablaFiltradaTecnico" method="POST">
     <div class="row">
       <div class="col-lg-8">
         <input class="form-control" id="system-search" name="q" placeholder="Buscar...">
@@ -70,7 +70,7 @@
     <tbody class="searchable">
     <c:forEach items="${actividades}" var="actividad" >
       <tr>
-      <form class="form-control" action="/CounterWebApp/desktop/actividad/autoasignarTecnico" method="POST">
+      <form class="form-control" action="/Sgti/desktop/actividad/autoasignarTecnico" method="POST">
         <td><input class="form-control" size="16" type="text" id="id" name="id" value="${actividad.id}" disabled="disabled"></td>
         <td name="id" hidden="hidden">${actividad.id}</td>
         <td><input class="form-control" size="16" type="text" name="tipo" value="${actividad.tipo}" disabled="disabled"></td>
@@ -105,7 +105,7 @@
       </form>
 
       <c:if test="${actividad.estado == 'PENDIENTE'}">
-        <form class="form-control" action="/CounterWebApp/desktop/actividad/cambiarEstado" method="POST">
+        <form class="form-control" action="/Sgti/desktop/actividad/cambiarEstado" method="POST">
           <input class="form-control" size="16" type="hidden" id="id" name="id" value="${actividad.id}" >
           <input type="hidden" class="form-control form_datetime" name="fechaDesde" value="${formattedfechaDesde}" />
 

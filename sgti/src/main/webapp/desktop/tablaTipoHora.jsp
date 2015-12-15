@@ -13,7 +13,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -49,7 +49,7 @@
         <tr>
 
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/editar" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/tiposDeHora/editar" method="POST">
                     <input type="text" name="id" value="${tipohora.id}" hidden></input>
                     <td><input class="vert-align form-control" size="6" name="id" value="${tipohora.id}" disabled="disabled"></td>
                     <td><input class="vert-align form-control" name="tipo" value="${tipohora.tipo}"></td>
@@ -57,7 +57,7 @@
                     <td class="vert-align"><button class="btn btn-success" type="submit"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar </button></td>
                 </form>
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/borrar" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/tiposDeHora/borrar" method="POST">
                     <input type="text" name="id" value="${tipohora.id}" hidden></input>
                     <td class="vert-align"><button class="btn btn-danger" type="submit"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar </button></td>
                 </form>

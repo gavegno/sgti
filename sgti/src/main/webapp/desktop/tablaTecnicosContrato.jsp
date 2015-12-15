@@ -14,7 +14,7 @@
     	request.removeAttribute("usuario");
 		if(usuarioSesion==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -58,7 +58,7 @@
 
                                 <c:forEach items="${tecnicos}" var="tecnico" >
                                 <tr>
-                                    <form class="form-control" action="/CounterWebApp/desktop/contrato/sacarTecnico" method="POST">
+                                    <form class="form-control" action="/Sgti/desktop/contrato/sacarTecnico" method="POST">
                                         <input class="form-control" type="hidden" name="id" value="${idContrato}" />
                                         <input class="form-control" type="hidden" name="idUsuario" value="${tecnico.id}" />
                                         <td><input class="form-control" size="20" type="text" name="idUsuario" value="${tecnico.id}" disabled="disabled"></td>
@@ -77,7 +77,7 @@
 
 
                         <br>
-                        <form class="form-horizontal" action="/CounterWebApp/desktop/contrato/asignarTecnico" method="POST">
+                        <form class="form-horizontal" action="/Sgti/desktop/contrato/asignarTecnico" method="POST">
                             <input class="form-control" type="hidden" name="id" value="${idContrato}" />
 
                         <div class="row">
@@ -124,7 +124,7 @@
 
                         
                         <br><br>
-                        <form class="form-horizontal" action="/CounterWebApp/desktop/contrato/tablaSocio" method="GET">
+                        <form class="form-horizontal" action="/Sgti/desktop/contrato/tablaSocio" method="GET">
                             <button class="btn btn-default" id="boton" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Volver </button>
                             <br><br>
                         </form>

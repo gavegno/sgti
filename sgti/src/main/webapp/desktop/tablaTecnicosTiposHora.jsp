@@ -15,7 +15,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -61,7 +61,7 @@
 
                                 <c:forEach items="${tiposHoraTecnico}" var="tipo" >
                                 <tr>
-                                <form action="/CounterWebApp/desktop/tiposDeHora/borrarTipoHoraTecnico" method="POST">
+                                <form action="/Sgti/desktop/tiposDeHora/borrarTipoHoraTecnico" method="POST">
                                         
                                 
                                     <input type="text" name="id" value="${id}" hidden></input>
@@ -81,7 +81,7 @@
             </div>
 
                         <br>
-                        <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/asignarTipoHoraTecnico" method="POST">
+                        <form class="form-horizontal" action="/Sgti/desktop/tiposDeHora/asignarTipoHoraTecnico" method="POST">
                             <input class="form-control" type="hidden" name="id" value="${id}" />
 
                         <div class="row">
@@ -129,7 +129,7 @@
                         
                         <br><br>
                     
-                    <form class="form-horizontal" action="/CounterWebApp/desktop/tecnicos/tabla" method="GET">
+                    <form class="form-horizontal" action="/Sgti/desktop/tecnicos/tabla" method="GET">
                         <button class="btn btn-default" id="boton" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Volver </button>
                         <br><br>
                     </form>

@@ -31,7 +31,7 @@
         <div class="container col-sm-6 col-md-6 ">
             <h2 class="container text-center">Gestión de usuarios</h2>
             <div class="form-group container">
-                <form class="form-vertical" action="/CounterWebApp/desktop/tecnicos/editarUsuarioOk" method="POST">
+                <form class="form-vertical" action="/Sgti/desktop/tecnicos/editarUsuarioOk" method="POST">
                 	<div class="container form-group ">
                         <label for="inputId" class="control-label">Id:</label>
                         <input type="text" class="form-control" name="id" value="${usuario.id}" disabled="disabled"> </input> 
@@ -69,7 +69,7 @@
                 </form>
 
 
-                <form action="/CounterWebApp/desktop/tecnicos/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
+                <form action="/Sgti/desktop/tecnicos/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
                     <input type="hidden" name="id" value="${usuario.id}" hidden> </input>        
 
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar </button>
@@ -93,7 +93,7 @@
                     </div>
                 </form>
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/tecnicos/tabla" method="GET">
+                <form class="form-horizontal" action="/Sgti/desktop/tecnicos/tabla" method="GET">
                     <div class="form-group container">
                         <br>
                         <button class="btn btn-default" id="boton" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Volver </button>

@@ -12,7 +12,7 @@
     	request.removeAttribute("usuario");
 		if(usuario==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -55,7 +55,7 @@
                     </c:forEach> 
 
                 </div>
-                <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/ingresarComputo" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/tiposDeHora/ingresarComputo" method="POST">
                     <input type="hidden" class="form-control" name="idContrato" value="${idContrato}">
 
                      <div class="form-group container">
@@ -81,7 +81,7 @@
 
 
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/dias/ingresar" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/dias/ingresar" method="POST">
                 <input type="hidden" class="form-control" name="idContrato" value="${idContrato}">
                 <div class="form-group container">
                     <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Pasar al paso 4 </button>

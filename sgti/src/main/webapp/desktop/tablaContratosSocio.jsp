@@ -16,7 +16,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -60,7 +60,7 @@
                             <tbody class="searchable">
 
                             <c:forEach items="${contratos}" var="contrato" >
-                                <form action="/CounterWebApp/desktop/configuracion/tablaConfiguraciones" method="POST">
+                                <form action="/Sgti/desktop/configuracion/tablaConfiguraciones" method="POST">
                                 <tr >
                                     <input type="text" name="id" value="${contrato.id}" hidden></input>
                                     
@@ -114,19 +114,19 @@
                                     <td class="vert-align"><button class="btn btn-primary" type="submit" title="Configuraciones"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></button></td>
                                 </form>
 
-                                <form action="/CounterWebApp/desktop/precio/tablaPrecios" method="POST">
+                                <form action="/Sgti/desktop/precio/tablaPrecios" method="POST">
                                     <input type="text" name="id" value="${contrato.id}" hidden></input>
                                     
                                     <td class="vert-align"><button class="btn btn-primary" type="submit" title="Precios"> <span class="glyphicon glyphicon-usd" aria-hidden="true"></span></button></td>
                                 </form>
 
-                                <form action="/CounterWebApp/desktop/tiposDeHora/tablaHorasContrato" method="POST">
+                                <form action="/Sgti/desktop/tiposDeHora/tablaHorasContrato" method="POST">
                                     <input type="text" name="id" value="${contrato.id}" hidden></input>
                                     
                                     <td class="vert-align"><button class="btn btn-primary" type="submit" title="Tipos de hora"> <span class="glyphicon glyphicon-time" aria-hidden="true"></span></button></td>
                                 </form>
 
-                                <form action="/CounterWebApp/desktop/contrato/tecnicosEnContrato" method="POST">
+                                <form action="/Sgti/desktop/contrato/tecnicosEnContrato" method="POST">
                                     <input type="text" name="id" value="${contrato.id}" hidden></input>
                                     
                                     <td class="vert-align"><button class="btn btn-primary" type="submit" title="Técnicos asignados"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span></button></td>

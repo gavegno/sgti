@@ -29,7 +29,7 @@
         <div class="col-sm-10 col-md-8">
             <h2 class="container text-center">Gestión de clientes</h2>
             <div class="form-group container">
-                <form class="form-horizontal" action="/CounterWebApp/desktop/cliente/editarClienteOk" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/cliente/editarClienteOk" method="POST">
                     <div class="form-group container">
                         <label for="inputNombre" class="control-label">Nombre:</label>
                         <input type="text" class="form-control" name="clienteNombre" value="${cliente.nombre}" disabled="disabled"></input>
@@ -53,7 +53,7 @@
 
                 </form>
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/cliente/tabla" method="GET">
+                <form class="form-horizontal" action="/Sgti/desktop/cliente/tabla" method="GET">
                     <div class="form-group container">
                         <br>
                         <button class="btn btn-default" id="boton" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Volver </button>

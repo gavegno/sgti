@@ -14,7 +14,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -44,7 +44,7 @@
                 </div>
 
 
-                <form action="/CounterWebApp/desktop/precio/ingresarPrecioNuevo" method="POST">
+                <form action="/Sgti/desktop/precio/ingresarPrecioNuevo" method="POST">
                     <input type="text" name="idContrato" value="${idContrato}" hidden></input>
 
 
@@ -78,7 +78,7 @@
                         
                     </div>      
                 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/precio/tablaPrecios" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/precio/tablaPrecios" method="POST">
                     <div class="form-group container">
                     <input type="text" name="idContrato" value="${idContrato}" hidden></input>
                     <input type="text" name="id" value="${idContrato}" hidden></input>

@@ -53,26 +53,26 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 				int cantidadActividadesRealizar = verActividadesARealizar(idUsuario, 0).size();
 				
 				if(cantConfVencer > 0){
-					DataNotificacion notificacion = new DataNotificacion("Configuracion(es) a vencer", cantConfVencer, "/CounterWebApp/desktop/contrato/configuracionVencer/redireccionarNotificacion");
+					DataNotificacion notificacion = new DataNotificacion("Configuracion(es) a vencer", cantConfVencer, "/Sgti/desktop/contrato/configuracionVencer/redireccionarNotificacion");
 					notificaciones.add(notificacion);
 				}
 				if(cantPreciosVencer > 0){
-					DataNotificacion notificacion = new DataNotificacion("Precio(s) a vencer", cantPreciosVencer, "/CounterWebApp/desktop/contrato/precioVencer/redireccionarNotificacion");
+					DataNotificacion notificacion = new DataNotificacion("Precio(s) a vencer", cantPreciosVencer, "/Sgti/desktop/contrato/precioVencer/redireccionarNotificacion");
 					notificaciones.add(notificacion);
 				}
 				if((cantContratosConHorasInformar) > 0){
-					DataNotificacion notificacion = new DataNotificacion("Contrato(s) con horas a informar", cantContratosConHorasInformar, "/CounterWebApp/desktop/contrato/horasInformar/redireccionarNotificacion");
+					DataNotificacion notificacion = new DataNotificacion("Contrato(s) con horas a informar", cantContratosConHorasInformar, "/Sgti/desktop/contrato/horasInformar/redireccionarNotificacion");
 					notificaciones.add(notificacion);
 				}
 				if(cantidadActividadesRealizar > 0){
-					DataNotificacion notificacion = new DataNotificacion("Actividad(es) a realizar", cantidadActividadesRealizar, "/CounterWebApp/desktop/actividad/redireccionarNotificacion");
+					DataNotificacion notificacion = new DataNotificacion("Actividad(es) a realizar", cantidadActividadesRealizar, "/Sgti/desktop/actividad/redireccionarNotificacion");
 					notificaciones.add(notificacion);
 				}
 			}
 		}else if(tipoUsuario.equalsIgnoreCase("TECNICO")){
 			int cantidadNotificaciones = verActividadesARealizar(idUsuario, 0).size();
 			if(cantidadNotificaciones > 0){
-				DataNotificacion notificacion = new DataNotificacion("Actividad(es) a realizar", cantidadNotificaciones, "/CounterWebApp/desktop/actividad/redireccionarNotificacion");
+				DataNotificacion notificacion = new DataNotificacion("Actividad(es) a realizar", cantidadNotificaciones, "/Sgti/desktop/actividad/redireccionarNotificacion");
 				notificaciones.add(notificacion);
 			}
 		}

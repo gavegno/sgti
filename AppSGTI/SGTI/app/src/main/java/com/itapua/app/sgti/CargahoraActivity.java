@@ -358,7 +358,7 @@ public class CargahoraActivity extends AppCompatActivity {
             horaSalida.setText("");
         }
 
-        url = archivo.getString("url", "http://192.168.230.160:9080/CounterWebApp");
+        url = archivo.getString("url", "http://192.168.230.160:9080/Sgti");
         idUsuario = archivo.getString("usuario","");
 
         TelephonyManager mngr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);

@@ -14,7 +14,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -44,7 +44,7 @@
                 </div>
 
 
-                <form action="/CounterWebApp/desktop/precio/editarPrecioOk" method="POST">
+                <form action="/Sgti/desktop/precio/editarPrecioOk" method="POST">
                     <input type="text" name="idContrato" value="${idContrato}" hidden></input></input>
                     <input type="text" name="fechaDesdeOriginal" value="${precio.fechaDesde}" hidden></input>
                     <input type="text" name="fechaHastaOriginal" class="form_datetime" value="${precio.fechaHasta}" hidden></input>
@@ -82,7 +82,7 @@
                         <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Guardar </button>
                 </form>
 
-                        <form action="/CounterWebApp/desktop/precio/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
+                        <form action="/Sgti/desktop/precio/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
                             <input type="text" name="idContrato" value="${idContrato}" hidden></input></input>
                             <input type="text" name="fechaDesdeOriginal" value="${precio.fechaDesde}" hidden></input>
                             <input type="text" name="fechaHastaOriginal" class="form_datetime" value="${precio.fechaHasta}" hidden></input>
@@ -111,7 +111,7 @@
                         </form>
                     </div>      
                 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/precio/tablaPrecios" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/precio/tablaPrecios" method="POST">
                     <div class="form-group container">
                     <input type="text" name="idContrato" value="${idContrato}" hidden></input>
                     <input type="text" name="id" value="${idContrato}" hidden></input>

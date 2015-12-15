@@ -13,7 +13,7 @@
     	request.removeAttribute("usuario");
 		if(usuario==null)
 		{
-			response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+			response.sendRedirect("/Sgti/desktop/login2.jsp");
 		}
 	%>
 </head>
@@ -41,7 +41,7 @@
                     Contrato: ${contrato.id}  ---  Cliente: ${contrato.cliente.nombre}  ---  Contraparte: ${contrato.contraparte.nombre} ${contrato.contraparte.apellido}
                 </div>
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/agregarContratoTipoHoraOk" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/tiposDeHora/agregarContratoTipoHoraOk" method="POST">
                     
                      <input type="hidden" name="id" value="${idContrato}"/>
 
@@ -64,7 +64,7 @@
                 </div>      
                 </form>
 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/tiposDeHora/tablaHorasContrato" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/tiposDeHora/tablaHorasContrato" method="POST">
                     <input type="hidden" name="id" value="${idContrato}"/>
                     <div class="form-group container">  
                         <button class="btn btn-default" id="boton" type="submit"> <span class="glyphicon glyphicon-chevron-left"></span> Volver </button>

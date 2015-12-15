@@ -14,7 +14,7 @@
         request.removeAttribute("usuario");
         if(usuarioSesion==null)
         {
-            response.sendRedirect("/CounterWebApp/desktop/login2.jsp");
+            response.sendRedirect("/Sgti/desktop/login2.jsp");
         }
     %>
 </head>
@@ -44,7 +44,7 @@
                 </div>
 
 
-                <form action="/CounterWebApp/desktop/configuracion/editarConfigOk" method="POST">
+                <form action="/Sgti/desktop/configuracion/editarConfigOk" method="POST">
                     <input type="text" name="idContrato" value="${idContrato}" hidden></input>
                     <input type="text" name="idConfiguracion" value="${config.id}" hidden></input>
 
@@ -206,7 +206,7 @@
                         <button class="btn btn-success" id="boton" type="submit"> <span class="glyphicon glyphicon-ok"></span> Guardar </button>
                         </form>
 
-                        <form action="/CounterWebApp/desktop/configuracion/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
+                        <form action="/Sgti/desktop/configuracion/borrar" method="POST" accept-charset="UTF-8" style="display:inline">
                             <input type="text" name="idContrato" value="${idContrato}" hidden></input>
                             <input type="text" name="idConfiguracion" value="${config.id}" hidden></input>
 
@@ -232,7 +232,7 @@
                         </form>
                     </div>       
                 
-                <form class="form-horizontal" action="/CounterWebApp/desktop/configuracion/tablaConfiguraciones" method="POST">
+                <form class="form-horizontal" action="/Sgti/desktop/configuracion/tablaConfiguraciones" method="POST">
                     <div class="form-group container">
                     <input type="text" name="id" value="${idContrato}" hidden></input>
                     

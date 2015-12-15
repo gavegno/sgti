@@ -169,7 +169,7 @@
 	</dependencies>
  
 	<build>
-		<finalName>CounterWebApp</finalName>
+		<finalName>Sgti</finalName>
  
 		<plugins>
 		    <!-- Eclipse project -->
@@ -205,7 +205,7 @@
 			<artifactId>tomcat7-maven-plugin</artifactId>
 			<version>2.2</version>
 			<configuration>
-				<path>/CounterWebApp</path>
+				<path>/Sgti</path>
 				<encoding>UTF-8</encoding>
 			</configuration>
 		  </plugin>
