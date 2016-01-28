@@ -61,7 +61,7 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 			assertEquals(TAMANO_LISTA, contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).size());		
 			assertEquals(TIPO_TEST,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
 			assertEquals(tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(),contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
-			assertEquals(COMPUTOS,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+			assertEquals(COMPUTOS,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo(),10);
 		}
 		
 	}
@@ -76,14 +76,14 @@ public class ConsultasContratoTipoHoraTest extends ConfigurarTest{
 			assertEquals(TAMANO_LISTA, contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).size());		
 			assertEquals(TIPO_TEST,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
 			assertEquals(tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(),contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
-			assertEquals(COMPUTOS,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+			assertEquals(COMPUTOS,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo(),10);
 			
 			contratoTipoHoraDao.editarContratoTipoHora(CONTRATO_TEST, tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(), COMPUTOS_EDITADOS);
 			
 			assertEquals(TAMANO_LISTA, contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).size());		
 			assertEquals(TIPO_TEST,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getTipo());
 			assertEquals(tipoHoraDao.seleccionarPorTipo(TIPO_TEST).getId(),contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getTipoHora().getId());
-			assertEquals(COMPUTOS_EDITADOS,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo());
+			assertEquals(COMPUTOS_EDITADOS,contratoTipoHoraDao.verContratoTipoHora(CONTRATO_TEST).get(0).getComputo(), 10);
 		}
 		
 	}

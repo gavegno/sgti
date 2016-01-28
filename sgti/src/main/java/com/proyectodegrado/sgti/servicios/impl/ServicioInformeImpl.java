@@ -448,7 +448,7 @@ public class ServicioInformeImpl implements ServicioInforme {
 			textoTabla += ", Total: $" + totalPorHora + SALTO_LINEA;
 			textosTabla += textoTabla;
 		}
-		textosTabla += SALTO_LINEA + "Total = " + total;
+		textosTabla += SALTO_LINEA + "Total = $" + total;
 		return textosTabla;
 	}
 	
@@ -458,7 +458,7 @@ public class ServicioInformeImpl implements ServicioInforme {
 			totalComputos += entry.getValue().getComputosConsumidos();
 		}
 		totalComputos += computos;
-		return totalComputos - totalComputosConsumir;
+		return (totalComputos - totalComputosConsumir) <= computos ? (totalComputos - totalComputosConsumir) : computos;
 	}
 	
 	private List<Hora> verHorasEnElInforme(final String idContrato)	throws FileNotFoundException, ClassNotFoundException, IOException, SQLException, ParseException {
@@ -561,7 +561,7 @@ public class ServicioInformeImpl implements ServicioInforme {
 			if(informe.getPrecioExtraTotal() != null){
 				informe.setPrecioExtraTotal(informe.getPrecioExtraTotal() + computosExtra * servicioPrecio.verPrecioDeHora(hora).getPrecioExtra());
 			}else{
-				informe.setPrecioExtraTotal(computosExtra * servicioPrecio.verPrecioDeHora(hora).getPrecio());
+				informe.setPrecioExtraTotal(computosExtra * servicioPrecio.verPrecioDeHora(hora).getPrecioExtra());
 			}
 			if(informe.getPrecioTotal() != null){
 				informe.setPrecioTotal(informe.getPrecioTotal() + (computos - computosExtra) * servicioPrecio.verPrecioDeHora(hora).getPrecio());

@@ -54,7 +54,7 @@ public class ConfigurarTest {
 	protected static final String TIPO_CONTRATO_TEST = "TIPO_CONTRATO_TEST";
 	protected static final String RENOVACION_TEST = "RENOVACION_TEST";
 	protected static final String HORARIO_LABORAL_TEST = "HORARIO_LABORAL_TEST";
-	protected static final String EMAIL_TEST = "EMAIL_TEST";
+	protected static final String EMAIL_TEST = "emailTest@gmail.com";
 	protected static final String CONTASENA_TEST = "CONTASENA_TEST";
 	protected static final String APELLIDO_TEST = "APELLIDO_TEST";
 	protected static final String NOMBRE_TEST = "NOMBRE_TEST";
