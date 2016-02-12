@@ -45,7 +45,7 @@ public class ServicioInformeImpl implements ServicioInforme {
 	
 	private static final String PRECIO_FIJO = "PRECIO FIJO";
 	private static final String HORAS_LIBRES = "HORAS LIBRES";
-	private static final String BOLSA_DE_COMPUTOS = "BOLSA DE COMPUTOS";
+	private static final String BOLSA_DE_COMPUTOS = "PAQUETE DE COMPUTOS";
 	private static final String PLANTILLA_INFORME = "/WEB-INF/resources/Informes/informe.doc";
 	private static final String PROYECTO = "<@proyecto>";
 	private static final String FECHA_NOMBRE = "<@fechaNombre>";
