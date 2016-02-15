@@ -162,7 +162,7 @@ public class ServicioInformeImpl implements ServicioInforme {
 		range.replaceText(CLIENTE, contrato.getCliente().getNombre());
 		range.replaceText(FECHA_NOMBRE, formatoFechaNombre.format(new Date()));
 		range.replaceText(FECHA, formatoFecha.format(new Date()));
-		range.replaceText(SOCIO, socio.getApellido() + " " + socio.getApellido());
+		range.replaceText(SOCIO, socio.getNombre() + " " + socio.getApellido());
 		
 		String textoHoras = "";
 		Map<String, Informe> tablaCantidadPorTipoHora = new HashMap<String, Informe>();
