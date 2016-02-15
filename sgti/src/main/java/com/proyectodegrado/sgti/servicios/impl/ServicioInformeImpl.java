@@ -158,7 +158,7 @@ public class ServicioInformeImpl implements ServicioInforme {
 		HWPFDocument word = new HWPFDocument(new POIFSFileSystem(buffInputStream));
 		
 		Range range = word.getRange();
-		range.replaceText(PROYECTO, contrato.getId());
+		range.replaceText(PROYECTO, "CONTRATO: " + contrato.getId());
 		range.replaceText(CLIENTE, contrato.getCliente().getNombre());
 		range.replaceText(FECHA_NOMBRE, formatoFechaNombre.format(new Date()));
 		range.replaceText(FECHA, formatoFecha.format(new Date()));

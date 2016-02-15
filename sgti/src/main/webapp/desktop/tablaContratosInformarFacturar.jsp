@@ -48,7 +48,7 @@
                                     <th>Cliente</th>
                                     <th>Contraparte</th>
                                     <th>Tipo</th>
-                                    <th>Fin_Vig. configuraciÃ³n</th>
+                                    <th>Fin_Vig. configuración</th>
                                     <th>Precio actual</th>
                                     <th>Fin Vig. precio</th>
                                 </tr>
