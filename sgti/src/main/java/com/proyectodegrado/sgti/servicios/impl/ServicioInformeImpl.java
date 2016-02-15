@@ -87,7 +87,7 @@ public class ServicioInformeImpl implements ServicioInforme {
 		range.replaceText(CLIENTE, "");
 		range.replaceText(FECHA, formatoFechaCaratula.format(new Date()));
 		range.replaceText(FECHA_NOMBRE, "");
-		range.replaceText(SOCIO, tecnico.getApellido() + " " + tecnico.getApellido());
+		range.replaceText(SOCIO, tecnico.getNombre() + " " + tecnico.getApellido());
 		range.replaceText(TABLA_INFORME, "");
 		
 		SimpleDateFormat formatoFecha = new SimpleDateFormat("MMMM");
